@@ -2,6 +2,7 @@ import { NavLink } from "./nav-link";
 
 export const primaryNavItems = [
   { href: "/pipeline", label: "Pipeline" },
+  { href: "/product-roles", label: "Product Roles" },
   { href: "/quality-model", label: "Quality Model" },
   { href: "/flywheel", label: "Flywheel" },
   { href: "/tools", label: "Tools" },
