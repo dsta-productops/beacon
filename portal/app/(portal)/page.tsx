@@ -10,6 +10,7 @@ import {
   FlaskConical,
   PenTool,
   RefreshCw,
+  ShieldCheck,
   Sparkles,
   Wrench,
 } from "lucide-react";
@@ -49,6 +50,13 @@ const bundles: Bundle[] = [
     title: "Pipeline",
     blurb:
       "What ProductOps is, how it sits alongside DevSecOps and MLOps, and the design principles that shape every iteration.",
+  },
+  {
+    href: "/quality-model",
+    icon: ShieldCheck,
+    title: "Quality Model",
+    blurb:
+      "How functional code meets the same quality bar as NFR code. Four layers of assurance across ProductOps and DevSecOps, plus a starter CLAUDE.md.",
   },
   {
     href: "/flywheel",
@@ -147,7 +155,7 @@ export default function Home() {
           </div>
         </Card>
 
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {bundles.map(({ href, icon: Icon, title, blurb }) => (
             <Link key={href} href={href} className="group block">
               <Card className="h-full p-6 transition-colors hover:border-border-strong">

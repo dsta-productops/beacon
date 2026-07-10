@@ -1,0 +1,65 @@
+---
+title: "Same quality bar, regardless of author"
+eyebrow: "Foundation"
+lede: "The ProductOps Quality Model exists so that functional code meets the same quality bar non-functional-requirement (NFR) code is expected to meet — regardless of who authored it or which pipeline it came from."
+visibility: "public"
+---
+
+## Two pipelines, one bar
+
+Within this Pipeline, the ProductOps and DevSecOps streams divide the work: ProductOps produces the code that implements functional requirements; DevSecOps produces the code that implements non-functional requirements — hardening, integration, reliability. Both streams are increasingly authored through Claude Code.
+
+The rest of this page uses **functional code** and **NFR code** as shorthand for what each stream produces:
+
+- **Functional code** — reference implementations scaffolded from PRDs, capability storyboards, virtual prototypes. Usually driven by UX; sometimes a Dev self-serving.
+- **NFR code** — implementation of non-functional requirements, hardening, integration. Usually driven by Dev.
+
+The Quality Model is the layered assurance approach that lets those two streams land at the same bar in production.
+
+## The four layers
+
+Each layer intervenes at a different point in the lifecycle. A concern that slips past one layer is still likely to be caught by another before it reaches production.
+
+| Layer | When | Intent | Mechanism | Catches |
+|---|---|---|---|---|
+| **L1 — Prevention** | Pre-build | Start every generation from a shared baseline: consistent style, aligned architecture patterns, baseline security and accessibility hygiene. Reduces how often the later layers need to fire. | `CLAUDE.md` NFR rules; PRIZM paved-road components; typed contract boundaries between functional and NFR surfaces | Violations that never get a chance to occur — the cheapest layer |
+| **L2 — Outcome Validation** | Design → continuous | Validate that the product concept will deliver its intended outcome before and as it is built. Catch misalignment before implementation effort is sunk into the wrong thing. | Test plan generation, usability testing, product scorecard, OKR validation → DASH for outcome measurement and early-warning | Functional and product-outcome risk, before implementation effort is sunk into the wrong thing |
+| **L3 — Automated Scan** | At PR | Mechanically verify that generated code meets codifiable quality and security bars, applied identically regardless of author. | Software quality checks and linters + application security testing suite (SCA, SAST, container scanning, DAST) → Vulnerability Management | Known, codifiable NFR classes — code quality, dependency and code-level vulnerabilities, container misconfigurations, runtime-exposed flaws |
+| **L4 — Integration Verification** | Post-merge | Confirm that once NFR implementation is layered on top of functional code, the combined artifact still meets the L3 bar. Catches interaction effects from the merge, not re-doing NFR work L1 should already have shaped. | L3 scan suite re-run against the integrated build rather than isolated components | Interaction effects invisible at the component level |
+
+**Ownership.** L1 and L4 span both pipelines directly. **L2 sits within ProductOps.** **L3 sits within DevSecOps.**
+
+## Where L1 does the heavy lifting
+
+Parity is engineered at L1, not enforced at L3. L3 is the safety net; L1 is what keeps most code from ever needing it.
+
+Three L1 mechanisms carry most of the load:
+
+- **`CLAUDE.md` NFR rules** — a per-project file that loads into Claude Code's context on every session. Names the exact patterns to use (shared API wrapper, existing state store, `ErrorBoundary`, PRIZM form components) rather than describing them in the abstract. The starter is below.
+- **PRIZM paved-road components** — [PRIZM](/tools/prizm) primitives already conform to DSTA's accessibility, theming, and visual bars. Using them means those bars are met by construction. Whenever PRIZM ships a component for the job — layout (`Frame`, `Stack`), forms (`Input`, `Select`, `Checkbox`, `Textarea`), interactive surfaces (`Button`, `Tabs`, `Sheet`, `Command`), content (`Card`, `Heading`, `Text`) — reach for it before writing a bespoke one or dropping to raw HTML.
+- **Typed contract boundaries** — shared type definitions at the seam between functional and NFR surfaces, so Dev can layer NFR work on top of a UX-authored scaffold without redefining prop shapes or guessing at intent. Straightforward integration is the goal; typed contracts are how L1 delivers it.
+
+## Why four layers, not one
+
+A single uniform scan catches syntactic and pattern-level issues but not architectural drift, integration-time failures, or repeat offences that a static rule set never learns from. The four layers exist because those failure modes intervene at different points in the lifecycle:
+
+- L1 shapes the code before it exists — cheapest to fix, before violations occur.
+- L2 checks that the thing being built is worth building.
+- L3 catches known issues that can be checked by a rule — hardcoded secrets, vulnerable dependencies, injection patterns, accessibility failures — at PR time.
+- L4 catches the interaction effects that only appear once functional and NFR code are integrated.
+
+Any one layer is necessary but not sufficient. Together, they let functional code ship into the same DevSecOps pipeline as NFR code, with the same confidence.
+
+## Starter `CLAUDE.md`
+
+Below is a ready-to-use starting file. Drop it into a project as-is, or edit it as a template.
+
+> **Before use:** the rules reference the project's actual patterns (shared API wrapper, error handling pattern, state management approach). These are placeholders in the starter template and must be verified — and the file endorsed — by the project's tech lead before it is enabled. A rule that names the wrong convention actively misleads Claude Code and recreates the integration risk this file exists to prevent.
+
+Rules use MUST / SHOULD phrasing rather than a separate severity field, since directive language measurably improves how consistently Claude Code follows a rule. Enforcement-layer mapping lives in the four-layer table above, not repeated per rule — every line in `CLAUDE.md` loads into context on every session, so keep it lean.
+
+## Where to go next
+
+- Curious how the flywheel produces functional code? See [the flywheel](/flywheel).
+- Looking at how test findings feed L2? See [the Test phase](/flywheel/test).
+- Working with the AI-native prompt library? [Browse prompts](/prompts).

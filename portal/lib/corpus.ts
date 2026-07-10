@@ -30,6 +30,13 @@ export const corpus: CorpusEntry[] = [
     section: "Foundation",
   },
   {
+    url: "/quality-model",
+    title: "ProductOps Quality Model",
+    description:
+      "How functional code (authored via ProductOps) meets the same quality bar as NFR code (authored via DevSecOps). Four layers of assurance — Prevention, Outcome Validation, Automated Scan, Integration Verification — plus a starter CLAUDE.md.",
+    section: "Foundation",
+  },
+  {
     url: "/flywheel",
     title: "The product flywheel",
     description:

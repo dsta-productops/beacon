@@ -3,11 +3,11 @@ title: "Prototype-from-PRD scaffolder"
 phase: "design"
 domain: "digital"
 tool: "claude-code"
-task: "Generate a working prototype from a PRD"
-expectedOutput: "Scaffolded, PRIZM-conformant prototype code that implements the user stories in the PRD."
+task: "Scaffold a working reference implementation from a PRD"
+expectedOutput: "Scaffolded, PRIZM-conformant reference code that implements the user stories in the PRD. Runs as an interactive prototype users can walk through."
 inputsFrom:
   - prd-generator
-outputDestination: "A working scaffold in your repo. The prototype is the reference code — push to a branch DevSecOps can read so their technical assessment runs in parallel with the next Design iteration."
+outputDestination: "A working scaffold in your repo. The running scaffold is the prototype teams put in front of users; the source is the reference code DevSecOps picks up — push to a branch so their technical assessment runs in parallel with the next Design iteration."
 inputs:
   - token: "PRD"
     description: "The PRD you're building from, in any of these forms:"
@@ -22,7 +22,7 @@ inputs:
       - "calm and information-dense"
       - "fast and keyboard-first"
 promptBody: |
-  I want to scaffold a prototype that implements the PRD below.
+  I want to scaffold a working reference implementation from the PRD below — real code, running as an interactive prototype users can walk through, that DevSecOps can pick up in parallel.
 
   Stack:
   - Next.js + TypeScript + Tailwind v4
@@ -51,7 +51,7 @@ promptBody: |
 visibility: "public"
 ---
 
-Use this prompt with [Claude Code](/tools/claude-code) to scaffold a working prototype from a finalised PRD.
+Use this prompt with [Claude Code](/tools/claude-code) to scaffold working reference code from a finalised PRD — the same running scaffold serves as the interactive prototype for the next Test pass.
 
 ## Tips
 
