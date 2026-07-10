@@ -14,7 +14,7 @@ The rest of this page uses **functional code** and **NFR code** as shorthand for
 - **Functional code** — reference implementations scaffolded from PRDs, capability storyboards, virtual prototypes. Usually driven by UX; sometimes a Dev self-serving.
 - **NFR code** — implementation of non-functional requirements, hardening, integration. Usually driven by Dev.
 
-The Quality Model is the layered assurance approach that lets those two streams land at the same bar in production.
+**Both are subjected to the same automated scan suite at PR time.** Functional code and NFR code go through the DevSecOps pipeline's Quality Checks & Linters, SCA, SAST, Container Scanning, and DAST — applied identically regardless of stream or author. The Quality Model is the layered assurance approach that wraps that scan with three further layers — extending parity beyond what a scanner can codify, and making the handoff between the two streams a smooth collaboration rather than a throw-over-the-wall: functional code arrives on shared foundations (design system, typed contracts, agreed patterns) that Dev can layer NFR work onto in parallel, not sequentially.
 
 ## The four layers
 
