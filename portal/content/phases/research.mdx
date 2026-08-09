@@ -64,8 +64,13 @@ stages:
         domain: "digital"
         promptSlugs:
           - service-blueprint-drafter
+      - name: "Rank the problems by impact"
+        description: "Consolidate the synthesis's friction into a single ranked Problem-impact analysis — reach, severity, evidence, and leverage — so the PRD builds for the highest-impact problem first."
+        domain: "shared"
+        promptSlugs:
+          - problem-impact-ranker
       - name: "Draft the PRD"
-        description: "Product Requirements Document — the artefact that passes into Design."
+        description: "Product Requirements Document — the artefact that passes into Design. Builds for the top-ranked problem from the Problem-impact analysis."
         domain: "digital"
         promptSlugs:
           - prd-generator

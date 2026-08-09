@@ -3,15 +3,27 @@ title: PRD generator
 phase: research
 domain: digital
 tool: clara
-task: draft a v0 PRD from research synthesis and prior framing
+task: >-
+  draft a v0 PRD from the problem-impact ranking, research synthesis, and prior
+  framing
 expectedOutput: >-
-  Markdown PRD with 7 standard sections, with clarifying questions where input
-  is incomplete.
+  Markdown PRD with 8 standard sections — including a Scope table that rolls
+  ranked problems up into product modules (module / rolls-up-ranks / core job)
+  and a prioritised user-story table (id·rank / as-a / i-want / so-that /
+  evidence). Clarifying questions where input is incomplete.
 inputsFrom:
+  - problem-impact-ranker
   - research-synthesiser
   - persona-generator
 confluenceContext:
   inputs:
+    - what: The problem to build for
+      description: >-
+        The top-ranked (or user-chosen) problem from `Knowledge
+        Base/{{track}}/Problem-impact-analysis`. Falls back to programme-wide.
+        If a ranking exists, the PRD is drafted for one problem lifted from it;
+        if the user names a different rank, use that. When no ranking exists,
+        fall back to the Research-synthesis problem statement directly.
     - what: Problem statement and Success criteria
       description: >-
         Problem-statement and Success-criteria sections of `Knowledge
@@ -33,7 +45,7 @@ confluenceContext:
   outputPathTemplate: 'Knowledge Base/{{track}}/PRDs/{{prd-title}}'
 visibility: public
 source: clara
-claraSourceSha: 875f6d44d91f059d9155e9f8f41ca60be613a3be
+claraSourceSha: 2aaffd60e09de6f1b99cdc34e167bef2080c52bc
 copyBlock: Use CLARA's `prd-generator` for <programme name>.
 ---
 
@@ -42,7 +54,7 @@ copyBlock: Use CLARA's `prd-generator` for <programme name>.
 - **Programme name** — your programme's name (e.g. SKYPROTECT).
 - **Track** — the slice of the programme this artefact belongs to (workstream, capability area, feature line, etc.), or `Programme-wide` if it spans tracks.
 - **PRD title** — short (e.g. "Incident-report capture v1").
-- **Inputs** — CLARA will search the programme's Confluence space for problem statement and success criteria; persona for the prd; themes from the research synthesis (optional); original stakeholder ask. You can also paste fresh material if it's not in Confluence yet.
+- **Inputs** — CLARA will search the programme's Confluence space for the problem to build for; problem statement and success criteria; persona for the prd; themes from the research synthesis (optional); original stakeholder ask. You can also paste fresh material if it's not in Confluence yet.
 
 ## Where the output lands
 
@@ -59,8 +71,8 @@ Before sharing the PRD with stakeholders, walk through these checks. Most teams 
 
 - **Problem statement** is one paragraph, framed as a problem (not a solution in disguise). Has a clear "who has the problem."
 - **Success criteria** are measurable and capability-focused — what the capability or product has to be able to do, and to what threshold. No "users will feel more confident" non-criteria.
-- **Scope** is bounded both ways — what's in *and* what's out. "Out of scope" usually shortens later debates.
-- **User stories / jobs-to-be-done** describe outcomes, not features.
+- **Scope table** rolls every relevant rank up into a module (or explicitly drops it to Out of scope). No ranked problem is silently unaccounted for; "Out of scope" names the rank and the reason.
+- **User-story table** is ordered by priority, every row's `ID · rank` ties back to the ranking, and every Evidence cell cites a real verbatim/observation with its source ref. Stories describe outcomes, not features.
 - **Constraints and dependencies** name every external thing the work depends on. Re-read with "what would block this?" in mind.
 - **Open questions** are honest. The first draft is supposed to be wrong in interesting ways; the open questions are where you flag what you don't know.
 - **Persona references** link to specific persona pages — no implicit "the user".
