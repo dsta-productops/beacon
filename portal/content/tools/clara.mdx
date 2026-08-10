@@ -7,13 +7,13 @@ additionalPhases:
 domain: "shared"
 type: "bespoke"
 availability:
-  anzC: early-access
-  mcc: planned
-  anzS: planned
-learnMoreLink: "#"  # TODO replace with CLARA brand site URL when it exists
+  internet: available
+  ace: planned
+  anzC: planned
+learnMoreLink: "https://dsta-productops.github.io/clara/"
 visibility: "public"
 promptsHeading: "What CLARA can do"
-promptsLede: "Pick a task. CLARA handles the Confluence search, drafting, and filing — open any tile for the one-liner to paste."
+promptsLede: "Pick a task. CLARA handles the knowledge-base search, drafting, and filing — open any tile for the one-liner to paste."
 prompts:
   - prior-knowledge-summariser
   - interview-guide-generator
@@ -33,9 +33,9 @@ prompts:
 
 ## What it does
 
-An AI-enabled product intelligence tool that produces research artefacts across the Research, Design, and Test phases of the ProductOps pipeline. CLARA reads your programme's Confluence space, drafts structured artefacts, and files them back into the Knowledge Base — so each team starts richer than the last.
+An AI-enabled product intelligence tool that produces research artefacts across the Research, Design, and Test phases of the ProductOps pipeline. CLARA reads your programme's knowledge base, drafts structured artefacts, and files them back — so each team starts richer than the last.
 
-CLARA — **C**onfluence **L**earning & AI **R**esearch **A**ssistant — is **Confluence-only**: she owns the research artefacts that live in the Knowledge Base across Research, Design, and Test (personas, journeys, PRDs, capability storyboards, test plans, and the rest). Prototype scaffolding still goes through Claude Code, not CLARA.
+CLARA connects to more than one knowledge-base backend: **Confluence** (via a direct connector, no manual setup) and **Plane** (via an MCP server). She owns the research artefacts that live in the Knowledge Base across Research, Design, and Test (personas, journeys, PRDs, capability storyboards, test plans, and the rest). Prototype scaffolding still goes through Claude Code, not CLARA.
 
 ## How CLARA behaves
 
@@ -51,7 +51,7 @@ She is **track-aware** — she always knows whether she's working at programme-w
 
 ## Where outputs land
 
-CLARA files every artefact under a top-level `Knowledge Base` page in the programme's Confluence space:
+CLARA files every artefact under a top-level `Knowledge Base` page in the programme's knowledge base:
 
 ```
 Knowledge Base /
