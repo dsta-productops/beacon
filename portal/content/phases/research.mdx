@@ -33,6 +33,11 @@ stages:
         domain: "shared"
         toolSlugs:
           - dash
+      - name: "Evaluate the existing product"
+        description: "Run a Nielsen heuristic usability evaluation of the existing, legacy, or competitor product — from screenshots, a live URL, or a deck — into a scored, evidence-anchored report. The severity-rated findings become candidate problems that feed the synthesis and the impact ranking."
+        domain: "shared"
+        promptSlugs:
+          - heuristic-evaluator
       - name: "Generate the interview guide"
         description: "Translate the outcome question into a field-ready interview guide — questions, listening signals, and probes."
         domain: "shared"
