@@ -51,20 +51,25 @@ const PHASE_LABELS: Record<string, string> = {
 // research starts at prior-knowledge / interview-guide and ends at PRD, design
 // follows from PRD into prototype + storyboard, test consumes the design output.
 const CHAIN_ORDER: string[] = [
-  // Research
+  // Research — mirrors the Research phase page: Discovery → Synthesis →
+  // Artefact production, with the digital and engineering chains interleaved
+  // in the same reading order as the phase stages.
   "prior-knowledge-summariser",
+  "heuristic-evaluator",
   "interview-guide-generator",
   "research-synthesiser",
   "persona-generator",
   "journey-map-drafter",
   "service-blueprint-drafter",
+  "problem-impact-ranker",
+  "prd-generator",
   "operational-scenario-generator",
   "capability-spec-generator",
   "mission-thread-mapper",
-  "prd-generator",
-  // Design
-  "capability-storyboard-scripter",
+  // Design — mirrors the Design phase page.
+  "before-after-journey-mapper",
   "prototype-from-prd",
+  "capability-storyboard-scripter",
   // Test
   "test-plan-generator",
 ];
