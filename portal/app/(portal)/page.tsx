@@ -57,7 +57,7 @@ const bundles: Bundle[] = [
     icon: Users,
     title: "Product Roles",
     blurb:
-      "The tripartite product structure — Ops PM, UX PM, Tech PM. Complementary ownership of mission outcomes, user experience, and technical delivery.",
+      "The tripartite product structure — product, design, and engineering. Complementary ownership of strategy, experience, and technical delivery.",
   },
   {
     href: "/quality-model",

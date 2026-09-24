@@ -33,7 +33,7 @@ export const corpus: CorpusEntry[] = [
     url: "/product-roles",
     title: "Tripartite product structure",
     description:
-      "The three product roles at DSTA — Ops PM (Product Lead), UX PM (Design Lead), Tech PM (Tech Lead) — and how they divide accountability for mission outcomes, user experience, and technical delivery.",
+      "The three product crafts at DSTA — product, design, and engineering — each at Lead and Manager seniority, and how they divide accountability for strategy, experience, and technical delivery.",
     section: "Foundation",
   },
   {
