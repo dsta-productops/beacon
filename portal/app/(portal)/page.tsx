@@ -104,33 +104,6 @@ export default function Home() {
           </Text>
         </Stack>
 
-        <Card className="border-l-4 border-l-accent p-6">
-          <div className="flex items-start gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-accent/10 text-accent">
-              <Sparkles className="h-5 w-5" />
-            </div>
-            <Stack gap="2" className="min-w-0 flex-1">
-              <Text
-                size="xs"
-                weight="medium"
-                className="uppercase tracking-wide text-accent"
-              >
-                About this portal
-              </Text>
-              <Text>
-                AI is reshaping how product teams deliver — how UX, ops, and engineering hand work back and forth, how quickly a testable artefact can exist, what a &ldquo;prototype&rdquo; is worth carrying forward. This portal captures the product structures, processes, and tools we&rsquo;re piloting for that shift. Expect it to evolve as we learn and adapt to the pace of AI. If a workflow here matches yours: try it. If it doesn&rsquo;t: tell us at{" "}
-                <a
-                  href="mailto:DESIGNINNO@dsta.gov.sg"
-                  className="font-medium text-accent hover:text-accent-strong"
-                >
-                  DESIGNINNO@dsta.gov.sg
-                </a>
-                {" "}— that shapes the next iteration.
-              </Text>
-            </Stack>
-          </div>
-        </Card>
-
         <Card className="border-accent p-6">
           <div className="flex items-start gap-4">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-accent text-accent-fg">
