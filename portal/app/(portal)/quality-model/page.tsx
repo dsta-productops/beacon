@@ -10,7 +10,7 @@ import { PageHeader } from "@/components/portal/page-header";
 import { notFound } from "next/navigation";
 
 export const metadata = {
-  title: "Quality Model · ProductOps Co-pilot",
+  title: "Quality Model · BEACON",
 };
 
 interface PageFrontmatter {

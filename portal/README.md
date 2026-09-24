@@ -1,4 +1,4 @@
-# DSTA ProductOps Co-pilot
+# BEACON
 
 Wayfinder, tool catalogue, and AI-ready guidance for DSTA's ProductOps pipeline. Serves both digital and engineering programme teams on a common platform.
 
@@ -72,7 +72,7 @@ Every content record has a `visibility` field (`public` / `internal`). The inter
 portal/
 ├── app/
 │   ├── (portal)/                    # Routes under the EnterpriseAppShell chrome
-│   │   ├── layout.tsx               # Mounts the AppShell + AskCopilot
+│   │   ├── layout.tsx               # Mounts the AppShell + AskBeacon
 │   │   ├── page.tsx                 # Landing
 │   │   ├── pipeline/                # Foundation
 │   │   ├── flywheel/                # Wayfinder + phase pages
@@ -92,7 +92,7 @@ portal/
 ├── components/
 │   ├── ui/                          # PRIZM primitives (copy-pasted from prizm-design/prizm)
 │   ├── templates/enterprise/        # Candidate PRIZM Enterprise templates (upstreamable)
-│   └── portal/                      # Portal-specific composition (brand, nav, AskCopilot…)
+│   └── portal/                      # Portal-specific composition (brand, nav, AskBeacon…)
 ├── lib/
 │   ├── ai/                          # Provider abstraction + system prompt
 │   ├── corpus.ts                    # Source of truth for /llms.txt

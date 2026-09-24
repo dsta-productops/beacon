@@ -33,7 +33,7 @@ const phases = [
 ];
 
 export const metadata = {
-  title: "Flywheel · ProductOps Co-pilot",
+  title: "Flywheel · BEACON",
 };
 
 export default function FlywheelPage() {

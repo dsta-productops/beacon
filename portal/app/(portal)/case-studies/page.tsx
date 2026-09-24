@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/portal/page-header";
 import { PlaceholderNote } from "@/components/portal/placeholder-note";
 
 export const metadata = {
-  title: "Case studies · ProductOps Co-pilot",
+  title: "Case studies · BEACON",
 };
 
 export default function CaseStudiesPage() {

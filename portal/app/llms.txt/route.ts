@@ -13,7 +13,7 @@ export async function GET() {
   const groups = corpusGroupedBySection();
   const sections = Object.entries(groups);
 
-  const body = `# DSTA ProductOps Co-pilot
+  const body = `# BEACON
 
 > The wayfinder for DSTA's ProductOps pipeline. Explains the pipeline,
 > catalogues tools and templates, and surfaces AI-ready prompts for every

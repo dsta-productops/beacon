@@ -27,7 +27,7 @@ import {
 const transport = new DefaultChatTransport({ api: "/api/ai" });
 
 /**
- * AskCopilot — the ⌘K trigger button plus the modal palette plus the
+ * AskBeacon — the ⌘K trigger button plus the modal palette plus the
  * "Continue as conversation" Sheet drawer. Shares one chat state across
  * both modes so an exchange started in the palette continues seamlessly
  * once the user expands.
@@ -35,7 +35,7 @@ const transport = new DefaultChatTransport({ api: "/api/ai" });
  * Wires to /api/ai which streams from the provider-agnostic LLM layer
  * (Groq on internet, on-prem on airgap).
  */
-export function AskCopilot() {
+export function AskBeacon() {
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -112,7 +112,7 @@ export function AskCopilot() {
         placeholder="Ask anything about the pipeline, tools, or prompts…"
         className="flex-1 bg-transparent text-sm text-fg placeholder:text-fg-subtle focus:outline-none"
         disabled={isPending}
-        aria-label="Ask Co-pilot"
+        aria-label="Ask BEACON"
       />
       <button
         type="submit"
@@ -136,7 +136,7 @@ export function AskCopilot() {
       <button
         type="button"
         onClick={() => setPaletteOpen(true)}
-        aria-label="Open Co-pilot (Cmd K)"
+        aria-label="Open BEACON (Cmd K)"
         className={cn(
           "inline-flex h-9 items-center gap-2 rounded-md border border-border bg-surface px-3 text-sm text-fg-muted transition-colors",
           "hover:border-border-strong hover:text-fg",
@@ -144,7 +144,7 @@ export function AskCopilot() {
         )}
       >
         <Search className="h-4 w-4" />
-        <span className="hidden sm:inline">Ask Co-pilot…</span>
+        <span className="hidden sm:inline">Ask BEACON…</span>
         <span className="hidden items-center gap-1 md:flex">
           <Kbd>⌘</Kbd>
           <Kbd>K</Kbd>
@@ -170,7 +170,7 @@ export function AskCopilot() {
               "transition-all duration-200",
             )}
           >
-            <BaseDialog.Title className="sr-only">Ask Co-pilot</BaseDialog.Title>
+            <BaseDialog.Title className="sr-only">Ask BEACON</BaseDialog.Title>
             <div className="flex-1 overflow-y-auto">
               {messages.length === 0 ? (
                 <PaletteEmpty />
@@ -220,7 +220,7 @@ export function AskCopilot() {
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-accent" />
-                <SheetTitle>Co-pilot</SheetTitle>
+                <SheetTitle>BEACON</SheetTitle>
               </div>
               {messages.length > 0 && (
                 <button
@@ -258,7 +258,7 @@ function PaletteEmpty() {
         journeys.
       </Text>
       <Text size="xs" variant="subtle">
-        The Co-pilot stays tight to portal content and cites source pages.
+        BEACON stays tight to portal content and cites source pages.
       </Text>
     </div>
   );
@@ -290,7 +290,7 @@ function ChatBody({ messages, status, error, onStop }: ChatBodyProps) {
             weight="medium"
             className="mb-1 uppercase tracking-wide"
           >
-            {m.role === "user" ? "You" : "Co-pilot"}
+            {m.role === "user" ? "You" : "BEACON"}
           </Text>
           <div>
             {m.parts.map((p, i) => {

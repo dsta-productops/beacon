@@ -8,7 +8,7 @@ export function Brand() {
     >
       <BrandMark />
       <span className="text-sm font-semibold tracking-tight">
-        DSTA ProductOps Co-pilot
+        BEACON
       </span>
     </Link>
   );

@@ -80,7 +80,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const entry = await readEntry<ToolFrontmatter>("tools", slug);
   if (!entry) return {};
-  return { title: `${entry.frontmatter.name} · Tools · ProductOps Co-pilot` };
+  return { title: `${entry.frontmatter.name} · Tools · BEACON` };
 }
 
 export default async function ToolPage({

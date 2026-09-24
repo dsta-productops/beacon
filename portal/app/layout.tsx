@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "DSTA ProductOps Co-pilot",
+  title: "BEACON: find your way around the ProductOps pipeline",
   description:
     "Wayfinder, tool catalogue, and guidance for DSTA's ProductOps pipeline.",
 };

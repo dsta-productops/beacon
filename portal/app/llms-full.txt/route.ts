@@ -9,9 +9,9 @@ import { corpus } from "@/lib/corpus";
  * page bodies inline.
  */
 export async function GET() {
-  const intro = `# DSTA ProductOps Co-pilot — full corpus
+  const intro = `# BEACON — full corpus
 
-> The complete, single-file corpus of the ProductOps Co-pilot portal.
+> The complete, single-file corpus of BEACON portal.
 > Intended for LLM agents to ingest as priming context.
 
 ## Status

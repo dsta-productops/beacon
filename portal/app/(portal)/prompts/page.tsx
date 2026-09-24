@@ -11,7 +11,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export const metadata = {
-  title: "Prompts · ProductOps Co-pilot",
+  title: "Prompts · BEACON",
 };
 
 type PromptTool = "clara" | "claude-code" | "any-llm";

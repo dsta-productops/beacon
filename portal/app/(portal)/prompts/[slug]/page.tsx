@@ -78,7 +78,7 @@ export async function generateMetadata({
   const entry = await readEntry<PromptFrontmatter>("prompts", slug);
   if (!entry) return {};
   return {
-    title: `${entry.frontmatter.title} · Prompts · ProductOps Co-pilot`,
+    title: `${entry.frontmatter.title} · Prompts · BEACON`,
   };
 }
 

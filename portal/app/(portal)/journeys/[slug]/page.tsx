@@ -53,7 +53,7 @@ export async function generateMetadata({
   const entry = await readEntry<JourneyFrontmatter>("journeys", slug);
   if (!entry) return {};
   return {
-    title: `${entry.frontmatter.title} · Journeys · ProductOps Co-pilot`,
+    title: `${entry.frontmatter.title} · Journeys · BEACON`,
   };
 }
 

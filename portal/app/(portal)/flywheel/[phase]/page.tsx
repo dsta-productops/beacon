@@ -30,7 +30,7 @@ export async function generateMetadata({
   const { phase } = await params;
   const entry = await readEntry<{ title: string }>("phases", phase);
   if (!entry) return {};
-  return { title: `${entry.frontmatter.title} · ProductOps Co-pilot` };
+  return { title: `${entry.frontmatter.title} · BEACON` };
 }
 
 interface ChecklistItem {

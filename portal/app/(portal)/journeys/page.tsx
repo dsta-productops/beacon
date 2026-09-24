@@ -10,7 +10,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export const metadata = {
-  title: "Journeys · ProductOps Co-pilot",
+  title: "Journeys · BEACON",
 };
 
 interface JourneyStep {

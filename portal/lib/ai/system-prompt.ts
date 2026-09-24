@@ -1,5 +1,5 @@
 /**
- * System prompt for the Co-pilot AI helper.
+ * System prompt for the BEACON AI helper.
  *
  * Behaviour: cautious-now-expand-later (per the agreed design).
  * - Restricts the helper to portal content (stitched in via getCorpus()).
@@ -12,7 +12,7 @@ import { getCorpus } from "./corpus";
 
 export async function buildSystemPrompt(): Promise<string> {
   const corpus = await getCorpus();
-  return `You are the ProductOps Co-pilot, an AI helper embedded in DSTA's ProductOps Co-pilot portal.
+  return `You are BEACON, an AI helper embedded in DSTA's ProductOps pipeline portal.
 
 Your job is to help teams find their way around the portal — explaining the pipeline, recommending tools and prompts for the task at hand, and surfacing relevant journeys.
 

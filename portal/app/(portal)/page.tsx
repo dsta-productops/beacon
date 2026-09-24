@@ -95,10 +95,10 @@ export default function Home() {
       <Stack gap="12" className="py-8">
         <Stack gap="4" className="max-w-2xl">
           <Heading as="h1" size="4xl">
-            Your ProductOps Co-pilot.
+            Your ProductOps pipeline companion.
           </Heading>
           <Text size="lg" variant="muted">
-            One place to learn how the DSTA ProductOps Pipeline works, find the tools and guidance you
+            One place to learn how the pipeline works, find the tools and guidance you
             need for each phase, and get AI-ready prompts you can paste
             straight into your work.
           </Text>

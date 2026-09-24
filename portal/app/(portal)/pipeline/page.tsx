@@ -6,7 +6,7 @@ import { PageHeader } from "@/components/portal/page-header";
 import { notFound } from "next/navigation";
 
 export const metadata = {
-  title: "Pipeline · ProductOps Co-pilot",
+  title: "Pipeline · BEACON",
 };
 
 interface PageFrontmatter {

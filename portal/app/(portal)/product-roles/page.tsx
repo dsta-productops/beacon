@@ -11,7 +11,7 @@ import { Target, Palette, Cpu } from "lucide-react";
 import { notFound } from "next/navigation";
 
 export const metadata = {
-  title: "Product Roles · ProductOps Co-pilot",
+  title: "Product Roles · BEACON",
 };
 
 interface PageFrontmatter {
