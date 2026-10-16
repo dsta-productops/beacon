@@ -8,6 +8,7 @@ export const primaryNavItems = [
   { href: "/tools", label: "Tools" },
   { href: "/journeys", label: "Journeys" },
   { href: "/prompts", label: "Prompts" },
+  { href: "/walkthrough", label: "Walkthrough" },
 ];
 
 export function PrimaryNav() {

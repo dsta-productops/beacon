@@ -6,6 +6,7 @@ import { Frame } from "@/components/ui/frame";
 import Link from "next/link";
 import {
   ArrowRight,
+  BookOpen,
   Compass,
   FlaskConical,
   PenTool,
@@ -159,6 +160,42 @@ export default function Home() {
                 See the full Flywheel overview
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
+            </Stack>
+          </div>
+        </Card>
+
+        <Card className="p-6">
+          <div className="flex items-start gap-4">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-bg-muted text-accent">
+              <BookOpen className="h-5 w-5" />
+            </div>
+            <Stack gap="4" className="min-w-0 flex-1">
+              <Stack gap="2">
+                <Heading as="h2" size="lg">
+                  Your first project in BEACON
+                </Heading>
+                <Text variant="muted">
+                  A step-by-step tutorial that takes one example project from a
+                  blank brief to researched requirements, a working prototype
+                  and a test plan. Pick the version that matches where your
+                  programme keeps its Knowledge Base.
+                </Text>
+              </Stack>
+              <div className="flex flex-wrap gap-x-6 gap-y-2">
+                {[
+                  { href: "/walkthrough", label: "Confluence walkthrough" },
+                  { href: "/walkthrough-gitlab", label: "GitLab wiki walkthrough" },
+                ].map(({ href, label }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    className="group inline-flex items-center gap-1 text-sm font-medium text-accent hover:text-accent-strong"
+                  >
+                    {label}
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                ))}
+              </div>
             </Stack>
           </div>
         </Card>
