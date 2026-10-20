@@ -14,17 +14,13 @@ By the end you will have:
 - **A test plan** (step 12)
 - **A baseline and test results** to compare against (steps 6, 13)
 
-
 ## 1. Check the prerequisites
 ::step{id="prerequisites" phase="Setup"}
 
 Confirm you have the access you need before you start.
 
 - A GitLab account that can create projects. To use your own wiki later, you need the Developer role or above on it.
-- Access to [CLARA](/tools/clara).
 - Access to [DASH](/tools/dash), at [diux-dash.com](https://diux-dash.com).
-
-If you are unsure about access, see the *Availability by environment* table on each tool page.
 
 :::watch{title="Read this first"}
 - Use the Claude Code plugin in your IDE, such as VS Code. The command-line version and the desktop app do not work with this tutorial.
@@ -38,13 +34,22 @@ If you are unsure about access, see the *Availability by environment* table on e
 
 Set up a workspace and a GitLab wiki for the tutorial. Allow about 20 minutes. Skip any tool you already have.
 
-#### Install git, VS Code and Claude Code
+#### Install VS Code, Claude Code and git
 
-1. Install **git** from [git-scm.com](https://git-scm.com/downloads), keeping the default options.
-2. Install **VS Code** from [code.visualstudio.com](https://code.visualstudio.com).
-3. In VS Code, open the Extensions view, search for **Claude Code** and choose **Install**. Sign in from the Claude panel.
-4. Create a folder such as `skyprotect-workspace`, then choose **File > Open Folder**.
-5. Open the terminal (**Terminal > New Terminal**) and run these commands, using your own name and email:
+1. Install **VS Code** from [code.visualstudio.com](https://code.visualstudio.com).
+2. In VS Code, open the Extensions view, search for **Claude Code** and choose **Install**. Sign in from the Claude panel.
+
+::screenshot{caption="VS Code Extensions view, with Claude Code and its Install button" hint="the VS Code Extensions view with Claude Code in the results and the Install button visible, then the Claude panel signed in"}
+
+3. Create a folder such as `skyprotect-workspace`, then choose **File > Open Folder**.
+4. Open the terminal: choose **Terminal > New Terminal** in VS Code. A panel opens at the bottom of the window, where you type commands and press :kbd[Enter] to run them. It looks different on Windows and Mac, but it works the same way.
+
+::screenshot{caption="The terminal panel open at the bottom of VS Code" hint="VS Code with the terminal panel open at the bottom of the window"}
+
+5. Install **git**:
+   - **Windows:** download it from [git-scm.com](https://git-scm.com/downloads) and run the installer, keeping the default options. Then close the terminal panel and open a new one.
+   - **Mac:** type `git --version` in the terminal and press :kbd[Enter]. If a window asks you to install the developer tools, choose **Install**.
+6. Type these two commands in the terminal, pressing :kbd[Enter] after each. Use your own name and email:
    ```prompt
    git config --global user.name "Your Name"
    ```
@@ -54,16 +59,21 @@ Set up a workspace and a GitLab wiki for the tutorial. Allow about 20 minutes. S
 
 #### Create the GitLab project and wiki
 
-1. In GitLab, choose **New project > Create blank project**. Name it **SKYPROTECT** and clear **Initialize repository with a README**.
+1. In GitLab, choose **New project > Create blank project**. Name it **SKYPROTECT** and untick the **Initialize repository with a README** checkbox.
+
+::screenshot{caption="The Create blank project form, with the README checkbox unticked" hint="the Create blank project form with the project name SKYPROTECT and the Initialize repository with a README checkbox unticked and highlighted"}
+
 2. Open **Plan > Wiki** and choose **Create your first page**. Set the title to `home`, add any placeholder text and save. Add no other pages.
 3. Choose **Clone repository** and copy the HTTPS address. It ends in `.wiki.git`.
+
+::screenshot{caption="The wiki's Clone repository menu, with the HTTPS address ending in .wiki.git" hint="the SKYPROTECT wiki page with the Clone repository button open and the HTTPS address ending in .wiki.git highlighted"}
 
 :::check
 VS Code is open on an empty folder, the Claude panel answers, the SKYPROTECT wiki holds one `home` page, and the wiki clone URL is copied.
 :::
 
 **If `git` is not found:**
-- Close the terminal and open a new one. If it still fails, run the git installer again.
+- Close the terminal and open a new one. If it still fails, repeat the git install for your system.
 
 **If git asks who you are:**
 - Run the two `git config` commands again.
@@ -75,22 +85,27 @@ VS Code is open on an empty folder, the Claude panel answers, the SKYPROTECT wik
 ## 3. Install CLARA
 ::step{id="install-clara" phase="Setup" tool="CLARA"}
 
-CLARA is a **skill**: a Markdown file that tells Claude how to draft research documents and file them in your wiki. Choose one method.
+CLARA is a **skill**: a Markdown file that tells Claude how to draft research documents and file them in your wiki.
+
+Choose one method.
 
 :::::tabs
 ::::tab{value="file" label="File method"}
 Install CLARA once and it is available whenever you open this workspace.
 
-1. Download :file[clara-gitlab.md]{href="/clara-gitlab.md"}.
+1. Download :file[SKILL.md]{href="/gitlab/SKILL.md"}.
 2. In your IDE's file list, create the folders `.claude/skills/clara-gitlab`.
-3. Drag the downloaded file into `clara-gitlab` and rename it `SKILL.md` (capitals).
+3. Drag the downloaded file into `clara-gitlab`. Keep the name as it is.
+
+::screenshot{caption="The folder .claude/skills/clara-gitlab, holding SKILL.md" hint="the IDE file list showing .claude/skills/clara-gitlab with SKILL.md inside"}
+
 4. Start a new chat in the Claude panel and ask:
    ```prompt
    What can CLARA do?
    ```
 
 **If CLARA does not appear:**
-- Check that the folder is named `clara-gitlab`, the file is named exactly `SKILL.md`, and `.claude` is at the top of the folder you opened.
+- Check that the folder is named `clara-gitlab`, it holds `SKILL.md` (spelled exactly with capitals), and `.claude` is at the top of the folder you opened.
 - Run **Developer: Reload Window** from the command palette.
 
 **Note:** To make CLARA available in every project, put the same folders in your home folder (`~/.claude/skills/clara-gitlab/`). Dot folders are hidden by default. On a Mac, press :kbd[Cmd] + :kbd[Shift] + :kbd[.] in Finder. On Windows, choose **View > Show > Hidden items** in File Explorer.
@@ -101,7 +116,7 @@ Nothing to install. Your computer must be able to reach the address. Paste the s
 
 1. Open a new chat in the Claude panel and paste:
    ```prompt
-   Read https://dsta-productops.github.io/clara/skill/clara-gitlab.md?v=3 and follow it as your instructions for the rest of this chat. Then introduce yourself and ask what I'd like to create.
+   Read https://dsta-productops.github.io/clara/skill/clara-gitlab.md?v=4 and follow it as your instructions for the rest of this chat. Then introduce yourself and ask what I'd like to create.
    ```
 
 **If CLARA does not respond:**
@@ -126,9 +141,12 @@ SKYPROTECT is a made-up drone-defence programme. One setup file describes its wh
    ```prompt
    Set up the SKYPROTECT demo Knowledge Base in a GitLab wiki by following the attached setup file exactly. The wiki clone URL is <paste your wiki clone URL>. The project and its wiki already exist, so do not create them. Use plain git commands only, with the git credentials already on this machine. If anything cannot be written, committed or pushed, stop and tell me. Do not retry or improvise.
    ```
+
+::screenshot{caption="The Claude panel with the setup file attached and the prompt pasted" hint="the Claude panel with skyprotect-gitlab-setup.md attached and the prompt pasted, with the attach control highlighted"}
+
 3. Wait for it to finish, then open the wiki home link it gives you.
 
-::screenshot{hint="the SKYPROTECT wiki home page in GitLab, with the sidebar tree expanded"}
+::screenshot{caption="The SKYPROTECT wiki home page, with the sidebar tree expanded" hint="the SKYPROTECT wiki home page in GitLab, with the sidebar tree expanded"}
 
 :::check
 The sidebar shows **Knowledge Base** with two tracks, **Programme-wide** and **Operator-console**, holding 52 pages in all, including 24 interview and field notes. Click a citation such as S08 in the research synthesis to open that note.
@@ -153,7 +171,7 @@ Review past projects and other teams' wiki pages first, so you do not start from
 3. Give it your sources as wiki page links, one per page. Remove any that do not belong.
 4. Review the path and every file CLARA says it will change, then reply **go**. CLARA files nothing until you do.
 
-::screenshot{hint="CLARA's list of sources, with the page links it has picked up"}
+::screenshot{caption="CLARA's list of files to change, waiting for your reply of go" hint="CLARA's list of files it will change, with the prompt waiting for the reply go"}
 
 :::check
 A summary of patterns, contradictions and related work, filed under `[track]/Prior-knowledge/[topic]`. Each finding names the wiki page it came from.
@@ -182,9 +200,12 @@ A **baseline** measures how things work today, so you can show later that your d
 
 1. Sign in at [diux-dash.com](https://diux-dash.com) and open your programme's workspace.
 2. Create a session, choose **Baseline Testing**, and name the system people use today. For SKYPROTECT, that is the three-vendor toolchain of separate radar, RF and camera systems.
+
+::screenshot{caption="The DASH new-session screen, with Baseline Testing selected" hint="the DASH new-session screen with Baseline Testing highlighted"}
+
 3. Share the link or QR code with people who use that system.
 
-::screenshot{hint="the Baseline Testing session in DASH, showing the share link and QR code"}
+::screenshot{caption="The Baseline Testing session, showing the share link and QR code" hint="the Baseline Testing session in DASH, showing the share link and QR code"}
 
 :::check
 Responses appear in DASH as people answer. Keep this session open, because you compare against it in step 13.
@@ -285,10 +306,13 @@ A prototype is a working draft people can click through. Claude Code reads your 
 1. Open an empty project folder in your IDE and start a chat in the Claude panel.
 2. Open the [Prototype-from-PRD scaffolder](/prompts/prototype-from-prd) prompt and paste your PRD where it asks.
 3. Choose a PRIZM zone: **Enterprise** for websites and back-office tools, or **C3** for command-and-control systems.
+
+::screenshot{caption="Claude Code asking which PRIZM zone to use, Enterprise or C3" hint="Claude Code asking which PRIZM zone to use, with Enterprise and C3 as the options"}
+
 4. When Claude Code lists three to five user flows, pick one to build first. Do not skip this question.
 5. Open the prototype in your browser. To change something, describe the change in plain English.
 
-::screenshot{hint="the running prototype in the browser, next to Claude Code"}
+::screenshot{caption="The running prototype in the browser, next to Claude Code" hint="the running prototype in the browser, next to Claude Code"}
 
 :::check
 A running prototype of your chosen flow, built from PRIZM components and semantic colour tokens such as `bg-bg` and `text-fg`, not raw colours.
@@ -324,9 +348,12 @@ Test the prototype, then compare the results with your baseline from step 6.
 1. In DASH, create a session and choose **Prototype Test**.
 2. Share the link or QR code with your participants and run the sessions as set out in your test plan.
 3. Compare the results with your baseline session.
+
+::screenshot{caption="The DASH comparison view, baseline against prototype results" hint="the DASH comparison view, baseline against prototype results"}
+
 4. Ask **DASH AI** for recommendations. It suggests usability improvements based on industry standards.
 
-::screenshot{hint="the DASH comparison view, baseline against prototype results"}
+::screenshot{caption="The DASH AI button on the results page" hint="the DASH AI button on the results page"}
 
 :::check
 Side-by-side scores for the old system and your prototype, plus a list of suggested improvements. This is your evidence that the new design is better, or your guide to what to fix next.

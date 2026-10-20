@@ -49,7 +49,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
  *   ::::tab{value="a" label="A"}     inside it (outer fences need more colons)
  *
  *   ```prompt                        a copyable prompt block
- *   ::screenshot{hint="..."}         placeholder until a real screenshot exists
+ *   ::screenshot{hint="..."}         placeholder until a real screenshot exists; add src="/x.png"
+ *                                    and alt="..." (optional caption="...") to show the image
  *   ::access{tool="clara"}           "Stuck? Contact ..." line
  *   :kbd[Enter]                      keyboard key
  *   :file[name.md]{href="/x.md"}     download link
@@ -150,7 +151,7 @@ function remarkWalkthrough() {
           break;
         case "screenshot":
           data.hName = "screenshot";
-          data.hProperties = { hint: attrs.hint };
+          data.hProperties = { hint: attrs.hint, src: attrs.src, alt: attrs.alt, caption: attrs.caption };
           break;
         case "access":
           data.hName = "access";
@@ -258,10 +259,43 @@ function WalkthroughTabs({ children }: { children?: ReactNode }) {
   );
 }
 
-// Screenshots are not captured yet, so `::screenshot{hint}` renders nothing and the hint stays in
-// the MDX as a to-do. Swap for an image (with alt text) when ready.
-function Screenshot(_props: { hint: string }) {
-  return null;
+// `::screenshot{caption="..."}` shows a blank captioned area until the image exists; without a
+// caption or `src` it renders nothing. Then add `src`
+// (a path under /public) and `alt`; the caption stays. `hint` is an optional note on what to capture.
+function Screenshot({
+  src,
+  alt,
+  caption,
+  hint,
+}: {
+  hint?: string;
+  src?: string;
+  alt?: string;
+  caption?: string;
+}) {
+  if (!src && !caption) return null;
+  return (
+    <figure className="my-4">
+      {src ? (
+        // eslint-disable-next-line @next/next/no-img-element -- static captures from /public, sizes vary
+        <img
+          src={src}
+          alt={alt ?? caption ?? ""}
+          loading="lazy"
+          className="h-auto w-full rounded-md border border-border bg-bg-muted"
+        />
+      ) : (
+        <div
+          role="img"
+          aria-label={alt ?? caption ?? hint ?? "Screenshot to come"}
+          className="aspect-video w-full rounded-md border border-border bg-bg-muted"
+        />
+      )}
+      {caption ? (
+        <figcaption className="mt-2 text-sm leading-6 text-fg-muted">{caption}</figcaption>
+      ) : null}
+    </figure>
+  );
 }
 
 function Pre({ children }: { children?: ReactNode }) {
@@ -323,7 +357,7 @@ const SHARED_PHASE_SUMMARIES = {
 
 const PHASE_SUMMARIES: Record<"walkthrough" | "walkthrough-gitlab", Record<string, string>> = {
   walkthrough: {
-    Setup: "Check the prerequisites, then load the SKYPROTECT demo project.",
+    Setup: "Check the prerequisites, install CLARA, then load the SKYPROTECT demo project.",
     ...SHARED_PHASE_SUMMARIES,
   },
   "walkthrough-gitlab": {
