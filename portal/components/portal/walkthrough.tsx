@@ -14,7 +14,7 @@ import { unified } from "unified";
 import { visit } from "unist-util-visit";
 import type { Root } from "mdast";
 import type { Directives } from "mdast-util-directive";
-import { CheckCircle2, Info, TriangleAlert } from "lucide-react";
+import { BookOpen, CheckCircle2, Info, TriangleAlert } from "lucide-react";
 import { readEntry } from "@/lib/content";
 import type { ToolSlug } from "@/lib/contacts";
 import { AccessContact } from "@/components/portal/access-contact";
@@ -41,6 +41,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
  *
  *   :::note{title="..."}             callouts (info / success / warning); a
  *   :::check / :::watch              missing title falls back to the default
+ *   :::example                       quiet "Example:" line pointing at a finished page
  *
  *   :::details{title="Stuck?"}      closed-by-default extra detail inside a step
  *
@@ -131,6 +132,7 @@ function remarkWalkthrough() {
       switch (d.name) {
         case "note":
         case "check":
+        case "example":
         case "watch":
           data.hName = "callout";
           data.hProperties = { kind: d.name, title: attrs.title ?? undefined };
@@ -183,6 +185,7 @@ const CALLOUTS = {
   check: { variant: "success", Icon: CheckCircle2, title: "You should see" },
   watch: { variant: "warning", Icon: TriangleAlert, title: "If it does not look right" },
   note: { variant: "info", Icon: Info, title: "" },
+  example: { variant: "info", Icon: BookOpen, title: "Example" },
 } as const;
 
 // Directive bodies parse as paragraphs; callouts want bare inline text.
@@ -204,11 +207,13 @@ function Callout({
   children?: ReactNode;
 }) {
   const { variant, Icon, title: defaultTitle } = CALLOUTS[kind];
-  // The expected result is a quiet line, not a box, so it does not compete with the steps.
-  if (kind === "check") {
+  // The expected result and the finished example are quiet lines, not boxes, so they do not compete with the steps.
+  if (kind === "check" || kind === "example") {
+    const tone = kind === "check" ? "border-success text-success" : "border-border text-fg-muted";
+    const [border, text] = tone.split(" ");
     return (
-      <div role="note" className="my-4 flex gap-3 border-l-2 border-success py-1 pl-4">
-        <Icon aria-hidden="true" className="mt-1 size-4 shrink-0 text-success" />
+      <div role="note" className={`my-4 flex gap-3 border-l-2 py-1 pl-4 ${border}`}>
+        <Icon aria-hidden="true" className={`mt-1 size-4 shrink-0 ${text}`} />
         <div className="text-base leading-7 [&_p]:mb-0">
           <span className="font-semibold">{title ?? defaultTitle}: </span>
           {unwrapParagraphs(children)}
