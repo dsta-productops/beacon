@@ -39,12 +39,12 @@ Set up a workspace and a GitLab wiki for the tutorial. Allow about 20 minutes. S
 1. Install **VS Code** from [code.visualstudio.com](https://code.visualstudio.com).
 2. In VS Code, open the Extensions view, search for **Claude Code** and choose **Install**. Sign in from the Claude panel.
 
-::screenshot{caption="VS Code Extensions view, with Claude Code and its Install button" hint="the VS Code Extensions view with Claude Code in the results and the Install button visible, then the Claude panel signed in"}
+::screenshot{src="/gitlab-walkthrough-1.png" alt="VS Code Extensions view with Claude Code for VS Code selected and its Install button" caption="VS Code Extensions view, with Claude Code and its Install button" hint="the VS Code Extensions view with Claude Code in the results and the Install button visible, then the Claude panel signed in"}
 
 3. Create a folder such as `skyprotect-workspace`, then choose **File > Open Folder**.
 4. Open the terminal: choose **Terminal > New Terminal** in VS Code. A panel opens at the bottom of the window, where you type commands and press :kbd[Enter] to run them. It looks different on Windows and Mac, but it works the same way.
 
-::screenshot{caption="The terminal panel open at the bottom of VS Code" hint="VS Code with the terminal panel open at the bottom of the window"}
+::screenshot{src="/gitlab-walkthrough-2.png" alt="VS Code with the Terminal menu open and the terminal panel at the bottom" caption="The terminal panel open at the bottom of VS Code" hint="VS Code with the terminal panel open at the bottom of the window"}
 
 5. Install **git**:
    - **Windows:** download it from [git-scm.com](https://git-scm.com/downloads) and run the installer, keeping the default options. Then close the terminal panel and open a new one.
@@ -61,12 +61,12 @@ Set up a workspace and a GitLab wiki for the tutorial. Allow about 20 minutes. S
 
 1. In GitLab, choose **New project > Create blank project**. Name it **SKYPROTECT** and untick the **Initialize repository with a README** checkbox.
 
-::screenshot{caption="The Create blank project form, with the README checkbox unticked" hint="the Create blank project form with the project name SKYPROTECT and the Initialize repository with a README checkbox unticked and highlighted"}
+::screenshot{src="/gitlab-walkthrough-3.png" alt="GitLab Create blank project form with the project name SKYPROTECT" caption="The Create blank project form, with the README checkbox unticked" hint="the Create blank project form with the project name SKYPROTECT and the Initialize repository with a README checkbox unticked and highlighted"}
 
 2. Open **Plan > Wiki** and choose **Create your first page**. Set the title to `home`, add any placeholder text and save. Add no other pages.
 3. Choose **Clone repository** and copy the HTTPS address. It ends in `.wiki.git`.
 
-::screenshot{caption="The wiki's Clone repository menu, with the HTTPS address ending in .wiki.git" hint="the SKYPROTECT wiki page with the Clone repository button open and the HTTPS address ending in .wiki.git highlighted"}
+::screenshot{src="/gitlab-walkthrough-4.png" alt="GitLab wiki Home page with the page menu open and Clone repository highlighted" caption="The wiki's Clone repository menu, with the HTTPS address ending in .wiki.git" hint="the SKYPROTECT wiki page with the Clone repository button open and the HTTPS address ending in .wiki.git highlighted"}
 
 :::check
 VS Code is open on an empty folder, the Claude panel answers, the SKYPROTECT wiki holds one `home` page, and the wiki clone URL is copied.
@@ -97,7 +97,7 @@ Install CLARA once and it is available whenever you open this workspace.
 2. In your IDE's file list, create the folders `.claude/skills/clara-gitlab`.
 3. Drag the downloaded file into `clara-gitlab`. Keep the name as it is.
 
-::screenshot{caption="The folder .claude/skills/clara-gitlab, holding SKILL.md" hint="the IDE file list showing .claude/skills/clara-gitlab with SKILL.md inside"}
+::screenshot{src="/gitlab-walkthrough-5.png" alt="VS Code showing .claude/skills/clara-gitlab/SKILL.md in the file list" caption="The folder .claude/skills/clara-gitlab, holding SKILL.md" hint="the IDE file list showing .claude/skills/clara-gitlab with SKILL.md inside"}
 
 4. Start a new chat in the Claude panel and ask:
    ```prompt
@@ -142,11 +142,11 @@ SKYPROTECT is a made-up drone-defence programme. One setup file describes its wh
    Set up the SKYPROTECT demo Knowledge Base in a GitLab wiki by following the attached setup file exactly. The wiki clone URL is <paste your wiki clone URL>. The project and its wiki already exist, so do not create them. Use plain git commands only, with the git credentials already on this machine. If anything cannot be written, committed or pushed, stop and tell me. Do not retry or improvise.
    ```
 
-::screenshot{caption="The Claude panel with the setup file attached and the prompt pasted" hint="the Claude panel with skyprotect-gitlab-setup.md attached and the prompt pasted, with the attach control highlighted"}
+::screenshot{src="/gitlab-walkthrough-6.png" alt="Claude panel with skyprotect-gitlab-setup.md attached and the prompt pasted" caption="The Claude panel with the setup file attached and the prompt pasted" hint="the Claude panel with skyprotect-gitlab-setup.md attached and the prompt pasted, with the attach control highlighted"}
 
 3. Wait for it to finish, then open the wiki home link it gives you.
 
-::screenshot{caption="The SKYPROTECT wiki home page, with the sidebar tree expanded" hint="the SKYPROTECT wiki home page in GitLab, with the sidebar tree expanded"}
+::screenshot{src="/gitlab-walkthrough-7.png" alt="SKYPROTECT wiki home page in GitLab with the sidebar page tree" caption="The SKYPROTECT wiki home page, with the sidebar tree expanded" hint="the SKYPROTECT wiki home page in GitLab, with the sidebar tree expanded"}
 
 :::check
 The sidebar shows **Knowledge Base** with two tracks, **Programme-wide** and **Operator-console**, holding 52 pages in all, including 24 interview and field notes. Click a citation such as S08 in the research synthesis to open that note.
