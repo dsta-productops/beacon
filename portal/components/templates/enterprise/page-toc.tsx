@@ -29,6 +29,8 @@ import { useEffect, useState } from "react";
 export interface PageTocItem {
   id: string;
   label: string;
+  /** Optional heading shown above the first item of each run of the same group. */
+  group?: string;
 }
 
 export interface EnterprisePageTocProps {
@@ -80,8 +82,13 @@ export function EnterprisePageToc({
         {heading}
       </p>
       <ol className="space-y-1 border-l border-border">
-        {items.map((item) => (
+        {items.map((item, i) => (
           <li key={item.id}>
+            {item.group && item.group !== items[i - 1]?.group && (
+              <p className="mt-3 mb-1 pl-3 text-xs font-medium uppercase tracking-wide text-fg-subtle first:mt-0">
+                {item.group}
+              </p>
+            )}
             <a
               href={`#${item.id}`}
               className={cn(

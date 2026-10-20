@@ -19,11 +19,10 @@ import { readEntry } from "@/lib/content";
 import type { ToolSlug } from "@/lib/contacts";
 import { AccessContact } from "@/components/portal/access-contact";
 import { CopyButton } from "@/components/portal/copy-button";
-import { LastVerified } from "@/components/portal/last-verified";
 import { PageHeader } from "@/components/portal/page-header";
 import { EnterprisePageToc } from "@/components/templates/enterprise/page-toc";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Badge } from "@/components/ui/badge";
+import { Disclosure, WalkthroughSteps, type WalkthroughBlock } from "@/components/portal/walkthrough-steps";
 import { Code, CodeBlock } from "@/components/ui/code";
 import { Frame } from "@/components/ui/frame";
 import { Kbd } from "@/components/ui/kbd";
@@ -42,6 +41,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
  *
  *   :::note{title="..."}             callouts (info / success / warning); a
  *   :::check / :::watch              missing title falls back to the default
+ *
+ *   :::details{title="Stuck?"}      closed-by-default extra detail inside a step
  *
  *   :::::tabs                        tab group; nest `::::tab{value label}`
  *   ::::tab{value="a" label="A"}     inside it (outer fences need more colons)
@@ -66,13 +67,14 @@ interface Section {
   title: string;
   phase?: string;
   tool?: string;
+  open?: boolean;
   body: string;
 }
 
 function parseBody(body: string): { intro: string; sections: Section[] } {
   const tree = unified().use(remarkParse).use(remarkDirective).parse(body) as Root;
   const nodes = tree.children;
-  const starts: { index: number; id: string; phase?: string; tool?: string }[] = [];
+  const starts: { index: number; id: string; phase?: string; tool?: string; open?: boolean }[] = [];
 
   nodes.forEach((node, i) => {
     const next = nodes[i + 1];
@@ -87,6 +89,7 @@ function parseBody(body: string): { intro: string; sections: Section[] } {
         id: next.attributes?.id ?? "",
         phase: next.attributes?.phase ?? undefined,
         tool: next.attributes?.tool ?? undefined,
+        open: next.attributes?.open === "true",
       });
     }
   });
@@ -103,6 +106,7 @@ function parseBody(body: string): { intro: string; sections: Section[] } {
       id: s.id,
       phase: s.phase,
       tool: s.tool,
+      open: s.open,
       title: body.slice(offset(s.index, "start"), heading.position!.end.offset!).replace(/^#+\s*/, ""),
       body: body.slice(directive.position!.end.offset!, end),
     };
@@ -130,6 +134,10 @@ function remarkWalkthrough() {
         case "watch":
           data.hName = "callout";
           data.hProperties = { kind: d.name, title: attrs.title ?? undefined };
+          break;
+        case "details":
+          data.hName = "disclosure";
+          data.hProperties = { title: attrs.title ?? "Learn more" };
           break;
         case "tabs":
           data.hName = "tabs";
@@ -162,15 +170,17 @@ function remarkWalkthrough() {
 
 function PromptBlock({ prompt }: { prompt: string }) {
   return (
-    <div className="mt-2 flex flex-col items-start gap-2">
-      <CodeBlock className="mb-0 w-full whitespace-pre-wrap">{prompt}</CodeBlock>
-      <CopyButton text={prompt} label="Copy" />
+    <div className="relative mt-2 mb-4">
+      <CodeBlock className="mb-0 whitespace-pre-wrap pr-24">{prompt}</CodeBlock>
+      <div className="absolute top-2 right-2">
+        <CopyButton text={prompt} label="Copy" />
+      </div>
     </div>
   );
 }
 
 const CALLOUTS = {
-  check: { variant: "success", Icon: CheckCircle2, title: "What you should see" },
+  check: { variant: "success", Icon: CheckCircle2, title: "You should see" },
   watch: { variant: "warning", Icon: TriangleAlert, title: "If it does not look right" },
   note: { variant: "info", Icon: Info, title: "" },
 } as const;
@@ -194,6 +204,18 @@ function Callout({
   children?: ReactNode;
 }) {
   const { variant, Icon, title: defaultTitle } = CALLOUTS[kind];
+  // The expected result is a quiet line, not a box, so it does not compete with the steps.
+  if (kind === "check") {
+    return (
+      <div role="note" className="my-4 flex gap-3 border-l-2 border-success py-1 pl-4">
+        <Icon aria-hidden="true" className="mt-1 size-4 shrink-0 text-success" />
+        <div className="text-base leading-7 [&_p]:mb-0">
+          <span className="font-semibold">{title ?? defaultTitle}: </span>
+          {unwrapParagraphs(children)}
+        </div>
+      </div>
+    );
+  }
   return (
     <Alert variant={variant} role="note" className="mb-4">
       <Icon aria-hidden="true" />
@@ -231,15 +253,10 @@ function WalkthroughTabs({ children }: { children?: ReactNode }) {
   );
 }
 
-// Temporary slot until real screenshots are added. Swap for an image (with alt text) when ready.
-function Screenshot({ hint }: { hint: string }) {
-  return (
-    <figure className="my-6">
-      <div className="flex aspect-video items-center justify-center rounded-lg border border-dashed border-border bg-bg-subtle p-6 text-center text-sm text-fg-muted">
-        Screenshot to add: {hint}
-      </div>
-    </figure>
-  );
+// Screenshots are not captured yet, so `::screenshot{hint}` renders nothing and the hint stays in
+// the MDX as a to-do. Swap for an image (with alt text) when ready.
+function Screenshot(_props: { hint: string }) {
+  return null;
 }
 
 function Pre({ children }: { children?: ReactNode }) {
@@ -274,6 +291,7 @@ const components = {
   pre: Pre,
   code: Code,
   callout: Callout,
+  disclosure: Disclosure,
   tabs: WalkthroughTabs,
   tab: () => null,
   screenshot: Screenshot,
@@ -292,6 +310,23 @@ function WalkthroughMarkdown({ children }: { children: string }) {
   );
 }
 
+const SHARED_PHASE_SUMMARIES = {
+  Research: "Find out who the work is for, and what problem you are solving.",
+  Design: "Turn the requirements into a prototype.",
+  Test: "Check the prototype works for real people.",
+};
+
+const PHASE_SUMMARIES: Record<"walkthrough" | "walkthrough-gitlab", Record<string, string>> = {
+  walkthrough: {
+    Setup: "Check the prerequisites, then load the SKYPROTECT demo project.",
+    ...SHARED_PHASE_SUMMARIES,
+  },
+  "walkthrough-gitlab": {
+    Setup: "Check the prerequisites, install your tools and CLARA, then load the SKYPROTECT demo project.",
+    ...SHARED_PHASE_SUMMARIES,
+  },
+};
+
 export async function WalkthroughPage({
   slug,
 }: {
@@ -303,37 +338,54 @@ export async function WalkthroughPage({
   const { title, eyebrow, lede } = entry.frontmatter;
   const { intro, sections } = parseBody(entry.body);
 
+  const blocks: WalkthroughBlock[] = sections.map((s) =>
+    s.phase
+      ? {
+          kind: "step",
+          id: s.id,
+          title: s.title,
+          phase: s.phase,
+          tool: s.tool,
+          defaultOpen: s.open,
+          content: (
+            <Prose>
+              <WalkthroughMarkdown>{s.body}</WalkthroughMarkdown>
+            </Prose>
+          ),
+        }
+      : {
+          kind: "plain",
+          id: s.id,
+          content: (
+            <section id={s.id} className="scroll-mt-20">
+              <Prose>
+                <h2>{s.title}</h2>
+                <WalkthroughMarkdown>{s.body}</WalkthroughMarkdown>
+              </Prose>
+            </section>
+          ),
+        },
+  );
+
   return (
     <Frame maxWidth="xl" padding="lg">
       <div className="py-8 lg:grid lg:grid-cols-[minmax(0,1fr)_220px] lg:gap-12">
         <Stack gap="8" className="min-w-0">
           <Stack gap="3">
             <PageHeader eyebrow={eyebrow ?? "Tutorial"} title={title} lede={lede} />
-            <LastVerified />
           </Stack>
 
           <Prose className="max-w-3xl">
             <WalkthroughMarkdown>{intro}</WalkthroughMarkdown>
           </Prose>
 
-          <div className="flex max-w-3xl flex-col items-stretch gap-8">
-            {sections.map((s) => (
-              <section key={s.id} id={s.id} className="scroll-mt-20 border-t border-border pt-8">
-                <Prose>
-                  <h2>{s.title}</h2>
-                  {(s.phase || s.tool) && (
-                    <div className="mb-4 flex flex-wrap gap-2">
-                      {s.phase && <Badge>{s.phase}</Badge>}
-                      {s.tool && <Badge variant="outline">{s.tool}</Badge>}
-                    </div>
-                  )}
-                  <WalkthroughMarkdown>{s.body}</WalkthroughMarkdown>
-                </Prose>
-              </section>
-            ))}
+          <div className="max-w-3xl">
+            <WalkthroughSteps blocks={blocks} phaseSummaries={PHASE_SUMMARIES[slug]} />
           </div>
         </Stack>
-        <EnterprisePageToc items={sections.map((s) => ({ id: s.id, label: s.title }))} />
+        <EnterprisePageToc
+          items={sections.map((s) => ({ id: s.id, label: s.title.replace(/^(\d+)\.\s*/, "Step $1: ") }))}
+        />
       </div>
     </Frame>
   );
