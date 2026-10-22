@@ -202,7 +202,7 @@ function StepCard({
           </Collapsible.Trigger>
         </h3>
         <Collapsible.Panel hiddenUntilFound>
-          <div className="border-t border-border px-4 pt-4 pb-2 sm:px-6">{step.content}</div>
+          <div className="border-t border-border px-4 pt-4 pb-4 sm:px-6">{step.content}</div>
         </Collapsible.Panel>
       </Collapsible.Root>
     </section>
@@ -212,7 +212,7 @@ function StepCard({
 /** Closed-by-default extra detail inside a step ("Learn more", "Stuck?"). */
 export function Disclosure({ title, children }: { title: string; children?: ReactNode }) {
   return (
-    <Collapsible.Root className="my-3 rounded-lg border border-border">
+    <Collapsible.Root className="mt-3 mb-6 rounded-lg border border-border">
       <Collapsible.Trigger
         className={cn(
           "group flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left text-sm font-medium text-fg-muted",
@@ -226,7 +226,7 @@ export function Disclosure({ title, children }: { title: string; children?: Reac
         {title}
       </Collapsible.Trigger>
       <Collapsible.Panel hiddenUntilFound>
-        <div className="border-t border-border px-3 pt-3 text-sm [&_li]:text-sm [&_p]:text-sm">{children}</div>
+        <div className="border-t border-border px-3 pt-3 pb-3 text-sm [&_li]:text-sm [&_p]:text-sm [&>*:last-child]:mb-0">{children}</div>
       </Collapsible.Panel>
     </Collapsible.Root>
   );

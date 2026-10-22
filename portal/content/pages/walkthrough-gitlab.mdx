@@ -17,22 +17,20 @@ By the end you will have:
 ## 1. Check the prerequisites
 ::step{id="prerequisites" phase="Setup"}
 
+Your research normally ends up scattered across notes, slides and chats. 
+
+**CLARA** is an AI assistant that turns your raw notes into structured documents, such as personas, journeys and a PRD, and files them in your wiki. Every claim links back to the note it came from, so you can check it. You make the decisions. CLARA does the drafting and the filing. CLARA builds on what you give it, so check each result before you move on.
+
 Confirm you have the access you need before you start.
 
 - A GitLab account that can create projects. To use your own wiki later, you need the Developer role or above on it.
+- **VS Code or another IDE with the Claude Code plugin.** The command-line version and the desktop app do not work with this tutorial.
 - Access to [DASH](/tools/dash), at [diux-dash.com](https://diux-dash.com).
-
-:::watch{title="Read this first"}
-- Use the Claude Code plugin in your IDE, such as VS Code. The command-line version and the desktop app do not work with this tutorial.
-- Never paste a token or password into a chat. Use the git credentials already on your machine.
-- CLARA builds on what you give it, so an early mistake carries through every later step. Check each result before you move on.
-- If a document lands in the wrong place or cites nothing, stop and check that the Knowledge Base from step 4 exists and your source links point to real pages.
-:::
 
 ## 2. Install your tools
 ::step{id="workspace" phase="Setup" tool="Git + VS Code"}
 
-Set up a workspace and a GitLab wiki for the tutorial. Allow about 20 minutes. Skip any tool you already have.
+Set up a workspace and a GitLab wiki. Allow about 20 minutes, and skip any tool you already have.
 
 #### Install VS Code, Claude Code and git
 
@@ -42,7 +40,7 @@ Set up a workspace and a GitLab wiki for the tutorial. Allow about 20 minutes. S
 ::screenshot{src="/gitlab-walkthrough-1.png" alt="VS Code Extensions view with Claude Code for VS Code selected and its Install button" caption="VS Code Extensions view, with Claude Code and its Install button" hint="the VS Code Extensions view with Claude Code in the results and the Install button visible, then the Claude panel signed in"}
 
 3. Create a folder such as `skyprotect-workspace`, then choose **File > Open Folder**.
-4. Open the terminal: choose **Terminal > New Terminal** in VS Code. A panel opens at the bottom of the window, where you type commands and press :kbd[Enter] to run them. It looks different on Windows and Mac, but it works the same way.
+4. Open the terminal: choose **Terminal > New Terminal** in VS Code. A panel opens at the bottom of the window. You type commands there and press :kbd[Enter] to run them.
 
 ::screenshot{src="/gitlab-walkthrough-2.png" alt="VS Code with the Terminal menu open and the terminal panel at the bottom" caption="The terminal panel open at the bottom of VS Code" hint="VS Code with the terminal panel open at the bottom of the window"}
 
@@ -57,6 +55,18 @@ Set up a workspace and a GitLab wiki for the tutorial. Allow about 20 minutes. S
    git config --global user.email "you@example.com"
    ```
 
+:::details{title="Stuck? See fixes for this step."}
+**If `git` is not found:**
+- Close the terminal and open a new one. If it still fails, repeat the git install for your system.
+
+**If git asks who you are:**
+- Run the two `git config` commands again.
+
+**If git asks you to sign in:**
+- Sign in through the browser window or terminal prompt.
+- If it asks for a token, create a personal access token with the `write_repository` scope and type it only into that prompt. Never paste a token or password into a chat.
+:::
+
 #### Create the GitLab project and wiki
 
 1. In GitLab, choose **New project > Create blank project**. Name it **SKYPROTECT** and untick the **Initialize repository with a README** checkbox.
@@ -69,18 +79,17 @@ Set up a workspace and a GitLab wiki for the tutorial. Allow about 20 minutes. S
 ::screenshot{src="/gitlab-walkthrough-4.png" alt="GitLab wiki Home page with the page menu open and Clone repository highlighted" caption="The wiki's Clone repository menu, with the HTTPS address ending in .wiki.git" hint="the SKYPROTECT wiki page with the Clone repository button open and the HTTPS address ending in .wiki.git highlighted"}
 
 :::check
-VS Code is open on an empty folder, the Claude panel answers, the SKYPROTECT wiki holds one `home` page, and the wiki clone URL is copied.
+The SKYPROTECT wiki holds one `home` page, and the wiki clone URL is copied.
 :::
 
-**If `git` is not found:**
-- Close the terminal and open a new one. If it still fails, repeat the git install for your system.
+:::details{title="Stuck? See fixes for this step."}
+**If you cannot find Plan > Wiki:**
+- The wiki may be switched off. In the project, open **Settings > General**, expand **Visibility, project features, permissions** and turn on **Wiki**.
 
-**If git asks who you are:**
-- Run the two `git config` commands again.
-
-**If git asks you to sign in:**
-- Sign in through the browser window or terminal prompt.
-- If it asks for a token, create a personal access token with the `write_repository` scope and type it only into that prompt.
+**If the Clone repository address does not end in `.wiki.git`:**
+- Copy it from the wiki page, not from the project's **Code** menu.
+- Save the `home` page first. The wiki repository does not exist until its first page is saved.
+:::
 
 ## 3. Install CLARA
 ::step{id="install-clara" phase="Setup" tool="CLARA"}
@@ -103,12 +112,6 @@ Install CLARA once and it is available whenever you open this workspace.
    ```prompt
    What can CLARA do?
    ```
-
-**If CLARA does not appear:**
-- Check that the folder is named `clara-gitlab`, it holds `SKILL.md` (spelled exactly with capitals), and `.claude` is at the top of the folder you opened.
-- Run **Developer: Reload Window** from the command palette.
-
-**Note:** To make CLARA available in every project, put the same folders in your home folder (`~/.claude/skills/clara-gitlab/`). Dot folders are hidden by default. On a Mac, press :kbd[Cmd] + :kbd[Shift] + :kbd[.] in Finder. On Windows, choose **View > Show > Hidden items** in File Explorer.
 ::::
 
 ::::tab{value="url" label="URL method"}
@@ -118,18 +121,24 @@ Nothing to install. Your computer must be able to reach the address. Paste the s
    ```prompt
    Read https://dsta-productops.github.io/clara/skill/clara-gitlab.md?v=4 and follow it as your instructions for the rest of this chat. Then introduce yourself and ask what I'd like to create.
    ```
-
-**If CLARA does not respond:**
-- Check that you pasted the whole prompt.
-- Open the address in your browser. If it does not load, use the file method.
 ::::
 :::::
+
+CLARA loads the prompt for each document type from the DSTA ProductOps site. If it cannot reach the site, it asks you to paste the prompt. You can copy every one from the [Prompts](/prompts) page.
 
 :::check
 CLARA introduces itself and says what it can do, such as drafting personas, journeys, PRDs and test plans.
 :::
 
-CLARA loads the prompt for each document type from the DSTA ProductOps site. If it cannot reach the site, it asks you to paste the prompt. You can copy every one from the [Prompts](/prompts) page.
+:::details{title="Stuck? See fixes for this step."}
+**If CLARA does not appear (file method):**
+- Check that the folder is named `clara-gitlab`, it holds `SKILL.md` (spelled exactly with capitals), and `.claude` is at the top of the folder you opened.
+- Run **Developer: Reload Window** from the command palette.
+
+**If CLARA does not respond (URL method):**
+- Check that you pasted the whole prompt.
+- Open the address in your browser. If it does not load, use the file method.
+:::
 
 ## 4. Set up the SKYPROTECT Knowledge Base
 ::step{id="knowledge-base" phase="Setup" tool="AI assistant"}
@@ -148,15 +157,17 @@ SKYPROTECT is a made-up drone-defence programme. One setup file describes its wh
 
 ::screenshot{src="/gitlab-walkthrough-7.png" alt="SKYPROTECT wiki home page in GitLab with the sidebar page tree" caption="The SKYPROTECT wiki home page, with the sidebar tree expanded" hint="the SKYPROTECT wiki home page in GitLab, with the sidebar tree expanded"}
 
+The setup also files a finished example of most documents you make in steps 5 to 12. Compare each with your own to see what good looks like. For a real programme, ask CLARA to create the folder structure instead. See [the CLARA provisioning steps](/tools/clara#provisioning).
+
 :::check
 The sidebar shows **Knowledge Base** with two tracks, **Programme-wide** and **Operator-console**, holding 52 pages in all, including 24 interview and field notes. Click a citation such as S08 in the research synthesis to open that note.
 :::
 
+:::details{title="Stuck? See fixes for this step."}
 **If the assistant stops:**
 - It stops on purpose when something is wrong. Common causes are a wiki that was never initialised, no push access (you need the Developer role or above), missing git credentials, or a wrong clone URL.
 - Fix the cause and run the same prompt again. Pages that already exist with identical content are skipped. The assistant never overwrites a different page, apart from your placeholder `home`.
-
-The setup also files a finished example of most documents you make in steps 5 to 12. Compare each with your own to see what good looks like. For a real programme, ask CLARA to create the folder structure instead. See [the CLARA provisioning steps](/tools/clara#provisioning).
+:::
 
 ## 5. Find what is already known
 ::step{id="prior-knowledge" phase="Research" tool="CLARA"}
@@ -181,6 +192,7 @@ A summary of patterns, contradictions and related work, filed under `[track]/Pri
 `Programme-wide/Prior-knowledge/Counter-drone-systems`
 :::
 
+:::details{title="Stuck? See fixes for this step."}
 **If the summary is thin or generic:**
 - Add more source material, such as interview notes or past write-ups.
 - Narrow the topic and run the prompt again. A finding with no source is a guess, not a fact.
@@ -193,6 +205,10 @@ A summary of patterns, contradictions and related work, filed under `[track]/Pri
 - Check that you can push to the wiki yourself. CLARA only uses the git credentials already on your machine.
 - If the wiki changed, CLARA pulls, rechecks the path and retries once, then stops and tells you.
 
+**If a document lands in the wrong place or cites nothing:**
+- Stop and check that the Knowledge Base from step 4 exists and your source links point to real pages.
+:::
+
 ## 6. Measure how things are today
 ::step{id="baseline" phase="Research" tool="DASH"}
 
@@ -203,18 +219,16 @@ A **baseline** measures how things work today, so you can show later that your d
 
 ::screenshot{caption="The DASH new-session screen, with Baseline Testing selected" hint="the DASH new-session screen with Baseline Testing highlighted"}
 
-3. Share the link or QR code with people who use that system.
+3. Share the link or QR code with people who use that system. Responses appear in DASH as they answer. Keep this session open, because you compare against it in step 13.
 
 ::screenshot{caption="The Baseline Testing session, showing the share link and QR code" hint="the Baseline Testing session in DASH, showing the share link and QR code"}
 
-:::check
-Responses appear in DASH as people answer. Keep this session open, because you compare against it in step 13.
-:::
+DASH asks about **SUS** (System Usability Scale, a short score for how easy a system is to use), look and feel, user needs, system performance and **CSAT** (customer satisfaction). It also tracks **OKRs**, which are goals with numbers attached.
 
+:::details{title="Stuck? See fixes for this step."}
 **If you cannot find your programme's workspace:**
 - Each programme has one DASH workspace. Ask your DASH contact to add you.
-
-DASH asks about **SUS** (System Usability Scale, a short score for how easy a system is to use), look and feel, user needs, system performance and **CSAT** (customer satisfaction). It also tracks **OKRs**, which are goals with numbers attached.
+:::
 
 ## 7. Interview your users
 ::step{id="interviews" phase="Research" tool="CLARA"}
@@ -228,10 +242,6 @@ Surveys give you numbers. Interviews tell you why. CLARA writes the guide and yo
 2. Run 5 to 7 conversations.
 3. After each one, copy `Template-Field-note` in the track's `Field-notes` folder and paste in your notes exactly as you took them. Do not tidy them, because polished notes add your own bias.
 
-:::check
-A field-ready interview guide with questions, things to listen for and follow-up prompts. Your raw notes are in `Field-notes`.
-:::
-
 **For the SKYPROTECT demo:** do step 1 only. The 24 interview and field notes are already in `Field-notes` in both tracks.
 
 ## 8. Make sense of the notes
@@ -244,10 +254,6 @@ A field-ready interview guide with questions, things to listen for and follow-up
    Use CLARA's `research-synthesiser` for SKYPROTECT.
    ```
 2. Give it your learning goals and the gaps you found in step 5.
-
-:::check
-One research-synthesis page with recurring patterns, friction points, standout statements and success criteria, citing your field notes.
-:::
 
 :::example
 `Operator-console/Research-synthesis` (the programme-wide version is under `Programme-wide/Research-synthesis`)
@@ -271,10 +277,6 @@ Turn the research into three documents. Paste each prompt into CLARA in turn.
    Use CLARA's `service-blueprint-drafter` for SKYPROTECT.
    ```
 
-:::check
-Three new pages in the Knowledge Base, each linked from its folder index and the sidebar. Every claim points back to a quote or note.
-:::
-
 :::example
 `Operator-console/Personas/Console-operator` and `Operator-console/Journeys/Engage-incoming-threat`. The demo has no service blueprint, so yours is the first.
 :::
@@ -289,10 +291,6 @@ A **PRD** (product requirements document) is one page everyone agrees on: the pr
    Use CLARA's `prd-generator` for SKYPROTECT.
    ```
 2. Read the draft, then edit it by hand. It becomes the input for your prototype.
-
-:::check
-A PRD with a problem statement, user goals, scope, functional requirements and user stories.
-:::
 
 :::example
 `Operator-console/PRDs/Console-v1`
@@ -318,8 +316,10 @@ A prototype is a working draft people can click through. Claude Code reads your 
 A running prototype of your chosen flow, built from PRIZM components and semantic colour tokens such as `bg-bg` and `text-fg`, not raw colours.
 :::
 
+:::details{title="Stuck? See fixes for this step."}
 **If Claude Code invents components PRIZM does not have:**
 - Stop it and ask it to check `lib/components-registry.ts` in the PRIZM repository before it generates anything more.
+:::
 
 ## 12. Plan the test
 ::step{id="test-plan" phase="Test" tool="CLARA"}
@@ -332,10 +332,6 @@ A test plan says who you will test with and what you will ask them to do. CLARA 
    ```
 2. Review the plan and adjust the number of participants to fit your team.
 
-:::check
-A test plan with objectives, research questions, personas to recruit, participant numbers, scenarios and tasks.
-:::
-
 :::example
 `Operator-console/Test-plans/Console-v1-usability-test`
 :::
@@ -343,7 +339,7 @@ A test plan with objectives, research questions, personas to recruit, participan
 ## 13. Test and compare
 ::step{id="test" phase="Test" tool="DASH"}
 
-Test the prototype, then compare the results with your baseline from step 6.
+Test the prototype, then compare the results with your baseline from step 6. The comparison is your evidence that the new design is better, or your guide to what to fix next.
 
 1. In DASH, create a session and choose **Prototype Test**.
 2. Share the link or QR code with your participants and run the sessions as set out in your test plan.
@@ -355,6 +351,3 @@ Test the prototype, then compare the results with your baseline from step 6.
 
 ::screenshot{caption="The DASH AI button on the results page" hint="the DASH AI button on the results page"}
 
-:::check
-Side-by-side scores for the old system and your prototype, plus a list of suggested improvements. This is your evidence that the new design is better, or your guide to what to fix next.
-:::

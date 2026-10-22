@@ -85,7 +85,7 @@ export function EnterprisePageToc({
         {items.map((item, i) => (
           <li key={item.id}>
             {item.group && item.group !== items[i - 1]?.group && (
-              <p className="mt-3 mb-1 pl-3 text-xs font-medium uppercase tracking-wide text-fg-subtle first:mt-0">
+              <p className={cn("mb-1 pl-3 text-xs font-semibold uppercase tracking-wide text-fg", i > 0 && "mt-6")}>
                 {item.group}
               </p>
             )}

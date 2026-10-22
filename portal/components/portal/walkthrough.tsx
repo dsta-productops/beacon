@@ -21,6 +21,7 @@ import { AccessContact } from "@/components/portal/access-contact";
 import { CopyButton } from "@/components/portal/copy-button";
 import { PageHeader } from "@/components/portal/page-header";
 import { EnterprisePageToc } from "@/components/templates/enterprise/page-toc";
+import { cn } from "@/lib/utils";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Disclosure, WalkthroughSteps, type WalkthroughBlock } from "@/components/portal/walkthrough-steps";
 import { Code, CodeBlock } from "@/components/ui/code";
@@ -171,9 +172,27 @@ function remarkWalkthrough() {
   };
 }
 
+/**
+ * Spacing for walkthrough text, scoped here so the shared `Prose` stays as it is.
+ * Three gaps: tight (8px) for something that belongs to the line above, normal (16px)
+ * for a new thought in the same step, loose (24px, 40px for sub-section titles) for a new block.
+ */
+const WALKTHROUGH_PROSE = [
+  // sub-section titles: tight gap below; every one after the first also gets a divider and a big gap above
+  "[&_h4]:mt-6 [&_h4]:mb-3 [&_h4]:text-lg",
+  "[&_h4~h4]:mt-10 [&_h4~h4]:border-t [&_h4~h4]:border-border [&_h4~h4]:pt-6",
+  // the first and last block of a step add no margin of their own, so the card padding sets the edges
+  "[&>:first-child]:mt-0 [&>:last-child]:mb-0",
+  // numbered steps are single actions, so give each room; bullets are short and related
+  "[&_ol]:mb-6 [&_ol]:space-y-3",
+  "[&_ul]:space-y-1.5",
+  // nested lists hang off their item instead of adding a block gap
+  "[&_li_ol]:mt-2 [&_li_ol]:mb-0 [&_li_ul]:mt-2 [&_li_ul]:mb-0",
+].join(" ");
+
 function PromptBlock({ prompt }: { prompt: string }) {
   return (
-    <div className="relative mt-2 mb-4">
+    <div className="relative mt-2 [&_pre]:mb-0">
       <CodeBlock className="mb-0 whitespace-pre-wrap pr-24">{prompt}</CodeBlock>
       <div className="absolute top-2 right-2">
         <CopyButton text={prompt} label="Copy" />
@@ -208,17 +227,31 @@ function Callout({
   children?: ReactNode;
 }) {
   const { variant, Icon, title: defaultTitle } = CALLOUTS[kind];
-  // The expected result and the finished example are quiet lines, not boxes, so they do not compete with the steps.
-  if (kind === "check" || kind === "example") {
-    const tone = kind === "check" ? "border-success text-success" : "border-border text-fg-muted";
-    const [border, text] = tone.split(" ");
+  // The expected result is a tinted panel with a small label above the text, so it reads as a
+  // checkpoint at the end of the step. The finished example is a quieter chip beneath it.
+  if (kind === "check") {
     return (
-      <div role="note" className={`my-4 flex gap-3 border-l-2 py-1 pl-4 ${border}`}>
-        <Icon aria-hidden="true" className={`mt-1 size-4 shrink-0 ${text}`} />
-        <div className="text-base leading-7 [&_p]:mb-0">
-          <span className="font-semibold">{title ?? defaultTitle}: </span>
-          {unwrapParagraphs(children)}
+      <div
+        role="note"
+        className="mt-6 mb-3 rounded-lg border border-[oklch(62.7%_0.194_149.21_/_0.30)] bg-[oklch(72.3%_0.219_149.58_/_0.10)] px-4 py-3"
+      >
+        <div className="mb-1 flex items-center gap-2 text-sm font-semibold text-success">
+          <Icon aria-hidden="true" className="size-4 shrink-0" />
+          {title ?? defaultTitle}
         </div>
+        <div className="text-base leading-7 text-fg [&_p]:mb-0">{unwrapParagraphs(children)}</div>
+      </div>
+    );
+  }
+  if (kind === "example") {
+    return (
+      <div
+        role="note"
+        className="mb-3 flex flex-wrap items-center gap-x-2 gap-y-1 rounded-md bg-bg-subtle px-3 py-2 text-sm text-fg-muted"
+      >
+        <Icon aria-hidden="true" className="size-4 shrink-0" />
+        <span className="font-medium">{title ?? defaultTitle}:</span>
+        <span className="[&_p]:mb-0">{unwrapParagraphs(children)}</span>
       </div>
     );
   }
@@ -242,7 +275,7 @@ function WalkthroughTabs({ children }: { children?: ReactNode }) {
     .filter((c): c is ReactElement<TabProps> => isValidElement(c))
     .map((c) => c.props);
   return (
-    <Tabs defaultValue={tabs[0]?.value}>
+    <Tabs defaultValue={tabs[0]?.value} className="mt-4 mb-6">
       <TabsList>
         {tabs.map((t) => (
           <TabsTrigger key={t.value} value={t.value}>
@@ -252,7 +285,7 @@ function WalkthroughTabs({ children }: { children?: ReactNode }) {
       </TabsList>
       {tabs.map((t) => (
         <TabsContent key={t.value} value={t.value}>
-          <Prose>{t.children}</Prose>
+          <Prose className={WALKTHROUGH_PROSE}>{t.children}</Prose>
         </TabsContent>
       ))}
     </Tabs>
@@ -275,24 +308,25 @@ function Screenshot({
 }) {
   if (!src && !caption) return null;
   return (
-    <figure className="my-4">
+    <figure className="mx-auto my-6 max-w-2xl">
       {src ? (
+        // Every capture sits in the same 16:9 frame so the steps look alike whatever the source size.
         // eslint-disable-next-line @next/next/no-img-element -- static captures from /public, sizes vary
         <img
           src={src}
           alt={alt ?? caption ?? ""}
           loading="lazy"
-          className="h-auto w-full rounded-md border border-border bg-bg-muted"
+          className="aspect-video w-full rounded-lg border border-border bg-bg-muted object-contain"
         />
       ) : (
         <div
           role="img"
           aria-label={alt ?? caption ?? hint ?? "Screenshot to come"}
-          className="aspect-video w-full rounded-md border border-border bg-bg-muted"
+          className="aspect-video w-full rounded-lg border border-border bg-bg-muted"
         />
       )}
       {caption ? (
-        <figcaption className="mt-2 text-sm leading-6 text-fg-muted">{caption}</figcaption>
+        <figcaption className="mt-2 text-center text-sm leading-6 text-fg-muted">{caption}</figcaption>
       ) : null}
     </figure>
   );
@@ -387,7 +421,7 @@ export async function WalkthroughPage({
           tool: s.tool,
           defaultOpen: s.open,
           content: (
-            <Prose>
+            <Prose className={WALKTHROUGH_PROSE}>
               <WalkthroughMarkdown>{s.body}</WalkthroughMarkdown>
             </Prose>
           ),
@@ -397,7 +431,7 @@ export async function WalkthroughPage({
           id: s.id,
           content: (
             <section id={s.id} className="scroll-mt-20">
-              <Prose>
+              <Prose className={WALKTHROUGH_PROSE}>
                 <h2>{s.title}</h2>
                 <WalkthroughMarkdown>{s.body}</WalkthroughMarkdown>
               </Prose>
@@ -414,7 +448,7 @@ export async function WalkthroughPage({
             <PageHeader eyebrow={eyebrow ?? "Tutorial"} title={title} lede={lede} />
           </Stack>
 
-          <Prose className="max-w-3xl">
+          <Prose className={cn("max-w-3xl", WALKTHROUGH_PROSE)}>
             <WalkthroughMarkdown>{intro}</WalkthroughMarkdown>
           </Prose>
 
@@ -423,7 +457,11 @@ export async function WalkthroughPage({
           </div>
         </Stack>
         <EnterprisePageToc
-          items={sections.map((s) => ({ id: s.id, label: s.title.replace(/^(\d+)\.\s*/, "Step $1: ") }))}
+          items={sections.map((s) => ({
+            id: s.id,
+            label: s.title,
+            group: s.phase,
+          }))}
         />
       </div>
     </Frame>
