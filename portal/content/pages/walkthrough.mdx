@@ -4,32 +4,37 @@ eyebrow: "Tutorial"
 visibility: "public"
 ---
 
-This tutorial follows one example project, SKYPROTECT, from raw interview notes to a prototype that real users can test. You do not need a background in product management or design.
+This tutorial takes a project from raw interview notes to a prototype that real users can test. You do not need a background in product management or design.
+
+Use your own project. If you do not have one, use the **demo project**, SKYPROTECT, a made-up drone-defence programme. Step 4 sets it up. It comes with a brief from an earlier project, field notes and practice material for each tool. Prompts in this tutorial say SKYPROTECT. If you use your own project, replace it with your programme's name. Notes headed **For the demo project** apply only to the demo.
 
 By the end you will have:
 
-- **Research documents** in Confluence, each traced to its sources (steps 4, 6, 7, 8)
-- **A requirements document** (PRD) (step 9)
-- **A working prototype** built with PRIZM (step 10)
-- **A test plan** (step 11)
-- **A baseline and test results** to compare against (steps 5, 12)
+- **Research documents** in Confluence, each traced to its sources (steps 5, 7, 8, 10, 11, 12)
+- **A requirements document** (PRD) (step 13)
+- **A working prototype** built with PRIZM (step 14)
+- **A test plan** (step 15)
+- **A baseline and test results** to compare against (steps 6, 16)
+- **A report card** that summarises your product in a standard format (step 17)
 
 ## 1. Check the prerequisites
 ::step{id="prerequisites" phase="Setup"}
 
+Your research normally ends up scattered across notes, slides and chats.
+
+**CLARA** is an AI assistant that turns your raw notes into structured documents, such as personas, journeys and a PRD, and files them in Confluence. Every claim links back to the note it came from, so you can check it. You make the decisions. CLARA does the drafting and the filing. CLARA builds on what you give it, so check each result before you move on.
+
 Confirm you have the access you need before you start.
 
 - A Confluence account with permission to create a space. Everything you produce is stored in a Confluence space.
-- An AI assistant connected to Confluence, such as Claude with the Confluence connector turned on. Steps 2 and 3 use it.
+- An AI assistant connected to Confluence, such as Claude with the Confluence connector turned on. Steps 2 and 4 use it.
 - Access to [DASH](/tools/dash), at [diux-dash.com](https://diux-dash.com).
-- [Claude Code](/tools/claude-code) installed. You need it for step 10, and for step 2 if you choose the file method.
+- **[Claude Code](/tools/claude-code) installed.** You need it for step 14, and for step 2 if you choose the file method.
+- **Node.js 20 or later, and pnpm.** Claude Code uses them to install the prototype's packages in step 14. If your network is offline, ask your IT team for the address of your internal npm registry, then run `pnpm config set registry <address>`.
+- **[INSIGHT](https://insight.vercel.app/) installed.** You need it for step 9, which is optional. The macOS and Windows apps are coming soon.
+- Access to the CMS for [PULSE](https://pulse-dsta.vercel.app/). You need it for step 17. Ask your PULSE contact to add you.
 
 ::screenshot{caption="The Confluence connector turned on in your AI assistant's settings" hint="your AI assistant's settings or connectors screen with the Confluence connector switched on and highlighted"}
-
-:::watch{title="Read this first"}
-- CLARA builds on what you give it, so an early mistake carries through every later step. Check each result before you move on.
-- If a document lands in the wrong place or cites nothing, stop and check that the Knowledge Base from step 3 exists and your source links point to real pages with real content.
-:::
 
 ## 2. Install CLARA
 ::step{id="install-clara" phase="Setup" tool="CLARA"}
@@ -40,7 +45,7 @@ Choose one method.
 
 :::::tabs
 ::::tab{value="file" label="File method"}
-Install CLARA once and it is available whenever you open this workspace. This method needs [Claude Code](/tools/claude-code) in your IDE.
+Install CLARA once and it is available whenever you open this workspace. This needs [Claude Code](/tools/claude-code) in your IDE.
 
 1. Download :file[SKILL.md]{href="/confluence/SKILL.md"}.
 2. In your IDE's file list, create the folders `.claude/skills/clara-confluence`.
@@ -52,19 +57,6 @@ Install CLARA once and it is available whenever you open this workspace. This me
    ```prompt
    What can CLARA do?
    ```
-
-:::check
-CLARA introduces itself and says what it can do, such as drafting personas, journeys, PRDs and test plans.
-:::
-
-**If CLARA does not appear:**
-- Check that the folder is named `clara-confluence`, it holds `SKILL.md` (spelled exactly with capitals), and `.claude` is at the top of the folder you opened.
-- Run **Developer: Reload Window** from the command palette.
-
-**If CLARA cannot reach Confluence:**
-- Check that the Confluence connector is turned on in your assistant.
-
-**Note:** To make CLARA available in every project, put the same folders in your home folder (`~/.claude/skills/clara-confluence/`). Dot folders are hidden by default. On a Mac, press :kbd[Cmd] + :kbd[Shift] + :kbd[.] in Finder. On Windows, choose **View > Show > Hidden items** in File Explorer.
 ::::
 
 ::::tab{value="url" label="URL method"}
@@ -74,26 +66,137 @@ Nothing to install. Your computer must be able to reach the address. Paste the s
    ```prompt
    Read https://dsta-productops.github.io/clara/skill/clara-confluence.md?v=4 and follow it as your instructions for the rest of this chat. Then introduce yourself and ask what I'd like to create.
    ```
-
-:::check
-CLARA introduces itself and says what it can do, such as drafting personas, journeys, PRDs and test plans.
-:::
-
-**If CLARA does not respond:**
-- Check that you pasted the whole prompt.
-- Open the address in your browser. If it does not load, use the file method, or copy the text of the page and paste it into the chat instead.
-
-**If CLARA cannot reach Confluence:**
-- Check that the Confluence connector is turned on in your assistant.
 ::::
 :::::
 
 CLARA loads the prompt for each document type from the DSTA ProductOps site. If it cannot reach the site, it asks you to paste the prompt. You can copy every one from the [Prompts](/prompts) page.
 
-## 3. Set up the SKYPROTECT Knowledge Base
-::step{id="knowledge-base" phase="Setup" tool="AI assistant"}
+:::check
+CLARA introduces itself and says what it can do, such as drafting personas, journeys, PRDs and test plans.
+:::
 
-SKYPROTECT is a made-up drone-defence programme. One setup file describes everything in its Confluence space, and your AI assistant builds the space from it.
+:::details{title="Stuck? See fixes for this step."}
+**If CLARA does not appear (file method):**
+- Check that the folder is named `clara-confluence`, it holds `SKILL.md` (spelled exactly with capitals), and `.claude` is at the top of the folder you opened.
+- Run **Developer: Reload Window** from the command palette.
+
+**If CLARA does not respond (URL method):**
+- Check that you pasted the whole prompt.
+- Open the address in your browser. If it does not load, use the file method, or copy the text of the page and paste it into the chat instead.
+
+**If CLARA cannot reach Confluence:**
+- Check that the Confluence connector is turned on in your assistant.
+:::
+
+## 3. Install PRIZM
+::step{id="install-prizm" phase="Setup" tool="PRIZM"}
+
+**PRIZM** is DSTA's design system: a library of ready-made screens, components and colours. It comes with instructions that Claude Code reads, so the prototype you build in step 14 follows DSTA standards without extra styling work.
+
+You set PRIZM up now, in the folder where you will build the prototype. Create an empty folder called `skyprotect-prototype` on your computer, or use your own project's name, and open it in your IDE.
+
+Choose one method.
+
+:::::tabs
+::::tab{value="file" label="File method"}
+Nothing is downloaded from the internet while you build, so this method works offline. The download is about 1 MB.
+
+1. Download :file[prizm.zip]{href="/prizm/prizm.zip"}.
+2. Extract it. On a Mac, double-click the file. On Windows, right-click it and choose **Extract All**. You get a folder called `prizm`.
+3. Drag the `prizm` folder into `skyprotect-prototype` in your IDE's file list.
+
+::screenshot{caption="The skyprotect-prototype folder, holding the prizm folder" hint="the IDE file list showing skyprotect-prototype with the prizm folder inside, and PRIZM.md visible inside prizm"}
+
+4. At the top of `skyprotect-prototype`, next to `prizm`, create a file named `CLAUDE.md`. Paste this into it and save:
+   ```
+   # PRIZM
+   This project uses PRIZM. Its files are in ./prizm.
+   - Before building any screen, read prizm/PRIZM.md and prizm/llms.txt.
+   - Copy components from prizm/components/ui into this project. Do not fetch anything from the internet. Do not invent components.
+   - Use semantic colour tokens such as bg-bg and text-fg, never raw colours.
+   ```
+
+::screenshot{caption="CLAUDE.md at the top of the project, next to the prizm folder" hint="the IDE file list and the open CLAUDE.md file with the PRIZM rules pasted in"}
+::::
+
+::::tab{value="url" label="URL method"}
+Claude Code reads PRIZM from GitHub when it needs it. Nothing is downloaded now, but your computer must be able to reach [github.com](https://github.com/prizm-design/prizm).
+
+1. At the top of `skyprotect-prototype`, create a file named `CLAUDE.md`. Paste this into it and save:
+   ```
+   # PRIZM
+   This project uses PRIZM, at https://github.com/prizm-design/prizm.
+   - Before building any screen, read https://raw.githubusercontent.com/prizm-design/prizm/main/PRIZM.md and https://raw.githubusercontent.com/prizm-design/prizm/main/llms.txt.
+   - Fetch components from that repository as PRIZM.md describes. Do not invent components.
+   - Use semantic colour tokens such as bg-bg and text-fg, never raw colours.
+   ```
+
+::screenshot{caption="CLAUDE.md at the top of the project, with the PRIZM rules pasted in" hint="the IDE file list and the open CLAUDE.md file with the PRIZM rules pasted in"}
+::::
+:::::
+
+Claude Code reads `CLAUDE.md` at the start of every chat in this folder, so the rules apply each time without you pasting them again.
+
+Then start a new chat in the Claude panel and ask:
+
+```prompt
+Which PRIZM zones are available, and where did you read that?
+```
+
+:::check
+Claude Code names two zones, **Enterprise** and **C3**. It says it read them from `prizm/PRIZM.md` (file method) or from the PRIZM address on GitHub (URL method).
+:::
+
+:::details{title="Stuck? See fixes for this step."}
+**If Claude does not mention PRIZM:**
+- Check that `CLAUDE.md` is at the top of `skyprotect-prototype`, spelled exactly with capitals, and not inside another folder.
+- Start a new chat. Claude reads `CLAUDE.md` only when a chat begins.
+- Run **Developer: Reload Window** from the command palette.
+
+**If the folder is nested (file method):**
+- Open `prizm` and check that `PRIZM.md` is directly inside it. If you see another `prizm` folder, drag that inner folder out instead.
+
+**If Claude tries to fetch from the internet (file method):**
+- Remind it: `Read only from ./prizm. Do not use the internet.`
+
+**If Claude cannot read PRIZM (URL method):**
+- Open the address from `CLAUDE.md` in your browser. If it does not load, use the file method.
+:::
+
+## 4. Set up your Knowledge Base
+::step{id="knowledge-base" phase="Setup" tool="CLARA"}
+
+Your **Knowledge Base** is the set of Confluence pages where CLARA files everything you make, in folders by document type. Set it up once, before you start.
+
+Choose one method.
+
+:::::tabs
+::::tab{value="own" label="Your own project"}
+CLARA builds the folders for you and shows you the plan before it creates anything.
+
+1. In Confluence, create an empty space for your programme. Note its space key.
+
+::screenshot{caption="The Create a space form, with your programme's name and key" hint="the Confluence Create a space form with a programme name and space key filled in and the key field highlighted"}
+
+2. Paste this prompt into CLARA:
+   ```prompt
+   Use CLARA's `setup-kb` for SKYPROTECT.
+   ```
+3. Answer its questions about your programme type and your tracks. A **track** is a slice of your programme, such as a workstream or a feature line. If you are not sure, start with none. CLARA files everything under `Programme-wide`, and you can add tracks later.
+4. Check the plan it shows, then confirm.
+
+:::check
+Your space has a **Knowledge Base** page with a `Programme-wide` folder under it, and a folder for each document type.
+:::
+
+:::details{title="Stuck? See fixes for this step."}
+**If CLARA stops part-way:**
+- It stops on purpose when something goes wrong, usually a missing permission. Fix the cause and run the same prompt again. It is safe to re-run.
+:::
+::::
+
+::::tab{value="demo" label="Demo project"}
+Use this if you do not have a project of your own. **SKYPROTECT** is a new programme that tracks small drones over fixed sites. Its team is starting from the documents of an earlier programme, **FLEETWATCH**, a console for supervising warehouse robots. One setup file describes the whole Confluence space, and your AI assistant builds it.
 
 1. In Confluence, create an empty space called **SKYPROTECT** with the space key `SKYPR`. Create it yourself, because the setup file tells the assistant not to.
 
@@ -102,27 +205,35 @@ SKYPROTECT is a made-up drone-defence programme. One setup file describes everyt
 2. Download :file[skyprotect-setup.md]{href="/skyprotect-setup.md"}.
 3. Open your AI assistant, attach the file and paste this prompt:
    ```prompt
-   Set up the SKYPROTECT demo Knowledge Base in Confluence by following the attached setup file exactly. The SKYPROTECT space (key SKYPR) already exists, so do not create it. If anything cannot be created, stop and tell me. Do not retry or improvise.
+   Set up the SKYPROTECT demo project in Confluence by following the attached setup file exactly. The SKYPROTECT space (key SKYPR) already exists, so do not create it. If anything cannot be created, stop and tell me. Do not retry or improvise.
    ```
 
 ::screenshot{caption="Your AI assistant with the setup file attached and the prompt pasted" hint="your AI assistant with skyprotect-setup.md attached and the prompt pasted, with the attach control highlighted"}
 
-4. Wait for it to finish. It creates the pages one level at a time, so this takes a few minutes. It then reports how many pages it created and gives you a link to the top-level **Knowledge Base** page.
-5. Open that link in Confluence.
+4. Wait for it to finish. It creates the pages one level at a time, so this takes a few minutes. Then open the **Knowledge Base** link it gives you.
 
-::screenshot{caption="The SKYPROTECT page tree, with Knowledge Base expanded" hint="the finished SKYPROTECT page tree in Confluence, with the Knowledge Base expanded and both tracks visible"}
+::screenshot{caption="The SKYPROTECT page tree, with Prior-projects and Knowledge Base expanded" hint="the finished SKYPROTECT page tree in Confluence, with Prior-projects and the Knowledge Base expanded and the Field-notes pages visible"}
+
+The setup files the starting documents only. You make the research documents yourself, in steps 5 to 13.
 
 :::check
-Under **Knowledge Base** are two tracks, **Programme-wide** and **Operator-console**, holding 51 pages in all, including 24 interview and observation notes (S01 to S16, WT01 to WT04, and the Field Alpha and Bravo shift notes). Click a citation such as S08 in the research synthesis to open that note.
+The space holds:
+- **Prior-projects**, with the FLEETWATCH project brief and close-out report
+- The **SKYPROTECT kickoff brief**
+- **Knowledge Base / Programme-wide / Field-notes**, with the Field Notes template and the interview and observation notes, S01 to S10 and WT01 and WT02
+
+Open **S06** to see what a rough field note looks like.
 :::
 
+:::details{title="Stuck? See fixes for this step."}
 **If the assistant stops part-way:**
 - It stops on purpose when something goes wrong, usually a missing permission or a space with the wrong key.
 - Fix the cause and run the same prompt again.
+:::
+::::
+:::::
 
-The setup also files a finished example of most documents you make in steps 4 to 11. Compare each with your own to see what good looks like. For a real programme, ask CLARA to create the folder structure instead. See [the CLARA provisioning steps](/tools/clara#provisioning).
-
-## 4. Find what is already known
+## 5. Find what is already known
 ::step{id="prior-knowledge" phase="Research" tool="CLARA"}
 
 Review past projects, earlier write-ups and other teams' Confluence pages first, so you do not start from zero.
@@ -139,16 +250,23 @@ Review past projects, earlier write-ups and other teams' Confluence pages first,
 
 ::screenshot{caption="Copying a Confluence page's link from the browser address bar" hint="a source page open in Confluence with the browser address bar highlighted, showing the /wiki/spaces/space-key/pages/page-id form of the link"}
 
-4. Check the list of sources before CLARA writes the summary. Remove any pages that do not belong.
+4. Review the list of sources before CLARA writes the summary. Remove any pages that do not belong.
 
 :::check
 A summary of patterns, contradictions and related work, filed under `Knowledge Base / [track] / Prior-knowledge / [topic]`. Each finding names the Confluence page it came from.
 :::
 
-:::example
-`Programme-wide / Prior-knowledge / Counter-drone-systems`
-:::
+**For the demo project:** answer CLARA's questions like this:
 
+```prompt
+Programme name: SKYPROTECT
+Track: Programme-wide
+Topic: lessons from FLEETWATCH on alert floods, shift handover and showing how sure a system is, that may apply to counter-drone operators
+```
+
+For sources, give it the links to the two pages under **Prior-projects**, the FLEETWATCH project brief and the FLEETWATCH close-out report. Add the SKYPROTECT kickoff brief for context.
+
+:::details{title="Stuck? See fixes for this step."}
 **If the summary is thin or generic:**
 - Add more source material, such as interview notes or past write-ups.
 - Narrow the topic and run the prompt again. A finding with no source is a guess, not a fact.
@@ -157,7 +275,11 @@ A summary of patterns, contradictions and related work, filed under `Knowledge B
 - Check that you can open the SKYPROTECT space yourself.
 - If you can, ask your CLARA contact to check its connection.
 
-## 5. Measure how things are today
+**If a document lands in the wrong place or cites nothing:**
+- Stop and check that the Knowledge Base from step 4 exists and your source links point to real pages with real content.
+:::
+
+## 6. Measure how things are today
 ::step{id="baseline" phase="Research" tool="DASH"}
 
 A **baseline** measures how things work today, so you can show later that your design is better. Do it before any interviews or design work.
@@ -167,20 +289,60 @@ A **baseline** measures how things work today, so you can show later that your d
 
 ::screenshot{caption="The DASH new-session screen, with Baseline Testing selected" hint="the DASH new-session screen with Baseline Testing highlighted"}
 
-3. Share the link or QR code with people who use that system.
+3. Share the link or QR code with people who use that system. Responses appear in DASH as they answer. Keep this session open, because you compare against it in step 16.
 
 ::screenshot{caption="The Baseline Testing session, showing the share link and QR code" hint="the Baseline Testing session in DASH, showing the share link and QR code"}
 
-:::check
-Responses appear in DASH as people answer. Keep this session open, because you compare against it in step 12.
-:::
-
-**If you cannot find your programme's workspace:**
-- Each programme has one DASH workspace. Ask your DASH contact to add you.
-
 DASH asks about **SUS** (System Usability Scale, a short score for how easy a system is to use), look and feel, user needs, system performance and **CSAT** (customer satisfaction). It also tracks **OKRs**, which are goals with numbers attached.
 
-## 6. Interview your users
+**For the demo project:** name the system **the current three-window toolchain: Halden Radar, Sigma RF Watch and Optix EO Viewer**. You have no operators to survey, so answer the survey yourself as a Site Alpha operator would. Use what you read in the kickoff brief. Ask a colleague to answer it too if you can, so you have more than one response to compare in step 16.
+
+:::details{title="Stuck? See fixes for this step."}
+**If you cannot find your programme's workspace:**
+- Each programme has one DASH workspace. Ask your DASH contact to add you.
+:::
+
+## 7. Review the product people use today
+::step{id="heuristic-evaluation" phase="Research" tool="CLARA"}
+
+A **heuristic evaluation** checks a product against a set of well-known usability rules, called **heuristics**. CLARA uses Nielsen's 10 heuristics. It scores the product out of 100 and lists each problem it finds, with a severity rating and the screen it appears on. The problems it finds feed your synthesis in step 10 and your ranking in step 12.
+
+1. Collect the material to evaluate. Use numbered screenshots of the flows, a link CLARA can open, or a PDF or deck of the screens. For SKYPROTECT, that is the current radar, RF and camera systems.
+2. Paste this prompt into CLARA:
+   ```prompt
+   Use CLARA's `heuristic-evaluator` for SKYPROTECT.
+   ```
+3. Tell CLARA the product name, then attach your material or paste the link.
+4. Choose the evaluation mode: a competitor's product, an existing system you want to improve, a product being retired, or a standalone evaluation.
+5. Name the one or two tasks to check, such as "an operator confirms and reports a threat". If you do not, CLARA proposes them from the screens and asks you to confirm.
+
+::screenshot{caption="CLARA asking for the product, the evaluation mode and the tasks to check" hint="the AI assistant asking for the product name, the evaluation mode and the task scenarios, with the attached screenshots visible"}
+
+6. Read the report. Check that each finding names a specific screen.
+
+:::check
+A report with a score out of 100, severity-rated findings that each cite a screen, and a fix list ranked P0, P1 and P2, filed under `Knowledge Base / [track] / Heuristic-evaluations / [product name]`.
+:::
+
+CLARA works from the material you give it. A link lets it check more states than screenshots do. One evaluator finds only about a third of the problems, so treat the findings as a minimum and the score as a ceiling. For a big decision, ask a second person to run the evaluation and merge the two.
+
+**For the demo project:** download :file[skyprotect-demo-screens.zip]{href="/skyprotect-demo/skyprotect-demo-screens.zip"} and unzip it. It holds four numbered screenshots of the current toolchain: two of Halden Radar, one of Sigma RF Watch and one of Optix EO Viewer. Attach all four, then answer CLARA's questions like this:
+
+```prompt
+Product name: the current SKYPROTECT toolchain: Halden Radar, Sigma RF Watch and Optix EO Viewer
+Evaluation mode: an existing system being improved
+Task scenario: an operator confirms an incoming drone across the radar, RF and camera tools
+```
+
+:::details{title="Stuck? See fixes for this step."}
+**If CLARA gives findings that do not cite a screen:**
+- Ask it to number the screens and tie every finding to one. Delete any finding it cannot place.
+
+**If the score looks too high or too low:**
+- The score is for comparing: the same product over time, or competitors judged the same way. Do not read it as an absolute grade.
+:::
+
+## 8. Interview your users
 ::step{id="interviews" phase="Research" tool="CLARA"}
 
 Surveys give you numbers. Interviews tell you why. CLARA writes the guide and you run the conversations.
@@ -189,18 +351,54 @@ Surveys give you numbers. Interviews tell you why. CLARA writes the guide and yo
    ```prompt
    Use CLARA's `interview-guide-generator` for SKYPROTECT.
    ```
-2. Run 5 to 7 conversations with the people who will use the system.
+2. Run 5 to 7 conversations. To get live prompts while you talk, set up INSIGHT in step 9 first.
 3. After each one, paste your notes into Confluence using the **Field Notes** template, exactly as you took them. Do not tidy them, because polished notes add your own bias.
 
 ::screenshot{caption="The ⋯ menu with Copy selected on the Field Notes template page" hint="the Field Notes template page in Confluence with its ⋯ menu open and Copy highlighted"}
 
+**For the demo project:** do step 1 only. The interview and observation notes are already filed under `Field-notes`. Answer CLARA's questions like this:
+
+```prompt
+Programme name: SKYPROTECT
+Track: Programme-wide
+Topic: how operators and commanders confirm a drone and escalate it
+Interviewee: console operators at two sites (6 sessions), air-defence commanders (2 sessions), a sensor technician (1 session) and a safety and legal adviser (1 session)
+Outcome question: where do operators and commanders lose time between the first alert and the authorisation, and what do they do about it?
+```
+
+## 9. Get live prompts in interviews
+::step{id="interview-prompts" phase="Research" tool="INSIGHT"}
+
+**INSIGHT** is an app that listens while you interview and suggests one thing at a time: a follow-up question, a definition for jargon, or a snippet from your documents. It runs on your computer without internet, and nothing leaves your device. This step is optional. It helps you run the conversations in step 8.
+
+The macOS and Windows apps are listed as "coming soon" on the [INSIGHT site](https://insight.vercel.app/). Until they are released, run step 8 without it and carry on to step 10.
+
+1. Optional: before the interview, upload your PRD or brief and add your team's terms, such as SKYPROTECT's names for its radar, RF and camera systems. The suggestions then match your project.
+2. Press start at the beginning of the conversation. INSIGHT writes a transcript as you talk.
+3. Read the **Now** card when you need a prompt. It shows one suggestion you can read aloud. A running summary and a glossary help you keep your place.
+
+::screenshot{caption="The Now card showing a suggested follow-up question during an interview" hint="the INSIGHT window during a session, with the Now card, the running summary and the glossary visible"}
+
+4. When the conversation ends, end the session and open the review. It shows a transcript with each speaker labelled and the suggestions tied to timestamps.
+5. Export the review as Markdown and paste it into the **Field Notes** template, as in step 8.
+
+::screenshot{caption="The session review with the export options" hint="the INSIGHT session review with the Markdown export option highlighted"}
+
 :::check
-A field-ready interview guide with questions, things to listen for and follow-up prompts. Your raw notes are in the Field Notes pages in the Knowledge Base.
+A transcript with each speaker labelled, saved as a Markdown file and pasted into a Field Notes page in Confluence.
 :::
 
-**For the SKYPROTECT demo:** do step 1 only. The 24 interview, walk-through and field notes are already filed under `Field-notes` in both tracks.
+:::details{title="Stuck? See fixes for this step."}
+**If INSIGHT does not hear the conversation:**
+- Check that your computer allows INSIGHT to use the microphone, then press start again.
 
-## 7. Make sense of the notes
+**If no suggestions appear:**
+- Suggestions appear as the conversation goes on, so wait a few minutes. Adding your PRD and team terms before you start also helps.
+:::
+
+**For the demo project:** practise on your own. Download :file[insight-practice-script.md]{href="/skyprotect-demo/insight-practice-script.md"}. It lists the terms to add to INSIGHT's glossary and a short script with two parts. You read both parts out loud, the interviewer in your own voice and the operator in a different voice, while INSIGHT listens. You do not need to file the export, because the notes are already in Confluence.
+
+## 10. Make sense of the notes
 ::step{id="synthesise" phase="Research" tool="CLARA"}
 
 **Synthesis** pulls the patterns out of many notes. CLARA reads them all in one pass and separates what is new from what you already knew.
@@ -209,43 +407,93 @@ A field-ready interview guide with questions, things to listen for and follow-up
    ```prompt
    Use CLARA's `research-synthesiser` for SKYPROTECT.
    ```
-2. Give it your learning goals and the gaps you found in step 4. It uses them to judge what counts as new.
+2. Give it your learning goals, the gaps you found in step 5 and the findings from step 7.
 
-:::check
-One research-synthesis page with recurring patterns, friction points, standout statements and success criteria, citing your field notes. The Knowledge Base is updated.
-:::
+**For the demo project:** answer CLARA's questions like this:
 
-:::example
-`Operator-console / Research-synthesis` (the programme-wide version is under `Programme-wide / Research-synthesis`)
-:::
+```prompt
+Programme name: SKYPROTECT
+Track: Programme-wide
+Outcome question: where do operators and commanders lose time between the first alert and the authorisation, and which FLEETWATCH lessons hold?
+```
 
-## 8. Profile your users
+Point it to the notes under `Field-notes`, your prior-knowledge summary from step 5 and your interview guide from step 8. Add the heuristic evaluation from step 7 as the source of known problems.
+
+Check that CLARA flags the places where the notes disagree. In S02 the operator says false alerts are mostly birds, and in S05 the operator says they are mostly weather. In S06 the operator says commanders are slow to answer, and in S08 the commander says operators are slow to call. S09 explains the false alerts at Site Bravo.
+
+## 11. Profile your users
 ::step{id="personas-journeys" phase="Research" tool="CLARA"}
 
 Turn the research into three documents. Paste each prompt into CLARA in turn.
 
-1. Create a **persona**: a profile of a typical user, with what they want, what frustrates them and the evidence.
+1. Create a **persona**: a profile of a typical user, with their goals, frustrations and the evidence.
    ```prompt
    Use CLARA's `persona-generator` for SKYPROTECT.
    ```
-2. Create a **user journey**: the steps a person goes through, the moments that matter most, and where you could improve things.
+2. Create a **user journey**: the steps a person goes through, and where you could improve things.
    ```prompt
    Use CLARA's `journey-map-drafter` for SKYPROTECT.
    ```
-3. Create a **service blueprint**: the journey plus what your team does behind the scenes and the systems that support both.
+3. Create a **service blueprint**: the journey plus what your team and systems do behind the scenes.
    ```prompt
    Use CLARA's `service-blueprint-drafter` for SKYPROTECT.
    ```
 
+**For the demo project:** answer CLARA's questions like this, one document at a time:
+
+```prompt
+Persona name: Console operator
+```
+
+```prompt
+Persona: Console operator
+Journey scope: confirming and reporting an incoming drone, from the first radar track to the commander's acknowledgement
+```
+
+```prompt
+Journey: the journey you just made
+System context: Halden Radar, Sigma RF Watch, Optix EO Viewer, the voice line to the commander, and the handwritten log
+```
+
+Use `Programme-wide` as the track each time.
+
+## 12. Rank the problems
+::step{id="problem-ranking" phase="Research" tool="CLARA"}
+
+Your research now lists many problems, and you cannot fix them all at once. CLARA ranks them so you know which one to build for first. It scores each problem on **reach** (how many people it affects), **severity** (how badly it hurts), **evidence** (how well it is proven) and **leverage** (whether fixing it also fixes others). Each score is out of 5, so a problem scores up to 20.
+
+1. Paste this prompt into CLARA:
+   ```prompt
+   Use CLARA's `problem-impact-ranker` for SKYPROTECT.
+   ```
+2. Tell it which problems to rank, such as all problems across the journey, or one track's. Name where they come from, such as the friction table in your research synthesis from step 10, so the ranking can be traced.
+3. Answer its questions where the evidence is thin. It does not invent evidence.
+4. Read the ranked table and the tiers. Check that the top problems match what you saw in the research.
+
 :::check
-Three new pages in the Knowledge Base, each claim pointing back to a quote or note from your research.
+A ranked table with each problem scored out of 20, grouped into tiers. Each problem names whose pain it is and the evidence behind it, filed under `Knowledge Base / [track] / Problem-impact-analysis`.
 :::
 
-:::example
-`Operator-console / Personas / Console-operator` and `Operator-console / Journeys / Engage-incoming-threat`. The space has no service blueprint, so yours is the first.
+**For the demo project:** answer CLARA's questions like this:
+
+```prompt
+Programme name: SKYPROTECT
+Track: Programme-wide
+Problem set scope: all problems across confirming and reporting an incoming drone
+Source of the problems: the friction points in the Programme-wide research synthesis, the heuristic evaluation and the field notes
+```
+
+CLARA may ask about the evidence for a need for an audit trail. The kickoff brief requires one, but S10 is the only adviser interviewed, and S10 could not say how often it matters. S08 mentions the handwritten log only in passing. Tell CLARA that. This is the kind of gap the ranking is meant to show.
+
+:::details{title="Stuck? See fixes for this step."}
+**If a persuasive problem ranks low:**
+- Check its evidence. A problem backed only by discussion ranks below a duller one that people tested or saw in use. The gap tells you what to go and prove next.
+
+**If CLARA asks for more problems or sources:**
+- Point it to your research synthesis from step 10, or paste a list of pain points from a workshop.
 :::
 
-## 9. Write the requirements
+## 13. Write the requirements
 ::step{id="prd" phase="Research" tool="CLARA"}
 
 A **PRD** (product requirements document) is one page everyone agrees on: the problem, who it is for, what the product must do and how you will know it worked. It is the most important output of Research.
@@ -254,28 +502,35 @@ A **PRD** (product requirements document) is one page everyone agrees on: the pr
    ```prompt
    Use CLARA's `prd-generator` for SKYPROTECT.
    ```
-2. Read the draft, then edit it by hand. It becomes the input for your prototype.
+2. Choose the problem to build for. CLARA suggests the top-ranked problem from step 12.
+3. Read the draft, then edit it by hand. It becomes the input for your prototype.
 
-:::check
-A PRD with a problem statement, user goals, scope, functional requirements (what the product must do) and user stories (short descriptions of what a user wants to do and why).
-:::
+**For the demo project:** answer CLARA's questions like this:
 
-:::example
-`Operator-console / PRDs / Console-v1`
-:::
+```prompt
+Programme name: SKYPROTECT
+Track: Programme-wide
+PRD title: Operator-console-v1
+Original stakeholder ask: Operators at our two sites should not need three windows to confirm a drone. Commanders in the central ops room should be able to authorise faster. Show us a prototype that people can try.
+```
 
-## 10. Build a prototype
+Build for the problem of confirming a drone across the three tools and escalating it to the commander with the evidence. This is the kickoff ask. If your ranking puts another problem first, still build for this one, and note why in the PRD. The constraints in the kickoff brief, such as the 90-second window and the human decision, belong in the PRD.
+
+## 14. Build a prototype
 ::step{id="prototype" phase="Design" tool="Claude Code + PRIZM"}
 
 A prototype is a working draft people can click through. Claude Code reads your PRD and PRIZM's rules, so the result follows DSTA standards without extra styling work.
 
-1. If you have not already, install Claude Code by following the steps on the [Claude Code page](/tools/claude-code). Open an empty project folder and start it there.
-2. Open the [Prototype-from-PRD scaffolder](/prompts/prototype-from-prd) prompt and paste your PRD where it asks. The prompt tells Claude Code to read PRIZM's `PRIZM.md` and `llms.txt` first.
+1. Open the `skyprotect-prototype` folder from step 3 in your IDE and start a chat in the Claude panel. If Claude Code is not installed yet, follow the steps on the [Claude Code page](/tools/claude-code).
+2. Open the [Prototype-from-PRD scaffolder](/prompts/prototype-from-prd) prompt and paste your PRD where it asks. If you used the file method in step 3, add this line to the top of the prompt, because the prompt otherwise points to GitHub:
+   ```prompt
+   Read PRIZM from ./prizm, not from the internet.
+   ```
 3. Choose a PRIZM zone: **Enterprise** for websites and back-office tools, or **C3** for command-and-control systems.
 
 ::screenshot{caption="Claude Code asking which PRIZM zone to use, Enterprise or C3" hint="Claude Code asking which PRIZM zone to use, with Enterprise and C3 as the options"}
 
-4. When Claude Code lists three to five user flows, pick one to build first. Do not skip this question, because it stops Claude Code generating hundreds of lines you do not need.
+4. When Claude Code lists three to five user flows, pick one to build first. Do not skip this question.
 5. Open the prototype in your browser. To change something, describe the change in plain English.
 
 ::screenshot{caption="The running prototype in the browser, next to Claude Code" hint="the running prototype in the browser, next to Claude Code"}
@@ -284,10 +539,12 @@ A prototype is a working draft people can click through. Claude Code reads your 
 A running prototype of your chosen flow, built from PRIZM components and semantic colour tokens such as `bg-bg` and `text-fg`, not raw colours.
 :::
 
+:::details{title="Stuck? See fixes for this step."}
 **If Claude Code invents components PRIZM does not have:**
-- Stop it and ask it to check `lib/components-registry.ts` in the PRIZM repository before it generates anything more.
+- Stop it and ask it to check `lib/components-registry.ts` before it generates anything more. With the file method, that file is `prizm/lib/components-registry.ts`. With the URL method, it is in the PRIZM repository on GitHub.
+:::
 
-## 11. Plan the test
+## 15. Plan the test
 ::step{id="test-plan" phase="Test" tool="CLARA"}
 
 A test plan says who you will test with and what you will ask them to do. CLARA reads your PRD and personas to draft one.
@@ -298,20 +555,23 @@ A test plan says who you will test with and what you will ask them to do. CLARA 
    ```
 2. Review the plan and adjust the number of participants to fit your team.
 
-:::check
-A test plan with objectives, research questions, personas to recruit, participant numbers, scenarios and the tasks each person will try.
-:::
+**For the demo project:** answer CLARA's questions like this:
 
-:::example
-`Operator-console / Test-plans / Console-v1-usability-test`
-:::
+```prompt
+Programme name: SKYPROTECT
+Track: Programme-wide
+Test type: usability test on an interactive prototype
+Test name: Operator-console-v1-usability-test
+Test focus: confirming a drone and escalating it to the commander
+Constraints: 6 operators and 2 commanders, 45 minutes each, run remotely, no classified material
+```
 
-## 12. Test and compare
+## 16. Test and compare
 ::step{id="test" phase="Test" tool="DASH"}
 
-Test the prototype, then compare the results with your baseline from step 5.
+Test the prototype, then compare the results with your baseline from step 6. The comparison is your evidence that the new design is better, or your guide to what to fix next.
 
-1. In DASH, create a session and choose **Prototype Test**. It covers usability (SUS), look and feel, user needs and CSAT.
+1. In DASH, create a session and choose **Prototype Test**.
 2. Share the link or QR code with your participants and run the sessions as set out in your test plan.
 3. Compare the results with your baseline session.
 
@@ -321,6 +581,34 @@ Test the prototype, then compare the results with your baseline from step 5.
 
 ::screenshot{caption="The DASH AI button on the results page" hint="the DASH AI button on the results page"}
 
+## 17. Publish a report card
+::step{id="report-card" phase="Test" tool="PULSE"}
+
+A **report card** is a one-page summary of what your product does, what it costs, what it has achieved and who it has benefited. **PULSE** gives every product the same format, so products can be compared. Your AI assistant drafts the card from the material you already have, and you edit and publish it.
+
+1. Open [PULSE](https://pulse-dsta.vercel.app/) and read the **Baseline** metrics that every report card includes, such as product stage, cost effectiveness, usability and satisfaction. Then read the **Domain** metrics for your area. For SKYPROTECT, that is Command and Control.
+2. Open the PULSE CMS and copy its prompt.
+
+::screenshot{caption="The prompt in the PULSE CMS, ready to copy" hint="the PULSE CMS with the report card prompt visible and the copy control highlighted"}
+
+3. Paste the prompt into your AI assistant, then add your material: the PRD from step 13, your results from step 16 and the Knowledge Base pages that describe the product.
+4. Paste the draft back into the CMS. It opens in the editor.
+5. Check every figure against its source, edit the card by hand, then publish it.
+
+::screenshot{caption="The published report card" hint="a published PULSE report card showing the baseline metrics and the domain metrics"}
+
+PULSE separates data your team enters by hand, such as your DASH scores, from data it pulls automatically from the Telemetry Hub. Today you enter most of it yourself. Live data is on the PULSE roadmap.
+
+**For the demo project:** SKYPROTECT is made up, so stop before you publish. Draft the card, read it and check each figure against its source, then discard it. Do not publish a made-up report card in PULSE.
+
 :::check
-Side-by-side scores for the old system and your prototype, plus a list of suggested improvements. This is your evidence that the new design is better, or your guide to what to fix next.
+A published report card that fills in the baseline metrics and the metrics for your domain, with each figure traced to a source you can name.
+:::
+
+:::details{title="Stuck? See fixes for this step."}
+**If a metric is missing or does not fit your product:**
+- Leave it blank rather than guess, then email the PULSE team using the contact link on the PULSE site.
+
+**If the draft contains figures you cannot source:**
+- Ask your assistant which document each figure came from. Delete any that it cannot name.
 :::
