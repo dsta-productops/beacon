@@ -317,7 +317,7 @@ function Screenshot({
         // Every capture sits in the same 16:9 frame so the steps look alike whatever the source size.
         // eslint-disable-next-line @next/next/no-img-element -- static captures from /public, sizes vary
         <img
-          src={src}
+          src={withBase(src)}
           alt={alt ?? caption ?? ""}
           loading="lazy"
           className="aspect-video w-full rounded-lg border border-border bg-bg-muted object-contain"
@@ -334,6 +334,13 @@ function Screenshot({
       ) : null}
     </figure>
   );
+}
+
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+/** Raw <img>/<a> don't get Next's basePath, so prefix root-relative /public paths ourselves. */
+function withBase(url: string) {
+  return url.startsWith("/") && !url.startsWith("//") ? `${BASE_PATH}${url}` : url;
 }
 
 function Pre({ children }: { children?: ReactNode }) {
@@ -357,7 +364,7 @@ function Anchor({
     return <Link href={href}>{children}</Link>;
   }
   return (
-    <a href={href} {...rest}>
+    <a href={withBase(href)} {...rest}>
       {children}
     </a>
   );

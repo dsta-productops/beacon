@@ -8,6 +8,8 @@ import { corpus } from "@/lib/corpus";
  * are filled in under `content/`, extend this to stitch in the actual
  * page bodies inline.
  */
+export const dynamic = "force-static";
+
 export async function GET() {
   const intro = `# BEACON — full corpus
 

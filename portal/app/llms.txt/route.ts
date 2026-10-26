@@ -9,6 +9,8 @@ import { corpusGroupedBySection } from "@/lib/corpus";
  * Goal: any LLM or agent can prime itself on the structure of this portal
  * by fetching this single file.
  */
+export const dynamic = "force-static";
+
 export async function GET() {
   const groups = corpusGroupedBySection();
   const sections = Object.entries(groups);
