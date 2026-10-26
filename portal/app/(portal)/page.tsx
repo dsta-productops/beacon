@@ -184,7 +184,7 @@ export default function Home() {
               <div className="flex flex-wrap gap-x-6 gap-y-2">
                 {[
                   { href: "/walkthrough", label: "Confluence walkthrough" },
-                  { href: "/walkthrough-gitlab", label: "GitLab wiki walkthrough" },
+                  // { href: "/walkthrough-gitlab", label: "GitLab wiki walkthrough" },
                 ].map(({ href, label }) => (
                   <Link
                     key={href}

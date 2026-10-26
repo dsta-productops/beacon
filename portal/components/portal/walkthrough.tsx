@@ -18,9 +18,14 @@ import { BookOpen, CheckCircle2, Info, TriangleAlert } from "lucide-react";
 import { readEntry } from "@/lib/content";
 import type { ToolSlug } from "@/lib/contacts";
 import { AccessContact } from "@/components/portal/access-contact";
-import { CopyButton } from "@/components/portal/copy-button";
 import { PageHeader } from "@/components/portal/page-header";
+import {
+  ProjectChoiceProvider,
+  ProjectSwitch,
+  PromptBlock,
+} from "@/components/portal/project-choice";
 import { EnterprisePageToc } from "@/components/templates/enterprise/page-toc";
+import { PROJECT_MARKUP, remarkProject, type Project } from "@/lib/remark-project";
 import { cn } from "@/lib/utils";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Disclosure, WalkthroughSteps, type WalkthroughBlock } from "@/components/portal/walkthrough-steps";
@@ -49,7 +54,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
  *   :::::tabs                        tab group; nest `::::tab{value label}`
  *   ::::tab{value="a" label="A"}     inside it (outer fences need more colons)
  *
- *   ```prompt                        a copyable prompt block
+ *   :::demo                          demo-project content, written as if the whole tutorial uses
+ *                                    the demo; plain text for demo readers, hidden otherwise
+ *   :demo[text]                      the same, for a sentence inside a step
+ *   ::::when{project="own"}          content for one project only (own or demo)
+ *   ::projectswitch                  the "own project or demo project" choice that drives all of these
+ *
+ *   ```prompt                        a copyable prompt block; PROGRAMME in it becomes SKYPROTECT
+ *                                    for readers on the demo project
  *   ::screenshot{hint="..."}         placeholder until a real screenshot exists; add src="/x.png"
  *                                    and alt="..." (optional caption="...") to show the image
  *   ::access{tool="clara"}           "Stuck? Contact ..." line
@@ -161,6 +173,9 @@ function remarkWalkthrough() {
         case "kbd":
           data.hName = "kbd";
           break;
+        case "projectswitch":
+          data.hName = "projectswitch";
+          break;
         case "file":
           data.hName = "a";
           data.hProperties = { href: attrs.href, download: true };
@@ -189,17 +204,6 @@ const WALKTHROUGH_PROSE = [
   // nested lists hang off their item instead of adding a block gap
   "[&_li_ol]:mt-2 [&_li_ol]:mb-0 [&_li_ul]:mt-2 [&_li_ul]:mb-0",
 ].join(" ");
-
-function PromptBlock({ prompt }: { prompt: string }) {
-  return (
-    <div className="relative mt-2 [&_pre]:mb-0">
-      <CodeBlock className="mb-0 whitespace-pre-wrap pr-24">{prompt}</CodeBlock>
-      <div className="absolute top-2 right-2">
-        <CopyButton text={prompt} label="Copy" />
-      </div>
-    </div>
-  );
-}
 
 const CALLOUTS = {
   check: { variant: "success", Icon: CheckCircle2, title: "You should see" },
@@ -308,7 +312,7 @@ function Screenshot({
 }) {
   if (!src && !caption) return null;
   return (
-    <figure className="mx-auto my-6 max-w-2xl">
+    <figure className="my-6 w-full">
       {src ? (
         // Every capture sits in the same 16:9 frame so the steps look alike whatever the source size.
         // eslint-disable-next-line @next/next/no-img-element -- static captures from /public, sizes vary
@@ -370,16 +374,45 @@ const components = {
   screenshot: Screenshot,
   access: ({ tool }: { tool: ToolSlug }) => <AccessContact tool={tool} />,
   kbd: Kbd,
+  projectswitch: ProjectSwitch,
 } as unknown as Components;
 
-function WalkthroughMarkdown({ children }: { children: string }) {
+function WalkthroughMarkdown({ children, project }: { children: string; project: Project }) {
   return (
     <ReactMarkdown
-      remarkPlugins={[remarkGfm, remarkDirective, remarkWalkthrough]}
+      remarkPlugins={[remarkGfm, remarkDirective, () => remarkProject(project), remarkWalkthrough]}
       components={components}
     >
       {children}
     </ReactMarkdown>
+  );
+}
+
+/**
+ * Markdown in the walkthrough's prose style. When the text differs by project, it is rendered
+ * once for each and `data-project` on the page wrapper picks which one shows; otherwise once.
+ */
+function ProjectProse({
+  children,
+  heading,
+  className,
+}: {
+  children: string;
+  heading?: string;
+  className?: string;
+}) {
+  const render = (project: Project) => (
+    <Prose className={cn(WALKTHROUGH_PROSE, className)}>
+      {heading ? <h2>{heading}</h2> : null}
+      <WalkthroughMarkdown project={project}>{children}</WalkthroughMarkdown>
+    </Prose>
+  );
+  if (!PROJECT_MARKUP.test(children)) return render("own");
+  return (
+    <>
+      <div className="[[data-project=demo]_&]:hidden">{render("own")}</div>
+      <div className="hidden [[data-project=demo]_&]:block">{render("demo")}</div>
+    </>
   );
 }
 
@@ -391,7 +424,7 @@ const SHARED_PHASE_SUMMARIES = {
 
 const PHASE_SUMMARIES: Record<"walkthrough" | "walkthrough-gitlab", Record<string, string>> = {
   walkthrough: {
-    Setup: "Check the prerequisites, install CLARA, then load the SKYPROTECT demo project.",
+    Setup: "Set up the prerequisites.",
     ...SHARED_PHASE_SUMMARIES,
   },
   "walkthrough-gitlab": {
@@ -420,50 +453,43 @@ export async function WalkthroughPage({
           phase: s.phase,
           tool: s.tool,
           defaultOpen: s.open,
-          content: (
-            <Prose className={WALKTHROUGH_PROSE}>
-              <WalkthroughMarkdown>{s.body}</WalkthroughMarkdown>
-            </Prose>
-          ),
+          content: <ProjectProse>{s.body}</ProjectProse>,
         }
       : {
           kind: "plain",
           id: s.id,
           content: (
             <section id={s.id} className="scroll-mt-20">
-              <Prose className={WALKTHROUGH_PROSE}>
-                <h2>{s.title}</h2>
-                <WalkthroughMarkdown>{s.body}</WalkthroughMarkdown>
-              </Prose>
+              <ProjectProse heading={s.title}>{s.body}</ProjectProse>
             </section>
           ),
         },
   );
 
   return (
-    <Frame maxWidth="xl" padding="lg">
-      <div className="py-8 lg:grid lg:grid-cols-[minmax(0,1fr)_220px] lg:gap-12">
-        <Stack gap="8" className="min-w-0">
-          <Stack gap="3">
-            <PageHeader eyebrow={eyebrow ?? "Tutorial"} title={title} lede={lede} />
+    <ProjectChoiceProvider>
+      <Frame maxWidth="xl" padding="lg">
+        <div className="py-8 lg:grid lg:grid-cols-[minmax(0,1fr)_220px] lg:gap-12">
+          <Stack gap="8" className="min-w-0">
+            <Stack gap="3">
+              <PageHeader eyebrow={eyebrow ?? "Tutorial"} title={title} lede={lede} />
+            </Stack>
+
+            <ProjectProse className="max-w-3xl">{intro}</ProjectProse>
+
+            <div className="max-w-3xl">
+              <WalkthroughSteps blocks={blocks} phaseSummaries={PHASE_SUMMARIES[slug]} />
+            </div>
           </Stack>
-
-          <Prose className={cn("max-w-3xl", WALKTHROUGH_PROSE)}>
-            <WalkthroughMarkdown>{intro}</WalkthroughMarkdown>
-          </Prose>
-
-          <div className="max-w-3xl">
-            <WalkthroughSteps blocks={blocks} phaseSummaries={PHASE_SUMMARIES[slug]} />
-          </div>
-        </Stack>
-        <EnterprisePageToc
-          items={sections.map((s) => ({
-            id: s.id,
-            label: s.title,
-            group: s.phase,
-          }))}
-        />
-      </div>
-    </Frame>
+          <EnterprisePageToc
+            items={sections.map((s) => ({
+              id: s.id,
+              label: s.title,
+              group: s.phase,
+            }))}
+          />
+        </div>
+      </Frame>
+    </ProjectChoiceProvider>
   );
 }

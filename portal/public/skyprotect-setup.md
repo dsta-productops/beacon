@@ -202,6 +202,13 @@ See the FLEETWATCH close-out report for results and lessons.
 
 Operators at our two sites should not need three windows to confirm a drone. Commanders in the central ops room should be able to authorise faster. Show us a prototype that people can try.
 
+## What the prototype should show
+
+- One view per drone, with the radar track, the RF contact and the camera feed together, and the track marked on the camera picture.
+- Whether each of the three feeds is live, stale or dropped, and how old its last data is.
+- When an operator escalates, one panel that gives the commander the evidence, and the commander authorises from there.
+- Both sites in one console, with an alert from the other site shown as it arrives.
+
 ## Background
 
 Radar, RF detection and EO/IR cameras are separate vendor systems:
