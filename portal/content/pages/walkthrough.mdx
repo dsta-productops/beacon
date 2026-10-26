@@ -12,11 +12,7 @@ You do not need a background in product management or design.
 
 You also do not need to finish it in one go, so do a few steps at a time.
 
-### Choose a project
-
-Choose how you will follow this tutorial.
-
-The page then shows only what applies to you.
+### Choose how you will follow this tutorial
 
 ::projectswitch
 
@@ -341,15 +337,23 @@ Start by reviewing past projects, earlier write-ups and other teams' Confluence 
    :::
 
 :::own
-::screenshot{caption="Copying a Confluence page's link from the browser address bar" hint="a source page open in Confluence with the browser address bar highlighted, showing the /wiki/spaces/space-key/pages/page-id form of the link"}
 :::
 
-4. Review the list of sources before CLARA writes the summary. Remove any pages that do not belong.
-5. CLARA shows you the draft and the page it will go under. Say yes to file it. CLARA asks this every time it writes to Confluence, and it files nothing until you do.
+4. CLARA shows you the draft and the page it will go under. Say yes to file it. CLARA asks this every time it writes to Confluence, and it files nothing until you do.
 
+::screenshot{src="confluence-walkthrough-step-6-1.png" caption="The updated Confluence page, with CLARA's prior-knowledge summary filed under the Knowledge Base" hint="the Confluence page tree with the new summary under Knowledge Base / Prior-knowledge / [topic], the filed page open and the page title highlighted"}
+
+::::when{project="own"}
 :::check
-A summary of patterns, contradictions and related work, filed under `Knowledge Base / [track] / Prior-knowledge / [topic]`. Each finding names the Confluence page it came from.
+In Confluence, open the **Prior-knowledge** folder. It holds your new summary of patterns, contradictions and related work. Each finding names the Confluence page it came from.
 :::
+::::
+
+::::when{project="demo"}
+:::check
+In Confluence, open the **Prior-knowledge** folder. It holds a new summary of the FLEETWATCH lessons on alert floods, shift handover and showing how sure a system is. Each finding names the FLEETWATCH page it came from.
+:::
+::::
 
 :::details{title="Stuck? See fixes for this step."}
 **If the summary is thin or generic:**
@@ -371,18 +375,18 @@ A **baseline** measures how things work today, so you can show later that your d
 
 Do it before any interviews or design work.
 
-DASH asks about **SUS** (System Usability Scale, a short score for how easy a system is to use), look and feel, user needs, system performance and **CSAT** (customer satisfaction).
+**DASH** asks about **SUS** (System Usability Scale, a short score for how easy a system is to use), look and feel, user needs, system performance and **CSAT** (customer satisfaction).
 
 It also tracks **OKRs**, which are goals with numbers attached.
 
 1. Sign in at [diux-dash.com](https://diux-dash.com) and open your programme's workspace.
 2. Create a session, choose **Baseline Testing**, and name the system people use today. :demo[Name it **the current three-window toolchain: Halden Radar, Sigma RF Watch and Optix EO Viewer**.]
 
-::screenshot{caption="The DASH new-session screen, with Baseline Testing selected" hint="the DASH new-session screen with Baseline Testing highlighted"}
+[//]: # (::screenshot{caption="The DASH new-session screen, with Baseline Testing selected" hint="the DASH new-session screen with Baseline Testing highlighted"})
 
 3. :own[Share the link or QR code with people who use that system. Responses appear in DASH as they answer.] :demo[Answer the survey yourself as a Site Alpha operator would, using what you read in the kickoff brief. If you can, ask a colleague to answer it too, so you have more than one response.] Keep this session open, because you compare against it in step 17.
 
-::screenshot{caption="The Baseline Testing session, showing the share link and QR code" hint="the Baseline Testing session in DASH, showing the share link and QR code"}
+[//]: # (::screenshot{caption="The Baseline Testing session, showing the share link and QR code" hint="the Baseline Testing session in DASH, showing the share link and QR code"})
 
 :::details{title="Stuck? See fixes for this step."}
 **If you cannot find your programme's workspace:**
@@ -424,20 +428,23 @@ These problems feed your synthesis in step 11 and your ranking in step 13.
    Attach all four screenshots, then answer with:
 
    ```prompt
+   Programme name: SKYPROTECT
+   Track: Programme-wide
    Product name: the current SKYPROTECT toolchain: Halden Radar, Sigma RF Watch and Optix EO Viewer
    Evaluation mode: an existing system being improved
    Task scenario: an operator confirms an incoming drone across the radar, RF and camera tools
    ```
    :::
+:::own
 4. Choose the evaluation mode: a competitor's product, an existing system you want to improve, a product being retired, or a standalone evaluation.
 5. Name the one or two tasks to check, such as "an operator confirms and reports a threat". If you do not, CLARA proposes them from the screens and asks you to confirm.
-
-::screenshot{caption="CLARA asking for the product, the evaluation mode and the tasks to check" hint="the Claude panel asking for the product name, the evaluation mode and the task scenarios, with the attached screenshots visible"}
+:::
 
 6. Read the report. Check that each finding names a specific screen.
+7. CLARA shows you the draft and the page it will go under. Say yes to file it.
 
 :::check
-A report with a score out of 100, severity-rated findings that each cite a screen, and a fix list ranked P0, P1 and P2, filed under `Knowledge Base / [track] / Heuristic-evaluations / [product name]`.
+In Confluence, open the **Heuristic-evaluations** folder. It holds your new report, with a score out of 100, severity-rated findings that each cite a screen, and a fix list ranked P0, P1 and P2.
 :::
 
 :::details{title="Stuck? See fixes for this step."}
@@ -460,10 +467,11 @@ CLARA writes the guide and you run the conversations.
    ```prompt
    Use CLARA's `interview-guide-generator` for PROGRAMME.
    ```
-2. Run 5 to 7 conversations. To get live prompts while you talk, set up INSIGHT in step 10 first.
-3. After each one, paste your notes into Confluence using the **Field Notes** template, exactly as you took them. Do not tidy them, because polished notes add your own bias.
+2. CLARA shows you the draft and the page it will go under. Say yes to file it.
+3. Run 5 to 7 conversations. To get live prompts while you talk, set up INSIGHT in step 10 first.
+4. After each one, paste your notes into Confluence using the **Field Notes** template, exactly as you took them. Do not tidy them, because polished notes add your own bias.
 
-::screenshot{caption="The ⋯ menu with Copy selected on the Field Notes template page" hint="the Field Notes template page in Confluence with its ⋯ menu open and Copy highlighted"}
+
 ::::
 
 ::::demo
@@ -478,19 +486,21 @@ CLARA writes the guide and you run the conversations.
    Topic: how operators and commanders confirm a drone and escalate it
    Interviewee: console operators at two sites (6 sessions), air-defence commanders (2 sessions), a sensor technician (1 session) and a safety and legal adviser (1 session)
    Outcome question: where do operators and commanders lose time between the first alert and the authorisation, and what do they do about it?
+   Sources: search the SKYPROTECT space and use ONLY the SKYPROTECT kickoff brief, the prior-knowledge summary and the heuristic evaluation
    ```
-3. The SKYPROTECT interviews have already been held, and their notes are in `Knowledge Base / Programme-wide / Field-notes`. Open **S02** and **S05** to see how raw notes look. They are untidy on purpose. On a real project, record your notes exactly as you took them, because polished notes add your own bias.
+3. CLARA shows you the draft and the page it will go under. Say yes to file it.
+4. The SKYPROTECT interviews have already been held, and their notes are in `Knowledge Base / Programme-wide / Field-notes`. Open **S02** and **S05** to see how raw notes look. They are untidy on purpose. On a real project, record your notes exactly as you took them, because polished notes add your own bias.
 ::::
 
 ::::when{project="own"}
 :::check
-An interview guide filed under `Knowledge Base / [track] / Interview-guides / [topic]`, and one page of raw notes for each conversation, in your `Field-notes` folder.
+In Confluence, open the **Interview-guides** folder to find your new interview guide. After the conversations, the **Field-notes** folder holds one page of raw notes for each.
 :::
 ::::
 
 ::::when{project="demo"}
 :::check
-An interview guide filed under `Knowledge Base / Programme-wide / Interview-guides`, and a look at two raw field notes in `Field-notes`.
+In Confluence, open the **Interview-guides** folder to find a new guide for how operators and commanders confirm a drone and escalate it. Then open the **Field-notes** folder and look at the raw notes S02 and S05.
 :::
 ::::
 
@@ -525,12 +535,12 @@ If you have INSIGHT and want to try it, you practise on a short script instead o
 2. :own[Press start at the beginning of the conversation. INSIGHT writes a transcript as you talk.] :demo[Press start, then read both parts of the script out loud. Read the interviewer in your own voice and the operator in a different voice. INSIGHT writes a transcript as you talk.]
 3. Read the **Now** card when you need a prompt. It shows one suggestion you can read aloud. A running summary and a glossary help you keep your place.
 
-::screenshot{caption="The Now card showing a suggested follow-up question during an interview" hint="the INSIGHT window during a session, with the Now card, the running summary and the glossary visible"}
+::screenshot{src="/confluence-walkthrough-step-10-1.png" caption="The Now card showing a suggested follow-up question during an interview" hint="the INSIGHT window during a session, with the Now card, the running summary and the glossary visible"}
 
 4. When the conversation ends, end the session and open the review. It shows a transcript with each speaker labelled and the suggestions tied to timestamps.
 5. Export the review as Markdown :own[and paste it into the **Field Notes** template, as in step 9.] :demo[and open the file. This is what you would paste into a Field Notes page on a real project.]
 
-::screenshot{caption="The session review with the export options" hint="the INSIGHT session review with the Markdown export option highlighted"}
+[//]: # (::screenshot{caption="The session review with the export options" hint="the INSIGHT session review with the Markdown export option highlighted"})
 
 :::::check
 :::own
@@ -553,7 +563,7 @@ If you tried INSIGHT, a transcript of the practice script with each speaker labe
 ## 11. Make sense of the notes
 ::step{id="synthesise" phase="Research" tool="CLARA"}
 
-**Synthesis** pulls the patterns out of many notes.
+Research synthesis pulls the patterns out of many notes.
 
 CLARA reads them all in one pass and separates what is new from what you already knew.
 
@@ -569,26 +579,15 @@ CLARA reads them all in one pass and separates what is new from what you already
    Programme name: SKYPROTECT
    Track: Programme-wide
    Outcome question: where do operators and commanders lose time between the first alert and the authorisation, and which FLEETWATCH lessons hold?
+   Sources: search the SKYPROTECT space and use the notes under Field-notes, the prior-knowledge summary, the interview guide and the heuristic evaluation as the source of known problems
    ```
-
-   Point it to these sources:
-
-   - The notes under `Field-notes`
-   - Your prior-knowledge summary from step 6
-   - Your interview guide from step 9
-   - The heuristic evaluation from step 8, as the source of known problems
    :::
 3. Read the synthesis and check that CLARA flags the places where the notes disagree.
-   :::demo
-   Look for these three:
 
-   - In S02 the operator says false alerts are mostly birds, and in S05 the operator says they are mostly weather.
-   - In S06 the operator says commanders are slow to answer, and in S08 the commander says operators are slow to call.
-   - S09 explains the false alerts at Site Bravo.
-   :::
+4. CLARA shows you the draft and the page it will go under. Say yes to file it.
 
 :::check
-A synthesis with themes, a friction table, a problem statement and success criteria, filed under `Knowledge Base / [track] / Research-synthesis`. Each finding names the field notes it came from, and the places where the notes disagree are flagged.
+In Confluence, open the **Research-synthesis** page. It has themes, a friction table, a problem statement and success criteria. Each finding names the field notes it came from, and the places where the notes disagree are flagged.
 :::
 
 :::details{title="Stuck? See fixes for this step."}
@@ -611,10 +610,13 @@ Paste each prompt into CLARA in turn.
    Use CLARA's `persona-generator` for PROGRAMME.
    ```
    :::demo
-   Use `Programme-wide` as the track, then answer with:
+   Answer with:
 
    ```prompt
+   Programme name: SKYPROTECT
+   Track: Programme-wide
    Persona name: Console operator
+   Sources: search the SKYPROTECT space and use the research synthesis and the notes under Field-notes
    ```
    :::
 2. Create a **user journey**: the steps a person goes through, and where you could improve things.
@@ -622,11 +624,14 @@ Paste each prompt into CLARA in turn.
    Use CLARA's `journey-map-drafter` for PROGRAMME.
    ```
    :::demo
-   Use `Programme-wide` as the track, then answer with:
+   Answer with:
 
    ```prompt
+   Programme name: SKYPROTECT
+   Track: Programme-wide
    Persona: Console operator
    Journey scope: confirming and reporting an incoming drone, from the first radar track to the commander's acknowledgement
+   Sources: search the SKYPROTECT space and use the Console operator persona, the research synthesis and the notes under Field-notes
    ```
    :::
 3. Create a **service blueprint**: the journey plus what your team and systems do behind the scenes.
@@ -634,20 +639,36 @@ Paste each prompt into CLARA in turn.
    Use CLARA's `service-blueprint-drafter` for PROGRAMME.
    ```
    :::demo
-   Use `Programme-wide` as the track, then answer with:
+   Answer with:
 
    ```prompt
-   Journey: the journey you just made
+   Programme name: SKYPROTECT
+   Track: Programme-wide
+   Journey: the Console operator journey in the Journeys folder
    System context: Halden Radar, Sigma RF Watch, Optix EO Viewer, the voice line to the commander, and the handwritten log
+   Sources: search the SKYPROTECT space and use the Console operator journey, the research synthesis and the notes under Field-notes
    ```
    :::
 
+4. For each one, CLARA shows you the draft and the page it will go under. Say yes to file it.
+
+::::when{project="own"}
 :::check
-Three new pages, each linked to the evidence behind it:
-- A persona, under `Knowledge Base / [track] / Personas`
-- A user journey, under `Knowledge Base / [track] / Journeys`
-- A service blueprint, under `Knowledge Base / [track] / Service-blueprints`
+In Confluence, open these three folders. Each holds a new page, linked to the evidence behind it:
+- **Personas**, with your persona
+- **Journeys**, with your user journey
+- **Service-blueprints**, with your service blueprint
 :::
+::::
+
+::::when{project="demo"}
+:::check
+In Confluence, open these three folders. Each holds a new page, linked to the evidence behind it:
+- **Personas**, with the Console operator persona
+- **Journeys**, with the journey from the first radar track to the commander's acknowledgement
+- **Service-blueprints**, with the blueprint for that journey
+:::
+::::
 
 :::details{title="Stuck? See fixes for this step."}
 **If a persona or journey is generic:**
@@ -695,9 +716,10 @@ It scores each problem out of 5 on four measures, so a problem scores up to 20:
    Tell CLARA that. This is the kind of gap the ranking is meant to show.
    :::
 4. Read the ranked table and the tiers. Check that the top problems match what you saw in the research.
+5. CLARA shows you the draft and the page it will go under. Say yes to file it.
 
 :::check
-A ranked table with each problem scored out of 20, grouped into tiers. Each problem names whose pain it is and the evidence behind it, filed under `Knowledge Base / [track] / Problem-impact-analysis`.
+In Confluence, open the **Problem-impact-analysis** page. It has a ranked table with each problem scored out of 20, grouped into tiers. Each problem names whose pain it is and the evidence behind it.
 :::
 
 :::details{title="Stuck? See fixes for this step."}
@@ -735,10 +757,11 @@ It is the most important output of Research.
 
    If your ranking puts another problem first, still build for this one, and note why in the PRD.
    :::
-3. Read the draft. If something is wrong or missing, tell CLARA what to change, and it updates the page once you confirm. The PRD becomes the input for your prototype.
+3. Read the draft. If something is wrong or missing, tell CLARA what to change, and it updates the draft.
+4. CLARA shows you the draft and the page it will go under. Say yes to file it. The PRD becomes the input for your prototype.
 
 :::check
-A PRD with a problem statement, target users, goals and non-goals, scope, prioritised user stories, success criteria, constraints and open questions, filed under `Knowledge Base / [track] / PRDs / [PRD title]`. Each user story cites its evidence.
+In Confluence, open the **PRDs** folder. It holds your new PRD, with a problem statement, target users, goals and non-goals, scope, prioritised user stories, success criteria, constraints and open questions. Each user story cites its evidence.
 :::
 
 :::details{title="Stuck? See fixes for this step."}
@@ -786,12 +809,11 @@ Claude Code reads your PRD and PRIZM's rules, so the result follows DSTA standar
 4. :own[Claude Code asks you two questions before it builds. Choose a PRIZM zone: **Enterprise** for websites and back-office tools, or **C3** for command-and-control systems. When it lists the user flows, pick one to build first. Do not skip this question.] :demo[The prompt already names the zone and the flow, so Claude Code should start building. If it asks anyway, answer C3 and the flow that confirms a drone and escalates it to the commander.]
 
 :::own
-::screenshot{caption="Claude Code asking which PRIZM zone to use, Enterprise or C3" hint="Claude Code asking which PRIZM zone to use, with Enterprise and C3 as the options"}
 :::
 
 5. Open the prototype in your browser. To change something, describe the change in plain English.
 
-::screenshot{caption="The running prototype in the browser, next to Claude Code" hint="the running prototype in the browser, next to Claude Code"}
+::screenshot{src="/confluence-walkthrough-step-15-1.png" caption="The running prototype in the browser, next to Claude Code" hint="the running prototype in the browser, next to Claude Code"}
 
 :::check
 A running prototype of your chosen flow, built from PRIZM components and semantic colour tokens such as `bg-bg` and `text-fg`, not raw colours.
@@ -826,9 +848,10 @@ CLARA reads your PRD and personas to draft one.
    ```
    :::
 2. Review the plan and adjust the number of participants to fit your team.
+3. CLARA shows you the draft and the page it will go under. Say yes to file it.
 
 :::check
-A test plan with scenarios, participants, measures and how the results will be analysed, filed under `Knowledge Base / [track] / Test-plans / [test name]`.
+In Confluence, open the **Test-plans** folder. It holds your new test plan, with scenarios, participants, measures and how the results will be analysed.
 :::
 
 :::details{title="Stuck? See fixes for this step."}
@@ -850,11 +873,11 @@ The comparison is your evidence that the new design is better, or your guide to 
 2. Share the link or QR code with your participants and run the sessions as set out in your test plan.
 3. Compare the results with your baseline session.
 
-::screenshot{caption="The DASH comparison view, baseline against prototype results" hint="the DASH comparison view, baseline against prototype results"}
+[//]: # (::screenshot{caption="The DASH comparison view, baseline against prototype results" hint="the DASH comparison view, baseline against prototype results"})
 
 4. Ask **DASH AI** for recommendations. It suggests usability improvements based on industry standards.
 
-::screenshot{caption="The DASH AI button on the results page" hint="the DASH AI button on the results page"}
+[//]: # (::screenshot{caption="The DASH AI button on the results page" hint="the DASH AI button on the results page"})
 5. File the results in Confluence, so the report card in step 18 can cite them. CLARA has no results page of its own yet, so ask Claude Code to add a page under your test plan. Export the comparison from DASH, attach it, and paste:
    ```prompt
    File the attached DASH results in Confluence as a new child page of the PROGRAMME test plan. Call it "Results". Show me the page and where it will go before you create it. Copy the figures exactly, name the DASH session each one came from, and do not add figures that are not in the attachment.
@@ -896,13 +919,13 @@ Today you enter most of it yourself, and live data is on the PULSE roadmap.
    :::
 2. Open the PULSE CMS and copy its prompt.
 
-::screenshot{caption="The prompt in the PULSE CMS, ready to copy" hint="the PULSE CMS with the report card prompt visible and the copy control highlighted"}
+[//]: # (::screenshot{caption="The prompt in the PULSE CMS, ready to copy" hint="the PULSE CMS with the report card prompt visible and the copy control highlighted"})
 
 3. Paste the prompt into the Claude panel, then add your material: the PRD from step 14, your results from step 17 and the Knowledge Base pages that describe the product.
 4. Paste the draft back into the CMS. It opens in the editor.
 5. Check every figure against its source, edit the card by hand, then publish it.
 
-::screenshot{caption="The published report card" hint="a published PULSE report card showing the baseline metrics and the domain metrics"}
+[//]: # (::screenshot{caption="The published report card" hint="a published PULSE report card showing the baseline metrics and the domain metrics"})
 
 :::check
 A published report card that fills in the baseline metrics and the metrics for your domain, with each figure traced to a source you can name.
