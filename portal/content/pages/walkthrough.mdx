@@ -67,10 +67,11 @@ You use one folder for the whole tutorial, so that CLARA, PRIZM and your prototy
 
 1. Open the Extensions view. Press **Cmd + Shift + X** on a Mac or **Ctrl + Shift + X** on Windows.
 2. Search for **Claude Code**, choose the one published by Anthropic and click **Install**.
+
+::screenshot{src="/confluence-walkthrough-step-2-1.png" caption="VS Code Extensions view, with Claude Code and its Install button" hint="the VS Code Extensions view with Claude Code in the results and the Install button visible, then the Claude panel signed in"}
+
 3. Click **✻ Claude Code** in the bottom-right corner of the window to open the Claude panel.
 4. Click **Sign in** and finish signing in in your browser, using the Claude account from step 1.
-
-::screenshot{caption="The Claude panel open in VS Code, after signing in" hint="VS Code with the Claude panel open and ready for a prompt, and the ✻ Claude Code button in the bottom-right corner highlighted"}
 
 ### Connect Claude Code to Confluence
 
@@ -81,7 +82,7 @@ You use one folder for the whole tutorial, so that CLARA, PRIZM and your prototy
    ```
 3. Select `atlassian` in the list and choose to authenticate. Your browser opens. Sign in to Atlassian and approve access to your Confluence site. Claude Code can only see what your own account can see.
 
-::screenshot{caption="The /mcp list showing the atlassian connection as connected" hint="the Claude panel with the /mcp connection list open and the atlassian entry showing as connected, highlighted"}
+::screenshot{src="/confluence-walkthrough-step-2-2.png" caption="The /mcp list showing the atlassian connection as connected" hint="the Claude panel with the /mcp connection list open and the atlassian entry showing as connected, highlighted"}
 
 4. Test it by asking:
    ```prompt
@@ -130,7 +131,7 @@ You install CLARA once, and it is then available whenever you open `beacon-tutor
    Move SKILL.md into a new folder called .claude/skills/clara-confluence in this project. Keep the file name as SKILL.md.
    ```
 
-::screenshot{caption="SKILL.md inside .claude/skills/clara-confluence in the beacon-tutorial folder" hint="the VS Code file list showing beacon-tutorial with .claude/skills/clara-confluence/SKILL.md inside, after Claude Code has moved the file"}
+::screenshot{src="/confluence-walkthrough-step-3-1.png" caption="SKILL.md inside .claude/skills/clara-confluence in the beacon-tutorial folder" hint="the VS Code file list showing beacon-tutorial with .claude/skills/clara-confluence/SKILL.md inside, after Claude Code has moved the file"}
 
 4. Start a new chat in the Claude panel and ask:
    ```prompt
@@ -190,11 +191,9 @@ Nothing is fetched while you build, because PRIZM is stored on your computer.
 2. Extract it. On a Mac, double-click the file. On Windows, right-click it and choose **Extract All**. You get a folder called `prizm`.
 3. Drag the `prizm` folder into `beacon-tutorial` in VS Code's file list.
 
-::screenshot{caption="The prizm folder inside the beacon-tutorial folder" hint="the VS Code file list showing beacon-tutorial with the prizm folder inside, and PRIZM.md visible inside prizm"}
-
 4. Download :file[CLAUDE.md]{href="/prizm/intranet/CLAUDE.md"} and drag it into `beacon-tutorial`, next to the `prizm` folder.
 
-::screenshot{caption="CLAUDE.md at the top of beacon-tutorial, next to the prizm folder" hint="the VS Code file list showing CLAUDE.md next to the prizm folder in beacon-tutorial"}
+::screenshot{src="/confluence-walkthrough-step-4-1.png" caption="The prizm folder and CLAUDE.md inside the beacon-tutorial folder" hint="the VS Code file list showing CLAUDE.md next to the prizm folder in beacon-tutorial"}
 
 5. Claude Code reads `CLAUDE.md` at the start of every chat in this folder, so you never need to paste the rules again. Start a new chat in the Claude panel and ask:
    ```prompt
@@ -211,7 +210,7 @@ Claude Code reads PRIZM from GitHub when it needs it, so your computer must be a
 
 1. Download :file[CLAUDE.md]{href="/prizm/internet/CLAUDE.md"} and drag it into `beacon-tutorial`.
 
-::screenshot{caption="CLAUDE.md at the top of beacon-tutorial" hint="the VS Code file list showing CLAUDE.md at the top of beacon-tutorial"}
+::screenshot{src="/confluence-walkthrough-step-4-2.png" caption="CLAUDE.md at the top of beacon-tutorial" hint="the VS Code file list showing CLAUDE.md at the top of beacon-tutorial"}
 
 2. Claude Code reads `CLAUDE.md` at the start of every chat in this folder, so you never need to paste the rules again. Start a new chat in the Claude panel and ask:
    ```prompt
@@ -246,14 +245,12 @@ Claude Code names two zones, **Enterprise** and **C3**. It says it read them fro
 
 Your **Knowledge Base** is the set of Confluence pages where CLARA files everything you make, in one folder per document type.
 
-Set it up once.
-
 ::::when{project="own"}
 CLARA builds the folders for you and shows you the plan before it creates anything.
 
-1. In Confluence, create an empty space for your programme. Note its space key.
+1. In Confluence, create an empty space for your programme. Give a name for this space, and you may choose to customize its space key.
 
-::screenshot{caption="The Create a space form, with your programme's name and key" hint="the Confluence Create a space form with a programme name and space key filled in and the key field highlighted"}
+::screenshot{src="confluence-walkthrough-step-5-1.png" caption="The Create a space form, with your programme's name and key" hint="the Confluence Create a space form with a programme name and space key filled in and the key field highlighted"}
 
 2. Paste this prompt into CLARA:
    ```prompt
@@ -273,29 +270,25 @@ Your space has a **Knowledge Base** page with a `Programme-wide` folder under it
 ::::
 
 ::::when{project="demo"}
-**SKYPROTECT** is a new programme that tracks small drones over fixed sites.
+In this demo project, **SKYPROTECT** is a new programme that tracks small drones over fixed sites.
 
 Its team starts from the documents of an earlier programme, **FLEETWATCH**, a console for supervising warehouse robots.
 
-One setup file describes the whole Confluence space, and Claude Code builds it.
+1. In Confluence, create an empty space called **SKYPROTECT** with the space key `SKYPR`.
 
-It files the starting documents only. You make the research documents yourself in steps 6 to 14.
+::screenshot{src="confluence-walkthrough-step-5-2.png" caption="The 'Create a space' form, with the name SKYPROTECT and the key SKYPR" hint="the Confluence Create a space form with the name SKYPROTECT and the space key SKYPR filled in and the key field highlighted"}
 
-1. In Confluence, create an empty space called **SKYPROTECT** with the space key `SKYPR`. Create it yourself, because the setup file tells Claude Code not to.
-
-::screenshot{caption="The Create a space form, with the name SKYPROTECT and the key SKYPR" hint="the Confluence Create a space form with the name SKYPROTECT and the space key SKYPR filled in and the key field highlighted"}
-
-2. Download :file[skyprotect-setup.md]{href="/skyprotect-setup.md"}.
+2. Download :file[skyprotect-setup.md]{href="/skyprotect-setup.md"}. Claude Code will use this file to create the starting documents for **SKYPROTECT** in Confluence.
 3. Start a new chat in the Claude panel, attach the file and paste this prompt:
    ```prompt
    Set up the SKYPROTECT demo project in Confluence by following the attached setup file exactly. The SKYPROTECT space (key SKYPR) already exists, so do not create it. If anything cannot be created, stop and tell me. Do not retry or improvise.
    ```
 
-::screenshot{caption="The Claude panel with the setup file attached and the prompt pasted" hint="the Claude panel in VS Code with skyprotect-setup.md attached and the prompt pasted, with the attachment highlighted"}
+::screenshot{src="confluence-walkthrough-step-5-3.png" caption="The Claude panel with the setup file attached and the prompt pasted" hint="the Claude panel in VS Code with skyprotect-setup.md attached and the prompt pasted, with the attachment highlighted"}
 
 4. Wait a few minutes while it creates the pages one level at a time. Then open the **Knowledge Base** link it gives you.
 
-::screenshot{caption="The SKYPROTECT page tree, with Prior-projects and Knowledge Base expanded" hint="the finished SKYPROTECT page tree in Confluence, with Prior-projects and the Knowledge Base expanded and the Field-notes pages visible"}
+::screenshot{src="confluence-walkthrough-step-5-4.png" caption="The SKYPROTECT page tree, with Prior-projects and Knowledge Base expanded" hint="the finished SKYPROTECT page tree in Confluence, with Prior-projects and the Knowledge Base expanded and the Field-notes pages visible"}
 
 :::check
 Your space holds:
