@@ -2,6 +2,7 @@ import {
   EnterpriseAppShell,
   EnterpriseAppShellTopBar,
 } from "@/components/templates/enterprise/app-shell";
+import { AskBeacon } from "@/components/portal/ask-beacon";
 import { Brand } from "@/components/portal/brand";
 import { MobileNav } from "@/components/portal/mobile-nav";
 import { PrimaryNav } from "@/components/portal/primary-nav";
@@ -15,6 +16,7 @@ export default function PortalLayout({ children }: { children: ReactNode }) {
           brand={<Brand />}
           nav={<PrimaryNav />}
           mobileNav={<MobileNav />}
+          actions={<AskBeacon />}
         />
       }
     >
