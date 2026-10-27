@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { RESTORE_PROJECT } from "@/lib/project-storage";
 import "./globals.css";
 
@@ -20,10 +19,11 @@ export default function RootLayout({
       data-zone="enterprise"
       data-mode="light"
       className="h-full"
+      suppressHydrationWarning
     >
-      <Script id="restore-project" strategy="beforeInteractive">
-        {RESTORE_PROJECT}
-      </Script>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: RESTORE_PROJECT }} />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
