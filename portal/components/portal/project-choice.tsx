@@ -14,6 +14,7 @@ import { CheckCircle2 } from "lucide-react";
 import { CopyButton } from "@/components/portal/copy-button";
 import { CodeBlock } from "@/components/ui/code";
 import type { Project } from "@/lib/remark-project";
+import { STORAGE_KEY } from "@/lib/project-storage";
 import { cn } from "@/lib/utils";
 
 /**
@@ -23,14 +24,11 @@ import { cn } from "@/lib/utils";
  * The demo is written as if the whole tutorial uses it, so its content shows without a label.
  *
  * Project-specific text is resolved on the server (see `lib/remark-project.ts`), once per project.
- * Both versions are in the page, and the `data-project` attribute on the wrapper decides which one
- * shows. A small script sets it before first paint, so a returning demo reader never sees the
- * "own" version flash.
+ * Both versions are in the page, and the `data-project` attribute on `<html>` decides which one
+ * shows. A small script in the root layout sets it before first paint, so a returning demo reader
+ * never sees the "own" version flash.
  */
 export type { Project };
-
-const STORAGE_KEY = "beacon-walkthrough-project";
-const RESTORE_PROJECT = `try{var p=localStorage.getItem(${JSON.stringify(STORAGE_KEY)});if(p==="own"||p==="demo")document.currentScript.parentElement.setAttribute("data-project",p)}catch(e){}`;
 
 interface ProjectChoice {
   project: Project;
@@ -53,7 +51,10 @@ export function ProjectChoiceProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const saved = window.localStorage.getItem(STORAGE_KEY);
-      if (saved === "own" || saved === "demo") setProjectState(saved);
+      if (saved === "own" || saved === "demo") {
+        setProjectState(saved);
+        document.documentElement.setAttribute("data-project", saved);
+      }
     } catch {
       // Storage can be blocked; the page then works without remembering.
     }
@@ -61,6 +62,7 @@ export function ProjectChoiceProvider({ children }: { children: ReactNode }) {
 
   const setProject = useCallback((next: Project) => {
     setProjectState(next);
+    document.documentElement.setAttribute("data-project", next);
     try {
       window.localStorage.setItem(STORAGE_KEY, next);
     } catch {
@@ -71,10 +73,7 @@ export function ProjectChoiceProvider({ children }: { children: ReactNode }) {
   const value = useMemo(() => ({ project, setProject }), [project, setProject]);
   return (
     <ProjectChoiceContext.Provider value={value}>
-      <div data-project={project} suppressHydrationWarning>
-        <script dangerouslySetInnerHTML={{ __html: RESTORE_PROJECT }} />
-        {children}
-      </div>
+      {children}
     </ProjectChoiceContext.Provider>
   );
 }

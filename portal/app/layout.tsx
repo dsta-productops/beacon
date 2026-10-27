@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Script from "next/script";
+import { RESTORE_PROJECT } from "@/lib/project-storage";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,6 +21,9 @@ export default function RootLayout({
       data-mode="light"
       className="h-full"
     >
+      <Script id="restore-project" strategy="beforeInteractive">
+        {RESTORE_PROJECT}
+      </Script>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
