@@ -1,7 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async redirects() {
+    return [
+      { source: "/walkthrough", destination: "/tutorial", permanent: true },
+      {
+        source: "/walkthrough-gitlab",
+        destination: "/tutorial-gitlab",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

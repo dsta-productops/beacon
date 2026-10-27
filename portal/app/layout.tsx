@@ -3,9 +3,9 @@ import { RESTORE_PROJECT } from "@/lib/project-storage";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BEACON: find your way around the ProductOps pipeline",
+  title: "BEACON: find your way around product work at DSTA",
   description:
-    "Wayfinder, tool catalogue, and guidance for DSTA's ProductOps pipeline.",
+    "A guide to product work at DSTA: how research, design and testing fit together, and which tool to use at each step.",
 };
 
 export default function RootLayout({

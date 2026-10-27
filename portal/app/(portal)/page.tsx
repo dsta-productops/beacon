@@ -3,90 +3,68 @@ import { Heading } from "@/components/ui/heading";
 import { Text } from "@/components/ui/text";
 import { Stack } from "@/components/ui/stack";
 import { Frame } from "@/components/ui/frame";
+import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import {
   ArrowRight,
   BookOpen,
-  Compass,
-  FlaskConical,
-  PenTool,
-  RefreshCw,
-  ShieldCheck,
-  Sparkles,
-  Users,
-  Wrench,
+  ChevronRight,
 } from "lucide-react";
 
-const phaseShortcuts = [
-  {
-    href: "/flywheel/research",
-    icon: Compass,
-    name: "Research",
-    blurb: "Define the right problem.",
-  },
-  {
-    href: "/flywheel/design",
-    icon: PenTool,
-    name: "Design",
-    blurb: "Build a testable artefact.",
-  },
-  {
-    href: "/flywheel/test",
-    icon: FlaskConical,
-    name: "Test",
-    blurb: "Validate against real use.",
-  },
-];
-
-interface Bundle {
-  href: string;
-  icon: typeof Compass;
-  title: string;
+interface Tool {
+  href?: string;
+  name: string;
   blurb: string;
 }
 
-const bundles: Bundle[] = [
+interface Stage {
+  name: string;
+  tools: Tool[];
+}
+
+const stages: Stage[] = [
   {
-    href: "/pipeline",
-    icon: Compass,
-    title: "Pipeline",
-    blurb:
-      "What ProductOps is, how it sits alongside DevSecOps and MLOps, and the design principles that shape every iteration.",
+    name: "Research",
+    tools: [
+      {
+        href: "/tools/clara",
+        name: "CLARA",
+        blurb:
+          "Gathers your rough research notes into structured documents, such as personas, journeys and a PRD, and files them in your knowledge base.",
+      },
+      {
+        name: "INSIGHT",
+        blurb:
+          "Run your interview with a helper beside you. INSIGHT suggests what to ask next, keeps a summary of the conversation, and writes the transcript for you.",
+      }
+    ],
   },
   {
-    href: "/product-roles",
-    icon: Users,
-    title: "Product Roles",
-    blurb:
-      "The tripartite product structure — product, design, and engineering. Complementary ownership of strategy, experience, and technical delivery.",
+    name: "Design",
+    tools: [
+      {
+        href: "/tools/prizm",
+        name: "PRIZM",
+        blurb:
+          "DSTA's design system: ready-made screens, components and colours. Your prototype follows DSTA standards without extra styling work.",
+      },
+    ],
   },
   {
-    href: "/quality-model",
-    icon: ShieldCheck,
-    title: "Quality Model",
-    blurb:
-      "How functional code meets the same quality bar as NFR code. Four layers of assurance across ProductOps and DevSecOps, plus a starter CLAUDE.md.",
-  },
-  {
-    href: "/flywheel",
-    icon: RefreshCw,
-    title: "Flywheel",
-    blurb:
-      "The three phases — Research, Design, Test — and how the outer and inner loops connect.",
-  },
-  {
-    href: "/tools",
-    icon: Wrench,
-    title: "Tools",
-    blurb:
-      "Find the right tool for each phase, with the prompts that pair with it.",
-  },
-  {
-    href: "/journeys",
-    icon: Sparkles,
-    title: "Journeys",
-    blurb:
-      "Scenario-based walkthroughs that compose tools and prompts end-to-end — for new projects, user research, hand-offs, and more.",
+    name: "Test",
+    tools: [
+      {
+        name: "PULSE",
+        blurb:
+          "Gives every product the same one-page report card, so products can be compared. Every figure is labelled as measured or an estimate.",
+      },
+      {
+        href: "/tools/dash",
+        name: "DASH",
+        blurb:
+          "Shows whether your design is better. You survey users on how things work today, then test your prototype and compare the two. DASH AI suggests what to improve.",
+      }
+    ],
   },
 ];
 
@@ -96,132 +74,132 @@ export default function Home() {
       <Stack gap="12" className="py-8">
         <Stack gap="4" className="max-w-2xl">
           <Heading as="h1" size="4xl">
-            Your ProductOps pipeline companion.
+            Your guide to product work at DSTA.
           </Heading>
           <Text size="lg" variant="muted">
-            One place to learn how the pipeline works, find the tools and guidance you
-            need for each phase, and get AI-ready prompts you can paste
-            straight into your work.
+            Beacon shows you how product work goes from research, to design, to
+            testing, and which tool to use at each step. Start with a tutorial
+            that takes you through one real project, or look around first.
           </Text>
         </Stack>
 
         <Card className="border-accent p-6">
           <div className="flex items-start gap-4">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-accent text-accent-fg">
-              <RefreshCw className="h-5 w-5" />
+              <BookOpen className="h-5 w-5" />
             </div>
             <Stack gap="4" className="min-w-0 flex-1">
               <Stack gap="2">
-                <Text
-                  size="xs"
-                  weight="medium"
-                  className="uppercase tracking-wide text-accent"
-                >
-                  Start here
-                </Text>
                 <Heading as="h2" size="lg">
-                  Open the Flywheel
+                  Your first project
                 </Heading>
                 <Text variant="muted">
-                  The Flywheel is the operational core. Pick the phase that
-                  matches what your team is working on right now.
+                  Take a project from raw interview notes to a prototype that
+                  real users can test. You don&apos;t need a
+                  background in product management or design.
                 </Text>
               </Stack>
-
-              <div className="grid gap-3 sm:grid-cols-3">
-                {phaseShortcuts.map(
-                  ({ href, icon: PhaseIcon, name, blurb }) => (
-                    <Link
-                      key={href}
-                      href={href}
-                      className="group block rounded-md border border-border bg-surface p-4 transition-colors hover:border-accent hover:bg-bg-subtle"
-                    >
-                      <Stack gap="2">
-                        <div className="flex items-center justify-between">
-                          <PhaseIcon className="h-5 w-5 text-accent" />
-                          <ArrowRight className="h-4 w-4 text-fg-muted transition-transform group-hover:translate-x-0.5 group-hover:text-accent" />
-                        </div>
-                        <Heading as="h3" size="md">
-                          {name}
-                        </Heading>
-                        <Text size="sm" variant="muted">
-                          {blurb}
-                        </Text>
-                      </Stack>
-                    </Link>
-                  ),
-                )}
-              </div>
-
               <Link
-                href="/flywheel"
+                href="/tutorial"
                 className="group inline-flex items-center gap-1 self-start text-sm font-medium text-accent hover:text-accent-strong"
               >
-                See the full Flywheel overview
+                Start here on Confluence
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </Stack>
           </div>
         </Card>
 
-        <Card className="p-6">
-          <div className="flex items-start gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-bg-muted text-accent">
-              <BookOpen className="h-5 w-5" />
-            </div>
-            <Stack gap="4" className="min-w-0 flex-1">
-              <Stack gap="2">
-                <Heading as="h2" size="lg">
-                  Your first project in BEACON
-                </Heading>
-                <Text variant="muted">
-                  A step-by-step tutorial that takes one example project from a
-                  blank brief to researched requirements, a working prototype
-                  and a test plan. Pick the version that matches where your
-                  programme keeps its Knowledge Base.
-                </Text>
-              </Stack>
-              <div className="flex flex-wrap gap-x-6 gap-y-2">
-                {[
-                  { href: "/walkthrough", label: "Confluence walkthrough" },
-                  // { href: "/walkthrough-gitlab", label: "GitLab wiki walkthrough" },
-                ].map(({ href, label }) => (
-                  <Link
-                    key={href}
-                    href={href}
-                    className="group inline-flex items-center gap-1 text-sm font-medium text-accent hover:text-accent-strong"
-                  >
-                    {label}
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                  </Link>
-                ))}
+        <Stack gap="6">
+          <Stack gap="2">
+            <Heading as="h2" size="xl">
+              Tools for each stage
+            </Heading>
+            <Text variant="muted">
+              Find out what users need, build a prototype, then test it.
+            </Text>
+          </Stack>
+          <ol className="m-0 hidden list-none grid-cols-3 gap-4 p-0 lg:grid">
+            {stages.map(({ name }, index) => (
+              <li key={name} className="flex items-center">
+                <span
+                  aria-hidden="true"
+                  className="-ml-2 mr-1 flex flex-1 items-center"
+                >
+                  {index > 0 && (
+                    <>
+                      <span className="h-px flex-1 bg-border-strong" />
+                      <ChevronRight className="-ml-1.5 h-4 w-4 text-fg-muted" />
+                    </>
+                  )}
+                </span>
+                <span className="flex items-center gap-2">
+                  <Badge variant="solid">{index + 1}</Badge>
+                  <Heading as="h3" size="md">
+                    {name}
+                  </Heading>
+                </span>
+                <span
+                  aria-hidden="true"
+                  className={`-mr-2 ml-3 h-px flex-1 ${index < stages.length - 1 ? "bg-border-strong" : ""}`}
+                />
+              </li>
+            ))}
+          </ol>
+          <div className="grid gap-x-4 gap-y-8 lg:grid-cols-3">
+            {stages.map(({ name, tools }, index) => (
+              <div key={name} className="flex flex-col gap-4">
+                <div className="flex items-center gap-2 lg:hidden">
+                  <Badge variant="solid">{index + 1}</Badge>
+                  <Heading as="h3" size="md">
+                    {name}
+                  </Heading>
+                </div>
+                {tools.map((tool) => {
+                  const tile = (
+                    <Card
+                      className={
+                        tool.href
+                          ? "h-full p-5 transition-colors group-hover:border-accent"
+                          : "h-full p-5"
+                      }
+                    >
+                      <Stack gap="2">
+                        <span className="text-base font-semibold text-fg transition-colors group-hover:text-accent">
+                          {tool.name}
+                        </span>
+                        <Text size="sm" variant="muted">
+                          {tool.blurb}
+                        </Text>
+                      </Stack>
+                    </Card>
+                  );
+                  return tool.href ? (
+                    <Link
+                      key={`${name}-${tool.name}`}
+                      href={tool.href}
+                      className="group block"
+                    >
+                      {tile}
+                    </Link>
+                  ) : (
+                    <div key={`${name}-${tool.name}`}>{tile}</div>
+                  );
+                })}
               </div>
-            </Stack>
+            ))}
           </div>
-        </Card>
+        </Stack>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {bundles.map(({ href, icon: Icon, title, blurb }) => (
-            <Link key={href} href={href} className="group block">
-              <Card className="h-full p-6 transition-colors hover:border-border-strong">
-                <Stack gap="3">
-                  <div className="flex items-center gap-2">
-                    <Icon className="h-5 w-5 text-accent" />
-                    <Heading as="h2" size="lg">
-                      {title}
-                    </Heading>
-                  </div>
-                  <Text variant="muted">{blurb}</Text>
-                  <div className="flex items-center gap-1 text-sm font-medium text-accent">
-                    Explore
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                  </div>
-                </Stack>
-              </Card>
-            </Link>
-          ))}
-        </div>
-
+        <Text variant="muted">
+          Want to understand the thinking behind it?{" "}
+          <Link
+            href="/pipeline"
+            className="font-medium text-accent hover:text-accent-strong"
+          >
+            Read how research, design and test fit together.
+          </Link>
+        </Text>
       </Stack>
     </Frame>
   );

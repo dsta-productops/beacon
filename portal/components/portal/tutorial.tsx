@@ -28,7 +28,7 @@ import { EnterprisePageToc } from "@/components/templates/enterprise/page-toc";
 import { PROJECT_MARKUP, remarkProject, type Project } from "@/lib/remark-project";
 import { cn } from "@/lib/utils";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Disclosure, WalkthroughSteps, type WalkthroughBlock } from "@/components/portal/walkthrough-steps";
+import { Disclosure, TutorialSteps, type TutorialBlock } from "@/components/portal/tutorial-steps";
 import { Code, CodeBlock } from "@/components/ui/code";
 import { Frame } from "@/components/ui/frame";
 import { Kbd } from "@/components/ui/kbd";
@@ -38,7 +38,7 @@ import { Stack } from "@/components/ui/stack";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 /**
- * Step-by-step tutorial pages (`content/pages/walkthrough*.mdx`).
+ * Step-by-step tutorial pages (`content/pages/tutorial*.mdx`).
  *
  * The MDX body is markdown plus a few directives (remark-directive syntax):
  *
@@ -71,7 +71,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
  * Plain fenced code (no language) renders as a CodeBlock.
  */
 
-interface WalkthroughFrontmatter {
+interface TutorialFrontmatter {
   title: string;
   eyebrow?: string;
   lede?: string;
@@ -130,7 +130,7 @@ function parseBody(body: string): { intro: string; sections: Section[] } {
 }
 
 /** Maps directives onto custom element names that `components` below render. */
-function remarkWalkthrough() {
+function remarkTutorial() {
   return (tree: Root) => {
     visit(tree, (node) => {
       if (
@@ -181,18 +181,18 @@ function remarkWalkthrough() {
           data.hProperties = { href: attrs.href, download: true };
           break;
         default:
-          throw new Error(`Unknown walkthrough directive "${d.name}"`);
+          throw new Error(`Unknown tutorial directive "${d.name}"`);
       }
     });
   };
 }
 
 /**
- * Spacing for walkthrough text, scoped here so the shared `Prose` stays as it is.
+ * Spacing for tutorial text, scoped here so the shared `Prose` stays as it is.
  * Three gaps: tight (8px) for something that belongs to the line above, normal (16px)
  * for a new thought in the same step, loose (24px, 40px for sub-section titles) for a new block.
  */
-const WALKTHROUGH_PROSE = [
+const TUTORIAL_PROSE = [
   // sub-section titles: tight gap below; every one after the first also gets a divider and a big gap above
   "[&_h4]:mt-6 [&_h4]:mb-3 [&_h4]:text-lg",
   "[&_h4~h4]:mt-10 [&_h4~h4]:border-t [&_h4~h4]:border-border [&_h4~h4]:pt-6",
@@ -274,7 +274,7 @@ interface TabProps {
   children?: ReactNode;
 }
 
-function WalkthroughTabs({ children }: { children?: ReactNode }) {
+function TutorialTabs({ children }: { children?: ReactNode }) {
   const tabs = Children.toArray(children)
     .filter((c): c is ReactElement<TabProps> => isValidElement(c))
     .map((c) => c.props);
@@ -289,7 +289,7 @@ function WalkthroughTabs({ children }: { children?: ReactNode }) {
       </TabsList>
       {tabs.map((t) => (
         <TabsContent key={t.value} value={t.value}>
-          <Prose className={WALKTHROUGH_PROSE}>{t.children}</Prose>
+          <Prose className={TUTORIAL_PROSE}>{t.children}</Prose>
         </TabsContent>
       ))}
     </Tabs>
@@ -369,7 +369,7 @@ const components = {
   code: Code,
   callout: Callout,
   disclosure: Disclosure,
-  tabs: WalkthroughTabs,
+  tabs: TutorialTabs,
   tab: () => null,
   screenshot: Screenshot,
   access: ({ tool }: { tool: ToolSlug }) => <AccessContact tool={tool} />,
@@ -377,10 +377,10 @@ const components = {
   projectswitch: ProjectSwitch,
 } as unknown as Components;
 
-function WalkthroughMarkdown({ children, project }: { children: string; project: Project }) {
+function TutorialMarkdown({ children, project }: { children: string; project: Project }) {
   return (
     <ReactMarkdown
-      remarkPlugins={[remarkGfm, remarkDirective, () => remarkProject(project), remarkWalkthrough]}
+      remarkPlugins={[remarkGfm, remarkDirective, () => remarkProject(project), remarkTutorial]}
       components={components}
     >
       {children}
@@ -389,7 +389,7 @@ function WalkthroughMarkdown({ children, project }: { children: string; project:
 }
 
 /**
- * Markdown in the walkthrough's prose style. When the text differs by project, it is rendered
+ * Markdown in the tutorial's prose style. When the text differs by project, it is rendered
  * once for each and `data-project` on the page wrapper picks which one shows; otherwise once.
  */
 function ProjectProse({
@@ -402,9 +402,9 @@ function ProjectProse({
   className?: string;
 }) {
   const render = (project: Project) => (
-    <Prose className={cn(WALKTHROUGH_PROSE, className)}>
+    <Prose className={cn(TUTORIAL_PROSE, className)}>
       {heading ? <h2>{heading}</h2> : null}
-      <WalkthroughMarkdown project={project}>{children}</WalkthroughMarkdown>
+      <TutorialMarkdown project={project}>{children}</TutorialMarkdown>
     </Prose>
   );
   if (!PROJECT_MARKUP.test(children)) return render("own");
@@ -422,29 +422,29 @@ const SHARED_PHASE_SUMMARIES = {
   Test: "Check the prototype works for real people.",
 };
 
-const PHASE_SUMMARIES: Record<"walkthrough" | "walkthrough-gitlab", Record<string, string>> = {
-  walkthrough: {
+const PHASE_SUMMARIES: Record<"tutorial" | "tutorial-gitlab", Record<string, string>> = {
+  tutorial: {
     Setup: "Set up the prerequisites.",
     ...SHARED_PHASE_SUMMARIES,
   },
-  "walkthrough-gitlab": {
+  "tutorial-gitlab": {
     Setup: "Check the prerequisites, install your tools and CLARA, then load the SKYPROTECT demo project.",
     ...SHARED_PHASE_SUMMARIES,
   },
 };
 
-export async function WalkthroughPage({
+export async function TutorialPage({
   slug,
 }: {
-  slug: "walkthrough" | "walkthrough-gitlab";
+  slug: "tutorial" | "tutorial-gitlab";
 }) {
-  const entry = await readEntry<WalkthroughFrontmatter>("pages", slug);
+  const entry = await readEntry<TutorialFrontmatter>("pages", slug);
   if (!entry) notFound();
 
   const { title, eyebrow, lede } = entry.frontmatter;
   const { intro, sections } = parseBody(entry.body);
 
-  const blocks: WalkthroughBlock[] = sections.map((s) =>
+  const blocks: TutorialBlock[] = sections.map((s) =>
     s.phase
       ? {
           kind: "step",
@@ -478,7 +478,7 @@ export async function WalkthroughPage({
             <ProjectProse className="max-w-3xl">{intro}</ProjectProse>
 
             <div className="max-w-3xl">
-              <WalkthroughSteps blocks={blocks} phaseSummaries={PHASE_SUMMARIES[slug]} />
+              <TutorialSteps blocks={blocks} phaseSummaries={PHASE_SUMMARIES[slug]} />
             </div>
           </Stack>
           <EnterprisePageToc

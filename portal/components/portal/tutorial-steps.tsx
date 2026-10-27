@@ -7,14 +7,14 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 /**
- * Collapsible walkthrough layout: phases are plain headings that group steps,
+ * Collapsible tutorial layout: phases are plain headings that group steps,
  * and each step opens and closes independently.
  *
  * The server renders every block's content and passes it in as `content`;
  * this component only owns open/closed state.
  */
 
-export type WalkthroughBlock =
+export type TutorialBlock =
   | { kind: "plain"; id: string; content: ReactNode }
   | {
       kind: "step";
@@ -28,12 +28,12 @@ export type WalkthroughBlock =
 
 interface Phase {
   name: string;
-  steps: Extract<WalkthroughBlock, { kind: "step" }>[];
+  steps: Extract<TutorialBlock, { kind: "step" }>[];
 }
 
-type Segment = { kind: "plain"; block: Extract<WalkthroughBlock, { kind: "plain" }> } | { kind: "phase"; phase: Phase };
+type Segment = { kind: "plain"; block: Extract<TutorialBlock, { kind: "plain" }> } | { kind: "phase"; phase: Phase };
 
-function toSegments(blocks: WalkthroughBlock[]): Segment[] {
+function toSegments(blocks: TutorialBlock[]): Segment[] {
   const segments: Segment[] = [];
   for (const block of blocks) {
     if (block.kind === "plain") {
@@ -50,16 +50,16 @@ function toSegments(blocks: WalkthroughBlock[]): Segment[] {
   return segments;
 }
 
-export function WalkthroughSteps({
+export function TutorialSteps({
   blocks,
   phaseSummaries = {},
 }: {
-  blocks: WalkthroughBlock[];
+  blocks: TutorialBlock[];
   phaseSummaries?: Record<string, string>;
 }) {
   const segments = useMemo(() => toSegments(blocks), [blocks]);
   const steps = useMemo(
-    () => blocks.filter((b): b is Extract<WalkthroughBlock, { kind: "step" }> => b.kind === "step"),
+    () => blocks.filter((b): b is Extract<TutorialBlock, { kind: "step" }> => b.kind === "step"),
     [blocks],
   );
 
@@ -168,7 +168,7 @@ function StepCard({
   open,
   onOpenChange,
 }: {
-  step: Extract<WalkthroughBlock, { kind: "step" }>;
+  step: Extract<TutorialBlock, { kind: "step" }>;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {

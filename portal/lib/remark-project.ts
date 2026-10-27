@@ -2,7 +2,7 @@ import type { List, ListItem, Parent, Root, RootContent } from "mdast";
 import type { Directives } from "mdast-util-directive";
 
 /**
- * Resolves the walkthrough's project-specific content before it is rendered, so the markdown
+ * Resolves the tutorial's project-specific content before it is rendered, so the markdown
  * renderer only ever sees the text that applies to one reader. Hiding things in React instead
  * leaves their effect on layout behind, such as the extra spacing a hidden block gives a list.
  *
