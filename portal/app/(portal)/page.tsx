@@ -78,8 +78,7 @@ export default function Home() {
           </Heading>
           <Text size="lg" variant="muted">
             Beacon shows you how product work goes from research, to design, to
-            testing, and which tool to use at each step. Start with a tutorial
-            that takes you through one real project, or look around first.
+            testing, and which tool to use at each step.
           </Text>
         </Stack>
 
