@@ -31,8 +31,8 @@ Confirm you have this access before you start:
 
 - **Confluence.** An account that can create a space. Everything you produce is stored there.
 - **A Claude account.** This can be a paid Claude subscription (Pro, Max, Team or Enterprise) or a Claude Console account. Step 2 uses it to sign in to [Claude Code](/tools/claude-code).
+- **INSIGHT.** Step 10 needs it, and that step is optional. INSIGHT is currently available on Mac.
 - **[DASH](/tools/dash),** at [diux-dash.com](https://diux-dash.com). Steps 7 and 17 use it.
-- **INSIGHT.** Step 10 needs it, and that step is optional.
 - **The [PULSE CMS](https://pulse-reportcards.vercel.app).** Step 18 needs it.
 
 ## 2. Set up Claude Code
@@ -531,6 +531,25 @@ In the demo project you can skip this step, because the SKYPROTECT interview not
 If you have INSIGHT and want to try it, you practise on a short script instead of a real interview. Otherwise, carry on to step 11.
 :::
 
+### Install INSIGHT
+
+INSIGHT is only available on Mac for now. A Windows version is not available yet, so if you use Windows, skip this step and carry on to step 11.
+
+1. Download the INSIGHT app from [this Google Drive link](https://drive.google.com/file/d/1RwBK2d0W2AlxtCk1VHl77378iNDGMGNk/view?usp=sharing). It is a `.dmg` file.
+2. Open the `.dmg` file and drag **INSIGHT** into the **Applications** folder.
+3. Open **Terminal**. Press **Cmd + Space**, type `Terminal` and press Enter.
+4. Paste this command and press Enter. macOS blocks apps that are downloaded outside the App Store, and this command tells it you trust INSIGHT. It only works if INSIGHT is in the **Applications** folder.
+   ```
+   xattr -dr com.apple.quarantine "/Applications/INSIGHT.app"
+   ```
+5. Open **INSIGHT** from the **Applications** folder.
+
+:::check
+INSIGHT opens without a warning that the app is damaged or from an unidentified developer.
+:::
+
+### Run an interview with INSIGHT
+
 1. :own[Optional: before the interview, upload your PRD or brief and add your team's terms, such as the names of your systems. The suggestions then match your project.] :demo[Download :file[insight-practice-script.md]{href="/skyprotect-demo/insight-practice-script.md"}. It lists the terms to add to INSIGHT's glossary, and a short script with two parts. Add the terms in INSIGHT before you start.]
 2. :own[Press start at the beginning of the conversation. INSIGHT writes a transcript as you talk.] :demo[Press start, then read both parts of the script out loud. Read the interviewer in your own voice and the operator in a different voice. INSIGHT writes a transcript as you talk.]
 3. Read the **Now** card when you need a prompt. It shows one suggestion you can read aloud. A running summary and a glossary help you keep your place.
@@ -553,6 +572,15 @@ If you tried INSIGHT, a transcript of the practice script with each speaker labe
 :::::
 
 :::details{title="Stuck? See fixes for this step."}
+**If macOS says INSIGHT is damaged, or cannot verify the developer:**
+- Check that INSIGHT is in the **Applications** folder, then run the Terminal command again and reopen the app.
+
+**If Terminal says "No such file or directory":**
+- INSIGHT is not in the **Applications** folder, or it is named differently. Drag it into **Applications** and run the command again.
+
+**If Google Drive says it cannot scan the file for viruses:**
+- Choose **Download anyway**.
+
 **If INSIGHT does not hear the conversation:**
 - Check that your computer allows INSIGHT to use the microphone, then press start again.
 
