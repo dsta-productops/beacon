@@ -1,0 +1,276 @@
+{
+  "slug": "",
+  "name": "Operator console",
+  "category": "Command and Control",
+  "phase": "proof of concept",
+  "since": 2026,
+  "builtFor": "Console operators at Site Alpha and Site Bravo, and air-defence commanders in the central ops room",
+  "summary": "A prototype console that puts the radar track, RF contact and camera for one drone in a single view. It lets operators escalate with the evidence attached, and lets commanders acknowledge and record a decision from one panel.",
+  "overview": {
+    "whyWeBuiltThis": [
+      "Operators at Sites Alpha and Bravo confirm a drone across radar, RF and camera tools that share no identity or clock for a target. They match tracks to emitters by eye and point the camera by hand.",
+      "Operators escalate by voice with no sign that the commander has it. Commanders spend 20 to 40 seconds a call getting the operator's picture.",
+      "Afterwards, it is hard to show who confirmed and authorised what, and a review takes a few days. All of this sits inside about 90 seconds to decide once a drone is confirmed."
+    ],
+    "whatWeEnvision": "Operators confirm a drone from one view, without matching tracks and emitters by eye. Commanders get the evidence in front of them and authorise without a voice description. Operators can see that an escalation has been received. Every step is recorded as it happens. Every engagement decision stays with a human.",
+    "whereWeAreAt": {
+      "blurb": "The console is a prototype and has not been tested with users. These figures show how the work was done before the console, taken from field notes. They are not results for the console.",
+      "headlines": [
+        {
+          "value": "About 2 min 40 s",
+          "label": "From the first radar track to the call to the commander, in one real contact before the console",
+          "evidence": "baseline"
+        },
+        {
+          "value": "27 of 31",
+          "label": "Radar alerts dismissed within about 10 seconds, in four observed hours at Site Alpha",
+          "evidence": "baseline"
+        },
+        {
+          "value": "20 to 40 seconds",
+          "label": "Added to each call while the operator describes the sensor state, as reported by one commander",
+          "evidence": "baseline"
+        }
+      ]
+    },
+    "whatWeBuilt": {
+      "features": [
+        {
+          "title": "One view per target",
+          "body": "Shows the radar track, the RF contact and the camera together under one target identifier, and states whether radar and RF were matched. The track is marked on the camera picture, and the camera can be pointed from the target."
+        },
+        {
+          "title": "Source status and age",
+          "body": "Shows whether each of the three feeds is live, stale or dropped, and how old its last data is."
+        },
+        {
+          "title": "Escalation and acknowledgement",
+          "body": "The operator escalates in one action with the evidence attached. The commander acknowledges with one action that the operator can see, and records a decision from the evidence panel."
+        },
+        {
+          "title": "Decision record",
+          "body": "Records each confirmation, escalation, acknowledgement and authorisation as it happens, with the sources, the people and the times."
+        },
+        {
+          "title": "Two sites, one console",
+          "body": "Lists both sites together, and shows an alert from the other site as it arrives. The evidence for this is one interview."
+        }
+      ]
+    },
+    "whatUsersSay": [
+      {
+        "text": "I've got three windows and one pair of eyes.",
+        "attribution": "Console operator, Site Alpha, day shift",
+        "source": "PW-01 console operator interview"
+      },
+      {
+        "text": "Is that your emitter or my track?",
+        "attribution": "Console operator, Site Alpha",
+        "source": "PW-11 day-shift observation"
+      },
+      {
+        "text": "I just want to know he's got it. Not that he's watching me.",
+        "attribution": "Console operator, Site Bravo, day shift",
+        "source": "PW-06 console operator interview"
+      },
+      {
+        "text": "Right now I'm getting there by voice, which costs me thirty, forty seconds a call.",
+        "attribution": "Air-defence commander, Lt Col",
+        "source": "PW-07 air-defence commander interview"
+      },
+      {
+        "text": "It can have the form filled in. It can't sign it.",
+        "attribution": "Air-defence commander, Col",
+        "source": "PW-08 air-defence commander interview"
+      }
+    ],
+    "comparison": {
+      "blurb": "The with-the-console bar is a placeholder, not a result. The console has not been timed. The Today bar is from one real contact.",
+      "reads": [
+        {
+          "unit": "Confirming a drone, from the first track to the call to the commander",
+          "evidence": "illustrative",
+          "bars": [
+            {
+              "label": "Today",
+              "value": 160,
+              "display": "2 min 40 s"
+            },
+            {
+              "label": "With the product",
+              "value": 90,
+              "display": "1 min 30 s"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "quarters": [
+    {
+      "quarter": "2026 Q4",
+      "groups": [
+        {
+          "title": "Growth",
+          "metrics": [
+            {
+              "id": "growth-users",
+              "label": "Users actively using it",
+              "meaning": "The number of operators and commanders using the console in the period.",
+              "value": "8",
+              "suffix": "users",
+              "evidence": "illustrative",
+              "method": "Count of distinct users who used the product in the period.",
+              "source": "Placeholder, not a result. Shows the planned test group of six operators and two commanders (Operator-console-v1-usability-test). No one has used the console yet."
+            }
+          ]
+        },
+        {
+          "title": "Cost effectiveness",
+          "metrics": [
+            {
+              "id": "cost-against-manual",
+              "label": "Cost against the manual process",
+              "meaning": "The cost of confirming and escalating a drone with three tools and a voice line, compared with the cost of the console, at a stated volume.",
+              "value": null,
+              "evidence": "pending",
+              "method": "Both costs measured at the same volume of work, with that volume stated."
+            }
+          ]
+        },
+        {
+          "title": "Productivity",
+          "metrics": [
+            {
+              "id": "time-to-confirm",
+              "label": "Time from first track to confirmed drone",
+              "meaning": "How long an operator takes to confirm a drone, from the first radar track to the call to the commander.",
+              "value": "1 min 30 s",
+              "evidence": "illustrative",
+              "baseline": {
+                "value": "About 2 min 40 s",
+                "note": "One real contact at Site Alpha, from first track to the call to the commander. Single event, so thin."
+              },
+              "method": "Time from the first track to the escalation, compared with the same measure from before the console.",
+              "source": "Placeholder, not a result. Baseline from field notes, PW-11 day-shift observation, Site Alpha."
+            },
+            {
+              "id": "commander-voice-time",
+              "label": "Time a commander spends getting the operator's picture by voice",
+              "meaning": "How much time each call adds while the operator describes the sensor state.",
+              "value": "10 seconds",
+              "suffix": "a call",
+              "evidence": "illustrative",
+              "baseline": {
+                "value": "20 to 40 seconds a call",
+                "note": "Reported by one commander. One interview, so thin."
+              },
+              "method": "Time from the escalation reaching the commander to a recorded decision, and how often a voice description is still needed.",
+              "source": "Placeholder, not a result. Baseline from field notes, PW-07 air-defence commander interview."
+            }
+          ]
+        },
+        {
+          "title": "Usability",
+          "metrics": [
+            {
+              "id": "usability-score",
+              "label": "Usability score",
+              "meaning": "The usability score of the console, from the people it is for.",
+              "value": "70",
+              "suffix": "/100",
+              "evidence": "illustrative",
+              "method": "System Usability Scale, run with operators and commanders after a prototype test.",
+              "source": "Placeholder, not a result. No usability test has been run and no score exists."
+            }
+          ]
+        },
+        {
+          "title": "Satisfaction",
+          "metrics": [
+            {
+              "id": "users-satisfied",
+              "label": "Users satisfied",
+              "meaning": "The share of operators and commanders who rate the console higher than the current toolchain.",
+              "value": "75",
+              "suffix": "%",
+              "evidence": "illustrative",
+              "method": "The prototype survey, answered by operators and commanders after the usability test.",
+              "source": "Placeholder, not a result. The survey has not run."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "health": {
+    "completion": {
+      "asOf": "2026-10-27",
+      "value": "92",
+      "suffix": "%",
+      "evidence": "illustrative"
+    },
+    "rework": {
+      "asOf": "2026-10-27",
+      "value": "4",
+      "suffix": "%",
+      "evidence": "illustrative"
+    },
+    "returning-users": {
+      "asOf": "2026-10-27",
+      "value": "70",
+      "suffix": "%",
+      "evidence": "illustrative"
+    },
+    "availability": {
+      "asOf": "2026-10-27",
+      "value": "99.9",
+      "suffix": "%",
+      "evidence": "illustrative"
+    },
+    "response-time": {
+      "asOf": "2026-10-27",
+      "value": "250",
+      "suffix": "ms",
+      "evidence": "illustrative"
+    },
+    "error-rate": {
+      "asOf": "2026-10-27",
+      "value": "0.3",
+      "suffix": "%",
+      "evidence": "illustrative"
+    },
+    "coverage": {
+      "asOf": "2026-10-27",
+      "value": "75",
+      "suffix": "%",
+      "evidence": "illustrative"
+    },
+    "vulnerabilities": {
+      "asOf": "2026-10-27",
+      "value": "0",
+      "evidence": "illustrative"
+    },
+    "dependencies": {
+      "asOf": "2026-10-27",
+      "value": "2",
+      "evidence": "illustrative"
+    }
+  },
+  "updates": [
+    {
+      "quarter": "2026 Q4",
+      "notes": [
+        {
+          "published": "2026-10-27",
+          "text": "The product requirements for Operator-console-v1 cover nine user stories across five modules. Handover and the alert flood are out of scope for v1.\nA usability test is planned with six console operators and two air-defence commanders. No results are filed yet."
+        }
+      ],
+      "next": [
+        "Run the usability test and file the results.",
+        "Run the System Usability Scale and the satisfaction question with the same participants.",
+        "Agree thresholds for each success criterion. All are still to be decided in the product requirements."
+      ]
+    }
+  ]
+}

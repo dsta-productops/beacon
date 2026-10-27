@@ -33,7 +33,7 @@ Confirm you have this access before you start:
 - **A Claude account.** This can be a paid Claude subscription (Pro, Max, Team or Enterprise) or a Claude Console account. Step 2 uses it to sign in to [Claude Code](/tools/claude-code).
 - **[DASH](/tools/dash),** at [diux-dash.com](https://diux-dash.com). Steps 7 and 17 use it.
 - **INSIGHT.** Step 10 needs it, and that step is optional.
-- **The CMS for [PULSE](https://pulse-dsta.vercel.app/).** Step 18 needs it.
+- **The [PULSE CMS](https://pulse-reportcards.vercel.app).** Step 18 needs it.
 
 ## 2. Set up Claude Code
 ::step{id="setup-claude-code" phase="Setup" tool="Claude Code"}
@@ -901,40 +901,90 @@ A DASH Prototype Test session with your participants' responses, a comparison vi
 ## 18. Publish a report card
 ::step{id="report-card" phase="Test" tool="PULSE"}
 
-A **report card** is a one-page summary of what your product does, what it costs, what it has achieved and who it has benefited.
+A **report card** is a one-page public summary of a product: the problem it solves, what it has achieved, how healthy it is and what changed lately.
 
 **PULSE** gives every product the same format, so products can be compared.
 
+Every figure on a report card carries an **evidence** label, such as Measured, Baseline, Illustrative or Not measured yet, so readers can tell a real result from an estimate.
+
 Claude Code drafts the card from your existing material.
 
-You edit and publish it.
+You check it in the PULSE CMS and publish it.
 
-PULSE separates data your team enters by hand, such as your DASH scores, from data it pulls automatically from the Telemetry Hub.
+1. Open the [PULSE CMS](https://pulse-reportcards.vercel.app), sign in, and choose **Create with AI**.
 
-Today you enter most of it yourself, and live data is on the PULSE roadmap.
+::::own
+2. Paste this prompt into the Claude panel. It is the CMS prompt with your material added under the last line.
+   ```prompt
+   Help me draft a product report card.
 
-1. Open [PULSE](https://pulse-dsta.vercel.app/) and read the **Baseline** metrics that every report card includes, such as product stage, cost effectiveness, usability and satisfaction. Then read the **Domain** metrics for your area.
-   :::demo
-   For SKYPROTECT, the domain is Command and Control.
-   :::
-2. Open the PULSE CMS and copy its prompt.
+   Read https://pulse-reportcards.vercel.app/pulse/skill.md?v=2026-09-04.6 and follow it.
 
-[//]: # (::screenshot{caption="The prompt in the PULSE CMS, ready to copy" hint="the PULSE CMS with the report card prompt visible and the copy control highlighted"})
+   Here is the material to draft it from:
+   Search my PROGRAMME space in Confluence and use the PRD, the Results page under my test plan, the research synthesis and the notes under Field-notes. Use only figures and quotes that appear in those pages.
+   ```
+3. Claude Code prints the report card as one JSON document. Copy all of it, paste it into **The document your AI wrote**, then choose **Open in the editor**.
+::::
 
-3. Paste the prompt into the Claude panel, then add your material: the PRD from step 14, your results from step 17 and the Knowledge Base pages that describe the product.
-4. Paste the draft back into the CMS. It opens in the editor.
-5. Check every figure against its source, edit the card by hand, then publish it.
+::::::demo
+2. Choose how you want to get the report card document.
 
-[//]: # (::screenshot{caption="The published report card" hint="a published PULSE report card showing the baseline metrics and the domain metrics"})
+   If you are not sure, choose **Download the file**, because it is easier to setup.
+
+:::::tabs
+::::tab{value="file" label="Download the file"}
+Choose this to get the report card from a ready-made file, with sample figures.
+
+1. Download :file[operator-console-report-card.json]{href="/skyprotect-demo/operator-console-report-card.json"}.
+2. In the CMS, choose **Choose a file**, select the file, then choose **Open in the editor**.
+::::
+
+::::tab{value="ai" label="Ask Claude Code"}
+Choose this to have Claude Code draft the report card from the SKYPROTECT space. Its draft may differ from the screenshots.
+
+1. Paste this prompt into the Claude panel:
+   ```prompt
+   Help me draft a product report card.
+
+   Read https://pulse-reportcards.vercel.app/pulse/skill.md?v=2026-09-04.6 and follow it.
+
+   Here is the material to draft it from:
+   Search the SKYPROTECT space in Confluence. The product is the Operator console, a prototype for console operators and commanders. Use the Operator-console-v1 PRD, the Results page under the Operator-console-v1-usability-test plan, the research synthesis, the SKYPROTECT kickoff brief and the notes under Field-notes. Use only figures and quotes that appear in those pages.
+   ```
+2. Copy the JSON document it prints, paste it into **The document your AI wrote**, then choose **Open in the editor**.
+::::
+:::::
+::::::
+
+::screenshot{src="/confluence-walkthrough-step-18-1.png" caption="The box where you paste the JSON document, or choose a file" hint="the PULSE CMS Create with AI page with the paste-back box and the Open in the editor button highlighted"}
+
+4. The editor shows your card on the left and a live preview on the right. Check the five tabs: **Header**, **Overview**, **Outcomes**, **Health** and **Updates**.
+
+::screenshot{src="/confluence-walkthrough-step-18-2.png" caption="The Header tab of the new report card, with the live preview beside it" hint="the PULSE CMS editor on the Header tab for the Operator console, with the product form on the left highlighted"}
+
+5. A few issues may need fixing before this report card can be published. Follow the instructions to resolve them.
+6. Choose **Create the report card**. It shows **Unpublished**, so nobody else can see it yet.
+7. Choose **Publish**. The card goes live straight away.
+8. Choose **Open the report card** to see it as readers do.
+
+::screenshot{src="/confluence-walkthrough-step-18-3.png" caption="The published report card, as readers see it" hint="the published Operator console report card on the PULSE site, with the Overview, Health and Updates tabs"}
 
 :::check
-A published report card that fills in the baseline metrics and the metrics for your domain, with each figure traced to a source you can name.
+A public report card for :own[your product] :demo[the Operator console] on [pulse-dsta.vercel.app](https://pulse-dsta.vercel.app/).
 :::
 
-:::details{title="Stuck? See fixes for this step."}
-**If a metric is missing or does not fit your product:**
-- Leave it blank rather than guess, then email the PULSE team using the contact link on the PULSE site.
+::::details{title="Stuck? See fixes for this step."}
+**If you get a "That is not valid JSON" error when you Open in the editor:**
+- The box is empty or the document is not valid JSON. :own[Ask Claude Code to print the whole document again as one block, then paste it again.] :demo[Choose the downloaded file again.]
 
+:::own
 **If the draft contains figures you cannot source:**
-- Ask Claude Code which document each figure came from. Delete any that it cannot name.
+- Ask Claude Code which page each figure came from. Delete any that it cannot name.
 :::
+
+**If you cannot create the report card:**
+- The editor lists what is wrong, with the field each problem is about. Fix each one, then try again.
+
+**If the card does not appear on the site:**
+- Open the card in the CMS. If it shows **Unpublished**, choose **Publish**.
+::::
