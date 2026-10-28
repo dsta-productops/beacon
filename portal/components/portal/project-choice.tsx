@@ -94,8 +94,8 @@ const OPTIONS: { value: Project; label: string; title: string; description: stri
 ];
 
 const STATUS: Record<Project, string> = {
-  own: "Prompts show PROGRAMME where your programme's name goes. Replace it with your programme's name.",
-  demo: "Prompts use SKYPROTECT, and the steps include the demo project's answers and files.",
+  own: "",
+  demo: "",
 };
 
 /** `::projectswitch` — two selectable cards that choose between your own project and the demo. */
