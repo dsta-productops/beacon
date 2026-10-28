@@ -410,8 +410,8 @@ function ProjectProse({
   if (!PROJECT_MARKUP.test(children)) return render("own");
   return (
     <>
-      <div className="[[data-project=demo]_&]:hidden">{render("own")}</div>
-      <div className="hidden [[data-project=demo]_&]:block">{render("demo")}</div>
+      <div className="hidden [[data-project=own]_&]:block">{render("own")}</div>
+      <div className="[[data-project=own]_&]:hidden">{render("demo")}</div>
     </>
   );
 }

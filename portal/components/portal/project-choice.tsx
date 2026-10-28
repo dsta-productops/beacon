@@ -20,13 +20,12 @@ import { cn } from "@/lib/utils";
 /**
  * Which project the reader is following: their own, or the SKYPROTECT demo.
  *
- * The page starts on "own". Once the reader picks the demo, that is remembered in this browser.
+ * The page starts on "demo". Once the reader picks their own project, that is remembered in this browser.
  * The demo is written as if the whole tutorial uses it, so its content shows without a label.
  *
  * Project-specific text is resolved on the server (see `lib/remark-project.ts`), once per project.
  * Both versions are in the page, and the `data-project` attribute on `<html>` decides which one
- * shows. A small script in the root layout sets it before first paint, so a returning demo reader
- * never sees the "own" version flash.
+ * shows. A small script in the root layout sets it before first paint, so the "demo" version shows from the first paint.
  */
 export type { Project };
 
@@ -36,7 +35,7 @@ interface ProjectChoice {
 }
 
 const ProjectChoiceContext = createContext<ProjectChoice>({
-  project: "own",
+  project: "demo",
   setProject: () => {},
 });
 
@@ -45,7 +44,7 @@ export function useProjectChoice() {
 }
 
 export function ProjectChoiceProvider({ children }: { children: ReactNode }) {
-  const [project, setProjectState] = useState<Project>("own");
+  const [project, setProjectState] = useState<Project>("demo");
 
   // Read the saved choice after hydration so the server and first client render match.
   useEffect(() => {
@@ -80,16 +79,16 @@ export function ProjectChoiceProvider({ children }: { children: ReactNode }) {
 
 const OPTIONS: { value: Project; label: string; title: string; description: string }[] = [
   {
-    value: "own",
-    label: "Option A",
-    title: "My own project",
-    description: "Follow the tutorial with a programme of your own.",
-  },
-  {
     value: "demo",
-    label: "Option B",
+    label: "Option A",
     title: "The demo project",
     description: "Practise with SKYPROTECT, a made-up drone-defence programme. Step 5 sets it up.",
+  },
+  {
+    value: "own",
+    label: "Option B",
+    title: "My own project",
+    description: "Follow the tutorial with a programme of your own.",
   },
 ];
 
