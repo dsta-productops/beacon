@@ -83,19 +83,6 @@ You use one folder for the whole tutorial, so that CLARA, PRIZM and your prototy
 Claude Code lists the Confluence spaces you connected it to.
 :::
 
-:::details{title="Stuck? See fixes for this step."}
-**If Claude Code does not appear after you install it:**
-- Restart VS Code, or run **Developer: Reload Window** from the command palette (Cmd + Shift + P on a Mac, Ctrl + Shift + P on Windows).
-
-**If you see "Not logged in":**
-- Type `/login` in the Claude panel and sign in again.
-
-**If `atlassian` does not show as connected:**
-- Type `/mcp`, select `atlassian` and choose to authenticate or reconnect. Check that you approved access to the right Confluence site in your browser.
-
-**If your organisation blocks the address, or hosts Confluence itself:**
-- Ask your IT team for the approved way to connect Claude Code to Confluence.
-:::
 
 ## 3. Install CLARA
 ::step{id="install-clara" phase="Setup" tool="CLARA"}
@@ -153,18 +140,6 @@ Paste that prompt at the start of every chat where you want to use CLARA.
 CLARA introduces itself and says what it can do, such as drafting personas, journeys, PRDs and test plans.
 :::
 
-:::details{title="Stuck? See fixes for this step."}
-**If CLARA does not appear (Intranet):**
-- Ask Claude Code to list the files in `.claude/skills`. You should see `clara-confluence/SKILL.md`, spelled exactly with capitals, inside `beacon-tutorial`.
-- Start a new chat, or run **Developer: Reload Window** from the command palette.
-
-**If CLARA does not respond (Internet):**
-- Check that you pasted the whole prompt.
-- Open the address in your browser. If it does not load, use the Intranet tab, or copy the text of the page and paste it into the chat instead.
-
-**If CLARA cannot reach Confluence:**
-- Check that Claude Code is connected to Confluence.
-:::
 
 ## 4. Install PRIZM
 ::step{id="install-prizm" phase="Setup" tool="PRIZM"}
@@ -219,22 +194,6 @@ Claude Code reads PRIZM from GitHub when it needs it, so your computer must be a
 Claude Code names two zones, **Enterprise** and **C3**. It says it read them from `prizm/PRIZM.md` (Intranet) or from the PRIZM address on GitHub (Internet).
 :::
 
-:::details{title="Stuck? See fixes for this step."}
-**If Claude does not mention PRIZM:**
-- Check that `CLAUDE.md` is at the top of `beacon-tutorial`, spelled exactly with capitals, and not inside another folder.
-- If your browser renamed the download, for example to `CLAUDE (1).md`, rename it to `CLAUDE.md`.
-- Start a new chat. Claude reads `CLAUDE.md` only when a chat begins.
-- Run **Developer: Reload Window** from the command palette.
-
-**If the folder is nested (Intranet):**
-- Open `prizm` and check that `PRIZM.md` is directly inside it. If you see another `prizm` folder, drag that inner folder out instead.
-
-**If Claude tries to fetch from the internet (Intranet):**
-- Remind it: `Read only from ./prizm. Do not use the internet.`
-
-**If Claude cannot read PRIZM (Internet):**
-- Open the address from `CLAUDE.md` in your browser. If it does not load, use the Intranet tab.
-:::
 
 ## 5. Set up your Knowledge Base
 ::step{id="knowledge-base" phase="Setup" tool="CLARA"}
@@ -259,10 +218,6 @@ CLARA builds the folders for you and shows you the plan before it creates anythi
 Your space has a **Knowledge Base** page with a `Programme-wide` folder under it, and a folder for each document type.
 :::
 
-:::details{title="Stuck? See fixes for this step."}
-**If CLARA stops part-way:**
-- It stops on purpose when something goes wrong, usually a missing permission. Fix the cause and run the same prompt again. It is safe to re-run.
-:::
 ::::
 
 ::::when{project="demo"}
@@ -295,11 +250,6 @@ Your space holds:
 Open **S06** to see what a rough field note looks like.
 :::
 
-:::details{title="Stuck? See fixes for this step."}
-**If Claude Code stops part-way:**
-- It stops on purpose when something goes wrong, usually a missing permission or a space with the wrong key.
-- Fix the cause and run the same prompt again.
-:::
 ::::
 
 ## 6. Find what is already known
@@ -355,18 +305,6 @@ In Confluence, open the **Prior-knowledge** folder. It holds a new summary of th
 :::
 ::::
 
-:::details{title="Stuck? See fixes for this step."}
-**If the summary is thin or generic:**
-- Add more source material, such as interview notes or past write-ups.
-- Narrow the topic and run the prompt again. A finding with no source is a guess, not a fact.
-
-**If CLARA cannot see your space:**
-- Check that you can open the SKYPROTECT space yourself.
-- If you can, ask your CLARA contact to check its connection.
-
-**If a document lands in the wrong place or cites nothing:**
-- Stop and check that the Knowledge Base from step 5 exists and your source links point to real pages with real content.
-:::
 
 ## 7. Measure how things are today
 ::step{id="baseline" phase="Research" tool="DASH"}
@@ -388,10 +326,6 @@ It also tracks **OKRs**, which are goals with numbers attached.
 
 [//]: # (::screenshot{caption="The Baseline Testing session, showing the share link and QR code" hint="the Baseline Testing session in DASH, showing the share link and QR code"})
 
-:::details{title="Stuck? See fixes for this step."}
-**If you cannot find your programme's workspace:**
-- Each programme has one DASH workspace. Ask your DASH contact to add you.
-:::
 
 ## 8. Review the product people use today
 ::step{id="heuristic-evaluation" phase="Research" tool="CLARA"}
@@ -447,13 +381,6 @@ These problems feed your synthesis in step 11 and your ranking in step 13.
 In Confluence, open the **Heuristic-evaluations** folder. It holds your new report, with a score out of 100, severity-rated findings that each cite a screen, and a fix list ranked P0, P1 and P2.
 :::
 
-:::details{title="Stuck? See fixes for this step."}
-**If CLARA gives findings that do not cite a screen:**
-- Ask it to number the screens and tie every finding to one. Delete any finding it cannot place.
-
-**If the score looks too high or too low:**
-- The score is for comparing: the same product over time, or competitors judged the same way. Do not read it as an absolute grade.
-:::
 
 ## 9. Interview your users
 ::step{id="interviews" phase="Research" tool="CLARA"}
@@ -504,13 +431,6 @@ In Confluence, open the **Interview-guides** folder to find a new guide for how 
 :::
 ::::
 
-:::details{title="Stuck? See fixes for this step."}
-**If CLARA files nothing:**
-- It files only after you say yes to the draft and the page it will go under. Reply yes, or ask where it stopped.
-
-**If CLARA asks for an interviewee you do not have:**
-- Give your best guess, such as the role you expect to speak to, and carry on. You can change the guide later.
-:::
 
 ## 10. Get live prompts in interviews
 ::step{id="interview-prompts" phase="Research" tool="INSIGHT"}
@@ -571,22 +491,6 @@ If you tried INSIGHT, a transcript of the practice script with each speaker labe
 :::
 :::::
 
-:::details{title="Stuck? See fixes for this step."}
-**If macOS says INSIGHT is damaged, or cannot verify the developer:**
-- Check that INSIGHT is in the **Applications** folder, then run the Terminal command again and reopen the app.
-
-**If Terminal says "No such file or directory":**
-- INSIGHT is not in the **Applications** folder, or it is named differently. Drag it into **Applications** and run the command again.
-
-**If Google Drive says it cannot scan the file for viruses:**
-- Choose **Download anyway**.
-
-**If INSIGHT does not hear the conversation:**
-- Check that your computer allows INSIGHT to use the microphone, then press start again.
-
-**If no suggestions appear:**
-- Suggestions appear as the conversation goes on, so wait a few minutes. Adding your PRD and team terms before you start also helps.
-:::
 
 ## 11. Make sense of the notes
 ::step{id="synthesise" phase="Research" tool="CLARA"}
@@ -618,13 +522,6 @@ CLARA reads them all in one pass and separates what is new from what you already
 In Confluence, open the **Research-synthesis** page. It has themes, a friction table, a problem statement and success criteria. Each finding names the field notes it came from, and the places where the notes disagree are flagged.
 :::
 
-:::details{title="Stuck? See fixes for this step."}
-**If the synthesis cites few or none of your notes:**
-- Check that your notes are pages under `Field-notes` in your Knowledge Base, then run the prompt again and name the notes to use.
-
-**If CLARA does not flag any disagreements:**
-- Ask it to compare what different interviewees said about the same topic, and to list where they differ.
-:::
 
 ## 12. Profile your users
 ::step{id="personas-journeys" phase="Research" tool="CLARA"}
@@ -698,13 +595,6 @@ In Confluence, open these three folders. Each holds a new page, linked to the ev
 :::
 ::::
 
-:::details{title="Stuck? See fixes for this step."}
-**If a persona or journey is generic:**
-- Tell CLARA which notes and which synthesis to base it on, and ask it to cite them.
-
-**If CLARA asks which persona to use:**
-- Give the name of the persona you created in this step.
-:::
 
 ## 13. Rank the problems
 ::step{id="problem-ranking" phase="Research" tool="CLARA"}
@@ -750,13 +640,6 @@ It scores each problem out of 5 on four measures, so a problem scores up to 20:
 In Confluence, open the **Problem-impact-analysis** page. It has a ranked table with each problem scored out of 20, grouped into tiers. Each problem names whose pain it is and the evidence behind it.
 :::
 
-:::details{title="Stuck? See fixes for this step."}
-**If a persuasive problem ranks low:**
-- Check its evidence. A problem backed only by discussion ranks below a duller one that people tested or saw in use. The gap tells you what to go and prove next.
-
-**If CLARA asks for more problems or sources:**
-- Point it to your research synthesis from step 11, or paste a list of pain points from a workshop.
-:::
 
 ## 14. Write the requirements
 ::step{id="prd" phase="Research" tool="CLARA"}
@@ -792,13 +675,6 @@ It is the most important output of Research.
 In Confluence, open the **PRDs** folder. It holds your new PRD, with a problem statement, target users, goals and non-goals, scope, prioritised user stories, success criteria, constraints and open questions. Each user story cites its evidence.
 :::
 
-:::details{title="Stuck? See fixes for this step."}
-**If the PRD is for the wrong problem:**
-- Tell CLARA which problem to build for and ask it to update the page. It asks you to confirm before it changes anything.
-
-**If CLARA cannot find the ranking or the synthesis:**
-- Check that steps 11 and 13 filed their pages in your Knowledge Base, then run the prompt again.
-:::
 
 ## 15. Build a prototype
 ::step{id="prototype" phase="Design" tool="Claude Code + PRIZM"}
@@ -847,10 +723,6 @@ Claude Code reads your PRD and PRIZM's rules, so the result follows DSTA standar
 A running prototype of your chosen flow, built from PRIZM components and semantic colour tokens such as `bg-bg` and `text-fg`, not raw colours.
 :::
 
-:::details{title="Stuck? See fixes for this step."}
-**If Claude Code invents components PRIZM does not have:**
-- Stop it and ask it to check `lib/components-registry.ts` before it generates anything more. On the Intranet tab, that file is `prizm/lib/components-registry.ts`. On the Internet tab, it is in the PRIZM repository on GitHub.
-:::
 
 ## 16. Plan the test
 ::step{id="test-plan" phase="Test" tool="CLARA"}
@@ -882,13 +754,6 @@ CLARA reads your PRD and personas to draft one.
 In Confluence, open the **Test-plans** folder. It holds your new test plan, with scenarios, participants, measures and how the results will be analysed.
 :::
 
-:::details{title="Stuck? See fixes for this step."}
-**If CLARA cannot find your PRD:**
-- Give it the name of the PRD page, and check that it is in the PRDs folder of your Knowledge Base.
-
-**If the number of participants does not fit your team:**
-- Tell CLARA the number you can reach and ask it to update the plan.
-:::
 
 ## 17. Test and compare
 ::step{id="test" phase="Test" tool="DASH"}
@@ -918,13 +783,6 @@ The comparison is your evidence that the new design is better, or your guide to 
 A DASH Prototype Test session with your participants' responses, a comparison view of the results against your baseline, and recommendations from DASH AI. The results are filed as a "Results" page under your test plan in Confluence.
 :::
 
-:::details{title="Stuck? See fixes for this step."}
-**If the comparison shows nothing:**
-- Check that your baseline session from step 7 is still open and has responses, and that your prototype session has some too.
-
-**If the results land on the wrong page:**
-- Ask Claude Code to move the page, and to show you the new path before it does.
-:::
 
 ## 18. Publish a report card
 ::step{id="report-card" phase="Test" tool="PULSE"}
@@ -1001,18 +859,4 @@ Choose this to have Claude Code draft the report card from the SKYPROTECT space.
 A public report card for :own[your product] :demo[the Operator console] on [pulse-dsta.vercel.app](https://pulse-dsta.vercel.app/).
 :::
 
-::::details{title="Stuck? See fixes for this step."}
-**If you get a "That is not valid JSON" error when you Open in the editor:**
-- The box is empty or the document is not valid JSON. :own[Ask Claude Code to print the whole document again as one block, then paste it again.] :demo[Choose the downloaded file again.]
 
-:::own
-**If the draft contains figures you cannot source:**
-- Ask Claude Code which page each figure came from. Delete any that it cannot name.
-:::
-
-**If you cannot create the report card:**
-- The editor lists what is wrong, with the field each problem is about. Fix each one, then try again.
-
-**If the card does not appear on the site:**
-- Open the card in the CMS. If it shows **Unpublished**, choose **Publish**.
-::::
