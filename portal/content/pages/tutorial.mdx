@@ -6,11 +6,9 @@ visibility: "public"
 
 This tutorial takes a project from raw interview notes to a prototype that real users can test.
 
-By the end you will have a requirements document, a working prototype, test results and a report card.
-
 You do not need a background in product management or design.
 
-You also do not need to finish it in one go, so do a few steps at a time.
+This tutorial is long, but you do not have to finish it in one go! Take it a few steps at a time.
 
 ### Choose how you will follow this tutorial
 
@@ -286,9 +284,6 @@ Start by reviewing past projects, earlier write-ups and other teams' Confluence 
    ```
    :::
 
-:::own
-:::
-
 4. CLARA shows you the draft and the page it will go under. Say yes to file it. CLARA asks this every time it writes to Confluence, and it files nothing until you do.
 
 ::screenshot{src="/confluence-walkthrough-step-6-1.png" caption="The updated Confluence page, with CLARA's prior-knowledge summary filed under the Knowledge Base" hint="the Confluence page tree with the new summary under Knowledge Base / Prior-knowledge / [topic], the filed page open and the page title highlighted"}
@@ -334,18 +329,10 @@ A **heuristic evaluation** checks a product against well-known usability rules, 
 
 CLARA uses Nielsen's 10 heuristics.
 
-It gives:
+For each problem it finds, it gives a severity rating and the screen it appears on.
 
-- A score out of 100
-- Each problem it finds, with a severity rating and the screen it appears on
+These problems feed your research synthesis in step 11 and your problem ranking in step 13.
 
-These problems feed your synthesis in step 11 and your ranking in step 13.
-
-**Tips:**
-
-- A link lets CLARA check more states than screenshots do.
-- One evaluator finds only about a third of the problems. Treat the findings as a minimum and the score as a ceiling.
-- For a big decision, ask a second person to run the evaluation and merge the two.
 
 1. Collect the material to evaluate: numbered screenshots of the flows, a link CLARA can open, or a PDF or deck of the screens.
    :::demo
@@ -374,8 +361,7 @@ These problems feed your synthesis in step 11 and your ranking in step 13.
 5. Name the one or two tasks to check, such as "an operator confirms and reports a threat". If you do not, CLARA proposes them from the screens and asks you to confirm.
 :::
 
-6. Read the report. Check that each finding names a specific screen.
-7. CLARA shows you the draft and the page it will go under. Say yes to file it.
+6. CLARA shows you the draft and the page it will go under. Say yes to file it.
 
 :::check
 In Confluence, open the **Heuristic-evaluations** folder. It holds your new report, with a score out of 100, severity-rated findings that each cite a screen, and a fix list ranked P0, P1 and P2.
@@ -478,8 +464,6 @@ INSIGHT opens without a warning that the app is damaged or from an unidentified 
 
 4. When the conversation ends, end the session and open the review. It shows a transcript with each speaker labelled and the suggestions tied to timestamps.
 5. Export the review as Markdown :own[and paste it into the **Field Notes** template, as in step 9.] :demo[and open the file. This is what you would paste into a Field Notes page on a real project.]
-
-[//]: # (::screenshot{caption="The session review with the export options" hint="the INSIGHT session review with the Markdown export option highlighted"})
 
 :::::check
 :::own
@@ -625,16 +609,8 @@ It scores each problem out of 5 on four measures, so a problem scores up to 20:
    Source of the problems: the friction points in the Programme-wide research synthesis, the heuristic evaluation and the field notes
    ```
    :::
-3. Answer its questions where the evidence is thin. It does not invent evidence.
-   :::demo
-   CLARA may ask about the evidence for a need for an audit trail.
-
-   The kickoff brief requires one, but S10 is the only adviser interviewed, and S10 could not say how often it matters. S08 mentions the handwritten log only in passing.
-
-   Tell CLARA that. This is the kind of gap the ranking is meant to show.
-   :::
-4. Read the ranked table and the tiers. Check that the top problems match what you saw in the research.
-5. CLARA shows you the draft and the page it will go under. Say yes to file it.
+3. Read the ranked table and the tiers. Check that the top problems match what you saw in the research.
+4. CLARA shows you the draft and the page it will go under. Say yes to file it.
 
 :::check
 In Confluence, open the **Problem-impact-analysis** page. It has a ranked table with each problem scored out of 20, grouped into tiers. Each problem names whose pain it is and the evidence behind it.
@@ -684,8 +660,42 @@ A prototype is a working draft people can click through.
 Claude Code reads your PRD and PRIZM's rules, so the result follows DSTA standards without extra styling work.
 
 1. In VS Code, with `beacon-tutorial` open, start a new chat in the Claude panel.
-2. Check that **Node.js 20 or later** and **pnpm** are installed. Claude Code uses them to run the prototype. If you are on an intranet with no internet access, ask your IT team for the address of your internal npm registry, then run `pnpm config set registry <address>`.
-3. Paste this prompt into the Claude panel. It tells Claude Code which Confluence page holds your PRD, so you do not paste the PRD itself. Your `CLAUDE.md` already tells it where PRIZM is and how to use it.
+2. Check that two free tools are installed. Claude Code needs them to run your prototype: **Node.js** (version 20 or later) and **pnpm**.
+   :::details{title="Show me how to check and install them"}
+   1. In VS Code, choose **Terminal**, then **New Terminal**. A panel opens at the bottom of the window.
+   2. Type this and press Enter:
+      ```
+      node --version
+      ```
+      If it shows `v20` or a higher number, such as `v22.11.0`, Node.js is ready.
+
+      If it says the command is not found, or shows a lower number, download the version marked **LTS** from [nodejs.org](https://nodejs.org/), install it, then close VS Code and open it again.
+
+      If your computer is managed, your IT team may need to install it for you.
+
+   3. Type this and press Enter:
+      ```
+      pnpm --version
+      ```
+      If it shows a number, such as `9.12.0`, pnpm is ready.
+
+      If it says the command is not found, type this, press Enter, then run the check again:
+      ```
+      npm install -g pnpm
+      ```
+   4. Skip this part if your computer can reach the internet.
+
+      If you are on an intranet with no internet access, pnpm cannot download what the prototype needs until you point it at your organisation's own copy.
+
+      Ask your IT team for the address of your internal npm registry, then type this, replacing `<address>` with what they give you:
+      ```
+      pnpm config set registry <address>
+      ```
+   :::
+3. Paste this prompt into the Claude panel.
+
+   It tells Claude Code which Confluence page holds your PRD, so you do not paste the PRD itself.
+   
    :::own
    ```prompt
    I want to build a working prototype from my PRD: real code that runs in the browser and that people can click through.
@@ -711,9 +721,6 @@ Claude Code reads your PRD and PRIZM's rules, so the result follows DSTA standar
    ```
    :::
 4. :own[Claude Code asks you two questions before it builds. Choose a PRIZM zone: **Enterprise** for websites and back-office tools, or **C3** for command-and-control systems. When it lists the user flows, pick one to build first. Do not skip this question.] :demo[The prompt already names the zone and the flow, so Claude Code should start building. If it asks anyway, answer C3 and the flow that confirms a drone and escalates it to the commander.]
-
-:::own
-:::
 
 5. Open the prototype in your browser. To change something, describe the change in plain English.
 
@@ -856,7 +863,7 @@ Choose this to have Claude Code draft the report card from the SKYPROTECT space.
 ::screenshot{src="/confluence-walkthrough-step-18-3.png" caption="The published report card, as readers see it" hint="the published Operator console report card on the PULSE site, with the Overview, Health and Updates tabs"}
 
 :::check
-A public report card for :own[your product] :demo[the Operator console] on [pulse-dsta.vercel.app](https://pulse-dsta.vercel.app/).
+A public report card for :own[your product] :demo[the Operator console] on [pulse-reportcards.vercel.app](https://pulse-reportcards.vercel.app/).
 :::
 
 
