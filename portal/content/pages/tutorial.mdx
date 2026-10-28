@@ -102,13 +102,13 @@ Choose a method below. If you are not sure, choose **File**.
 You install CLARA once, and it is then available whenever you open your project folder.
 
 1. Download :file[SKILL.md]{href="/confluence/SKILL.md"}.
-2. Drag the downloaded file into :own[your project folder]:demo[`beacon-tutorial`] in VS Code's file list.
-3. In the Claude panel, ask Claude Code to put it in the right place, and approve the changes when it asks:
+2. The panel on the left of VS Code, called **Explorer**, shows what is inside this folder. Drag the downloaded file into the **Explorer** panel on the left.
+3. In the Claude panel, paste this prompt below. It moves `SKILL.md` into the folders `.claude/skills/clara-confluence`, so that Claude Code can find CLARA.
    ```prompt
    Move SKILL.md into a new folder called .claude/skills/clara-confluence in this project. Keep the file name as SKILL.md.
    ```
 
-::screenshot{src="/confluence-walkthrough-step-3-1.png" caption="SKILL.md inside .claude/skills/clara-confluence in the project folder" hint="the VS Code file list showing the project folder with .claude/skills/clara-confluence/SKILL.md inside, after Claude Code has moved the file"}
+::screenshot{src="/confluence-walkthrough-step-3-1.png" caption="SKILL.md inside .claude/skills/clara-confluence in the project folder" hint="the VS Code Explorer panel showing the project folder with .claude/skills/clara-confluence/SKILL.md inside, after Claude Code has moved the file"}
 
 4. Start a new chat in the Claude panel and ask:
    ```prompt
@@ -148,9 +148,9 @@ PRIZM is stored in your project folder.
 
 1. Download :file[prizm.zip]{href="/prizm/prizm.zip"}.
 2. Extract it. On a Mac, double-click the file. On Windows, right-click it and choose **Extract All**. You get a folder called `prizm`.
-3. Drag the `prizm` folder into :own[your project folder]:demo[`beacon-tutorial`] in VS Code's file list.
+3. Drag the `prizm` folder into the **Explorer** panel on the left.
 
-::screenshot{src="/confluence-walkthrough-step-4-1.png" caption="The prizm folder inside the project folder" hint="the VS Code file list showing the prizm folder in the project folder"}
+::screenshot{src="/confluence-walkthrough-step-4-1.png" caption="The prizm folder inside the project folder" hint="the VS Code Explorer panel showing the prizm folder in the project folder"}
 
 4. Start a new chat in the Claude panel and ask:
    ```prompt
@@ -159,11 +159,11 @@ PRIZM is stored in your project folder.
 ::::
 
 ::::tab{value="url" label="URL"}
-You do not need to download PRIZM itself. Claude Code reads it from [GitHub](https://github.com/prizm-design/prizm) when it needs it.
+You do not need to download PRIZM itself. Claude Code reads it from [GitHub](https://github.com/prizm-design/prizm) when you tell it to.
 
-1. Start a new chat in the Claude panel and ask:
+1. Start a new chat in the Claude panel and paste:
    ```prompt
-   Which PRIZM zones are available, and where did you read that?
+   Read https://raw.githubusercontent.com/prizm-design/prizm/main/PRIZM.md and https://raw.githubusercontent.com/prizm-design/prizm/main/llms.txt and follow them as your PRIZM rules for the rest of this chat. Then tell me which PRIZM zones are available, and where you read that.
    ```
 ::::
 :::::
@@ -682,7 +682,7 @@ Claude Code reads your PRD and PRIZM's rules, so the result follows DSTA standar
 
    Read the PRD from Confluence. It is the page called PRD-TITLE in the PRDs folder of the PROGRAMME Knowledge Base.
 
-   Use Next.js, TypeScript and Tailwind v4, and follow the PRIZM rules. Use PRIZM components wherever one exists, and use semantic colour tokens, never raw colours. Do not invent components. If you need one that PRIZM does not have, tell me.
+   Use Next.js, TypeScript and Tailwind v4, and follow the PRIZM rules in prizm/PRIZM.md if there is a prizm folder in this project, or otherwise in https://raw.githubusercontent.com/prizm-design/prizm/main/PRIZM.md. Use PRIZM components wherever one exists, and use semantic colour tokens, never raw colours. Do not invent components. If you need one that PRIZM does not have, tell me.
 
    Before you write any code, ask me which PRIZM zone to use, Enterprise or C3. Then list the three to five most important user flows in the PRD and ask me which to build first. Do not build everything in one pass.
    ```
@@ -693,7 +693,7 @@ Claude Code reads your PRD and PRIZM's rules, so the result follows DSTA standar
 
    Read the PRD from Confluence. It is the page called Operator-console-v1 in the PRDs folder of the SKYPROTECT Knowledge Base.
 
-   Use Next.js, TypeScript and Tailwind v4, and follow the PRIZM rules. Use PRIZM components wherever one exists, and use semantic colour tokens, never raw colours. Do not invent components. If you need one that PRIZM does not have, tell me.
+   Use Next.js, TypeScript and Tailwind v4, and follow the PRIZM rules in prizm/PRIZM.md if there is a prizm folder in this project, or otherwise in https://raw.githubusercontent.com/prizm-design/prizm/main/PRIZM.md. Use PRIZM components wherever one exists, and use semantic colour tokens, never raw colours. Do not invent components. If you need one that PRIZM does not have, tell me.
 
    Use the C3 zone, because this is a command-and-control system. Start from PRIZM's C3 app shell, so the prototype has a top bar, a status ticker and an icon rail. Use the glass variant for the evidence panel and for any popovers and tooltips. Keep the authorise confirmation as a solid dialog, because PRIZM keeps confirmations for important decisions solid.
 
