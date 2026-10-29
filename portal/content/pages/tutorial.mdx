@@ -682,7 +682,17 @@ Claude Code reads your PRD and PRIZM's rules, so the result follows DSTA standar
 
    Read the PRD from Confluence. It is the page called PRD-TITLE in the PRDs folder of the PROGRAMME Knowledge Base.
 
-   Use Next.js, TypeScript and Tailwind v4, and follow the PRIZM rules in prizm/PRIZM.md if there is a prizm folder in this project, or otherwise in https://raw.githubusercontent.com/prizm-design/prizm/main/PRIZM.md. Use PRIZM components wherever one exists, and use semantic colour tokens, never raw colours. Do not invent components. If you need one that PRIZM does not have, tell me.
+   Build it with PRIZM 4.0, a design system, using Next.js, TypeScript and Tailwind v4. Read PRIZM.md and llms.txt first, from the prizm folder in this project if there is one, or otherwise from https://github.com/prizm-design/prizm. They describe everything else, including how to fetch any source file you do not already have. If you cannot find them, ask me where PRIZM lives rather than guessing.
+
+   Working conventions:
+   - Reuse before you build (non-negotiable). Before creating any UI element, search llms.txt and lib/components-api.ts for a PRIZM component that fits. If one exists, use it as-is: adjust exposed props and variants only, never rewrite its markup or styling. If nothing fits, stop and say so, naming what you checked, rather than silently hand-rolling a replacement. Duplicating existing PRIZM functionality needs explicit sign-off from me.
+   - For any component, check llms/<slug>.md for props, conventions and accessibility notes.
+   - For design decisions (layout, hierarchy, when to use what), consult /docs/principles.
+   - Use semantic Tailwind tokens only: bg-bg, text-fg, border-border, bg-accent and so on. Never use raw colour utilities like bg-slate-500 or text-blue-600.
+   - Prefer existing component variants over className overrides for visual changes.
+   - Match the active product zone: C3 (cyan, dense, tactical) or Enterprise (blue, spacious, professional). Tokens flip automatically; layout choices do not.
+   - Components are copy-paste. The source files at components/ui/<slug>.tsx are mine to copy and modify.
+   - Never introduce external URL references (CDNs, remote fonts, third-party scripts). PRIZM is air-gap safe, and the audit script will fail CI on violations.
 
    Before you write any code, ask me which PRIZM zone to use, Enterprise or C3. Then list the three to five most important user flows in the PRD and ask me which to build first. Do not build everything in one pass.
    ```
@@ -693,7 +703,17 @@ Claude Code reads your PRD and PRIZM's rules, so the result follows DSTA standar
 
    Read the PRD from Confluence. It is the page called Operator-console-v1 in the PRDs folder of the SKYPROTECT Knowledge Base.
 
-   Use Next.js, TypeScript and Tailwind v4, and follow the PRIZM rules in prizm/PRIZM.md if there is a prizm folder in this project, or otherwise in https://raw.githubusercontent.com/prizm-design/prizm/main/PRIZM.md. Use PRIZM components wherever one exists, and use semantic colour tokens, never raw colours. Do not invent components. If you need one that PRIZM does not have, tell me.
+   Build it with PRIZM 4.0, a design system, using Next.js, TypeScript and Tailwind v4. Read PRIZM.md and llms.txt first, from the prizm folder in this project if there is one, or otherwise from https://github.com/prizm-design/prizm. They describe everything else, including how to fetch any source file you do not already have. If you cannot find them, ask me where PRIZM lives rather than guessing.
+
+   Working conventions:
+   - Reuse before you build (non-negotiable). Before creating any UI element, search llms.txt and lib/components-api.ts for a PRIZM component that fits. If one exists, use it as-is: adjust exposed props and variants only, never rewrite its markup or styling. If nothing fits, stop and say so, naming what you checked, rather than silently hand-rolling a replacement. Duplicating existing PRIZM functionality needs explicit sign-off from me.
+   - For any component, check llms/<slug>.md for props, conventions and accessibility notes.
+   - For design decisions (layout, hierarchy, when to use what), consult /docs/principles.
+   - Use semantic Tailwind tokens only: bg-bg, text-fg, border-border, bg-accent and so on. Never use raw colour utilities like bg-slate-500 or text-blue-600.
+   - Prefer existing component variants over className overrides for visual changes.
+   - Match the active product zone: C3 (cyan, dense, tactical) or Enterprise (blue, spacious, professional). Tokens flip automatically; layout choices do not.
+   - Components are copy-paste. The source files at components/ui/<slug>.tsx are mine to copy and modify.
+   - Never introduce external URL references (CDNs, remote fonts, third-party scripts). PRIZM is air-gap safe, and the audit script will fail CI on violations.
 
    Use the C3 zone, because this is a command-and-control system. Start from PRIZM's C3 app shell, so the prototype has a top bar, a status ticker and an icon rail. Use the glass variant for the evidence panel and for any popovers and tooltips. Keep the authorise confirmation as a solid dialog, because PRIZM keeps confirmations for important decisions solid.
 
@@ -704,7 +724,7 @@ Claude Code reads your PRD and PRIZM's rules, so the result follows DSTA standar
 
 5. Open the prototype in your browser. To change something, describe the change in plain English.
 
-::screenshot{src="/confluence-walkthrough-step-15-1.png" caption="The running prototype in the browser, next to Claude Code" hint="the running prototype in the browser, next to Claude Code"}
+::screenshot{src="/confluence-walkthrough-step-15-1.png" caption="A running prototype in the browser" hint="the running prototype in the browser"}
 
 :::check
 A running prototype of your chosen flow, built from PRIZM components and semantic colour tokens such as `bg-bg` and `text-fg`, not raw colours.
