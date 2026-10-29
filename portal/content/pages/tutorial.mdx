@@ -66,11 +66,18 @@ You use one folder for the whole tutorial, so that CLARA, PRIZM and your prototy
 ### Connect Claude Code to Confluence
 
 1. In the Claude panel, type `/mcp` and press Enter. This opens the list of connections.
-2. Add a new connection. Name it `atlassian`, choose **HTTP** as the type and enter this address. If you are asked where to save it, choose **user**, so the connection works in every folder you open:
-   ```
-   https://mcp.atlassian.com/v1/mcp/authv2
-   ```
-3. Select `atlassian` in the list and choose to authenticate. Your browser opens. Sign in to Atlassian and approve access to your Confluence site. Claude Code can only see what your own account can see.
+2. Click **Add server**. A form opens. Fill it in like this:
+   - **Name:** type `atlassian`
+   - **Transport:** choose **HTTP (remote)**
+   - **URL:** paste this address:
+     ```
+     https://mcp.atlassian.com/v1/mcp/authv2
+     ```
+   - **Headers:** leave this empty.
+   - **Scope:** choose **User**, so the connection works in every folder you open.
+
+   Then click **Add server**.
+3. Select `atlassian` in the list and choose to authenticate. Your browser opens. Sign in to Atlassian and approve access to your Confluence site.
 
 ::screenshot{src="/confluence-walkthrough-step-2-2.png" caption="The /mcp list showing the atlassian connection as connected" hint="the Claude panel with the /mcp connection list open and the atlassian entry showing as connected, highlighted"}
 
