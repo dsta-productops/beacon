@@ -26,11 +26,11 @@ interface ToolFrontmatter {
   visibility: string;
 }
 
-const PHASE_ORDER = ["research", "design", "test", "cross-phase"] as const;
+const PHASE_ORDER = ["research", "design", "measure", "cross-phase"] as const;
 const PHASE_LABELS: Record<string, string> = {
   research: "Research",
   design: "Design",
-  test: "Test",
+  measure: "Measure",
   "cross-phase": "Cross-phase",
 };
 const DOMAIN_LABELS: Record<string, string> = {

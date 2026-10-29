@@ -5,7 +5,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "BEACON: find your way around product work at DSTA",
   description:
-    "A guide to product work at DSTA: how research, design and testing fit together, and which tool to use at each step.",
+    "A guide to product work at DSTA: how research, design and measurement fit together, and which tool to use at each step.",
 };
 
 export default function RootLayout({

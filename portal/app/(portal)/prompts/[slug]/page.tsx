@@ -40,7 +40,7 @@ interface PromptFrontmatter {
 const PHASE_LABELS: Record<string, string> = {
   research: "Research",
   design: "Design",
-  test: "Test",
+  measure: "Measure",
   "cross-phase": "Cross-phase",
 };
 

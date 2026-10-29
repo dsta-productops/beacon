@@ -24,9 +24,9 @@ const phases = [
       "Translate validated needs into testable artefacts — interactive prototypes, virtual prototypes, capability storyboards.",
   },
   {
-    href: "/flywheel/test",
+    href: "/flywheel/measure",
     icon: FlaskConical,
-    title: "Test",
+    title: "Measure",
     blurb:
       "Run the artefact against real users or operators, capture the feedback in DASH, feed the next Design iteration.",
   },
@@ -43,7 +43,7 @@ export default function FlywheelPage() {
         <PageHeader
           eyebrow="Foundation"
           title="The product flywheel"
-          lede="Three phases — Research, Design, Test. Research is the outer loop, done thoroughly at the start; Design ↔ Test is the inner loop, iterating at high cadence. Pick a phase to dive in."
+          lede="Three phases — Research, Design, Measure. Research is the outer loop, done thoroughly at the start; Design ↔ Measure is the inner loop, iterating at high cadence. Pick a phase to dive in."
         />
 
         <div className="grid gap-4 sm:grid-cols-3">
@@ -74,7 +74,7 @@ export default function FlywheelPage() {
               Grounded in the 4Ds
             </Heading>
             <Text variant="muted">
-              The flywheel adapts the 4Ds of design innovation — Discover, Define, Develop, Deliver — into a tighter loop suited to defence programmes. Discover and Define collapse into Research (problem space). Develop becomes the Design ↔ Test inner loop (solution space). Deliver becomes the close-out at the end of each interval, where decisions are made and the next loop is seeded.
+              The flywheel adapts the 4Ds of design innovation — Discover, Define, Develop, Deliver — into a tighter loop suited to defence programmes. Discover and Define collapse into Research (problem space). Develop becomes the Design ↔ Measure inner loop (solution space). Deliver becomes the close-out at the end of each interval, where decisions are made and the next loop is seeded.
             </Text>
           </Stack>
 
@@ -215,7 +215,7 @@ const fourDs = [
   {
     d: "D3",
     name: "Develop",
-    mapsTo: "Design ↔ Test",
+    mapsTo: "Design ↔ Measure",
     blurb:
       "Prototype, put it in front of operators, learn, adjust. The high-cadence inner loop of the flywheel.",
   },
@@ -342,7 +342,7 @@ const cadences: Record<"digital" | "engineering", Cadence> = {
         when: "Sprints 3–7",
         what: "Rapid prototyping + user feedback",
         detail:
-          "Tight Design ↔ Test loops each sprint — prototype, put it in front of operators, learn, adjust. The bulk of the flywheel spin happens here.",
+          "Tight Design ↔ Measure loops each sprint — prototype, put it in front of operators, learn, adjust. The bulk of the flywheel spin happens here.",
       },
       {
         when: "Sprint 8",
@@ -356,7 +356,7 @@ const cadences: Record<"digital" | "engineering", Cadence> = {
     aside: {
       summary: "How this aligns with the DevSecOps PI",
       paragraphs: [
-        "Because ProductOps produces working reference code in every Design ↔ Test iteration, DevSecOps does not have to wait for the PI close-out to engage. They run upstream technical assessment — feasibility, integration, security, tech debt — in parallel with the current ProductOps design loop. Risk is reduced continuously, not only at handover.",
+        "Because ProductOps produces working reference code in every Design ↔ Measure iteration, DevSecOps does not have to wait for the PI close-out to engage. They run upstream technical assessment — feasibility, integration, security, tech debt — in parallel with the current ProductOps design loop. Risk is reduced continuously, not only at handover.",
         "The two PIs run as a dual-track model where ProductOps is always one PI ahead of DevSecOps. ProductOps designs and validates capability X in PI N while DevSecOps builds the previously-validated capability W and assesses X in the background. At sprint 8 close-out, validated X hands over to DevSecOps PI N+1, where the assessment work has already de-risked the build.",
       ],
       bullets: [
@@ -365,7 +365,7 @@ const cadences: Record<"digital" | "engineering", Cadence> = {
         "Sprint 8 close-out: validated X with draft requirements hands over to DevSecOps PI N+1.",
       ],
       implication:
-        "Note: what ProductOps hands to DevSecOps is reference code that bootstraps development, not static designs. Working prototypes from the Design ↔ Test loop become the starting point for the build PI, alongside validated requirements.",
+        "Note: what ProductOps hands to DevSecOps is reference code that bootstraps development, not static designs. Working prototypes from the Design ↔ Measure loop become the starting point for the build PI, alongside validated requirements.",
     },
   },
   engineering: {

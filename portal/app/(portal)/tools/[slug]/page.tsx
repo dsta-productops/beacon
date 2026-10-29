@@ -46,13 +46,13 @@ const PROMPTS_SLOT_MARKER = "<!-- PROMPTS SLOT -->";
 const PROMPT_PHASE_LABELS: Record<string, string> = {
   research: "Research",
   design: "Design",
-  test: "Test",
+  measure: "Measure",
 };
 
 const PHASE_LABELS: Record<string, string> = {
   research: "Research",
   design: "Design",
-  test: "Test",
+  measure: "Measure",
   "cross-phase": "Cross-phase",
 };
 const DOMAIN_LABELS: Record<string, string> = {

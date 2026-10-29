@@ -38,11 +38,11 @@ function resolveTool(fm: PromptFrontmatter): PromptTool {
   return "any-llm";
 }
 
-const PHASE_ORDER = ["research", "design", "test", "cross-phase"] as const;
+const PHASE_ORDER = ["research", "design", "measure", "cross-phase"] as const;
 const PHASE_LABELS: Record<string, string> = {
   research: "Research",
   design: "Design",
-  test: "Test",
+  measure: "Measure",
   "cross-phase": "Cross-phase",
 };
 
@@ -70,7 +70,7 @@ const CHAIN_ORDER: string[] = [
   "before-after-journey-mapper",
   "prototype-from-prd",
   "capability-storyboard-scripter",
-  // Test
+  // Measure
   "test-plan-generator",
 ];
 

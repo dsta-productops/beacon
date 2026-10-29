@@ -47,7 +47,7 @@ export const corpus: CorpusEntry[] = [
     url: "/flywheel",
     title: "The product flywheel",
     description:
-      "Three iterative phases — Research, Design, Test — that run continuously.",
+      "Three iterative phases — Research, Design, Measure — that run continuously.",
     section: "Foundation",
   },
   {
@@ -65,8 +65,8 @@ export const corpus: CorpusEntry[] = [
     section: "Foundation",
   },
   {
-    url: "/flywheel/test",
-    title: "Test phase",
+    url: "/flywheel/measure",
+    title: "Measure phase",
     description:
       "Measure what was delivered against what was intended. Close the loop with evidence.",
     section: "Foundation",

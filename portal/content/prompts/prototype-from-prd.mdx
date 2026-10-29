@@ -51,11 +51,11 @@ promptBody: |
 visibility: "public"
 ---
 
-Use this prompt with [Claude Code](/tools/claude-code) to scaffold working reference code from a finalised PRD — the same running scaffold serves as the interactive prototype for the next Test pass.
+Use this prompt with [Claude Code](/tools/claude-code) to scaffold working reference code from a finalised PRD — the same running scaffold serves as the interactive prototype for the next Measure pass.
 
 ## Tips
 
 - The "before writing any code, confirm" step is what prevents Claude Code from generating 500 lines of irrelevant scaffolding. Don't skip it.
 - The output is reference code, not production code. Treat it as the starting point for the team's iteration, and let DevSecOps act on it in parallel.
 - If Claude Code starts inventing PRIZM components that don't exist, stop and tell it to check `lib/components-registry.ts` in the PRIZM repo before generating.
-- The scaffolded prototype is the thing the next Test phase puts in front of users — pair it with the [test-plan generator](/prompts/test-plan-generator), which reads the PRD to draft the plan, then close the loop with usability sessions and DASH surveys.
+- The scaffolded prototype is the thing the next Measure phase puts in front of users — pair it with the [test-plan generator](/prompts/test-plan-generator), which reads the PRD to draft the plan, then close the loop with usability sessions and DASH surveys.

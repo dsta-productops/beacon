@@ -16,7 +16,7 @@ import {
 import { AvailabilityMap, isToolAvailable } from "@/lib/tools";
 import { notFound } from "next/navigation";
 
-const PHASE_SLUGS = ["research", "design", "test"] as const;
+const PHASE_SLUGS = ["research", "design", "measure"] as const;
 
 export function generateStaticParams() {
   return PHASE_SLUGS.map((phase) => ({ phase }));

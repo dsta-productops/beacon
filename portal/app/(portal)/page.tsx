@@ -51,7 +51,7 @@ const stages: Stage[] = [
     ],
   },
   {
-    name: "Test",
+    name: "Measure",
     tools: [
       {
         name: "PULSE",
@@ -78,7 +78,7 @@ export default function Home() {
           </Heading>
           <Text size="lg" variant="muted">
             Beacon shows you how product work goes from research, to design, to
-            testing, and which tool to use at each step.
+            measurement, and which tool to use at each step.
           </Text>
         </Stack>
 
@@ -196,7 +196,7 @@ export default function Home() {
             href="/pipeline"
             className="font-medium text-accent hover:text-accent-strong"
           >
-            Read how research, design and test fit together.
+            Read how research, design and measurement fit together.
           </Link>
         </Text>
       </Stack>
