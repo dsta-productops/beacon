@@ -370,7 +370,7 @@ When the user asks for a Research artefact, identify which one applies and follo
 - **`persona-generator`** — draft a persona from research evidence → `Knowledge Base/{{track}}/Personas/{{persona-name}}`
 - **`prd-generator`** — draft a v0 PRD from the problem-impact ranking, research synthesis, and prior framing → `Knowledge Base/{{track}}/PRDs/{{prd-title}}`
 - **`prior-knowledge-summariser`** — summarise prior knowledge from past programmes on a specific topic → `Knowledge Base/{{track}}/Prior-knowledge/{{topic}}`
-- **`problem-impact-ranker`** — consolidate the captured problems for a programme into a single ranked Problem-impact analysis — each problem scored on reach, severity, evidence and leverage, grouped into leverage tiers, so the team knows which problem to build for first → `Knowledge Base/{{track}}/Problem-impact-analysis`
+- **`problem-impact-ranker`** — consolidate the captured problems for a programme into a single ranked Problem-impact analysis — each problem rated High/Medium/Low on severity, reach and frequency, ranked by the combined score and grouped into tiers, so the team knows which problem to build for first → `Knowledge Base/{{track}}/Problem-impact-analysis`
 - **`research-synthesiser`** — turn interview transcripts and field observations into a single Research synthesis page covering themes, friction, problem statement, and success criteria → `Knowledge Base/{{track}}/Research-synthesis`
 - **`service-blueprint-drafter`** — draft a service blueprint linking user actions to front-stage and back-stage support → `Knowledge Base/{{track}}/Service-blueprints/{{journey-scope}}`
 - **`test-plan-generator`** — draft a complete test plan with scenarios, participants, measurement, and analysis → `Knowledge Base/{{track}}/Test-plans/{{test-name}}`
@@ -416,7 +416,7 @@ The fallback is **visible**, not silent. Tell the user which version you used an
 
 - Read the current-state journey at `Knowledge Base/{{track}}/Journeys/*` — its phases/stages and steps are the BEFORE column.
 - Read the PRD at `Knowledge Base/{{track}}/PRDs/*` — its Scope-module table names the modules the AFTER column is written in. Do not introduce any capability the PRD does not scope.
-- Read `Knowledge Base/{{track}}/Problem-impact-analysis` (fall back to programme-wide) — for the per-phase "Addresses Ranks · Impact" tags and the final coverage check.
+- Read `Knowledge Base/{{track}}/Problem-impact-analysis` (fall back to programme-wide) — for the per-phase "Addresses Ranks · Score" tags and the final coverage check.
 - Optionally read the persona at `Knowledge Base/{{track}}/Personas/*` to keep steps grounded in one operator's reality.
 - Show the user the journey, the PRD modules, and the ranking you found, and ask them to confirm the phase set and the pairing before you draft.
 - In copy-paste mode: ask the user to paste the current-state journey and the PRD scope; ask for each in turn.
@@ -432,7 +432,7 @@ Phase-by-phase comparison across [scope], grounded in the ranked problems each p
 
 ## Phase N — [phase name] ([time window, if the journey has one])
 
-**Addresses Ranks [x, y] · Impact [scores]** — via [the PRD module(s) that act in this phase]
+**Addresses Ranks [x, y] · Score [totals]** — via [the PRD module(s) that act in this phase]
 
 **BEFORE — today**
 
@@ -1611,7 +1611,7 @@ You do **not** apply Confluence labels. The MCP does not expose a label-apply to
 ### Problem-impact ranker (`problem-impact-ranker`)
 
 ```
-You are helping me consolidate the captured problems for a programme into a single ranked Problem-impact analysis — each problem scored on reach, severity, evidence and leverage, grouped into leverage tiers, so the team knows which problem to build for first.
+You are helping me consolidate the captured problems for a programme into a single ranked Problem-impact analysis — each problem rated High/Medium/Low on severity, reach and frequency, ranked by the combined score and grouped into tiers, so the team knows which problem to build for first.
 
 Step 1 — Confirm the run context.
 
@@ -1645,75 +1645,95 @@ When the same artefact-type exists in both locations, the **track-level version 
 
 The fallback is **visible**, not silent. Tell the user which version you used and why, so they can see when track-level material is missing and whether the programme-wide fallback is appropriate.
 
-- Read the **Friction-points table, Themes, and Problem-statement** sections of `Knowledge Base/{{track}}/Research-synthesis` (fall back to programme-wide). The friction table is the seed: each friction row becomes a candidate problem, and its Severity / Frequency / Evidence columns feed the score directly.
-- Look up the **persona(s)** at `Knowledge Base/{{track}}/Personas/*` (fall back to programme-wide) to score Reach — which roles each problem hits, and how often.
-- Search `Knowledge Base/{{track}}/Prior-knowledge/*` and programme-wide for **prior-knowledge summaries** — what's already proven or already in flight. This grounds the Evidence and Value scores.
+- Read the **Friction-points table, Themes, and Problem-statement** sections of `Knowledge Base/{{track}}/Research-synthesis` (fall back to programme-wide). The friction table is the seed: each friction row becomes a candidate problem, and its Severity / Frequency columns feed the rating directly. Its Evidence column is carried across as the evidence marker.
+- Look up the **persona(s)** at `Knowledge Base/{{track}}/Personas/*` (fall back to programme-wide) to rate Reach and Frequency — which roles each problem hits, and how often.
+- Search `Knowledge Base/{{track}}/Prior-knowledge/*` and programme-wide for **prior-knowledge summaries** — what's already proven or already in flight. This grounds the evidence markers and the research status.
 - Gather the **raw sources** the problems came from — field notes, workshop/board exports, or a pasted list — for the verbatims and evidence each entry must cite.
 - Search `Knowledge Base/{{track}}/Heuristic-evaluations/*` and programme-wide for a **heuristic evaluation** of an existing or competitor product. Each finding is a candidate problem already scored for severity and tied to a screen — fold them into the register and cite the finding ID as evidence.
-- Optionally read **journeys and service blueprints** in the space to judge Leverage — which problems are one root cause seen from several seats.
+- Optionally read **journeys and service blueprints** in the space to identify clusters — which problems are one root cause seen from several seats. Clusters are noted beside the score, not scored.
 - Show the user everything you found — the friction table, personas, prior-knowledge, and raw sources — and ask them to confirm or refine the problem set before you score it.
 - In copy-paste mode: ask the user to paste the captured problems (or the board/workshop export), plus any verbatims and evidence they have. Ask for each missing input in turn.
 
 Step 3 — Draft.
 
-Produce a single page. Score every problem, rank them, tier them, then read the ranking back. Output as markdown:
+Produce a single page. Rate every problem, rank them, tier them, then read the ranking back. Output as markdown:
 
 # Problem-impact analysis
 
 **Scope:** [the problem set being ranked]
 **Sources:** [links to the Research synthesis, personas, prior-knowledge, and raw sources — referenced throughout]
 
+*Provenance. Every claim is grounded in the sources above. Nothing has been invented, and where the sources record no evidence the statement says so.*
+
 ## How impact was scored
 
-Each problem is rated **1–5 on four dimensions**, giving a total out of 20. Nothing is invented — where the source records no evidence, the item scores low on Evidence and is flagged discovery-stage rather than dropped.
+Each problem is rated **High / Medium / Low** on three factors:
 
-- **Reach** — how many roles are affected and how often (name the roles).
-- **Severity** — the effort cost, accuracy/safety risk, or morale consequence recorded in the evidence.
-- **Evidence** — strength of what backs the claim: 💻 document / 🧪 research = strong (4–5); 💬 discussion / interview verbatim = moderate (2–3); nothing recorded = weak (1).
-- **Leverage** — whether fixing it removes a root cause other problems depend on (high) versus a self-contained fix (low).
+- **Severity** — how painful is the problem? **H** = safety, accuracy, pay or morale consequence, or work that has to be redone; **M** = significant extra effort or delay; **L** = an annoyance with a workaround.
+- **Reach** — how many people are affected? Name the roles. **H** = several roles, or the whole user population; **M** = one role at scale; **L** = a narrow group.
+- **Frequency** — how often does it occur? **H** = every cycle or every person; **M** = some cycles or a subset; **L** = occasional or edge cases.
+
+**Score.** H = 3, M = 2, L = 1. The score is Severity + Reach + Frequency, from 3 to 9. H-H-H scores 9 and ranks first. Show the triple next to the score (for example `H-H-M · 8`).
+
+**Tie-break.** Equal scores are ordered by Severity, then Reach, then Frequency. Problems still tied share a rank, marked `=`. Do not invent an order.
+
+**Missing data.** Where the sources record nothing for a factor, mark it `?`, sort it as M, and flag the problem `[provisional]`. Do not silently score it L.
+
+**Evidence and Leverage are not scored.** They sit beside the score so a reader can weigh it:
+
+- **Evidence** — strength of what backs the claim: 💻 document / 🧪 research = strong; 💬 discussion / interview verbatim = moderate; nothing recorded = weak.
+- **Cluster** — whether the problem shares a root cause with others (name the cluster), or is self-contained.
 
 ## Ranking at a glance
 
-| # | Problem statement (short) | Source ref | Reach | Sev | Evid | Lev | Total |
-|---|---|---|---|---|---|---|---|
-| 1 | [short statement] | [ref] | [1–5] | [1–5] | [1–5] | [1–5] | [/20] |
+| # | Problem statement (short) | Source ref | Sev | Reach | Freq | Score | Evidence | Cluster |
+|---|---|---|---|---|---|---|---|---|
+| 1 | [short statement] | [ref] | [H/M/L/?] | [H/M/L/?] | [H/M/L/?] | [3–9] | [💻/🧪/💬/none] | [name or —] |
 
-Sort strictly by Total descending. Break ties by Leverage (a shared root cause outranks a self-contained fix at the same score).
+Sort strictly by Score descending, then by the tie-break above.
 
 ## Ranked problems
 
-Group the entries into leverage tiers, highest-leverage first. Use the tier headings that fit the set — typically:
+Group the entries into tiers by score band:
 
-- **Tier 1 — Systemic root causes** — fix these and several items below shrink on their own.
-- **Tier 2 — High-volume process friction** — narrower blast radius, but the strongest hard numbers and clearest fixes.
-- **Tier 3 — Validated but narrower** — real pain, contained to one role or one moment.
-- **Tier 4 — Discovery-stage or engagement-led** — need evidence before they can be prioritised against the above.
+- **Tier 1 — Score 8–9.** Highest pain, widest reach, most often.
+- **Tier 2 — Score 6–7.**
+- **Tier 3 — Score 4–5.**
+- **Tier 4 — Score 3, or two or more factors marked `?`.** Discovery-stage: they need evidence before they can be compared with the above.
+
+If the ranking shows a cluster (problems that are one root cause seen from several seats), open the section with one **consolidated statement** covering the whole cluster, listing the ranks it merges and their scores. Then write the members individually, so either framing can be used.
 
 For each problem, one entry in this shape:
 
-### RANK N · [source ref] · IMPACT [total]/20 — [short title]
+### RANK N · [source ref] · SCORE [total]/9 ([S]-[R]-[F]) — [short title]
 
-[One paragraph. Frame it as a *problem*, not a solution in disguise. Name who has the problem, what the impact is, and why the current state persists — the same discipline as the Research synthesis problem statement.]
+[One paragraph. Frame it as a *problem*, not a solution in disguise. Say what the problem is, where and when it bites, who carries it, what the impact is, and why the current state persists.]
 
-- **Whose pain** — the roles carrying it (workload, accuracy risk, or morale), most-affected first.
-- **Grounded in** — the verbatims and evidence, each with a strength marker (💻 / 🧪 / 💬) and a citable Session ID or page link. If a claim has no recorded evidence, say so plainly and score Evidence low — never fabricate a source or a number.
-- **Value** — what fixing it yields (whose jobscope shrinks, what accuracy/experience improves).
-- **Research status** — is the *issue* proven, or only the *scale*? Note the maturity (prove-issue vs prove-value/scale), any metric already drafted, and — at most one line — the candidate direction if it proves out. Do not design the solution here.
+| Field | Content |
+|---|---|
+| **What** | [the problem in one line] |
+| **Where & when** | [the moment, place or system, with any hard volume recorded] |
+| **Who** | [the roles carrying it, most-affected first] |
+| **Why (root cause)** | [why it happens] |
+| **Why (impact)** | [what it costs: workload, accuracy risk, morale] |
+
+> **Evidence and status** · [The verbatims and evidence, each with a strength marker (💻 / 🧪 / 💬) and a citable Session ID or page link. If a claim has no recorded evidence, say so plainly — never fabricate a source or a number. Then the research status: is the *issue* proven, or only the *scale*? Note any metric already drafted, any factor marked `?`, and — at most one line — the candidate direction if it proves out. Do not design the solution here.]
 
 ## Reading the ranking
 
 Step back from the individual scores and surface what the ranking makes visible:
 
 - **Clusters** — problems that are one root cause seen from several seats. Name them and argue whether to scope them as a single effort rather than N separate fixes.
-- **Where evidence is thin** — high-ranked items resting on 💬 discussion only, and what piece of research would move them from persuasive to defensible.
+- **Where evidence is thin** — high-ranked items resting on 💬 discussion only, or carrying a `?`, and what piece of research would move them from persuasive to defensible.
 - **Policy vs product** — items whose recorded preferred fix is a policy change, not a build. Separate these so they aren't judged on shippability.
 - **Constraints carried over** — assumptions declared out of scope, and open impetus questions that would reshuffle the ranking if answered differently.
 
 Rules:
-- Score only from recorded evidence. Where the source records nothing for a dimension, score it low and flag the gap — do not invent reach, severity, or numbers.
+- Rate only from recorded evidence. Where the source records nothing for a factor, mark it `?` and flag the gap — do not invent reach, severity, frequency, or numbers.
+- Show the arithmetic, and state how ties were broken.
 - Keep each problem statement to one paragraph, framed as a problem.
-- **Don't solution here.** "Value" and an optional one-line candidate direction are the ceiling; the PRD generator picks up the top-ranked problem and does the design.
-- Where the problem set or evidence is incomplete, ask the user up to 3 clarifying questions BEFORE scoring. If you'd be guessing a score, mark it provisional and note it under "Where evidence is thin."
+- **Don't solution here.** The one-line candidate direction is the ceiling; the PRD generator picks up the top-ranked problem and does the design.
+- Where the problem set or evidence is incomplete, ask the user up to 3 clarifying questions BEFORE rating. If you'd be guessing a rating, mark it `?` and note it under "Where evidence is thin."
 
 Step 4 — File the output.
 

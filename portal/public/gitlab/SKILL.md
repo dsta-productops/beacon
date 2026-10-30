@@ -1478,8 +1478,7 @@ Ask for these slots in one message, using these exact bold labels.
 
 - **Programme name** — the named DSTA initiative you are working on (for example SKYWATCH). It is not the deployment environment (on-prem, internet, ANZ C); those are hosting contexts, not programmes. CLARA uses it only to check it is working in the right project wiki. It does not appear in output paths.
 - **Track** — the track within the programme this artefact belongs to (workstream, capability area, feature line, sub-system, or any other meaningful slice). Tracks vary by programme. If the artefact spans tracks, the answer is the literal `Programme-wide`. CLARA lists the track folders it finds so you can pick one; it does not invent track names.
-- **Ranking lens** — what "impact" means here (for example time lost, safety, adoption). The default is severity, frequency and reach together.
-- **Weights** — optional. If you give none, CLARA uses equal weights and marks them `[provisional]`.
+- **Ranking lens** — optional. Impact is always rated on severity, reach and frequency (High, Medium or Low each). Use this slot only to say what "severity" means for this programme (for example time lost, safety, adoption).
 - **Inputs** — the research synthesis and any other material, or "search the wiki".
 
 # Step 1 — Confirm the run context
@@ -1510,7 +1509,7 @@ When the same artefact type exists in both locations, the **track-level version 
 
 - **Field notes.** Before reading any notes, stamp Session IDs (main skill, section 7.7). Then read the notes in `{{track}}/Field-notes/` and `Programme-wide/Field-notes/`, track first. Cite every note by its Session ID in square brackets, for example [FS03]. Never cite an unstamped note.
 - Read the research synthesis for the scope. Its friction table is the required input. If there is none, say so and offer research-synthesiser first.
-- Read the personas to estimate reach, and the field notes to check counts.
+- Read the personas to rate reach and frequency, and the field notes to check counts.
 
 # Step 3 — Draft
 
@@ -1519,18 +1518,27 @@ Rank the problems. Use this structure:
 ```
 # Problem impact analysis — <scope>
 ## How impact was scored
+## Ranking at a glance
 ## Ranked problems
-## Where this differs from the synthesis order
-## Sensitivity
-## Gaps
+## Reading the ranking
 ## Sources
 ```
 
-- **How impact was scored:** a table of the criteria and the formula, with the weights marked `[provisional]` until the user confirms them.
-- **Ranked problems:** a table with the columns Rank, Problem, Severity, Frequency, Reach, Evidence strength, Impact score, Evidence.
-- **Where this differs from the synthesis order:** list any problem whose rank changed and why.
-- **Sensitivity:** whether the top three stay the top three under equal weights and under each criterion alone.
-- **Gaps:** what could not be scored and why.
+**How impact was scored.** Each problem is rated High, Medium or Low on three factors:
+
+- **Severity** — how painful is the problem? H: safety, accuracy, pay or morale consequence, or work that must be redone. M: significant extra effort or delay. L: an annoyance with a workaround.
+- **Reach** — how many people are affected? Name the roles. H: several roles, or the whole user population. M: one role at scale. L: a narrow group.
+- **Frequency** — how often does it occur? H: every cycle or every person. M: some cycles or a subset. L: occasional or edge cases.
+
+State the rule on the page: H = 3, M = 2, L = 1, and the score is Severity + Reach + Frequency, from 3 to 9. H-H-H scores 9 and ranks first. Equal scores are ordered by Severity, then Reach, then Frequency. Problems still tied share a rank, marked `=`. Where the notes record nothing for a factor, mark it `?`, sort it as M, and flag the problem `[provisional]`; never score it L silently.
+
+Evidence and Cluster are **not scored**. They sit beside the score so a reader can weigh it. Evidence is the number and type of notes (interviews, observations, walk-throughs): strong, moderate or weak. Cluster names the root cause the problem shares with others, or `—` if it is self-contained.
+
+**Ranking at a glance.** A table with the columns Rank, Problem, Source ref, Sev, Reach, Freq, Score, Evidence, Cluster. Sort by Score descending, then by the tie-break.
+
+**Ranked problems.** Group by score band: Tier 1 is 8–9, Tier 2 is 6–7, Tier 3 is 4–5, and Tier 4 is a score of 3 or two or more factors marked `?` (discovery-stage). If the ranking shows a cluster, open with one consolidated statement for the whole cluster, listing the ranks it merges, then write the members individually. Each entry is a heading `RANK N · SCORE total/9 (S-R-F) — short title`, one paragraph framed as a problem, a table with the rows What, Where and when, Who, Why (root cause) and Why (impact), and an Evidence and status paragraph that cites Session IDs, says plainly where no evidence is recorded, and states the research status.
+
+**Reading the ranking.** Clusters worth scoping as one effort, where evidence is thin, items whose preferred fix is policy rather than product, and constraints carried over. Include any problem whose rank differs from the synthesis order, and why.
 
 Output rules for every draft:
 
@@ -1543,7 +1551,6 @@ Output rules for every draft:
 - Clean Unicode punctuation. No raw angle brackets in prose.
 - If a diagram helps, use Mermaid.
 - Take severity and frequency from the synthesis and cite it. Reach is the share of roles or users affected, and must be countable.
-- Evidence strength is the number and type of notes (interviews, observations, walk-throughs).
 - Show the arithmetic. State how ties were broken.
 - Rank problems only. Do not propose solutions.
 

@@ -5,14 +5,16 @@ domain: shared
 tool: clara
 task: >-
   consolidate the captured problems for a programme into a single ranked
-  Problem-impact analysis — each problem scored on reach, severity, evidence and
-  leverage, grouped into leverage tiers, so the team knows which problem to
-  build for first
+  Problem-impact analysis — each problem rated High/Medium/Low on severity,
+  reach and frequency, ranked by the combined score and grouped into tiers, so
+  the team knows which problem to build for first
 expectedOutput: >-
   A single markdown page: a scoring rubric, a ranked at-a-glance table (each
-  problem scored /20), tiered problem entries (whose pain, grounded-in evidence,
-  value, research maturity), and a 'reading the ranking' analysis. Clarifying
-  questions where the evidence is thin.
+  problem rated H/M/L on severity, reach and frequency, scored out of 9, with
+  its evidence strength and cluster alongside), tiered problem entries (a
+  problem paragraph, What / Where & when / Who / Why tables, evidence and
+  status), and a 'reading the ranking' analysis. Clarifying questions where the
+  evidence is thin.
 inputsFrom:
   - research-synthesiser
   - persona-generator
@@ -27,18 +29,19 @@ confluenceContext:
         `Knowledge Base/{{track}}/Research-synthesis`. Falls back to `Knowledge
         Base/Programme-wide/Research-synthesis` when no track-level version
         exists. The friction table is the seed for the ranked register — its
-        Severity/Frequency/Evidence columns feed the score directly.
+        Severity/Frequency columns feed the rating directly, and its Evidence
+        column is carried across as a marker.
     - what: Persona(s) for the affected roles
       description: >-
         Pages under `Knowledge Base/{{track}}/Personas/*` or `Knowledge
-        Base/Programme-wide/Personas/*`. Used to score Reach — which roles are
-        hit and how often (the 'whose pain' line).
+        Base/Programme-wide/Personas/*`. Used to rate Reach and Frequency — which
+        roles are hit and how often (the 'Who' line).
     - what: Prior-knowledge summaries (optional)
       description: >-
         Search `Knowledge Base/{{track}}/Prior-knowledge/*` and `Knowledge
         Base/Programme-wide/Prior-knowledge/*`. Tells you what's already been
-        proven or is in flight — this informs the Evidence and Value scoring and
-        stops you re-discovering known problems.
+        proven or is in flight — this informs the evidence markers and research
+        status and stops you re-discovering known problems.
     - what: Raw field notes / captured problem sources
       description: >-
         Field notes, workshop/board exports, or a pasted list of pain points.
@@ -47,8 +50,9 @@ confluenceContext:
     - what: Journeys and service blueprints (optional)
       description: >-
         Pages under `Knowledge Base/{{track}}/Journeys/*` and
-        `.../Service-blueprints/*`. Used to score Leverage — which problems
-        share a single root cause seen from several seats.
+        `.../Service-blueprints/*`. Used to identify clusters — which problems
+        share a single root cause seen from several seats. Noted beside the
+        score, not scored.
   outputPathTemplate: 'Knowledge Base/{{track}}/Problem-impact-analysis'
 visibility: public
 source: clara
@@ -71,6 +75,7 @@ copyBlock: Use CLARA's `problem-impact-ranker` for <programme name>.
 ## Tips
 
 - The ranking is an **action queue, not a complaint list**. Its value is the sort order and the tiers — an unranked pile of problems tells the team nothing about where to start.
-- Reach × Severity says how much a problem *hurts*; **Leverage says whether fixing one thing fixes many**. A high-leverage root cause should usually be scoped as a single product, not N point fixes — that judgement is the whole point of the "Clusters" note.
-- **Evidence scoring keeps you honest.** A persuasive problem backed only by 💬 discussion should rank below a duller one with 💻/🧪 behind it — and the gap is exactly what tells research what to go prove next.
+- **Severity, Reach and Frequency are each High, Medium or Low** (3, 2, 1), and the score is their sum out of 9. H-H-H ranks first. Ties are broken by Severity, then Reach, then Frequency.
+- **Evidence and clusters are shown, not scored.** A persuasive problem backed only by 💬 discussion keeps its rank but is flagged `[provisional]` — the gap is exactly what tells research what to go prove next. A cluster of problems sharing one root cause should usually be scoped as a single product, not N point fixes — that judgement is the whole point of the "Clusters" note.
+- **A missing rating is a `?`, not an L.** It sorts as Medium and is flagged, so unmeasured problems aren't quietly pushed down.
 - This page is the hand-off between synthesis and build: the Research synthesis says *what is wrong*, this artefact says *which wrong thing to fix first*, and the [PRD generator](/prompts/prd-generator) builds for the top-ranked (or user-chosen) problem. Keep the problem statements clean enough that the PRD can lift one straight out.

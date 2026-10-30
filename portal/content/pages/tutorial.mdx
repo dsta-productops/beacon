@@ -600,12 +600,15 @@ Your research now lists many problems, and you cannot fix them all at once.
 
 CLARA ranks them so you know which to build for first.
 
-It scores each problem out of 5 on four measures, so a problem scores up to 20:
+It rates each problem High, Medium or Low on three measures:
 
+- **Severity:** how painful the problem is
 - **Reach:** how many people it affects
-- **Severity:** how badly it hurts
-- **Evidence:** how well it is proven
-- **Leverage:** whether fixing it also fixes others
+- **Frequency:** how often it happens
+
+High scores 3, Medium 2 and Low 1, so a problem scores from 3 to 9. A problem that is High on all three scores 9 and ranks first.
+
+CLARA also shows how well each problem is proven (its evidence) and whether it shares a root cause with others. These are not scored, but they tell you how far to trust the rank.
 
 1. :own[Paste this prompt into CLARA. Replace PROGRAMME with your programme's name.]:demo[Paste this prompt into CLARA:]
    ```prompt
@@ -622,11 +625,11 @@ It scores each problem out of 5 on four measures, so a problem scores up to 20:
    Source of the problems: the friction points in the Programme-wide research synthesis, the heuristic evaluation and the field notes
    ```
    :::
-3. Read the ranked table and the tiers. Check that the top problems match what you saw in the research.
+3. Read the ranked table and the tiers. Check that the top problems match what you saw in the research. A problem marked `[provisional]` has a rating CLARA could not find evidence for, so check it.
 4. CLARA shows you the draft and the page it will go under. Say yes to file it.
 
 :::check
-In Confluence, open the **Problem-impact-analysis** page. It has a ranked table with each problem scored out of 20, grouped into tiers. Each problem names whose pain it is and the evidence behind it.
+In Confluence, open the **Problem-impact-analysis** page. It has a ranked table with each problem rated High, Medium or Low on severity, reach and frequency, and scored out of 9, grouped into tiers. Each problem says who it affects and the evidence behind it.
 :::
 
 
@@ -641,21 +644,16 @@ It is the most important output of Research.
    ```prompt
    Use CLARA's `prd-generator` for PROGRAMME.
    ```
+2. :own[Choose the problem to build for. CLARA suggests the top-ranked problem from step 13.]:demo[Answer with:]
    :::demo
-   Answer with:
-
    ```prompt
    Programme name: SKYPROTECT
    Track: Programme-wide
    PRD title: Operator-console-v1
    Original stakeholder ask: Operators at our two sites should not need three windows to confirm a drone. Commanders in the central ops room should be able to authorise faster. Show us a prototype that people can try.
+   Problem to build for: ranks 1, 6 and 7 of the problem-impact analysis together. Operators cannot tell whether the radar, RF and camera reports describe the same drone, they distrust the radar's label, and they cannot tell contradicting or stale sensor data from live data. This is the kickoff ask. Escalation and authorisation are secondary. If the ranking puts another problem first, still build for these, and note why in the PRD.
+   Prototype scope: the prototype is built only from PRIZM components, and PRIZM has no radar or camera view. Put live radar, RF and camera feeds out of scope. Show sensor evidence as data. Include three things. First, a contact list with a short agreement status for each contact, using the words Sensors agree, Sensors disagree, Single sensor, 2 of 3 agree and Agreement unknown. Each contact shows its site as a label only. Second, for each contact, the confidence the system presents, with how it is made up: the confidence and weight of each sensor, and a note when a disagreeing sensor lowers it. It is never a bare number. Third, simple prototype-only buttons that simulate a new sensor report and reset the contacts. Leave the fusion rule, the weights and the staleness limits as TBD.
    ```
-   :::
-2. Choose the problem to build for. CLARA suggests the top-ranked problem from step 13.
-   :::demo
-   Build for the problem of confirming a drone across the three tools and escalating it to the commander with the evidence, which is the kickoff ask.
-
-   If your ranking puts another problem first, still build for this one, and note why in the PRD.
    :::
 3. Read the draft. If something is wrong or missing, tell CLARA what to change, and it updates the draft.
 4. CLARA shows you the draft and the page it will go under. Say yes to file it. The PRD becomes the input for your prototype.
@@ -716,7 +714,7 @@ Claude Code reads your PRD and PRIZM's rules, so the result follows DSTA standar
 
    Read the PRD from Confluence. It is the page called PRD-TITLE in the PRDs folder of the PROGRAMME Knowledge Base.
 
-   Build it with Next.js, TypeScript and Tailwind v4.
+   Build it with Next.js, TypeScript and Tailwind v4. Use PRIZM components only. Do not create new components. If you think one is missing, stop and tell me what is missing, then wait.
 
    Before you write any code, ask me which PRIZM zone to use, Enterprise or C3. Then list the three to five most important user flows in the PRD and ask me which to build first. Do not build everything in one pass.
    ```
@@ -727,12 +725,22 @@ Claude Code reads your PRD and PRIZM's rules, so the result follows DSTA standar
 
    Read the PRD from Confluence. It is the page called Operator-console-v1 in the PRDs folder of the SKYPROTECT Knowledge Base.
 
-   Build it with Next.js, TypeScript and Tailwind v4.
+   Build it with Next.js, TypeScript and Tailwind v4. Use PRIZM components only. Do not create new components or draw your own radar, map or camera views. If you think one is missing, stop and tell me what is missing, then wait.
 
-   Use the C3 zone, because this is a command-and-control system. Start from PRIZM's C3 app shell, so the prototype has a top bar, a status ticker and an icon rail. Use the glass variant for the evidence panel and for any popovers and tooltips. Keep the authorise confirmation as a solid dialog, because PRIZM keeps confirmations for important decisions solid.
+   Use the C3 zone, because this is a command-and-control system. Scaffold the project in the current folder. Copy PRIZM's C3 app shell into it and fill the shell's main canvas, so the prototype has a top bar, a status ticker and an icon rail. Copying the shell counts as using PRIZM.
+
+   Lay out the main canvas as a master-detail view, and fill it with what the PRD's user stories describe, using the PRD's own wording for statuses and labels. On the left is an alert queue table with the columns Alert, Contact, Time and Sensors. The Sensors column shows a badge with the agreement status, and the contact column shows the site as a label. Make the queue 25 to 40 percent of the canvas width, with all its columns fitting inside it without sideways scrolling. The selected row is highlighted. On the right, for the selected contact, show a header with the alert ID, a status badge and a line giving the contact, site and time. Below it, show each sensor's report, its age and whether it is live, stale or dropped, in a table. Then a card titled "Fused confidence" with the figure in large type and a "What does this number mean?" link that opens a popover. Under that, a table of sensor, sensor confidence, weight and contribution, followed by the weighted sum, the disagreement adjustment and the rounded fused confidence. Then a warning alert explaining what lowered the figure. Last, a card titled "Prototype controls" that says it simulates events the real console would receive and is not part of the design, with a button "Simulate new RF report" that adds a report labelled "Simulated" and updates the status and the confidence, and a button "Reset all alerts". Let the right side take the remaining width. Fill the shell's status ticker with the site, open alerts, contradiction-class alerts and sensors online.
+
+   Use this sample data for illustration, and select A-2042 first. Where it differs from the PRD, follow the PRD. Contacts (alert, contact, site, time): A-2041 Small UAS (probable), Alpha, 05:31; A-2042 Small UAS (probable), Bravo, 05:37; A-2043 Fixed-wing UAS, Alpha, 05:44; A-2044 Unclassified contact, Bravo, 05:52; A-2045 Small UAS (probable), Bravo, 05:58; A-2046 Small UAS (probable), Alpha, 06:03. Give them a mix of statuses, covering agree, disagree, single sensor, partial agreement and unknown. For A-2042, the sensors disagree: radar 91 percent at weight 40 percent, RF 12 percent at 30 percent, EO/IR 85 percent at 30 percent. Contributions are 36.4, 3.6 and 25.5, the weighted sum is 65.5, the disagreement adjustment is minus 12, and the fused confidence is 54 percent. The warning says the fused value is 12 points lower than the weighted sum because RF disagrees with the other sensors. Label the weights and the adjustment as simulated. Make up similar values for the other contacts.
+
+   Turn on the shell's glass mode by default (`defaultGlass`), and keep the bell and the glass toggle in the top bar working, so the notification centre opens as a glass panel. Apart from the shell, use the glass variant only for popovers and tooltips.
+
+   Where the PRD leaves anything else undecided, such as the fusion rule, the staleness limits or what the camera reports, use made-up sample values and do not stop to ask about them.
+
+   When you finish, list every component the prototype uses and where it comes from in PRIZM, and flag anything you wrote yourself instead of taking it from PRIZM.
    ```
    :::
-5. :own[Claude Code asks you two questions before it builds. Choose a PRIZM zone: **Enterprise** for websites and back-office tools, or **C3** for command-and-control systems. When it lists the user flows, pick one to build first. Do not skip this question.] :demo[The prompt already names the zone and the flow, so Claude Code should start building. If it asks anyway, answer C3 and the flow that confirms a drone and escalates it to the commander.]
+5. :own[Claude Code asks you two questions before it builds. Choose a PRIZM zone: **Enterprise** for websites and back-office tools, or **C3** for command-and-control systems. When it lists the user flows, pick one to build first. Do not skip this question.] :demo[The prompt already names the zone and the screens, so Claude Code should start building. If it asks anyway, answer C3 and the alert queue with the fused confidence detail.]
 
 6. Open the prototype in your browser. To change something, describe the change in plain English.
 
