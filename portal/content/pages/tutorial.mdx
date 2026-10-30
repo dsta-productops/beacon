@@ -24,7 +24,7 @@ Confirm you have this access before you start:
 - **Confluence.** An account that can create a Confluence space.
 - **A Claude account.** This can be a paid Claude subscription (Pro, Max, Team or Enterprise) or a Claude Console account. Step 2 uses it to sign in to [Claude Code](/tools/claude-code).
 - **INSIGHT.** Step 11 needs it, and that step is optional. INSIGHT is currently available on Mac.
-- **A personal email address and your work email.** Step 3 uses both to create your [DASH](/tools/dash) account. Steps 8 and 18 use DASH.
+- **A personal email address and your work email.** Step 3 uses both to create your [DASH](/tools/dash) account. Steps 9 and 18 use DASH.
 - **The [PULSE CMS](https://pulse-reportcards.vercel.app).** Step 20 needs it.
 
 If you do not have access to PULSE, or cannot set up your DASH account, email [DESIGNINNO@dsta.gov.sg](mailto:DESIGNINNO@dsta.gov.sg) to ask for it.
@@ -94,7 +94,7 @@ Claude Code lists the Confluence spaces you connected it to.
 ## 3. Create a DASH account
 ::step{id="dash-account" phase="Setup" tool="DASH"}
 
-**DASH** runs short surveys that measure how easy a system is to use. You use it in step 8 to measure how things are today, and in step 18 to compare your prototype against that.
+**DASH** runs short surveys that measure how easy a system is to use. You use it in step 9 to measure how things are today, and in step 18 to compare your prototype against that.
 
 1. Go to [diux-dash.com](https://diux-dash.com) and sign up.
 2. Sign up with a **personal email address**, such as a Gmail address, not your work email.
@@ -329,28 +329,7 @@ In Confluence, open the **Prior-knowledge** folder. It holds a new summary of th
 ::::
 
 
-## 8. Measure how things are today
-::step{id="baseline" phase="Research" tool="DASH"}
-
-A **baseline** measures how things work today, so you can show later that your design is better.
-
-Do it before any interviews or design work.
-
-**DASH** asks about **SUS** (System Usability Scale, a short score for how easy a system is to use), look and feel, user needs, system performance and **CSAT** (customer satisfaction).
-
-It also tracks **OKRs**, which are goals with numbers attached.
-
-1. Sign in at [diux-dash.com](https://diux-dash.com) and open your programme's workspace.
-2. Create a session, choose **Baseline Testing**, and set up questions. :demo[Name the project **The current three-window toolchain: Halden Radar, Sigma RF Watch and Optix EO Viewer**.]
-
-::screenshot{src="/confluence-walkthrough-step-7-1.png" caption="The DASH new-session screen, with Baseline Testing selected" hint="the DASH new-session screen with Baseline Testing highlighted"}
-
-3. :own[Share the link or QR code with people who use that system. Responses appear in DASH as they answer.] :demo[Answer the survey yourself as a Site Alpha operator would, using what you read in the kickoff brief. If you can, ask a colleague to answer it too, so you have more than one response.] Keep this session open, because you compare against it in step 18.
-
-::screenshot{src="/confluence-walkthrough-step-7-2.png" caption="The Baseline Testing session, showing the share link and QR code" hint="the Baseline Testing session in DASH, showing the share link and QR code"}
-
-
-## 9. Review the product people use today
+## 8. Review the product people use today
 ::step{id="heuristic-evaluation" phase="Research" tool="CLARA"}
 
 A **heuristic evaluation** checks a product against well-known usability rules, called **heuristics**.
@@ -394,6 +373,27 @@ These problems feed your research synthesis in step 12 and your problem ranking 
 :::check
 In Confluence, open the **Heuristic-evaluations** folder. It holds your new report, with a score out of 100, severity-rated findings that each cite a screen, and a fix list ranked P0, P1 and P2.
 :::
+
+
+## 9. Measure how things are today
+::step{id="baseline" phase="Research" tool="DASH"}
+
+A **baseline** measures how things work today, so you can show later that your design is better.
+
+Do it before any interviews or design work.
+
+**DASH** asks about **SUS** (System Usability Scale, a short score for how easy a system is to use), look and feel, user needs, system performance and **CSAT** (customer satisfaction).
+
+It also tracks **OKRs**, which are goals with numbers attached.
+
+1. Sign in at [diux-dash.com](https://diux-dash.com) and open your programme's workspace.
+2. Create a session, choose **Baseline Testing**, and set up questions. :demo[Name the project **The current three-window toolchain: Halden Radar, Sigma RF Watch and Optix EO Viewer**.]
+
+::screenshot{src="/confluence-walkthrough-step-7-1.png" caption="The DASH new-session screen, with Baseline Testing selected" hint="the DASH new-session screen with Baseline Testing highlighted"}
+
+3. :own[Share the link or QR code with people who use that system. Responses appear in DASH as they answer.] :demo[Answer the survey yourself as a Site Alpha operator would, using what you read in the kickoff brief. If you can, ask a colleague to answer it too, so you have more than one response.] Keep this session open, because you compare against it in step 18.
+
+::screenshot{src="/confluence-walkthrough-step-7-2.png" caption="The Baseline Testing session, showing the share link and QR code" hint="the Baseline Testing session in DASH, showing the share link and QR code"}
 
 
 ## 10. Interview your users
@@ -515,7 +515,7 @@ CLARA reads them all in one pass and separates what is new from what you already
    ```prompt
    Use CLARA's `research-synthesiser` for PROGRAMME.
    ```
-2. Give it your learning goals, the gaps you found in step 7 and the findings from step 9.
+2. Give it your learning goals, the gaps you found in step 7 and the findings from step 8.
    :::demo
    Answer with:
 
@@ -800,7 +800,7 @@ In Confluence, open the **Test-plans** folder. It holds your new test plan, with
 ## 18. Measure and compare
 ::step{id="measure" phase="Measure" tool="DASH"}
 
-Test the prototype, then compare the results with your baseline from step 8.
+Test the prototype, then compare the results with your baseline from step 9.
 
 The comparison is your evidence that the new design is better, or your guide to what to fix next.
 
