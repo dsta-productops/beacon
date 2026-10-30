@@ -23,11 +23,11 @@ Confirm you have this access before you start:
 
 - **Confluence.** An account that can create a Confluence space.
 - **A Claude account.** This can be a paid Claude subscription (Pro, Max, Team or Enterprise) or a Claude Console account. Step 2 uses it to sign in to [Claude Code](/tools/claude-code).
-- **INSIGHT.** Step 10 needs it, and that step is optional. INSIGHT is currently available on Mac.
-- **[DASH](/tools/dash),** at [diux-dash.com](https://diux-dash.com). Steps 7 and 17 use it.
-- **The [PULSE CMS](https://pulse-reportcards.vercel.app).** Step 18 needs it.
+- **INSIGHT.** Step 11 needs it, and that step is optional. INSIGHT is currently available on Mac.
+- **A personal email address and your work email.** Step 3 uses both to create your [DASH](/tools/dash) account. Steps 8 and 18 use DASH.
+- **The [PULSE CMS](https://pulse-reportcards.vercel.app).** Step 20 needs it.
 
-If you do not have access to DASH or PULSE, email [DESIGNINNO@dsta.gov.sg](mailto:DESIGNINNO@dsta.gov.sg) to ask for it.
+If you do not have access to PULSE, or cannot set up your DASH account, email [DESIGNINNO@dsta.gov.sg](mailto:DESIGNINNO@dsta.gov.sg) to ask for it.
 
 ## 2. Set up Claude Code
 ::step{id="setup-claude-code" phase="Setup" tool="Claude Code"}
@@ -91,7 +91,22 @@ Claude Code lists the Confluence spaces you connected it to.
 :::
 
 
-## 3. Install CLARA
+## 3. Create a DASH account
+::step{id="dash-account" phase="Setup" tool="DASH"}
+
+**DASH** runs short surveys that measure how easy a system is to use. You use it in step 8 to measure how things are today, and in step 18 to compare your prototype against that.
+
+1. Go to [diux-dash.com](https://diux-dash.com) and sign up.
+2. Sign up with a **personal email address**, such as a Gmail address, not your work email.
+3. Later in sign-up, DASH asks for your **work email** to verify you. It sends a PIN to your work email. Enter that PIN in DASH.
+4. Once you are verified, follow the steps in DASH to finish setting up your account.
+
+:::check
+You can sign in to DASH with your personal email address, and you have finished DASH's setup steps.
+:::
+
+
+## 4. Install CLARA
 ::step{id="install-clara" phase="Setup" tool="CLARA"}
 
 Research usually ends up scattered across notes, slides and chats.
@@ -140,12 +155,12 @@ CLARA introduces itself and says what it can do, such as drafting personas, jour
 :::
 
 
-## 4. Install PRIZM
+## 5. Install PRIZM
 ::step{id="install-prizm" phase="Setup" tool="PRIZM"}
 
 **PRIZM** is DSTA's design system: a library of ready-made screens, components and colours.
 
-Claude Code reads its instructions, so the prototype you build in step 15 follows DSTA standards without extra styling work.
+Claude Code reads its instructions, so the prototype you build in step 16 follows DSTA standards without extra styling work.
 
 Choose a method below. If you are not sure, choose **File**.
 
@@ -206,7 +221,7 @@ Claude Code names two zones, **Enterprise** and **C3**. It says it read them fro
 :::
 
 
-## 5. Set up your Knowledge Base
+## 6. Set up your Knowledge Base
 ::step{id="knowledge-base" phase="Setup" tool="CLARA"}
 
 Your **Knowledge Base** is the set of Confluence pages where CLARA files everything you make, in one folder per document type.
@@ -263,7 +278,7 @@ Open **S06** to see what a rough field note looks like.
 
 ::::
 
-## 6. Find what is already known
+## 7. Find what is already known
 ::step{id="prior-knowledge" phase="Research" tool="CLARA"}
 
 Start by reviewing past projects, earlier write-ups and other teams' Confluence pages, so you do not begin from zero.
@@ -314,7 +329,7 @@ In Confluence, open the **Prior-knowledge** folder. It holds a new summary of th
 ::::
 
 
-## 7. Measure how things are today
+## 8. Measure how things are today
 ::step{id="baseline" phase="Research" tool="DASH"}
 
 A **baseline** measures how things work today, so you can show later that your design is better.
@@ -330,12 +345,12 @@ It also tracks **OKRs**, which are goals with numbers attached.
 
 ::screenshot{src="/confluence-walkthrough-step-7-1.png" caption="The DASH new-session screen, with Baseline Testing selected" hint="the DASH new-session screen with Baseline Testing highlighted"}
 
-3. :own[Share the link or QR code with people who use that system. Responses appear in DASH as they answer.] :demo[Answer the survey yourself as a Site Alpha operator would, using what you read in the kickoff brief. If you can, ask a colleague to answer it too, so you have more than one response.] Keep this session open, because you compare against it in step 17.
+3. :own[Share the link or QR code with people who use that system. Responses appear in DASH as they answer.] :demo[Answer the survey yourself as a Site Alpha operator would, using what you read in the kickoff brief. If you can, ask a colleague to answer it too, so you have more than one response.] Keep this session open, because you compare against it in step 18.
 
 ::screenshot{src="/confluence-walkthrough-step-7-2.png" caption="The Baseline Testing session, showing the share link and QR code" hint="the Baseline Testing session in DASH, showing the share link and QR code"}
 
 
-## 8. Review the product people use today
+## 9. Review the product people use today
 ::step{id="heuristic-evaluation" phase="Research" tool="CLARA"}
 
 A **heuristic evaluation** checks a product against well-known usability rules, called **heuristics**.
@@ -344,7 +359,7 @@ CLARA uses Nielsen's 10 heuristics.
 
 For each problem it finds, it gives a severity rating and the screen it appears on.
 
-These problems feed your research synthesis in step 11 and your problem ranking in step 13.
+These problems feed your research synthesis in step 12 and your problem ranking in step 14.
 
 
 1. Collect the material to evaluate: numbered screenshots of the flows, a link CLARA can open, or a PDF or deck of the screens.
@@ -381,7 +396,7 @@ In Confluence, open the **Heuristic-evaluations** folder. It holds your new repo
 :::
 
 
-## 9. Interview your users
+## 10. Interview your users
 ::step{id="interviews" phase="Research" tool="CLARA"}
 
 Surveys give you numbers, and interviews tell you why.
@@ -394,7 +409,7 @@ CLARA writes the guide and you run the conversations.
    Use CLARA's `interview-guide-generator` for PROGRAMME.
    ```
 2. CLARA shows you the draft and the page it will go under. Say yes to file it.
-3. Run 5 to 7 conversations. To get live prompts while you talk, set up INSIGHT in step 10 first.
+3. Run 5 to 7 conversations. To get live prompts while you talk, set up INSIGHT in step 11 first.
 4. After each one, paste your notes into Confluence using the **Field Notes** template, exactly as you took them. Do not tidy them, because polished notes add your own bias.
 
 
@@ -431,7 +446,7 @@ In Confluence, open the **Interview-guides** folder to find a new guide for how 
 ::::
 
 
-## 10. Get live prompts in interviews
+## 11. Get live prompts in interviews
 ::step{id="interview-prompts" phase="Research" tool="INSIGHT"}
 
 **INSIGHT** listens while you interview and suggests one thing at a time: a follow-up question, a definition for jargon, or a snippet from your documents.
@@ -441,18 +456,18 @@ It runs on your computer without internet, and nothing leaves your device.
 This step is optional.
 
 :::own
-It helps you run the conversations in step 9. If you do not have INSIGHT, run step 9 without it and carry on to step 11.
+It helps you run the conversations in step 10. If you do not have INSIGHT, run step 10 without it and carry on to step 12.
 :::
 
 :::demo
 In the demo project you can skip this step, because the SKYPROTECT interview notes are already in `Field-notes`.
 
-If you have INSIGHT and want to try it, you practise on a short script instead of a real interview. Otherwise, carry on to step 11.
+If you have INSIGHT and want to try it, you practise on a short script instead of a real interview. Otherwise, carry on to step 12.
 :::
 
 ### Install INSIGHT
 
-INSIGHT is only available on Mac for now. A Windows version is not available yet, so if you use Windows, skip this step and carry on to step 11.
+INSIGHT is only available on Mac for now. A Windows version is not available yet, so if you use Windows, skip this step and carry on to step 12.
 
 1. Download the INSIGHT app from [this Google Drive link](https://drive.google.com/file/d/1RwBK2d0W2AlxtCk1VHl77378iNDGMGNk/view?usp=sharing). It is a `.dmg` file.
 2. Open the `.dmg` file and drag **INSIGHT** into the **Applications** folder.
@@ -476,7 +491,7 @@ INSIGHT opens without a warning that the app is damaged or from an unidentified 
 ::screenshot{src="/confluence-walkthrough-step-10-1.png" caption="The Now card showing a suggested follow-up question during an interview" hint="the INSIGHT window during a session, with the Now card, the running summary and the glossary visible"}
 
 4. When the conversation ends, end the session and open the review. It shows a transcript with each speaker labelled and the suggestions tied to timestamps.
-5. Export the review as Markdown :own[and paste it into the **Field Notes** template, as in step 9.] :demo[and open the file. This is what you would paste into a Field Notes page on a real project.]
+5. Export the review as Markdown :own[and paste it into the **Field Notes** template, as in step 10.] :demo[and open the file. This is what you would paste into a Field Notes page on a real project.]
 
 :::::check
 :::own
@@ -489,7 +504,7 @@ If you tried INSIGHT, a transcript of the practice script with each speaker labe
 :::::
 
 
-## 11. Make sense of the notes
+## 12. Make sense of the notes
 ::step{id="synthesise" phase="Research" tool="CLARA"}
 
 Research synthesis pulls the patterns out of many notes.
@@ -500,7 +515,7 @@ CLARA reads them all in one pass and separates what is new from what you already
    ```prompt
    Use CLARA's `research-synthesiser` for PROGRAMME.
    ```
-2. Give it your learning goals, the gaps you found in step 6 and the findings from step 8.
+2. Give it your learning goals, the gaps you found in step 7 and the findings from step 9.
    :::demo
    Answer with:
 
@@ -520,7 +535,7 @@ In Confluence, open the **Research-synthesis** page. It has themes, a friction t
 :::
 
 
-## 12. Profile your users
+## 13. Profile your users
 ::step{id="personas-journeys" phase="Research" tool="CLARA"}
 
 Turn the research into three documents.
@@ -593,7 +608,7 @@ In Confluence, open these three folders. Each holds a new page, linked to the ev
 ::::
 
 
-## 13. Rank the problems
+## 14. Rank the problems
 ::step{id="problem-ranking" phase="Research" tool="CLARA"}
 
 Your research now lists many problems, and you cannot fix them all at once.
@@ -614,7 +629,7 @@ CLARA also shows how well each problem is proven (its evidence) and whether it s
    ```prompt
    Use CLARA's `problem-impact-ranker` for PROGRAMME.
    ```
-2. Tell it which problems to rank, such as all problems across the journey, or one track's. Name where they come from, such as the friction table in your research synthesis from step 11, so the ranking can be traced.
+2. Tell it which problems to rank, such as all problems across the journey, or one track's. Name where they come from, such as the friction table in your research synthesis from step 12, so the ranking can be traced.
    :::demo
    Answer with:
 
@@ -633,7 +648,7 @@ In Confluence, open the **Problem-impact-analysis** page. It has a ranked table 
 :::
 
 
-## 14. Write the requirements
+## 15. Write the requirements
 ::step{id="prd" phase="Research" tool="CLARA"}
 
 A **PRD** (product requirements document) is one page everyone agrees on: the problem, who it is for, what the product must do and how you will know it worked.
@@ -644,7 +659,7 @@ It is the most important output of Research.
    ```prompt
    Use CLARA's `prd-generator` for PROGRAMME.
    ```
-2. :own[Choose the problem to build for. CLARA suggests the top-ranked problem from step 13.]:demo[Answer with:]
+2. :own[Choose the problem to build for. CLARA suggests the top-ranked problem from step 14.]:demo[Answer with:]
    :::demo
    ```prompt
    Programme name: SKYPROTECT
@@ -663,7 +678,7 @@ In Confluence, open the **PRDs** folder. It holds your new PRD, with a problem s
 :::
 
 
-## 15. Build a prototype
+## 16. Build a prototype
 ::step{id="prototype" phase="Design" tool="Claude Code + PRIZM"}
 
 A prototype is a working draft people can click through.
@@ -703,7 +718,7 @@ Claude Code reads your PRD and PRIZM's rules, so the result follows DSTA standar
       pnpm config set registry <address>
       ```
    :::
-3. Paste the PRIZM starter prompt from step 4 into the Claude panel first, and wait for Claude Code to name the zones.
+3. Paste the PRIZM starter prompt from step 5 into the Claude panel first, and wait for Claude Code to name the zones.
 4. Paste this prompt next.
 
    It tells Claude Code which Confluence page holds your PRD, so you do not paste the PRD itself.
@@ -751,7 +766,7 @@ A running prototype of your chosen flow, built from PRIZM components and semanti
 :::
 
 
-## 16. Plan the test
+## 17. Plan the test
 ::step{id="test-plan" phase="Measure" tool="CLARA"}
 
 A test plan says who you will test with and what you will ask them to do.
@@ -782,10 +797,10 @@ In Confluence, open the **Test-plans** folder. It holds your new test plan, with
 :::
 
 
-## 17. Measure and compare
+## 18. Measure and compare
 ::step{id="measure" phase="Measure" tool="DASH"}
 
-Test the prototype, then compare the results with your baseline from step 7.
+Test the prototype, then compare the results with your baseline from step 8.
 
 The comparison is your evidence that the new design is better, or your guide to what to fix next.
 
@@ -798,7 +813,7 @@ The comparison is your evidence that the new design is better, or your guide to 
 4. Ask **DASH AI** for recommendations. It suggests usability improvements based on industry standards.
 
 ::screenshot{src="/confluence-walkthrough-step-17-2.png" caption="The DASH AI panel, ready for your question" hint="the DASH AI panel open"}
-5. File the results in Confluence, so the report card in step 19 can cite them. CLARA has no results page of its own yet, so ask Claude Code to add a page under your test plan. Export the comparison from DASH, attach it, and paste:
+5. File the results in Confluence, so the report card in step 20 can cite them. CLARA has no results page of its own yet, so ask Claude Code to add a page under your test plan. Export the comparison from DASH, attach it, and paste:
    ```prompt
    File the attached DASH results in Confluence as a new child page of the PROGRAMME test plan. Call it "Results". Show me the page and where it will go before you create it. Copy the figures exactly, name the DASH session each one came from, and do not add figures that are not in the attachment.
    ```
@@ -811,7 +826,7 @@ A DASH Prototype Test session with your participants' responses, a comparison vi
 :::
 
 
-## 18. Write the product strategy one-pager
+## 19. Write the product strategy one-pager
 ::step{id="one-pager" phase="Measure" tool="CLARA"}
 
 A **product strategy one-pager** sets out, on one page, the problem your product solves, where it is heading, how you will measure success, what it costs against the value it delivers, the risks and the roadmap.
@@ -855,7 +870,7 @@ In Confluence, open the **One-pagers** folder. It holds the one-pager for :own[y
 :::
 
 
-## 19. Publish a report card
+## 20. Publish a report card
 ::step{id="report-card" phase="Measure" tool="PULSE"}
 
 A **report card** is a one-page public summary of a product: the problem it solves, what it has achieved, how healthy it is and what changed lately.
