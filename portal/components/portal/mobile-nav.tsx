@@ -11,7 +11,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { primaryNavItems } from "./primary-nav";
+import { isNavItemActive, primaryNavGroups } from "./primary-nav";
 import { cn } from "@/lib/utils";
 
 export function MobileNav() {
@@ -49,25 +49,31 @@ export function MobileNav() {
           aria-label="Primary"
           className="mt-6 flex flex-col gap-1 px-4 pb-6"
         >
-          {primaryNavItems.map((item) => {
-            const isActive =
-              pathname === item.href || pathname.startsWith(`${item.href}/`);
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={isActive ? "page" : undefined}
-                className={cn(
-                  "rounded-md px-3 py-2.5 text-base font-medium transition-colors",
-                  isActive
-                    ? "bg-bg-muted text-fg"
-                    : "text-fg-muted hover:bg-bg-muted/60 hover:text-fg",
-                )}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
+          {primaryNavGroups.map((group) => (
+            <div key={group.label} className="flex flex-col gap-1 pb-3">
+              <p className="px-3 pb-1 pt-2 text-xs font-semibold uppercase tracking-wide text-fg-subtle">
+                {group.label}
+              </p>
+              {group.items.map((item) => {
+                const isActive = isNavItemActive(pathname, item.href);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    aria-current={isActive ? "page" : undefined}
+                    className={cn(
+                      "rounded-md px-3 py-2.5 text-base font-medium transition-colors",
+                      isActive
+                        ? "bg-bg-muted text-fg"
+                        : "text-fg-muted hover:bg-bg-muted/60 hover:text-fg",
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </div>
+          ))}
         </nav>
       </SheetContent>
     </Sheet>
