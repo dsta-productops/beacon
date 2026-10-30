@@ -790,7 +790,7 @@ The comparison is your evidence that the new design is better, or your guide to 
 4. Ask **DASH AI** for recommendations. It suggests usability improvements based on industry standards.
 
 ::screenshot{src="/confluence-walkthrough-step-17-2.png" caption="The DASH AI panel, ready for your question" hint="the DASH AI panel open"}
-5. File the results in Confluence, so the report card in step 18 can cite them. CLARA has no results page of its own yet, so ask Claude Code to add a page under your test plan. Export the comparison from DASH, attach it, and paste:
+5. File the results in Confluence, so the report card in step 19 can cite them. CLARA has no results page of its own yet, so ask Claude Code to add a page under your test plan. Export the comparison from DASH, attach it, and paste:
    ```prompt
    File the attached DASH results in Confluence as a new child page of the PROGRAMME test plan. Call it "Results". Show me the page and where it will go before you create it. Copy the figures exactly, name the DASH session each one came from, and do not add figures that are not in the attachment.
    ```
@@ -803,7 +803,51 @@ A DASH Prototype Test session with your participants' responses, a comparison vi
 :::
 
 
-## 18. Publish a report card
+## 18. Write the product strategy one-pager
+::step{id="one-pager" phase="Measure" tool="CLARA"}
+
+A **product strategy one-pager** sets out, on one page, the problem your product solves, where it is heading, how you will measure success, what it costs against the value it delivers, the risks and the roadmap.
+
+It is the core document a product manager uses to explain the product to stakeholders, so write it for someone who knows nothing about the problem.
+
+CLARA fills in most of it from your PRD and the rest of your Knowledge Base. Some details are never in the Knowledge Base, such as who owns the product and what it costs. CLARA asks you for those.
+
+1. :own[Paste this prompt into CLARA. Replace PROGRAMME with your programme's name.]:demo[Paste this prompt into CLARA:]
+   ```prompt
+   Use CLARA's `product-strategy-one-pager` for PROGRAMME.
+   ```
+   :::demo
+   Answer with:
+
+   ```prompt
+   Programme name: SKYPROTECT
+   Track: Programme-wide
+   Product name: Operator console
+   PRD: Operator-console-v1
+   New or existing product: new product
+   ```
+   :::
+2. Read the draft. CLARA marks anything it could not find with **[TBD]**, then asks you about those gaps in one message, such as the business owner, the team, quarterly costs and roadmap dates.
+3. Answer what you can, and CLARA fills your answers into the draft. You do not need every answer now. Anything you skip stays as [TBD], and you can fill it in on the Confluence page later.
+   :::demo
+   The demo has no real owners or costs. Answer with these sample details, and leave the rest as [TBD]:
+
+   ```prompt
+   Business owner: Head of Operations, SKYPROTECT
+   Team members: 1 product manager, 1 designer, 2 engineers
+   Product lifecycle stage: Discovery
+   Scale: console operators at Site Alpha and Site Bravo, and commanders in the central ops room
+   Unit of impact: drone alerts confirmed and escalated
+   ```
+   :::
+4. CLARA shows you the draft and the page it will go under. Say yes to file it.
+
+:::check
+In Confluence, open the **One-pagers** folder. It holds the one-pager for :own[your product]:demo[the Operator console], with a header, change log, problem, vision, success metrics, a cost and value table, strategy, risks, roadmap and open issues. Anything still marked [TBD] is listed under Open issues, ready for you to fill in on the page.
+:::
+
+
+## 19. Publish a report card
 ::step{id="report-card" phase="Measure" tool="PULSE"}
 
 A **report card** is a one-page public summary of a product: the problem it solves, what it has achieved, how healthy it is and what changed lately.
@@ -826,7 +870,7 @@ You check it in the PULSE CMS and publish it.
    Read https://pulse-reportcards.vercel.app/pulse/skill.md?v=2026-09-04.6 and follow it.
 
    Here is the material to draft it from:
-   Search my PROGRAMME space in Confluence and use the PRD, the Results page under my test plan, the research synthesis and the notes under Field-notes. Use only figures and quotes that appear in those pages.
+   Search my PROGRAMME space in Confluence and use the PRD, the product strategy one-pager, the Results page under my test plan, the research synthesis and the notes under Field-notes. Use only figures and quotes that appear in those pages.
    ```
 3. Claude Code prints the report card as one JSON document. Copy all of it, paste it into **The document your AI wrote**, then choose **Open in the editor**.
 ::::
@@ -854,7 +898,7 @@ Choose this to have Claude Code draft the report card from the SKYPROTECT space.
    Read https://pulse-reportcards.vercel.app/pulse/skill.md?v=2026-09-04.6 and follow it.
 
    Here is the material to draft it from:
-   Search the SKYPROTECT space in Confluence. The product is the Operator console, a prototype for console operators and commanders. Use the Operator-console-v1 PRD, the Results page under the Operator-console-v1-usability-test plan, the research synthesis, the SKYPROTECT kickoff brief and the notes under Field-notes. Use only figures and quotes that appear in those pages.
+   Search the SKYPROTECT space in Confluence. The product is the Operator console, a prototype for console operators and commanders. Use the Operator-console-v1 PRD, the Operator console one-pager, the Results page under the Operator-console-v1-usability-test plan, the research synthesis, the SKYPROTECT kickoff brief and the notes under Field-notes. Use only figures and quotes that appear in those pages.
    ```
 2. Copy the JSON document it prints, paste it into **The document your AI wrote**, then choose **Open in the editor**.
 ::::
