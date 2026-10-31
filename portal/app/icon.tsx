@@ -16,15 +16,12 @@ export default function Icon() {
           background: "transparent",
         }}
       >
-        <svg width="32" height="32" viewBox="0 0 20 20" fill="none">
-          <circle
-            cx="10"
-            cy="10"
-            r="7.5"
-            stroke="#2563eb"
-            strokeWidth="1.5"
-          />
-          <circle cx="10" cy="10" r="2" fill="#2563eb" />
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+          <g stroke="#155dfc" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M8.5 21 10 9h4l1.5 12z" fill="#155dfc" />
+            <path d="M12 2v3.5" />
+            <path d="M17 4.5 20 3M7 4.5 4 3" />
+          </g>
         </svg>
       </div>
     ),
