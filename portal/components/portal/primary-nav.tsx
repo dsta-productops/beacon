@@ -87,7 +87,19 @@ export const primaryNavGroups: NavGroup[] = [
   },
 ];
 
-export const primaryNavItems: NavItem[] = primaryNavGroups.flatMap((g) => g.items);
+/** Top-level links that sit after the dropdowns, outside any group. */
+export const primaryNavLinks: NavItem[] = [
+  {
+    href: "/faq",
+    label: "FAQ",
+    description: "Answers to common questions about BEACON and its tools.",
+  },
+];
+
+export const primaryNavItems: NavItem[] = [
+  ...primaryNavGroups.flatMap((g) => g.items),
+  ...primaryNavLinks,
+];
 
 export function isNavItemActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
@@ -145,6 +157,26 @@ export function PrimaryNav() {
         {primaryNavGroups.map((group) => (
           <NavGroupItem key={group.label} group={group} />
         ))}
+        {primaryNavLinks.map((item) => {
+          const active = isNavItemActive(pathname, item.href);
+          return (
+            <NavigationMenuItem key={item.href}>
+              <NavigationMenuLink
+                render={<Link href={item.href} />}
+                active={active}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "inline-flex h-9 items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                  "text-fg-muted hover:bg-bg-muted hover:text-fg",
+                  "focus-visible:outline-1 focus-visible:outline-offset-0 focus-visible:outline-accent",
+                  active && "bg-bg-muted text-fg",
+                )}
+              >
+                {item.label}
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          );
+        })}
       </NavigationMenuList>
     </NavigationMenu>
   );

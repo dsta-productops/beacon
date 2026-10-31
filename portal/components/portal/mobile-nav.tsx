@@ -11,7 +11,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { isNavItemActive, primaryNavGroups } from "./primary-nav";
+import { isNavItemActive, primaryNavGroups, primaryNavLinks } from "./primary-nav";
 import { cn } from "@/lib/utils";
 
 export function MobileNav() {
@@ -74,6 +74,24 @@ export function MobileNav() {
               })}
             </div>
           ))}
+          {primaryNavLinks.map((item) => {
+            const isActive = isNavItemActive(pathname, item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={isActive ? "page" : undefined}
+                className={cn(
+                  "rounded-md px-3 py-2.5 text-base font-medium transition-colors",
+                  isActive
+                    ? "bg-bg-muted text-fg"
+                    : "text-fg-muted hover:bg-bg-muted/60 hover:text-fg",
+                )}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
       </SheetContent>
     </Sheet>
