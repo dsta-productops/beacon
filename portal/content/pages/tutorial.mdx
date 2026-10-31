@@ -739,7 +739,23 @@ Claude Code reads your PRD and PRIZM's rules, so the result follows DSTA standar
       pnpm config set registry <address>
       ```
    :::
-3. Paste the PRIZM starter prompt from step 5 into the Claude panel first, and wait for Claude Code to name the zones.
+3. Paste the PRIZM starter prompt into the Claude panel first, and wait for Claude Code to name the zones. It is the same prompt as in step 5.
+
+   ```prompt
+   You are helping me build with PRIZM 4.0, a design system. Read PRIZM.md and llms.txt first, from your local PRIZM checkout or your team's mirror if you have one, otherwise from the repo at https://github.com/prizm-design/prizm. They describe everything else, including how to fetch any source file you do not already have. If you cannot locate them, ask me where PRIZM lives rather than guessing.
+
+   Working conventions:
+   - Reuse before you build (non-negotiable). Before creating any UI element, search llms.txt and lib/components-api.ts for a PRIZM component that fits. If one exists, use it as-is: adjust exposed props and variants only, never rewrite its markup or styling. If nothing fits, stop and say so, naming what you checked, rather than silently hand-rolling a replacement. Duplicating existing PRIZM functionality needs explicit sign-off from me.
+   - For any component, check llms/<slug>.md for props, conventions and accessibility notes.
+   - For design decisions (layout, hierarchy, when to use what), consult /docs/principles.
+   - Use semantic Tailwind tokens only: bg-bg, text-fg, border-border, bg-accent and so on. Never use raw colour utilities like bg-slate-500 or text-blue-600.
+   - Prefer existing component variants over className overrides for visual changes.
+   - Match the active product zone: C3 (cyan, dense, tactical) or Enterprise (blue, spacious, professional). Tokens flip automatically; layout choices do not.
+   - Components are copy-paste. The source files at components/ui/<slug>.tsx are mine to copy and modify.
+   - Never introduce external URL references (CDNs, remote fonts, third-party scripts). PRIZM is air-gap safe, and the audit script will fail CI on violations.
+
+   Follow these as your PRIZM rules for the rest of this chat. Then tell me which PRIZM zones are available, and where you read that.
+   ```
 4. Paste this prompt next.
 
    It tells Claude Code which Confluence page holds your PRD, so you do not paste the PRD itself.
@@ -790,9 +806,9 @@ A running prototype of your chosen flow, built from PRIZM components and semanti
 ## 17. Plan the test
 ::step{id="test-plan" phase="Measure" tool="CLARA"}
 
-A test plan says who you will test with and what you will ask them to do.
+Now that you have a working prototype, it is time to put it to the test.
 
-CLARA reads your PRD and personas to draft one.
+CLARA reads your PRD and other relevant information to create a test plan that suggests the number and types of participants, scenarios, methods and questions.
 
 1. :own[Paste this prompt into CLARA. Replace PROGRAMME with your programme's name.]:demo[Paste this prompt into CLARA:]
    ```prompt
