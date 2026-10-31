@@ -209,6 +209,8 @@ const TUTORIAL_PROSE = [
   "[&_ul]:space-y-1.5",
   // nested lists hang off their item instead of adding a block gap
   "[&_li_ol]:mt-2 [&_li_ol]:mb-0 [&_li_ul]:mt-2 [&_li_ul]:mb-0",
+  // comparison tables: a row-label column, then equal-width columns for the things compared
+  "[&_table]:w-full [&_table]:table-fixed [&_th:first-child]:w-[20%]",
 ].join(" ");
 
 const CALLOUTS = {
