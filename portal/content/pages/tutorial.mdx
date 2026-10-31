@@ -512,7 +512,7 @@ If you tried INSIGHT, a transcript of the practice script with each speaker labe
 ## 12. Make sense of the notes
 ::step{id="synthesise" phase="Research" tool="CLARA"}
 
-Research synthesiser turns interview transcripts and field observations into a single Research synthesis page covering themes, friction, problem statement, and success criteria.
+Research synthesiser turns interview transcripts and field observations into a single research synthesis page covering themes, friction, problem statement, and success criteria.
 
 CLARA reads them all in one pass and separates what is new from what you already knew.
 
@@ -540,14 +540,16 @@ In Confluence, open the **Research-synthesis** page. It has themes, a friction t
 :::
 
 
-## 13. Profile your users
+## 13. Map the user experience
 ::step{id="personas-journeys" phase="Research" tool="CLARA"}
 
-Turn the research into three documents.
+Turn the research into three documents, one at a time.
 
-Paste each prompt into CLARA in turn.
+### Create a persona
 
-1. Create a **persona**: a profile of a typical user, with their goals, frustrations and the evidence.
+A **persona** is a profile of a typical user, with their goals, frustrations and the evidence.
+
+1. :own[Paste this prompt into CLARA. Replace PROGRAMME with your programme's name.]:demo[Paste this prompt into CLARA:]
    ```prompt
    Use CLARA's `persona-generator` for PROGRAMME.
    ```
@@ -561,7 +563,17 @@ Paste each prompt into CLARA in turn.
    Sources: search the SKYPROTECT space and use the research synthesis and the notes under Field-notes
    ```
    :::
-2. Create a **user journey**: the steps a person goes through, and where you could improve things.
+2. CLARA shows you the draft and the page it will go under. Say yes to file it.
+
+:::check
+In Confluence, open the **Personas** folder to find :own[your persona]:demo[the Console operator persona], linked to the evidence behind it.
+:::
+
+### Create a user journey
+
+A **user journey** shows the steps a person goes through, and where you could improve things.
+
+1. :own[Paste this prompt into CLARA. Replace PROGRAMME with your programme's name.]:demo[Paste this prompt into CLARA:]
    ```prompt
    Use CLARA's `journey-map-drafter` for PROGRAMME.
    ```
@@ -576,7 +588,17 @@ Paste each prompt into CLARA in turn.
    Sources: search the SKYPROTECT space and use the Console operator persona, the research synthesis and the notes under Field-notes
    ```
    :::
-3. Create a **service blueprint**: the journey plus what your team and systems do behind the scenes.
+2. CLARA shows you the draft and the page it will go under. Say yes to file it.
+
+:::check
+In Confluence, open the **Journeys** folder to find :own[your user journey]:demo[the journey from the first radar track to the commander's acknowledgement], linked to the evidence behind it.
+:::
+
+### Create a service blueprint
+
+A **service blueprint** is the journey plus what your team and systems do behind the scenes.
+
+1. :own[Paste this prompt into CLARA. Replace PROGRAMME with your programme's name.]:demo[Paste this prompt into CLARA:]
    ```prompt
    Use CLARA's `service-blueprint-drafter` for PROGRAMME.
    ```
@@ -591,27 +613,11 @@ Paste each prompt into CLARA in turn.
    Sources: search the SKYPROTECT space and use the Console operator journey, the research synthesis and the notes under Field-notes
    ```
    :::
+2. CLARA shows you the draft and the page it will go under. Say yes to file it.
 
-4. For each one, CLARA shows you the draft and the page it will go under. Say yes to file it.
-
-::::when{project="own"}
 :::check
-In Confluence, open these three folders. Each holds a new page, linked to the evidence behind it:
-- **Personas**, with your persona
-- **Journeys**, with your user journey
-- **Service-blueprints**, with your service blueprint
+In Confluence, open the **Service-blueprints** folder to find :own[your service blueprint]:demo[the blueprint for that journey], linked to the evidence behind it.
 :::
-::::
-
-::::when{project="demo"}
-:::check
-In Confluence, open these three folders. Each holds a new page, linked to the evidence behind it:
-- **Personas**, with the Console operator persona
-- **Journeys**, with the journey from the first radar track to the commander's acknowledgement
-- **Service-blueprints**, with the blueprint for that journey
-:::
-::::
-
 
 ## 14. Rank the problems
 ::step{id="problem-ranking" phase="Research" tool="CLARA"}
