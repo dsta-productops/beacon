@@ -949,6 +949,24 @@ In Confluence, open the **One-pagers** folder. It holds the one-pager for :own[y
 
 The one-pager is a living document. Update it regularly where necessary, such as when costs, metrics or the roadmap change. Every time you update it, add a row to the **Change log** in the document, with the date and what changed. If you re-run CLARA to update it, CLARA adds the row for you.
 
+### One-pager vs PRD
+
+The one-pager and the PRD both describe your product, but they do different jobs. The one-pager explains the whole product to the people who approve, fund and steer it. The PRD tells the delivery team exactly what to build for one release, feature or capability. Use the table below to see how they differ.
+
+| | Product strategy one-pager | Product requirements document (PRD) |
+|---|---|---|
+| **Purpose** | States the product's problem, vision and strategy so it can be approved, funded and steered | Turns an agreed problem into requirements the team can build and test |
+| **Level** | The whole product | One release, feature or capability within the product |
+| **Main contents** | • Status quo<br>• Vision<br>• North Star and outcome metrics<br>• Quarterly value-for-cost table (VCR)<br>• Strategy and theory of change<br>• Risks<br>• 6 to 12 month roadmap<br>• Open issues<br>• Log of what has been delivered | • Problem statement<br>• Target users and personas<br>• Goals and non-goals<br>• Scope and out of scope<br>• Prioritised user stories with acceptance criteria<br>• Non-functional requirements (performance, security, access, accessibility)<br>• Dependencies and constraints<br>• Success criteria<br>• Assumptions to validate<br>• Open questions |
+| **Detail** | High level, readable in minutes by someone new to the topic | Detailed: covers edge cases, error states and access rules, and links each requirement to user evidence |
+| **Time horizon** | Long term (vision), plus a rolling 6 to 12 months | The current release or iteration |
+| **When to create** | First, at the start of discovery or when converting an existing project into a product | Once the one-pager is approved and the team is ready to design and build a specific part of the product. Draft it from what you know, then refine it as user research and prototypes confirm or overturn assumptions |
+| **When to use** | At funding and approval gates and in regular steering reviews | Day to day during design, build and testing |
+| **How it changes** | Revisited quarterly with actual results, as metrics, VCR and the roadmap move | Versioned as research and prototype findings come in, with a frozen baseline for each prototype or release |
+| **Who it is for** | Business owners, the Steering Committee and sponsors, funding approvers, and portfolio reviewers who compare products | The delivery team. Engineers and designers use it to know what to build. QA and testers use the acceptance criteria. The PM and business owner use it to agree scope and trade-offs. Dependency owners, such as other system owners and the security or accreditation teams, use it to see what is needed from them |
+
+**How the two documents link up:** a PRD's problem and goals should trace back to the one-pager's status quo and North Star. Its success criteria should feed the one-pager's metrics and its "Delivered" log. Any open question that affects strategy or scope should be raised in the one-pager too.
+
 
 ## 19. Publish a report card
 ::step{id="report-card" phase="Measure" tool="PULSE"}

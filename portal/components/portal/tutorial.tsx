@@ -132,6 +132,12 @@ function parseBody(body: string): { intro: string; sections: Section[] } {
 /** Maps directives onto custom element names that `components` below render. */
 function remarkTutorial() {
   return (tree: Root) => {
+    // a table cell cannot hold a list, so `<br>` inside one becomes a line break
+    visit(tree, "html", (node, index, parent) => {
+      if (parent?.type === "tableCell" && index !== undefined && /^<br\s*\/?>$/i.test(node.value)) {
+        parent.children[index] = { type: "break" };
+      }
+    });
     visit(tree, (node) => {
       if (
         node.type !== "containerDirective" &&
