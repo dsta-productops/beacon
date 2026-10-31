@@ -1,15 +1,10 @@
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Heading } from "@/components/ui/heading";
 import { Text } from "@/components/ui/text";
-import { Stack } from "@/components/ui/stack";
-import { Frame } from "@/components/ui/frame";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import {
-  ArrowRight,
-  BookOpen,
-  ChevronRight,
-} from "lucide-react";
+import { ArrowRight, ChevronRight } from "lucide-react";
 
 interface Tool {
   href?: string;
@@ -68,63 +63,83 @@ const stages: Stage[] = [
   },
 ];
 
+// Section layout and type scale follow the CLARA site, so the two read as one family.
+const CONTAINER = "mx-auto max-w-6xl px-6 sm:px-8";
+const EYEBROW = "uppercase tracking-[0.18em] text-accent";
+
 export default function Home() {
   return (
-    <Frame maxWidth="xl" padding="lg">
-      <Stack gap="12" className="py-8">
-        <Stack gap="4" className="max-w-2xl">
-          <Heading as="h1" size="4xl">
-            Your guide to product work at DSTA.
-          </Heading>
-          <Text size="lg" variant="muted">
-            Beacon shows you how product work goes from research, to design, to
-            measurement, and which tool to use at each step.
-          </Text>
-        </Stack>
+    <>
+      <section className="border-b border-border">
+        <div className={`${CONTAINER} py-24 sm:py-32 lg:py-40`}>
+          <div className="max-w-3xl space-y-8">
+            <Text size="sm" variant="muted" weight="medium" className={EYEBROW}>
+              Product work at DSTA
+            </Text>
 
-        <Card className="border-accent p-6">
-          <div className="flex items-start gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-accent text-accent-fg">
-              <BookOpen className="h-5 w-5" />
+            <Heading as="h1" size="4xl" className="text-balance sm:text-5xl lg:text-6xl">
+              Your guide to product work at DSTA.
+            </Heading>
+
+            <Text size="lg" variant="muted" className="max-w-2xl text-balance leading-relaxed">
+              Beacon shows you how product work goes from research, to design, to
+              measurement, and which tool to use at each step.
+            </Text>
+
+            <div className="flex flex-wrap gap-2 pt-2">
+              {stages.map(({ name }) => (
+                <Badge key={name} variant="outline">
+                  {name}
+                </Badge>
+              ))}
             </div>
-            <Stack gap="4" className="min-w-0 flex-1">
-              <Stack gap="2">
-                <Heading as="h2" size="lg">
-                  Your first project
-                </Heading>
-                <Text variant="muted">
-                  Take a project from raw interview notes to a prototype that
-                  real users can test. You don&apos;t need a
-                  background in product management or design.
-                </Text>
-              </Stack>
-              <Link
-                href="/tutorial"
-                className="group inline-flex items-center gap-1 self-start text-sm font-medium text-accent hover:text-accent-strong"
-              >
-                Begin the tutorial here
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </Link>
-            </Stack>
-          </div>
-        </Card>
 
-        <Stack gap="6">
-          <Stack gap="2">
-            <Heading as="h2" size="xl">
+            <div className="space-y-3 pt-4">
+              <Link href="/tutorial" className="inline-flex">
+                <Button variant="solid" size="lg">
+                  Begin your tutorial
+                  <ArrowRight className="h-4 w-4" aria-hidden />
+                </Button>
+              </Link>
+              <Text size="sm" variant="muted" className="max-w-xl">
+                Take a project from raw interview notes to a prototype that real
+                users can test. You don&apos;t need a background in product
+                management or design.
+              </Text>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tools" className="border-b border-border bg-bg-subtle">
+        <div className={`${CONTAINER} py-20 sm:py-24 lg:py-28`}>
+          <div className="max-w-2xl space-y-4">
+            <Text size="sm" variant="muted" weight="medium" className={EYEBROW}>
+              The pipeline
+            </Text>
+            <Heading as="h2" size="3xl" className="text-balance">
               Tools for each stage
             </Heading>
-            <Text variant="muted">
-              Find out what users need, build a prototype, then test it.
+            <Text size="md" variant="muted" className="leading-relaxed">
+              Product work moves through three stages. In Research, you find out
+              who your users are and what problem to solve. In Design, you turn
+              that into a prototype people can try. In Measure, you test it with
+              real users and show whether it is better. Each stage has its own
+              tools, and what you learn feeds the next round.
             </Text>
-          </Stack>
-          <ol className="m-0 hidden list-none grid-cols-3 gap-4 p-0 lg:grid">
+            <Link
+              href="/flywheel"
+              className="group inline-flex items-center gap-1 text-sm font-medium text-accent hover:text-accent-hover"
+            >
+              Explore the flywheel
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
+            </Link>
+          </div>
+
+          <ol className="m-0 mt-12 hidden list-none grid-cols-3 gap-6 p-0 lg:grid">
             {stages.map(({ name }, index) => (
               <li key={name} className="flex items-center">
-                <span
-                  aria-hidden="true"
-                  className="-ml-2 mr-1 flex flex-1 items-center"
-                >
+                <span aria-hidden="true" className="-ml-3 mr-1 flex flex-1 items-center">
                   {index > 0 && (
                     <>
                       <span className="h-px flex-1 bg-border-strong" />
@@ -140,12 +155,13 @@ export default function Home() {
                 </span>
                 <span
                   aria-hidden="true"
-                  className={`-mr-2 ml-3 h-px flex-1 ${index < stages.length - 1 ? "bg-border-strong" : ""}`}
+                  className={`-mr-3 ml-3 h-px flex-1 ${index < stages.length - 1 ? "bg-border-strong" : ""}`}
                 />
               </li>
             ))}
           </ol>
-          <div className="grid gap-x-4 gap-y-8 lg:grid-cols-3">
+
+          <div className="mt-12 grid gap-x-6 gap-y-8 lg:mt-6 lg:grid-cols-3">
             {stages.map(({ name, tools }, index) => (
               <div key={name} className="flex flex-col gap-4">
                 <div className="flex items-center gap-2 lg:hidden">
@@ -159,26 +175,24 @@ export default function Home() {
                     <Card
                       className={
                         tool.href
-                          ? "h-full p-5 transition-colors group-hover:border-accent"
-                          : "h-full p-5"
+                          ? "h-full transition-colors group-hover:border-accent"
+                          : "h-full"
                       }
                     >
-                      <Stack gap="2">
-                        <span className="text-base font-semibold text-fg transition-colors group-hover:text-accent">
+                      <CardHeader>
+                        <CardTitle className="text-base transition-colors group-hover:text-accent">
                           {tool.name}
-                        </span>
-                        <Text size="sm" variant="muted">
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <Text size="sm" variant="muted" className="leading-relaxed">
                           {tool.blurb}
                         </Text>
-                      </Stack>
+                      </CardContent>
                     </Card>
                   );
                   return tool.href ? (
-                    <Link
-                      key={`${name}-${tool.name}`}
-                      href={tool.href}
-                      className="group block"
-                    >
+                    <Link key={`${name}-${tool.name}`} href={tool.href} className="group block">
                       {tile}
                     </Link>
                   ) : (
@@ -188,18 +202,33 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </Stack>
+        </div>
+      </section>
 
-        <Text variant="muted">
-          Want to understand the thinking behind it?{" "}
-          <Link
-            href="/pipeline"
-            className="font-medium text-accent hover:text-accent-strong"
-          >
-            Read how research, design and measurement fit together.
-          </Link>
-        </Text>
-      </Stack>
-    </Frame>
+      <section>
+        <div className={`${CONTAINER} py-20 sm:py-24`}>
+          <div className="max-w-2xl space-y-4">
+            <Text size="sm" variant="muted" weight="medium" className={EYEBROW}>
+              Go deeper
+            </Text>
+            <Heading as="h2" size="3xl" className="text-balance">
+              Understand the thinking behind it
+            </Heading>
+            <Text size="md" variant="muted" className="leading-relaxed">
+              See how research, design and measurement fit together, and why each
+              step feeds the next.
+            </Text>
+            <div className="pt-4">
+              <Link href="/pipeline" className="inline-flex">
+                <Button variant="outline" size="lg">
+                  Read about the pipeline
+                  <ArrowRight className="h-4 w-4" aria-hidden />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

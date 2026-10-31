@@ -23,11 +23,13 @@ import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
 export interface EnterpriseAppShellProps extends ComponentPropsWithoutRef<"div"> {
   topBar?: ReactNode;
+  footer?: ReactNode;
   children: ReactNode;
 }
 
 export function EnterpriseAppShell({
   topBar,
+  footer,
   className,
   children,
   ...props
@@ -39,6 +41,7 @@ export function EnterpriseAppShell({
     >
       {topBar}
       <main className="flex-1">{children}</main>
+      {footer}
     </div>
   );
 }
