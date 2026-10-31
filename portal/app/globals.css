@@ -173,3 +173,9 @@
     }
   }
 }
+
+/* The BEACON mark takes a bright cyan wherever it sits on a dark surface
+   (dark mode, or the top bar over the dark hero). */
+.theme-enterprise-dark .brand-mark {
+  color: rgb(45 231 252);
+}

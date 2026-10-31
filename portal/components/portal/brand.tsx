@@ -24,7 +24,7 @@ function BrandMark() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
-      className="text-accent"
+      className="brand-mark text-accent"
     >
       <g stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M8.5 21 10 9h4l1.5 12z" fill="currentColor" />
