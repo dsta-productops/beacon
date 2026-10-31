@@ -659,7 +659,7 @@ In Confluence, open the **Problem-impact-analysis** page. It has a ranked table 
 :::
 
 
-## 15. Write the requirements
+## 15. Write the product requirements document
 ::step{id="prd" phase="Research" tool="CLARA"}
 
 A **PRD** (product requirements document) is one page everyone agrees on: the problem, who it is for, what the product must do and how you will know it worked.
@@ -681,12 +681,22 @@ It is the most important output of Research.
    Prototype scope: the prototype is built only from PRIZM components, and PRIZM has no radar or camera view. Put live radar, RF and camera feeds out of scope. Show sensor evidence as data. Include three things. First, a contact list with a short agreement status for each contact, using the words Sensors agree, Sensors disagree, Single sensor, 2 of 3 agree and Agreement unknown. Each contact shows its site as a label only. Second, for each contact, the confidence the system presents, with how it is made up: the confidence and weight of each sensor, and a note when a disagreeing sensor lowers it. It is never a bare number. Third, simple prototype-only buttons that simulate a new sensor report and reset the contacts. Leave the fusion rule, the weights and the staleness limits as TBD.
    ```
    :::
-3. Read the draft. If something is wrong or missing, tell CLARA what to change, and it updates the draft.
+3. Read the draft carefully, especially the user stories and their acceptance criteria. Check that they cover edge cases, including obscure ones that are easy to miss. If something is wrong or missing, tell CLARA what to change, and it updates the draft.
 4. CLARA shows you the draft and the page it will go under. Say yes to file it. The PRD becomes the input for your prototype.
 
 :::check
 In Confluence, open the **PRDs** folder. It holds your new PRD, with a problem statement, target users, goals and non-goals, scope, prioritised user stories, success criteria, constraints and open questions. Each user story cites its evidence.
 :::
+
+### Keep the PRD up to date
+
+A PRD is a living document. While you are working on the same problem, for the same users and with the same metrics, keep updating it rather than starting again.
+
+Start a new PRD when:
+
+- the problem, the users or the value metric has changed
+- you have pivoted to a fundamentally different solution, and the old requirements no longer apply
+- the next prototype is a separate component or workstream
 
 
 ## 16. Build a prototype
