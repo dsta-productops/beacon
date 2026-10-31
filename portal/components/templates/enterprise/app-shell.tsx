@@ -64,22 +64,20 @@ export function EnterpriseAppShellTopBar({
   return (
     <header
       className={cn(
-        "z-40 border-b border-border bg-bg/95 backdrop-blur supports-[backdrop-filter]:bg-bg/75",
+        "z-50 border-b border-border bg-bg/80 backdrop-blur-md",
         sticky && "sticky top-0",
         className,
       )}
       {...props}
     >
-      <div className="mx-auto flex h-14 max-w-screen-2xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <div className="flex min-w-0 items-center gap-8">
-          {brand}
+      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-6 sm:px-8">
+        <div className="flex min-w-0 items-center">{brand}</div>
+        <div className="flex items-center gap-2">
           {nav && (
             <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
               {nav}
             </nav>
           )}
-        </div>
-        <div className="flex items-center gap-2">
           {actions}
           {mobileNav && <div className="md:hidden">{mobileNav}</div>}
         </div>

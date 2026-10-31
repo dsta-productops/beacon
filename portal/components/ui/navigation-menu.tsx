@@ -63,10 +63,10 @@ export function NavigationMenuTrigger({
   return (
     <BaseNav.Trigger
       className={cn(
-        "group inline-flex h-9 items-center justify-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors",
-        "text-fg-muted hover:bg-bg-muted hover:text-fg",
+        "group inline-flex items-center justify-center gap-1 rounded-md px-3 py-2 text-sm transition-colors",
+        "text-fg-muted hover:text-fg",
         "focus-visible:outline-1 focus-visible:outline-offset-0 focus-visible:outline-accent",
-        "data-[popup-open]:bg-bg-muted data-[popup-open]:text-fg",
+        "data-[popup-open]:text-fg",
         "aria-disabled:pointer-events-none aria-disabled:opacity-50",
         className,
       )}

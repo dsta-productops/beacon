@@ -111,7 +111,7 @@ function NavGroupItem({ group }: { group: NavGroup }) {
 
   return (
     <NavigationMenuItem value={group.label}>
-      <NavigationMenuTrigger className={cn(groupActive && "bg-bg-muted text-fg")}>
+      <NavigationMenuTrigger className={cn(groupActive && "text-fg")}>
         {group.label}
       </NavigationMenuTrigger>
       <NavigationMenuContent className="w-80 p-1.5">
@@ -166,10 +166,10 @@ export function PrimaryNav() {
                 active={active}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "inline-flex h-9 items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                  "text-fg-muted hover:bg-bg-muted hover:text-fg",
+                  "inline-flex items-center rounded-md px-3 py-2 text-sm transition-colors",
+                  "text-fg-muted hover:text-fg",
                   "focus-visible:outline-1 focus-visible:outline-offset-0 focus-visible:outline-accent",
-                  active && "bg-bg-muted text-fg",
+                  active && "text-fg",
                 )}
               >
                 {item.label}

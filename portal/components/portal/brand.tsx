@@ -4,10 +4,10 @@ export function Brand() {
   return (
     <Link
       href="/"
-      className="group flex items-center gap-2 text-fg transition-colors"
+      className="group flex items-center gap-2 text-fg transition-colors hover:text-accent"
     >
       <BrandMark />
-      <span className="text-sm font-semibold tracking-tight">
+      <span className="text-base font-semibold tracking-tight">
         BEACON
       </span>
     </Link>
