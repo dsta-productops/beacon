@@ -815,11 +815,11 @@ A running prototype of your chosen flow, built from PRIZM components and semanti
 
 
 ## 16. Plan the test
-::step{id="test-plan" phase="Measure" tool="CLARA"}
+::step{id="test-plan" phase="Measure" tool="CLARA + DASH"}
 
 Now that you have a working prototype, it is time to put it to the test.
 
-CLARA reads your PRD and other relevant information to create a test plan that suggests the number and types of participants, scenarios, methods and questions.
+CLARA reads your PRD and other relevant information to create a test plan. The plan suggests the number and types of participants, scenarios, methods and questions, so that you can organise and prepare your test sessions properly.
 
 1. :own[Paste this prompt into CLARA. Replace PROGRAMME with your programme's name.]:demo[Paste this prompt into CLARA:]
    ```prompt
@@ -844,24 +844,52 @@ CLARA reads your PRD and other relevant information to create a test plan that s
 In Confluence, open the **Test-plans** folder. It holds your new test plan, with scenarios, participants, measures and how the results will be analysed.
 :::
 
+### Creating prototype test session
+
+1. In DASH, create a session and choose **Prototype Test**.
+2. Download the QR code for the survey or copy the survey link, so your participants can complete the survey during the test sessions.
+
+:::check
+A DASH Prototype Test session, ready to share with your participants.
+:::
+
 
 ## 17. Measure and compare
-::step{id="measure" phase="Measure" tool="DASH"}
+::step{id="measure" phase="Measure" tool="DASH + INSIGHT + CLARA"}
 
 Test the prototype, then compare the results with your baseline from step 9.
 
 The comparison is your evidence that the new design is better, or your guide to what to fix next.
 
-1. In DASH, create a session and choose **Prototype Test**.
-2. Share the link or QR code with your participants and run the sessions as set out in your test plan.
-3. Compare the results with your baseline session.
+### During the test session
+
+::::own
+1. Run the test sessions as set out in your test plan. Ask each participant to use the prototype through the scenarios, and ask the questions from the test plan.
+2. Ask each participant to complete the survey, using the QR code or link from step 16. Responses appear in DASH as they answer.
+3. You can also run INSIGHT during each session for live prompts and a transcript, as in step 10.
+::::
+
+::::demo
+1. On a real project, you would ask each participant to use the prototype through the scenarios in your test plan, and ask the questions from it.
+2. To simulate a response, try the prototype yourself and answer the Prototype Test survey as a Site Alpha operator would. If you can, ask a colleague to do the same.
+::::
+
+### After the test session
+
+1. Compare the results with your baseline session in DASH.
 
 ::screenshot{src="/confluence-walkthrough-step-17-1.png" caption="The DASH results page, with tabs for baseline and prototype results" hint="the DASH results page with the Baseline Test and Prototype Test tabs"}
 
-4. Ask **DASH AI** for recommendations. It suggests usability improvements based on industry standards.
+2. Ask **DASH AI** for recommendations. It suggests usability improvements based on industry standards.
 
 ::screenshot{src="/confluence-walkthrough-step-17-2.png" caption="The DASH AI panel, ready for your question" hint="the DASH AI panel open"}
-5. File the results in Confluence, so the report card in step 19 can cite them. CLARA has no results page of its own yet, so ask Claude Code to add a page under your test plan. Export the comparison from DASH, attach it, and paste:
+
+3. If you took notes or used INSIGHT during the sessions, file each session's notes in Confluence using the **Field Notes** template, as in **After the interview** in step 10.
+4. If you filed field notes, synthesise the prototype testing results. Paste this prompt into CLARA, and tell it to use the field notes from the test sessions:
+   ```prompt
+   Use CLARA's `research-synthesiser` for PROGRAMME.
+   ```
+5. File the results in Confluence, so the report card in step 19 can cite them. CLARA has no results page of its own yet, so ask it to add a page under your test plan. Extract the test sessions and/or comparison from DASH, attach it, and paste:
    ```prompt
    File the attached DASH results in Confluence as a new child page of the PROGRAMME test plan. Call it "Results". Show me the page and where it will go before you create it. Copy the figures exactly, name the DASH session each one came from, and do not add figures that are not in the attachment.
    ```
