@@ -5,6 +5,9 @@ import { useEffect, useId, useRef, useState } from "react";
 const LIGHT = "#F5B544";
 const DIM = "#2A3550";
 const FIELD = "#2B3F6E";
+// Markers light and dim on the same timing as the CTAs they share the beam with.
+const FADE_MS = 200;
+const FADE = `opacity ${FADE_MS}ms`;
 
 // The scene as drawn on the 720×540 design canvas. ORIGIN is where the canvas's
 // source sat, and anchors the scene on the field; the source itself sits further right.
@@ -81,10 +84,25 @@ export function BeaconHeroArt({
     let target = REST_ANGLE;
     let frame = 0;
 
+    // Elements in the section marked data-beam-target get data-lit while the beam is on them.
+    const targets = Array.from(section.querySelectorAll<HTMLElement>("[data-beam-target]"));
+    const lightTargets = () => {
+      const matrix = sceneRef.current?.getScreenCTM();
+      if (!matrix) return;
+      const toScene = matrix.inverse();
+      for (const el of targets) {
+        const box = el.getBoundingClientRect();
+        const centre = new DOMPoint(box.left + box.width / 2, box.top + box.height / 2).matrixTransform(toScene);
+        const on = Math.abs(angleBetween(angleTo(centre.x, centre.y), current)) <= BEAM_HALF_ANGLE;
+        el.toggleAttribute("data-lit", on);
+      }
+    };
+
     const step = () => {
       const delta = angleBetween(target, current);
       current = Math.abs(delta) < 0.05 ? target : current + delta * 0.15;
       setAngle(current);
+      lightTargets();
       frame = current === target ? 0 : requestAnimationFrame(step);
     };
     const aimAt = (next: number) => {
@@ -103,10 +121,14 @@ export function BeaconHeroArt({
 
     section.addEventListener("pointermove", onMove);
     section.addEventListener("pointerleave", onLeave);
+    window.addEventListener("resize", lightTargets);
+    lightTargets();
     return () => {
       section.removeEventListener("pointermove", onMove);
       section.removeEventListener("pointerleave", onLeave);
+      window.removeEventListener("resize", lightTargets);
       cancelAnimationFrame(frame);
+      targets.forEach((el) => el.removeAttribute("data-lit"));
     };
   }, [fieldOnly]);
 
@@ -172,9 +194,11 @@ export function BeaconHeroArt({
           {markers.map((m) => {
             const on = isLit(m, angle);
             return (
+              // Both halos are drawn and cross-fade, on the CTAs' 200ms timing.
               <g key={`${m.cx}-${m.cy}`}>
-                <circle cx={m.cx} cy={m.cy} r={on ? 14 : m.halo} fill={`url(#${on ? litHalo : dimHalo})`} />
-                <circle cx={m.cx} cy={m.cy} r={m.r} fill={on ? LIGHT : DIM} />
+                <circle cx={m.cx} cy={m.cy} r={m.halo} fill={`url(#${dimHalo})`} style={{ opacity: on ? 0 : 1, transition: FADE }} />
+                <circle cx={m.cx} cy={m.cy} r={14} fill={`url(#${litHalo})`} style={{ opacity: on ? 1 : 0, transition: FADE }} />
+                <circle cx={m.cx} cy={m.cy} r={m.r} style={{ fill: on ? LIGHT : DIM, transition: `fill ${FADE_MS}ms` }} />
               </g>
             );
           })}

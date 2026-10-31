@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { BeaconHeroArt } from "@/components/portal/beacon-hero-art";
+import { BeaconSpot } from "@/components/portal/beacon-spot";
 import { ArrowRight, ChevronRight } from "lucide-react";
 
 interface Tool {
@@ -107,8 +108,13 @@ export default function Home() {
             </div>
 
             <div className="pt-4">
-              <Link href="/tutorial" className="inline-flex">
-                <Button variant="solid" size="lg">
+              {/* Lights up in the beacon's orange whenever its beam falls on it (data-lit is set by BeaconHeroArt). */}
+              <Link href="/tutorial" data-beam-target className="group inline-flex">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="transition-[border-color,box-shadow] duration-200 group-data-[lit]:border-[#F5B544] group-data-[lit]:shadow-[0_0_24px_rgb(245_181_68_/_0.45)] group-focus-visible:border-[#F5B544] group-focus-visible:shadow-[0_0_24px_rgb(245_181_68_/_0.45)]"
+                >
                   Begin your tutorial
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Button>
@@ -213,8 +219,13 @@ export default function Home() {
       </section>
 
       {/* The hero's dot grid again, in pale grey on the light page. */}
-      <section className="bg-bg bg-[radial-gradient(circle,var(--color-border)_1.3px,transparent_1.6px)] bg-[length:24px_24px]">
-        <div className={`${CONTAINER} py-20 sm:py-24`}>
+      <section className="relative overflow-hidden bg-bg bg-[radial-gradient(circle,var(--color-border)_1.3px,transparent_1.6px)] bg-[length:24px_24px]">
+        {/* A second, smaller beacon whose beam follows the cursor and lights the button below. */}
+        <BeaconSpot x="85%" y="19%" restAngle={150} />
+        {/* The hero's translucent layers: mute the beam's colours, and deepen the side behind the text. */}
+        <div aria-hidden="true" className="absolute inset-0 bg-bg/40" />
+        <div aria-hidden="true" className="absolute inset-y-0 left-0 w-[70%] bg-gradient-to-r from-bg/75 to-transparent" />
+        <div className={`${CONTAINER} relative py-20 sm:py-24`}>
           <div className="max-w-2xl space-y-4">
             <Text size="sm" variant="muted" weight="medium" className={EYEBROW}>
               Go deeper
@@ -227,8 +238,13 @@ export default function Home() {
               step feeds the next.
             </Text>
             <div className="pt-4">
-              <Link href="/pipeline" className="inline-flex">
-                <Button variant="outline" size="lg">
+              {/* Lights up in the beacon's orange whenever its beam falls on it (data-lit is set by BeaconSpot). */}
+              <Link href="/pipeline" data-beam-target className="group inline-flex">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="transition-[border-color,box-shadow] duration-200 group-data-[lit]:border-[#F5B544] group-data-[lit]:shadow-[0_0_24px_rgb(245_181_68_/_0.45)] group-focus-visible:border-[#F5B544] group-focus-visible:shadow-[0_0_24px_rgb(245_181_68_/_0.45)]"
+                >
                   Read about the pipeline
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Button>
