@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { RESTORE_PROJECT } from "@/lib/project-storage";
+import { RESTORE_THEME } from "@/lib/theme";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: RESTORE_PROJECT }} />
+        <script dangerouslySetInnerHTML={{ __html: RESTORE_THEME }} />
       </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

@@ -80,3 +80,96 @@
     stroke-width: 1.5;
   }
 }
+
+/* ============================================================
+   Enterprise dark, scoped to one section (e.g. the home hero).
+   Sets the resolved --color-* values directly, as PRIZM's
+   .swatch-enterprise-dark does, so they inherit to descendants.
+   ============================================================ */
+
+.theme-enterprise-dark {
+  color-scheme: dark;
+  /* A step lighter than PRIZM's slate-950 base, so dark reads as deep navy, not black. */
+  --color-bg: oklch(20.8% 0.042 265.75);
+  --color-bg-subtle: oklch(18.5% 0.04 265.75);
+  --color-bg-muted: oklch(24.5% 0.04 263);
+  --color-surface: oklch(25.5% 0.042 263);
+  --color-surface-elevated: oklch(30.5% 0.041 260.03);
+  --color-border: oklch(32% 0.041 260.03);
+  --color-border-strong: oklch(40% 0.044 257.29);
+  --color-fg: oklch(98.5% 0.002 247.84);
+  --color-fg-muted: oklch(86.9% 0.022 252.89);
+  --color-fg-subtle: oklch(70.4% 0.04 256.79);
+  --color-accent: oklch(62.3% 0.214 259.81);
+  --color-accent-fg: oklch(20.8% 0.042 265.75);
+  --color-accent-hover: oklch(70.7% 0.165 254.62);
+  --color-danger: oklch(57.7% 0.245 27.32);
+  --color-danger-fg: oklch(98.5% 0.002 247.84);
+  --color-success: oklch(72.3% 0.219 149.58);
+  --color-warning: oklch(76.9% 0.188 70.08);
+  --color-info: oklch(68.5% 0.169 237.32);
+}
+
+/* ============================================================
+   Liquid glass for the top bar, ported from PRIZM's C3-only
+   surface-glass-chrome treatment (Enterprise has no glass tokens,
+   so the C3 values are carried here). Light tint by default;
+   the C3 dark values apply inside .theme-enterprise-dark.
+   ============================================================ */
+
+.surface-glass-chrome {
+  /* A white frosted tint (not C3's dark tint) so the bar matches the light page. */
+  --prizm-glass-chrome-bg: oklch(100% 0 0 / 0.72);
+  --prizm-glass-chrome-border: oklch(0% 0 0 / 0.06);
+  --prizm-glass-chrome-blur: 8px;
+  --prizm-glass-chrome-saturate: 180%;
+  --prizm-glass-chrome-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.25);
+  --prizm-glass-noise-opacity: 0.02;
+}
+
+.theme-enterprise-dark.surface-glass-chrome,
+.theme-enterprise-dark .surface-glass-chrome {
+  --prizm-glass-chrome-bg: oklch(85% 0.015 220 / 0.06);
+  --prizm-glass-chrome-border: oklch(100% 0 0 / 0.08);
+  --prizm-glass-chrome-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.1);
+  --prizm-glass-noise-opacity: 0.04;
+}
+
+@layer components {
+  .surface-glass-chrome {
+    isolation: isolate;
+    background-color: var(--prizm-glass-chrome-bg);
+    border-color: var(--prizm-glass-chrome-border);
+    box-shadow: var(--prizm-glass-chrome-shadow);
+  }
+
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    .surface-glass-chrome {
+      -webkit-backdrop-filter: blur(var(--prizm-glass-chrome-blur)) saturate(var(--prizm-glass-chrome-saturate));
+      backdrop-filter: blur(var(--prizm-glass-chrome-blur)) saturate(var(--prizm-glass-chrome-saturate));
+    }
+  }
+
+  .surface-glass-chrome::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("/noise.svg");
+    background-size: 160px 160px;
+    opacity: var(--prizm-glass-noise-opacity);
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: overlay;
+  }
+
+  .surface-glass-chrome > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .surface-glass-chrome {
+      background-color: var(--color-surface);
+    }
+  }
+}

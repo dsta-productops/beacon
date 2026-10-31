@@ -67,7 +67,7 @@ export function EnterpriseAppShellTopBar({
   return (
     <header
       className={cn(
-        "z-50 border-b border-border bg-bg/80 backdrop-blur-md",
+        "surface-glass-chrome z-50 border-b",
         sticky && "sticky top-0",
         className,
       )}

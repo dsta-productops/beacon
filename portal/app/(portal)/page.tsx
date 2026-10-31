@@ -4,6 +4,7 @@ import { Text } from "@/components/ui/text";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { BeaconHeroArt } from "@/components/portal/beacon-hero-art";
 import { ArrowRight, ChevronRight } from "lucide-react";
 
 interface Tool {
@@ -28,6 +29,7 @@ const stages: Stage[] = [
           "Gathers your rough research notes into structured documents, such as personas, journeys and a PRD, and files them in your knowledge base.",
       },
       {
+        href: "/tools/insight",
         name: "INSIGHT",
         blurb:
           "Run your interview with a helper beside you. INSIGHT suggests what to ask next, keeps a summary of the conversation, and writes the transcript for you.",
@@ -49,6 +51,7 @@ const stages: Stage[] = [
     name: "Measure",
     tools: [
       {
+        href: "/tools/pulse",
         name: "PULSE",
         blurb:
           "Gives every product the same one-page report card, so products can be compared. Every figure is labelled as measured or an estimate.",
@@ -70,9 +73,18 @@ const EYEBROW = "uppercase tracking-[0.18em] text-accent";
 export default function Home() {
   return (
     <>
-      <section className="border-b border-border">
-        <div className={`${CONTAINER} py-24 sm:py-32 lg:py-40`}>
-          <div className="max-w-3xl space-y-8">
+      {/* Fills the first screen, running up behind the top bar (h-14), which turns dark over it. */}
+      <section
+        id="hero"
+        className="theme-enterprise-dark relative -mt-14 flex min-h-svh items-center overflow-hidden bg-bg pt-14 text-fg"
+      >
+        <BeaconHeroArt className="absolute inset-0 h-full w-full opacity-40 lg:opacity-100" />
+        {/* Mutes the illustration's colours overall. */}
+        <div aria-hidden="true" className="absolute inset-0 bg-bg/40" />
+        {/* Deepens the field behind the text, fading out at the beacon. */}
+        <div aria-hidden="true" className="absolute inset-y-0 left-0 w-[70%] bg-gradient-to-r from-bg/75 to-transparent" />
+        <div className={`${CONTAINER} relative w-full py-24 sm:py-32`}>
+          <div className="max-w-xl space-y-8">
             <Text size="sm" variant="muted" weight="medium" className={EYEBROW}>
               Product work at DSTA
             </Text>
@@ -94,24 +106,19 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="space-y-3 pt-4">
+            <div className="pt-4">
               <Link href="/tutorial" className="inline-flex">
                 <Button variant="solid" size="lg">
                   Begin your tutorial
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Button>
               </Link>
-              <Text size="sm" variant="muted" className="max-w-xl">
-                Take a project from raw interview notes to a prototype that real
-                users can test. You don&apos;t need a background in product
-                management or design.
-              </Text>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="tools" className="border-b border-border bg-bg-subtle">
+      <section id="tools" className="bg-bg-subtle">
         <div className={`${CONTAINER} py-20 sm:py-24 lg:py-28`}>
           <div className="max-w-2xl space-y-4">
             <Text size="sm" variant="muted" weight="medium" className={EYEBROW}>
@@ -205,7 +212,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section>
+      {/* The hero's dot grid again, in pale grey on the light page. */}
+      <section className="bg-bg bg-[radial-gradient(circle,var(--color-border)_1.3px,transparent_1.6px)] bg-[length:24px_24px]">
         <div className={`${CONTAINER} py-20 sm:py-24`}>
           <div className="max-w-2xl space-y-4">
             <Text size="sm" variant="muted" weight="medium" className={EYEBROW}>

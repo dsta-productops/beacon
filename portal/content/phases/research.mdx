@@ -43,6 +43,11 @@ stages:
         domain: "shared"
         promptSlugs:
           - interview-guide-generator
+      - name: "Run the interviews"
+        description: "Hold the conversations with the guide to hand. INSIGHT suggests follow-up questions and writes a labelled transcript on your device, ready to file as field notes."
+        domain: "shared"
+        toolSlugs:
+          - insight
   - name: "Synthesis"
     intro: "Turn transcripts and field observations into a single Research-synthesis page covering themes, friction, problem statement, and success criteria — produced in one pass so all four are internally consistent."
     artefacts:
