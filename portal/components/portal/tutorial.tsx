@@ -419,7 +419,7 @@ function ProjectProse({
 const SHARED_PHASE_SUMMARIES = {
   Research: "Find out who the work is for, and what problem you are solving.",
   Design: "Turn the requirements into a prototype.",
-  Measure: "Check the prototype works for real people.",
+  Measure: "Review the prototype with actual users.",
 };
 
 const PHASE_SUMMARIES: Record<"tutorial" | "tutorial-gitlab", Record<string, string>> = {

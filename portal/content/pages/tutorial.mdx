@@ -374,9 +374,9 @@ In Confluence, open the **Heuristic-evaluations** folder. It holds your new repo
 
 
 ## 9. Prepare for the interviews
-::step{id="baseline" phase="Research" tool="DASH + CLARA"}
+::step{id="baseline" phase="Research" tool="DASH + CLARA + INSIGHT"}
 
-Before you talk to anyone, set up two things: a baseline survey in DASH, which gives you numbers, and an interview guide from CLARA, which helps you find out why.
+Before you talk to anyone, set up three things: a baseline survey in DASH, which gives you numbers, an interview guide from CLARA, which helps you find out why, and INSIGHT, which supports you during the interviews.
 
 ### Create a baseline survey in DASH
 
@@ -393,7 +393,7 @@ It also tracks **OKRs**, which are goals with numbers attached.
 
 ::screenshot{src="/confluence-walkthrough-step-7-1.png" caption="The DASH new-session screen, with Baseline Testing selected" hint="the DASH new-session screen with Baseline Testing highlighted"}
 
-3. :own[Share the link or QR code with people who use that system. Responses appear in DASH as they answer.] :demo[Answer the survey yourself as a Site Alpha operator would, using what you read in the kickoff brief. If you can, ask a colleague to answer it too, so you have more than one response.] Keep this session open, because you would need to compare your prototype against it in step 17.
+3. Download the QR code for the survey or copy the survey link, so your users can complete the survey during the interview later on.
 
 ::screenshot{src="/confluence-walkthrough-step-7-2.png" caption="The Baseline Testing session, showing the share link and QR code" hint="the Baseline Testing session in DASH, showing the share link and QR code"}
 
@@ -431,28 +431,9 @@ In Confluence, open the **Interview-guides** folder to find :own[your new interv
 :::
 
 
-## 10. Interview your users
-::step{id="interviews" phase="Research" tool="INSIGHT"}
+### Install INSIGHT
 
-Surveys give you numbers, and interviews tell you why.
-
-:::own
-Run 5 to 7 conversations, using your interview guide from step 9.
-:::
-
-:::demo
-In the demo project, the SKYPROTECT interviews have already been held, so you can skip to **After the interview**. But if you have INSIGHT and want to try it, you may practise on a short script instead of a real interview.
-:::
-
-### Get live prompts with INSIGHT (optional)
-
-**INSIGHT** listens while you interview and suggests one thing at a time: a follow-up question, a definition for jargon, or a snippet from your documents.
-
-It runs on your computer without internet, and nothing leaves your device. If you do not have INSIGHT, run the interviews without it.
-
-#### Install INSIGHT
-
-INSIGHT is only available on Mac for now. A Windows version is not available yet, so if you use Windows, skip to **After the interview**.
+INSIGHT gives you live prompts and a transcript during your interviews in step 10. It is only available on Mac for now. If you use Windows, skip this section.
 
 1. Download the INSIGHT app [here](https://drive.google.com/file/d/1RwBK2d0W2AlxtCk1VHl77378iNDGMGNk/view?usp=sharing).
 2. Open the `.dmg` file and drag **INSIGHT** into the **Applications** folder.
@@ -467,25 +448,56 @@ INSIGHT is only available on Mac for now. A Windows version is not available yet
 INSIGHT opens without a warning that the app is damaged or from an unidentified developer.
 :::
 
-#### Run an interview with INSIGHT
 
-1. :own[Optional: before the interview, upload your PRD or brief and add your team's terms, such as the names of your systems. The suggestions then match your project.] :demo[Download :file[insight-practice-script.md]{href="/skyprotect-demo/insight-practice-script.md"}. It lists the terms to add to INSIGHT's glossary, and a short script with two parts. Add the terms in INSIGHT before you start.]
-2. :own[Press start at the beginning of the conversation. INSIGHT writes a transcript as you talk.] :demo[Press start, then read both parts of the script out loud. Read the interviewer in your own voice and the operator in a different voice. INSIGHT writes a transcript as you talk.]
+## 10. Interview your users
+::step{id="interviews" phase="Research" tool="INSIGHT"}
+
+After the preparation for the interview is done, you are now ready to interview your users.
+
+:::demo
+In the demo project, the SKYPROTECT interviews have already been held. But if you have INSIGHT and want to try it, you may practise on a short script instead of a real interview.
+:::
+
+### During the interview
+
+::::own
+1. Run 5 to 7 conversations. Use the interview guide from step 9 to ask your questions, and take notes as you go.
+2. Ask each user to complete the survey, using the QR code or link from step 9. Responses appear in DASH as they answer.
+3. Run INSIGHT during each conversation for live prompts and a transcript, as described below.
+::::
+
+::::demo
+1. On a real project, you would use the interview guide from step 9 to ask your questions, and take notes as you go.
+2. To simulate a survey response from a user, answer the survey yourself as a Site Alpha operator would, using what you read in the kickoff brief. If you can, ask a colleague to answer it too, so you have more than one response.
+::::
+
+#### Get live prompts and transcription with INSIGHT
+
+**INSIGHT** listens while you interview and suggests one thing at a time: a follow-up question, a definition for jargon, or a snippet from your documents. It also writes a transcript as you talk.
+
+It runs on your computer without internet, and nothing leaves your device. If you use Windows, INSIGHT is not available yet, so take notes by hand instead.
+
+1. Before the interview, upload your PRD or brief and add your team's terms, such as the names of your systems. The suggestions then match your project.
+2. Press start at the beginning of the conversation. INSIGHT writes a transcript as you talk.
 3. Read the **Now** card when you need a prompt. It shows one suggestion you can read aloud. A running summary and a glossary help you keep your place.
 
 ::screenshot{src="/confluence-walkthrough-step-10-1.png" caption="The Now card showing a suggested follow-up question during an interview" hint="the INSIGHT window during a session, with the Now card, the running summary and the glossary visible"}
 
 4. When the conversation ends, end the session and open the review. It shows a transcript with each speaker labelled and the suggestions tied to timestamps.
-5. Export the review as Markdown :own[and paste it into the **Field Notes** template, as in **After the interview** below.] :demo[and open the file. This is what you would paste into a Field Notes page on a real project.]
+5. Export the review as Markdown and paste it into the **Field Notes** template, as in **After the interview** below.
 
-:::::check
-:::own
-A transcript with each speaker labelled, saved as a Markdown file and pasted into a Field Notes page in Confluence.
-:::
+:::::demo
+::::details{title="Simulating the interview with INSIGHT (optional)"}
+1. Download :file[insight-practice-script.md]{href="/skyprotect-demo/insight-practice-script.md"}. It lists the terms to add to INSIGHT's glossary, and a short script with two parts. Add the terms in INSIGHT before you start.
+2. Press start, then read both parts of the script out loud. Read the interviewer in your own voice and the operator in a different voice. INSIGHT writes a transcript as you talk.
+3. Read the **Now** card when you need a prompt.
+4. When you finish, end the session and open the review.
+5. Export the review as Markdown and open the file. This is what you would paste into a Field Notes page on a real project.
 
-:::demo
-If you tried INSIGHT, a transcript of the practice script with each speaker labelled, saved as a Markdown file.
+:::check
+A transcript of the practice script with each speaker labelled, saved as a Markdown file.
 :::
+::::
 :::::
 
 ### After the interview
