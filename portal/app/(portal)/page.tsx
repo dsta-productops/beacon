@@ -70,6 +70,11 @@ const stages: Stage[] = [
 // Section layout and type scale follow the CLARA site, so the two read as one family.
 const CONTAINER = "mx-auto max-w-6xl px-6 sm:px-8";
 const EYEBROW = "uppercase tracking-[0.18em] text-accent";
+// Each stage label leads to that phase's page, e.g. "Research" → /flywheel/research.
+const phaseHref = (name: string) => `/flywheel/${name.toLowerCase()}`;
+// The stage numbers sit in the beacon's orange, with dark text for contrast.
+const STAGE_BADGE =
+  "h-6 w-6 justify-center rounded-full border-transparent bg-[#F5B544] p-0 text-[#1A1A1A] transition-shadow duration-200 group-hover:shadow-[0_0_16px_rgb(245_181_68_/_0.7)] group-focus-visible:shadow-[0_0_16px_rgb(245_181_68_/_0.7)]";
 
 export default function Home() {
   return (
@@ -160,12 +165,14 @@ export default function Home() {
                     </>
                   )}
                 </span>
-                <span className="flex items-center gap-2">
-                  <Badge variant="solid">{index + 1}</Badge>
-                  <Heading as="h3" size="md">
+                <Link href={phaseHref(name)} className="group flex items-center gap-2 rounded-md">
+                  <Badge variant="solid" className={STAGE_BADGE}>
+                    {index + 1}
+                  </Badge>
+                  <Heading as="h3" size="md" className="transition-colors group-hover:text-[#F5B544]">
                     {name}
                   </Heading>
-                </span>
+                </Link>
                 <span
                   aria-hidden="true"
                   className={`-mr-3 ml-3 h-px flex-1 ${index < stages.length - 1 ? "bg-border-strong" : ""}`}
@@ -177,12 +184,14 @@ export default function Home() {
           <div className="mt-12 grid gap-x-6 gap-y-8 lg:mt-6 lg:grid-cols-3">
             {stages.map(({ name, tools }, index) => (
               <div key={name} className="flex flex-col gap-4">
-                <div className="flex items-center gap-2 lg:hidden">
-                  <Badge variant="solid">{index + 1}</Badge>
-                  <Heading as="h3" size="md">
+                <Link href={phaseHref(name)} className="group flex items-center gap-2 lg:hidden">
+                  <Badge variant="solid" className={STAGE_BADGE}>
+                    {index + 1}
+                  </Badge>
+                  <Heading as="h3" size="md" className="transition-colors group-hover:text-[#F5B544]">
                     {name}
                   </Heading>
-                </div>
+                </Link>
                 {tools.map((tool) => {
                   const tile = (
                     <Card
