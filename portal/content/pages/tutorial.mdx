@@ -264,15 +264,13 @@ Its team starts from the documents of an earlier programme, **FLEETWATCH**, a co
    ```
 
 ::screenshot{src="/confluence-walkthrough-step-5-kb-skeleton.png" caption="The Knowledge Base skeleton, with a Programme-wide folder for each document type" hint="the Confluence page tree with the Knowledge Base and its Programme-wide folders highlighted"}
-4. Download :file[skyprotect-setup.md]{href="/skyprotect-setup.md"}. CLARA will use this file to create the starting documents for **SKYPROTECT** in Confluence.
-5. Start a new chat in the Claude panel, attach the file and paste this prompt:
+
+4. To simulate that you have a preceding project called **FLEETWATCH** that you want to refer to in your new project **SKYPROTECT**, some background of your previous project is essential. Download :file[skyprotect-setup.md]{href="/skyprotect-setup.md"}. The file also contains field notes sample pages that you would require later on.
+5. Attach the file and paste this prompt:
    ```prompt
-   Set up the SKYPROTECT demo project in Confluence by following the attached setup file exactly. The SKYPROTECT space (key SKYPR) already exists, so do not create it. If anything cannot be created, stop and tell me. Do not retry or improvise.
+   Refer to the attached file to setup prior-projects and field-notes samples. Do not change anything to the existing knowledge base.
    ```
-
-::screenshot{src="/confluence-walkthrough-step-5-3.png" caption="The Claude panel with the setup file attached and the prompt pasted" hint="the Claude panel in VS Code with skyprotect-setup.md attached and the prompt pasted, with the attachment highlighted"}
-
-6. Wait a few minutes while it creates the pages one level at a time. Then open the **Knowledge Base** link it gives you.
+6. You can now see the **Prior-projects** featuring FLEETWATCH, and the field notes sample pages nested within **Field-notes (Programme-wide)**.
 
 ::screenshot{src="/confluence-walkthrough-step-5-4.png" caption="The SKYPROTECT page tree, with Prior-projects and Knowledge Base expanded" hint="the finished SKYPROTECT page tree in Confluence, with Prior-projects and the Knowledge Base expanded and the Field-notes pages visible"}
 
