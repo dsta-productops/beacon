@@ -436,7 +436,7 @@ const PHASE_SUMMARIES: Record<"tutorial" | "tutorial-gitlab", Record<string, str
     ...SHARED_PHASE_SUMMARIES,
   },
   "tutorial-gitlab": {
-    Setup: "Check the prerequisites, install your tools and CLARA, then load the SKYPROTECT demo project.",
+    Setup: "Set up the prerequisites.",
     ...SHARED_PHASE_SUMMARIES,
   },
 };
