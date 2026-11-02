@@ -255,8 +255,8 @@ Its team starts from the documents of an earlier programme, **FLEETWATCH**, a co
 
 ::screenshot{src="/confluence-walkthrough-step-5-2.png" caption="The 'Create a space' form, with the name SKYPROTECT and the key SKYPR" hint="the Confluence Create a space form with the name SKYPROTECT and the space key SKYPR filled in and the key field highlighted"}
 
-2. Type `setup-kb` to set up your Knowledge Base skeleton.
-3. You will be prompted to fill in the programme name, programme type and track. Paste this prompt:
+2. In the Claude panel, type `setup-kb` to set up your Knowledge Base skeleton.
+3. CLARA will ask you fill in the programme name, programme type and track. Paste this prompt:
    ```prompt
    Programme name: SKYPROTECT
    Programme type: digital
@@ -265,7 +265,7 @@ Its team starts from the documents of an earlier programme, **FLEETWATCH**, a co
 
 ::screenshot{src="/confluence-walkthrough-step-5-kb-skeleton.png" caption="The Knowledge Base skeleton, with a Programme-wide folder for each document type" hint="the Confluence page tree with the Knowledge Base and its Programme-wide folders highlighted"}
 
-4. To simulate that you have a preceding project called **FLEETWATCH** that you want to refer to in your new project **SKYPROTECT**, some background of your previous project is essential. Download :file[skyprotect-setup.md]{href="/skyprotect-setup.md"}. The file also contains field notes sample pages that you would require later on.
+4. To simulate that you have a preceding project called **FLEETWATCH** that you want to refer to in your new project **SKYPROTECT**, some background of your previous project is essential. Download :file[skyprotect-demo-setup.md]{href="/skyprotect-demo-setup.md"}. The file also contains field notes sample pages that you would require later on.
 5. Attach the file and paste this prompt:
    ```prompt
    Refer to the attached file to setup prior-projects and field-notes samples. Do not change anything to the existing knowledge base.
@@ -362,7 +362,7 @@ These problems feed your research synthesis in step 11 and your problem ranking 
    ```
 3. Tell CLARA the product name, then attach your material or paste the link.
    :::demo
-   Attach all four screenshots, then answer with:
+   Then answer with:
 
    ```prompt
    Programme name: SKYPROTECT
@@ -705,8 +705,8 @@ It is the most important output of Research.
    Track: Programme-wide
    PRD title: Operator-console-v1
    Original stakeholder ask: Operators at our two sites should not need three windows to confirm a drone. Commanders in the central ops room should be able to authorise faster. Show us a prototype that people can try.
-   Problem to build for: ranks 1, 6 and 7 of the problem-impact analysis together. Operators cannot tell whether the radar, RF and camera reports describe the same drone, they distrust the radar's label, and they cannot tell contradicting or stale sensor data from live data. This is the kickoff ask. Escalation and authorisation are secondary. If the ranking puts another problem first, still build for these, and note why in the PRD.
-   Prototype scope: the prototype is built only from PRIZM components, and PRIZM has no radar or camera view. Put live radar, RF and camera feeds out of scope. Show sensor evidence as data. Include three things. First, a contact list with a short agreement status for each contact, using the words Sensors agree, Sensors disagree, Single sensor, 2 of 3 agree and Agreement unknown. Each contact shows its site as a label only. Second, for each contact, the confidence the system presents, with how it is made up: the confidence and weight of each sensor, and a note when a disagreeing sensor lowers it. It is never a bare number. Third, simple prototype-only buttons that simulate a new sensor report and reset the contacts. Leave the fusion rule, the weights and the staleness limits as TBD.
+   Problem to build for: the problems about whether operators can trust what the sensors jointly say, which is what the kickoff ask is about. Operators cannot tell whether the radar, RF and camera reports describe the same drone, they distrust the radar's label, and they cannot tell stale or contradicting sensor data from live data. Escalation and authorisation are secondary. If the ranking puts another problem first, still build for these, and note why in the PRD.
+   Prototype scope: the prototype is built only from PRIZM components, and PRIZM has no radar or camera view, so put live feeds out of scope and show sensor evidence as data. Include a contact list with a short agreement status for each contact. For each contact, include the confidence the system presents and how it is made up, including how much each sensor counts and a note when a disagreeing sensor lowers it. It is never a bare number. Also include simple prototype-only controls that simulate a new sensor report. Leave the fusion rule, the weights and the staleness limits as TBD.
    ```
    :::
 3. Read the draft carefully, especially the user stories and their acceptance criteria. Check that they cover edge cases, including obscure ones that are easy to miss. If something is wrong or missing, tell CLARA what to change, and it updates the draft.
@@ -807,20 +807,16 @@ Claude Code reads your PRD and PRIZM's rules, so the result follows DSTA standar
 
    Build it with Next.js, TypeScript and Tailwind v4. Use PRIZM components only. Do not create new components or draw your own radar, map or camera views. If you think one is missing, stop and tell me what is missing, then wait.
 
-   Use the C3 zone, because this is a command-and-control system. Scaffold the project in the current folder. Copy PRIZM's C3 app shell into it and fill the shell's main canvas, so the prototype has a top bar, a status ticker and an icon rail. Copying the shell counts as using PRIZM.
+   Use the C3 zone, because this is a command-and-control system. Scaffold the project in the current folder and copy PRIZM's C3 app shell into it. Copying the shell counts as using PRIZM.
 
-   Lay out the main canvas as a master-detail view, and fill it with what the PRD's user stories describe, using the PRD's own wording for statuses and labels. On the left is an alert queue table with the columns Alert, Contact, Time and Sensors. The Sensors column shows a badge with the agreement status, and the contact column shows the site as a label. Make the queue 25 to 40 percent of the canvas width, with all its columns fitting inside it without sideways scrolling. The selected row is highlighted. On the right, for the selected contact, show a header with the alert ID, a status badge and a line giving the contact, site and time. Below it, show each sensor's report, its age and whether it is live, stale or dropped, in a table. Then a card titled "Fused confidence" with the figure in large type and a "What does this number mean?" link that opens a popover. Under that, a table of sensor, sensor confidence, weight and contribution, followed by the weighted sum, the disagreement adjustment and the rounded fused confidence. Then a warning alert explaining what lowered the figure. Last, a card titled "Prototype controls" that says it simulates events the real console would receive and is not part of the design, with a button "Simulate new RF report" that adds a report labelled "Simulated" and updates the status and the confidence, and a button "Reset all alerts". Let the right side take the remaining width. Fill the shell's status ticker with the site, open alerts, contradiction-class alerts and sensors online.
+   Build the PRD's user stories inside the shell as one master-detail console: a list of the main items on the left, and the selected item's detail on the right. Use the PRD's own module names, statuses and labels, and put anything the PRD marks as prototype-only in its own card. It should look like a finished console, so reach for PRIZM's richer components where they fit, such as tables, badges, cards, alerts, popovers and the notification centre. Turn on the shell's glass mode by default.
 
-   Use this sample data for illustration, and select A-2042 first. Where it differs from the PRD, follow the PRD. Contacts (alert, contact, site, time): A-2041 Small UAS (probable), Alpha, 05:31; A-2042 Small UAS (probable), Bravo, 05:37; A-2043 Fixed-wing UAS, Alpha, 05:44; A-2044 Unclassified contact, Bravo, 05:52; A-2045 Small UAS (probable), Bravo, 05:58; A-2046 Small UAS (probable), Alpha, 06:03. Give them a mix of statuses, covering agree, disagree, single sensor, partial agreement and unknown. For A-2042, the sensors disagree: radar 91 percent at weight 40 percent, RF 12 percent at 30 percent, EO/IR 85 percent at 30 percent. Contributions are 36.4, 3.6 and 25.5, the weighted sum is 65.5, the disagreement adjustment is minus 12, and the fused confidence is 54 percent. The warning says the fused value is 12 points lower than the weighted sum because RF disagrees with the other sensors. Label the weights and the adjustment as simulated. Make up similar values for the other contacts.
-
-   Turn on the shell's glass mode by default (`defaultGlass`), and keep the bell and the glass toggle in the top bar working, so the notification centre opens as a glass panel. Apart from the shell, use the glass variant only for popovers and tooltips.
-
-   Where the PRD leaves anything else undecided, such as the fusion rule, the staleness limits or what the camera reports, use made-up sample values and do not stop to ask about them.
+   The PRD leaves values undecided, such as the fusion rule, the weights and the staleness limits. Use made-up but plausible sample values: about six contacts across Alpha and Bravo with a mix of agreement statuses, and label the weights and the fusion as simulated. Do not stop to ask about them.
 
    When you finish, list every component the prototype uses and where it comes from in PRIZM, and flag anything you wrote yourself instead of taking it from PRIZM.
    ```
    :::
-5. :own[Claude Code asks you two questions before it builds. Choose a PRIZM zone: **Enterprise** for websites and back-office tools, or **C3** for command-and-control systems. When it lists the user flows, pick one to build first. Do not skip this question.] :demo[The prompt already names the zone and the screens, so Claude Code should start building. If it asks anyway, answer C3 and the alert queue with the fused confidence detail.]
+5. :own[Claude Code asks you two questions before it builds. Choose a PRIZM zone: **Enterprise** for websites and back-office tools, or **C3** for command-and-control systems. When it lists the user flows, pick one to build first. Do not skip this question.] :demo[The prompt already names the zone and the screens, so Claude Code should start building. If it asks anyway, answer C3 and the contact list with the evidence and confidence detail.]
 
 6. Open the prototype in your browser. To change something, describe the change in plain English.
 
