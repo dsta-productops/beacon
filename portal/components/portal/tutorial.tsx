@@ -26,6 +26,7 @@ import {
 } from "@/components/portal/project-choice";
 import { EnterprisePageToc } from "@/components/templates/enterprise/page-toc";
 import { PROJECT_MARKUP, remarkProject, type Project } from "@/lib/remark-project";
+import { remarkCellBreaks } from "@/lib/remark-cell-breaks";
 import { cn } from "@/lib/utils";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Disclosure, TutorialSteps, type TutorialBlock } from "@/components/portal/tutorial-steps";
@@ -132,12 +133,7 @@ function parseBody(body: string): { intro: string; sections: Section[] } {
 /** Maps directives onto custom element names that `components` below render. */
 function remarkTutorial() {
   return (tree: Root) => {
-    // a table cell cannot hold a list, so `<br>` inside one becomes a line break
-    visit(tree, "html", (node, index, parent) => {
-      if (parent?.type === "tableCell" && index !== undefined && /^<br\s*\/?>$/i.test(node.value)) {
-        parent.children[index] = { type: "break" };
-      }
-    });
+    remarkCellBreaks()(tree);
     visit(tree, (node) => {
       if (
         node.type !== "containerDirective" &&

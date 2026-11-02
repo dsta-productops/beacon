@@ -2,6 +2,7 @@ import type React from "react";
 import { Prose } from "@/components/ui/prose";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { remarkCellBreaks } from "@/lib/remark-cell-breaks";
 
 /**
  * Renders markdown (the body of an MDX content file) inside PRIZM's Prose
@@ -19,7 +20,7 @@ function stripHtmlComments(md: string): string {
 export function Markdown({ children }: { children: string }) {
   return (
     <Prose>
-      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+      <ReactMarkdown remarkPlugins={[remarkGfm, remarkCellBreaks]}>
         {stripHtmlComments(children)}
       </ReactMarkdown>
     </Prose>
