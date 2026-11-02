@@ -79,16 +79,16 @@ const STAGE_BADGE =
 export default function Home() {
   return (
     <>
-      {/* Fills the first screen, running up behind the top bar (h-14), which turns dark over it. */}
+      {/* Fills the first screen, running up behind the top bar (h-14). Follows the site's light/dark mode. */}
       <section
         id="hero"
-        className="theme-enterprise-dark relative -mt-14 flex min-h-svh items-center overflow-hidden bg-bg pt-14 text-fg"
+        className="relative -mt-14 flex min-h-svh items-center overflow-hidden bg-bg pt-14 text-fg"
       >
         <BeaconHeroArt className="absolute inset-0 h-full w-full opacity-40 lg:opacity-100" />
         {/* Mutes the illustration's colours overall. */}
         <div aria-hidden="true" className="absolute inset-0 bg-bg/40" />
-        {/* Deepens the field behind the text, fading out at the beacon. */}
-        <div aria-hidden="true" className="absolute inset-y-0 left-0 w-[70%] bg-gradient-to-r from-bg/75 to-transparent" />
+        {/* Keeps the field behind the text solid, then fades out towards the beacon. */}
+        <div aria-hidden="true" className="absolute inset-y-0 left-0 w-[75%] bg-gradient-to-r from-bg/90 via-bg/80 to-transparent" />
         <div className={`${CONTAINER} relative w-full py-24 sm:py-32`}>
           <div className="max-w-xl space-y-8">
             <Text size="sm" variant="muted" weight="medium" className={EYEBROW}>
@@ -99,26 +99,17 @@ export default function Home() {
               Your guide to product work at DSTA.
             </Heading>
 
-            <Text size="lg" variant="muted" className="max-w-2xl text-balance leading-relaxed">
+            <Text size="lg" variant="default" className="max-w-2xl text-balance leading-relaxed">
               Beacon shows you how product work goes from research, to design, to
               measurement, and which tool to use at each step.
             </Text>
 
-            <div className="flex flex-wrap gap-2 pt-2">
-              {stages.map(({ name }) => (
-                <Badge key={name} variant="outline">
-                  {name}
-                </Badge>
-              ))}
-            </div>
-
             <div className="pt-4">
-              {/* Lights up in the beacon's orange whenever its beam falls on it (data-lit is set by BeaconHeroArt). */}
-              <Link href="/tutorial" data-beam-target className="group inline-flex">
+              {/* The page's main action: a filled beacon-orange button that glows at rest and brighter on hover or focus. */}
+              <Link href="/tutorial" className="group inline-flex">
                 <Button
-                  variant="outline"
                   size="lg"
-                  className="transition-[border-color,box-shadow] duration-200 group-data-[lit]:border-[#F5B544] group-data-[lit]:shadow-[0_0_24px_rgb(245_181_68_/_0.45)] group-focus-visible:border-[#F5B544] group-focus-visible:shadow-[0_0_24px_rgb(245_181_68_/_0.45)]"
+                  className="h-12 border-transparent bg-[#F5B544] px-8 text-lg text-[#1A1A1A] shadow-[0_0_18px_rgb(245_181_68_/_0.3)] transition-[background-color,box-shadow] duration-200 hover:bg-[#F7C265] hover:shadow-[0_0_30px_rgb(245_181_68_/_0.6)] group-focus-visible:bg-[#F7C265] group-focus-visible:shadow-[0_0_30px_rgb(245_181_68_/_0.6)]"
                 >
                   Begin your tutorial
                   <ArrowRight className="h-4 w-4" aria-hidden />

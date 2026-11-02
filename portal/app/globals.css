@@ -54,6 +54,14 @@
     border-color: var(--color-border);
   }
 
+  /* Tailwind's preflight resets buttons to the default cursor; links and buttons should show a pointer. */
+  a[href],
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  summary {
+    cursor: pointer;
+  }
+
   html {
     font-family: var(--font-sans);
     -webkit-text-size-adjust: 100%;
@@ -87,7 +95,21 @@
    .swatch-enterprise-dark does, so they inherit to descendants.
    ============================================================ */
 
+:root {
+  /* Hero art colours, light mode. */
+  --beacon-field: oklch(82% 0.025 260);
+  --beacon-dim: oklch(72% 0.04 260);
+  --beacon-beam-a: 0.22;
+  --beacon-beam-core-a: 0.18;
+  --beacon-lit-a: 0.9;
+}
+
 .theme-enterprise-dark {
+  --beacon-field: #2B3F6E;
+  --beacon-dim: #2A3550;
+  --beacon-beam-a: 0.1;
+  --beacon-beam-core-a: 0.08;
+  --beacon-lit-a: 0.55;
   color-scheme: dark;
   /* A step lighter than PRIZM's slate-950 base, so dark reads as deep navy, not black. */
   --color-bg: oklch(20.8% 0.042 265.75);
@@ -119,7 +141,7 @@
 
 .surface-glass-chrome {
   /* A white frosted tint (not C3's dark tint) so the bar matches the light page. */
-  --prizm-glass-chrome-bg: oklch(100% 0 0 / 0.72);
+  --prizm-glass-chrome-bg: oklch(100% 0 0);
   --prizm-glass-chrome-border: oklch(0% 0 0 / 0.06);
   --prizm-glass-chrome-blur: 8px;
   --prizm-glass-chrome-saturate: 180%;
@@ -129,7 +151,8 @@
 
 .theme-enterprise-dark.surface-glass-chrome,
 .theme-enterprise-dark .surface-glass-chrome {
-  --prizm-glass-chrome-bg: oklch(85% 0.015 220 / 0.06);
+  /* Opaque, matching the dark --color-bg, so nav text stays legible over the hero. */
+  --prizm-glass-chrome-bg: oklch(20.8% 0.042 265.75);
   --prizm-glass-chrome-border: oklch(100% 0 0 / 0.08);
   --prizm-glass-chrome-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.1);
   --prizm-glass-noise-opacity: 0.04;

@@ -3,8 +3,9 @@
 import { useEffect, useId, useRef, useState } from "react";
 
 const LIGHT = "#F5B544";
-const DIM = "#2A3550";
-const FIELD = "#2B3F6E";
+// Field and marker colours follow the site's light/dark mode (set in globals.css).
+const DIM = "var(--beacon-dim)";
+const FIELD = "var(--beacon-field)";
 // Markers light and dim on the same timing as the CTAs they share the beam with.
 const FADE_MS = 200;
 const FADE = `opacity ${FADE_MS}ms`;
@@ -42,7 +43,7 @@ const isLit = (m: (typeof markers)[number], beamAngle: number) =>
   Math.abs(angleBetween(angleTo(m.cx, m.cy), beamAngle)) <= BEAM_HALF_ANGLE;
 
 /**
- * BEACON hero background: a signal whose beam lights up part of a dark field.
+ * BEACON hero background: a signal whose beam lights up part of a dot field.
  * On a pointer device the beam follows the cursor across its section, and a marker
  * glows only while the beam is on it; at rest (and with reduced motion) the beam
  * holds on the first marker. Fills its box (wide viewBox, sliced to cover).
@@ -184,11 +185,11 @@ export function BeaconHeroArt({
           </g>
         )}
         <g transform={rotate}>
-          <path d={BEAM} fill={LIGHT} fillOpacity="0.1" filter={`url(#${soften})`} />
-          <path d={BEAM_CORE} fill={LIGHT} fillOpacity="0.08" />
+          <path d={BEAM} fill={LIGHT} style={{ fillOpacity: "var(--beacon-beam-a)" }} filter={`url(#${soften})`} />
+          <path d={BEAM_CORE} fill={LIGHT} style={{ fillOpacity: "var(--beacon-beam-core-a)" }} />
         </g>
       </g>
-      <rect width="1440" height="720" fill={`url(#${lit})`} fillOpacity="0.55" mask={`url(#${clip})`} />
+      <rect width="1440" height="720" fill={`url(#${lit})`} style={{ fillOpacity: "var(--beacon-lit-a)" }} mask={`url(#${clip})`} />
       {!fieldOnly && (
         <g transform={scene}>
           {markers.map((m) => {
