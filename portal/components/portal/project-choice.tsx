@@ -149,10 +149,12 @@ export function ProjectSwitch() {
 /** A copyable prompt. The server has already put the demo's programme name into it. */
 export function PromptBlock({ prompt }: { prompt: string }) {
   return (
-    <div className="relative mt-2 [&_pre]:mb-0">
-      <CodeBlock className="mb-0 whitespace-pre-wrap pr-24">{prompt}</CodeBlock>
-      <div className="absolute top-2 right-2">
-        <CopyButton text={prompt} label="Copy" />
+    <div className="mt-2 flex items-start gap-2 rounded-lg border border-border bg-bg-muted p-2">
+      <CodeBlock className="!mb-0 min-w-0 flex-1 whitespace-pre-wrap !rounded-none !border-0 !bg-transparent !p-2">
+        {prompt}
+      </CodeBlock>
+      <div className="shrink-0">
+        <CopyButton text={prompt} label="Copy" iconOnly />
       </div>
     </div>
   );
