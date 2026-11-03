@@ -53,7 +53,7 @@ const DOMAIN_LABELS: Record<string, string> = {
 const TOOL_LABELS: Record<PromptTool, string> = {
   clara: "CLARA",
   "claude-code": "Claude Code",
-  "any-llm": "Any LLM",
+  "any-llm": "Any AI assistant",
 };
 
 function resolveTool(fm: PromptFrontmatter): PromptTool {
@@ -152,7 +152,7 @@ export default async function PromptPage({
                   Paste into a CLARA-enabled chat
                 </Text>
                 <Text size="sm" variant="muted">
-                  CLARA will confirm the route, ask for anything she still needs in one batched question, and show you the draft before filing.
+                  CLARA will confirm which task it will run and for which programme, ask for anything else it needs in a single set of questions, and show you the draft before filing it.
                 </Text>
               </Stack>
               <div className="flex items-center justify-between gap-3 rounded-md border border-border bg-bg-subtle px-4 py-3">
@@ -172,7 +172,7 @@ export default async function PromptPage({
                     Run with Claude Code
                   </Text>
                   <Text size="sm" variant="muted">
-                    Open this prompt inside a Claude Code workspace with access to your prototype repo.
+                    Open this prompt in Claude Code, in a workspace that can reach your prototype's repository (the folder where its code is kept).
                   </Text>
                 </Stack>
                 <div className="shrink-0">
@@ -192,10 +192,10 @@ export default async function PromptPage({
               <div className="flex items-start justify-between gap-4">
                 <Stack gap="1" className="min-w-0">
                   <Text size="sm" variant="muted" weight="medium" className="uppercase tracking-wide">
-                    Paste into any LLM
+                    Paste into any AI assistant
                   </Text>
                   <Text size="sm" variant="muted">
-                    Fill in the inputs below where you see <code className="font-mono text-xs">{"{{TOKEN}}"}</code> placeholders, then paste the full prompt into Claude, ChatGPT, Gemini, or a local model.
+                    Replace each <code className="font-mono text-xs">{"{{TOKEN}}"}</code> placeholder with the matching input described below, then paste the full prompt into Claude, ChatGPT, Gemini or a model running on your own computer.
                   </Text>
                 </Stack>
                 <div className="shrink-0">
@@ -312,8 +312,7 @@ export default async function PromptPage({
                       Feeds into
                     </Heading>
                     <Text size="sm" variant="muted">
-                      The output of this prompt is consumed by these downstream
-                      prompts.
+                      These prompts use the output of this one.
                     </Text>
                     <Stack gap="2">
                       {downstreamPrompts.map((prompt) => (

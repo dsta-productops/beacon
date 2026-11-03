@@ -17,22 +17,22 @@ prompts:
 
 ## What it does
 
-Natural-language code generation in the terminal and IDE. Enables rapid prototyping of digital products without specialist development skills — a product owner or designer can describe what they want and Claude Code generates working code.
+Claude Code writes code from plain-language instructions, in the terminal or inside a code editor. It lets a product owner or designer build a working prototype without specialist development skills: describe what you want, and Claude Code writes working code.
 
-Pairs especially powerfully with [PRIZM](/tools/prizm): Claude Code reads PRIZM's `PRIZM.md` and `llms.txt`, then generates code that is automatically PRIZM-conformant.
+It pairs especially well with [PRIZM](/tools/prizm), DSTA's design system. Claude Code reads PRIZM's `PRIZM.md` and `llms.txt` files, then writes code that automatically follows PRIZM.
 
 ## When to use it
 
-- Design phase for digital teams — rapid prototyping from a PRD
-- Iterative refinement during iterations
-- Production code generation when paired with design-system discipline
+- Design phase for digital teams: building a rapid prototype from a PRD (product requirements document)
+- Improving the work round by round
+- Producing production code, when paired with the discipline of a design system
 
 ## How to access
 
-Available at [claude.com/claude-code](https://claude.com/claude-code). Run in the terminal or in any IDE with an MCP-compatible extension.
+Available at [claude.com/claude-code](https://claude.com/claude-code). Run it in the terminal, or in any code editor that has a compatible (MCP-compatible) extension.
 
 ## Output expectations
 
-- Generated code respects the project's existing conventions (read `CLAUDE.md` files in the repo)
-- For PRIZM consumers: uses semantic tokens, copies components rather than inventing alternatives
-- Air-gap discipline preserved (no external URL references introduced)
+- Generated code respects the project's existing conventions (it reads the `CLAUDE.md` files in the repository, which are rules files, explained on the [Quality Model](/quality-model) page)
+- For teams using PRIZM: it uses PRIZM's named style tokens and copies PRIZM components, instead of inventing alternatives
+- It adds no links to outside web addresses, so the code still works on isolated networks

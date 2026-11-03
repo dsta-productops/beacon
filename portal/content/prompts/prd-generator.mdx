@@ -3,14 +3,8 @@ title: PRD generator
 phase: research
 domain: digital
 tool: clara
-task: >-
-  draft a v0 PRD from the problem-impact ranking, research synthesis, and prior
-  framing
-expectedOutput: >-
-  Markdown PRD with 8 standard sections — including a Scope table that rolls
-  ranked problems up into product modules (module / rolls-up-ranks / core job)
-  and a prioritised user-story table (id·rank / as-a / i-want / so-that /
-  evidence). Clarifying questions where input is incomplete.
+task: "Draft a first version (v0) of a PRD (product requirements document) from the problem-impact ranking, the research synthesis and earlier framing."
+expectedOutput: "A Markdown PRD with 8 standard sections. These include a scope table that groups the ranked problems into product modules (module, the ranks it covers, and its core job) and a prioritised table of user stories (ID and rank, as a, I want, so that, and evidence). CLARA asks clarifying questions where the input is incomplete."
 inputsFrom:
   - problem-impact-ranker
   - research-synthesiser
@@ -51,10 +45,10 @@ copyBlock: Use CLARA's `prd-generator` for <programme name>.
 
 ## What CLARA will ask you for
 
-- **Programme name** — your programme's name (e.g. SKYPROTECT).
-- **Track** — the slice of the programme this artefact belongs to (workstream, capability area, feature line, etc.), or `Programme-wide` if it spans tracks.
-- **PRD title** — short (e.g. "Incident-report capture v1").
-- **Inputs** — CLARA will search the programme's Confluence space for the problem to build for; problem statement and success criteria; persona for the prd; themes from the research synthesis (optional); original stakeholder ask. You can also paste fresh material if it's not in Confluence yet.
+- **Programme name** — your programme's name (for example SKYPROTECT).
+- **Track** — the part of the programme this document belongs to (for example a workstream, capability area or feature line), or `Programme-wide` if it spans several. The [CLARA page](/tools/clara) explains tracks.
+- **PRD title** — short (for example "Incident-report capture v1").
+- **Inputs** — CLARA will search your programme's Confluence space for the problem to build for, the problem statement and success criteria, the persona for the PRD, optionally the themes from the research synthesis, and the original request from stakeholders. You can also paste in new material that is not in Confluence yet.
 
 ## Where the output lands
 
@@ -62,17 +56,17 @@ copyBlock: Use CLARA's `prd-generator` for <programme name>.
 
 ## Tips
 
-- CLARA asks clarifying questions when inputs are thin. Answer honestly even if it's "I don't know yet" — the Open questions section preserves the unknown.
-- Treat CLARA's v0 PRD as a starting position, not a final document. Manual editing after generation is the norm, not the exception.
+- CLARA asks clarifying questions when inputs are thin. Answer honestly, even if the answer is "I don't know yet". The Open questions section keeps a record of what is unknown.
+- Treat CLARA's v0 PRD as a starting position, not a final document. Editing it by hand afterwards is normal, not the exception.
 
-## Before you circulate — self-review checklist
+## Before you circulate: self-review checklist
 
-Before sharing the PRD with stakeholders, walk through these checks. Most teams will edit the draft directly to fix gaps; a few questions surface things the draft can't fix on its own.
+Before sharing the PRD with stakeholders, walk through these checks. Most teams will fix gaps by editing the draft directly. A few questions bring up things the draft cannot fix on its own.
 
-- **Problem statement** is one paragraph, framed as a problem (not a solution in disguise). Has a clear "who has the problem."
-- **Success criteria** are measurable and capability-focused — what the capability or product has to be able to do, and to what threshold. No "users will feel more confident" non-criteria.
-- **Scope table** rolls every relevant rank up into a module (or explicitly drops it to Out of scope). No ranked problem is silently unaccounted for; "Out of scope" names the rank and the reason.
-- **User-story table** is ordered by priority, every row's `ID · rank` ties back to the ranking, and every Evidence cell cites a real verbatim/observation with its source ref. Stories describe outcomes, not features.
-- **Constraints and dependencies** name every external thing the work depends on. Re-read with "what would block this?" in mind.
-- **Open questions** are honest. The first draft is supposed to be wrong in interesting ways; the open questions are where you flag what you don't know.
-- **Persona references** link to specific persona pages — no implicit "the user".
+- **Problem statement** is one paragraph and describes a problem, not a solution in disguise. It says clearly who has the problem.
+- **Success criteria** are measurable and describe what the capability or product must be able to do, and to what level. Avoid vague non-criteria such as "users will feel more confident".
+- **Scope table** groups every relevant ranked problem into a module, or explicitly puts it under Out of scope. No ranked problem is left unaccounted for, and "Out of scope" names the rank and the reason.
+- **User-story table** is in priority order. Every row's `ID · rank` ties back to the ranking, and every Evidence cell cites a real quote (verbatim) or observation with its source. Stories describe outcomes, not features.
+- **Constraints and dependencies** name every outside thing the work depends on. Read it again with the question "what would block this?" in mind.
+- **Open questions** are honest. The first draft is expected to be wrong in interesting ways, and the open questions are where you flag what you do not know.
+- **Persona references** link to specific persona pages, never to an unnamed "the user".

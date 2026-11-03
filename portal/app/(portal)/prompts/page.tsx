@@ -101,7 +101,7 @@ export default async function PromptsPage() {
         <PageHeader
           eyebrow="Operations"
           title="Prompt library"
-          lede="Copy-and-paste prompts for every phase of the pipeline. Each prompt is tagged with where it runs — CLARA for KB-grounded artefacts, Claude Code for prototype scaffolding."
+          lede="Copy-and-paste prompts for every phase of the Pipeline. Each prompt is labelled with the tool it runs in: CLARA for documents based on a knowledge base, or Claude Code for building prototypes."
         />
 
         {activePhases.map((phase, i) => (

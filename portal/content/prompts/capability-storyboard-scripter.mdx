@@ -3,10 +3,8 @@ title: Capability-storyboard scripter
 phase: design
 domain: engineering
 tool: clara
-task: script a visual storyboard showing how a capability is exercised end-to-end
-expectedOutput: >-
-  Markdown storyboard script: beat-by-beat panels with what to show, what's
-  happening, and what changes from the prior beat.
+task: "Script a storyboard that shows how a capability is used from start to finish."
+expectedOutput: "A Markdown storyboard script, beat by beat. Each panel says what to show, what is happening, and what has changed since the previous beat."
 inputsFrom:
   - operational-scenario-generator
   - capability-spec-generator
@@ -37,12 +35,12 @@ copyBlock: Use CLARA's `capability-storyboard-scripter` for <programme name>.
 
 ## What CLARA will ask you for
 
-- **Programme name** — your programme's name (e.g. SKYPROTECT).
-- **Track** — the slice of the programme this artefact belongs to (workstream, capability area, feature line, etc.), or `Programme-wide` if it spans tracks.
-- **Storyboard title** — short (e.g. "Tank-crew alerting under degraded comms").
-- **Length** — number of panels. Typically 8–12; shorter (5–6) for a quick brief or longer (15+) for a full narrative.
+- **Programme name** — your programme's name (for example SKYPROTECT).
+- **Track** — the part of the programme this document belongs to (for example a workstream, capability area or feature line), or `Programme-wide` if it spans several. The [CLARA page](/tools/clara) explains tracks.
+- **Storyboard title** — short (for example "Tank-crew alerting under degraded comms").
+- **Length** — the number of panels. Typically 8 to 12: fewer (5 to 6) for a quick brief, more (15 or more) for a full narrative.
 - **Audience** — who the storyboard is for. Examples: operators reviewing the capability for the first time, or the engineering team scoping the build.
-- **Inputs** — CLARA will search the programme's Confluence space for operational scenario this storyboard depicts; capability spec for the capability being shown (optional); persona depicted in the storyboard (optional). You can also paste fresh material if it's not in Confluence yet.
+- **Inputs** — CLARA will search your programme's Confluence space for the operational scenario this storyboard shows, optionally the capability specification for the capability being shown, and optionally the persona shown in the storyboard. You can also paste in new material that is not in Confluence yet.
 
 ## Where the output lands
 
@@ -50,6 +48,6 @@ copyBlock: Use CLARA's `capability-storyboard-scripter` for <programme name>.
 
 ## Tips
 
-- When you review CLARA's panels, check the carry-over field on each. Without it you get a set of disconnected hero shots, not a narrative.
-- If CLARA's panels read like a system diagram, push back — the capability should be visible in use.
-- CLARA's panel-level prompts are the spec for the visualisation tool, not the visualisation itself. Send them through to Luma / Nano Banana / Forma for the actual rendering.
+- When you review CLARA's panels, check the carry-over field on each one. Without it you get a set of disconnected hero shots, not a story.
+- If CLARA's panels read like a system diagram, push back. The capability should be visible in use.
+- CLARA's panel-level prompts are the instructions for the visualisation tool, not the visualisation itself. Send them to Luma, Nano Banana or Forma to do the actual rendering.

@@ -3,10 +3,8 @@ title: Interview-guide generator
 phase: research
 domain: shared
 tool: clara
-task: generate a field-ready interview guide that surfaces the data the team needs
-expectedOutput: >-
-  A structured interview guide with warmup, core, probe, and wrap-up sections —
-  each question annotated with what to listen for.
+task: "Generate an interview guide, ready for the field, that gets the team the information it needs."
+expectedOutput: "A structured interview guide with warm-up, core, probe and wrap-up sections. Each question is annotated with what to listen for."
 inputsFrom:
   - prior-knowledge-summariser
 confluenceContext:
@@ -26,12 +24,12 @@ copyBlock: Use CLARA's `interview-guide-generator` for <programme name>.
 
 ## What CLARA will ask you for
 
-- **Programme name** — your programme's name (e.g. SKYPROTECT).
-- **Track** — the slice of the programme this artefact belongs to (workstream, capability area, feature line, etc.), or `Programme-wide` if it spans tracks.
-- **Topic** — a short identifier for the interview topic (e.g. "operator decision-making under time pressure", "shift handover friction"). Shapes the questions.
-- **Interviewee** — role, seniority, and number of sessions planned.
-- **Outcome question** — what the research needs to answer. Be specific: "do operators trust the alert system enough to act on it without secondary confirmation?", not "how do operators feel about alerts".
-- **Inputs** — CLARA will search the programme's Confluence space for prior-knowledge summary on the topic (optional). You can also paste fresh material if it's not in Confluence yet.
+- **Programme name** — your programme's name (for example SKYPROTECT).
+- **Track** — the part of the programme this document belongs to (for example a workstream, capability area or feature line), or `Programme-wide` if it spans several. The [CLARA page](/tools/clara) explains tracks.
+- **Topic** — a short label for the interview topic (for example "operator decision-making under time pressure" or "shift handover friction"). It shapes the questions.
+- **Interviewee** — role, seniority and the number of sessions planned.
+- **Outcome question** — what the research needs to answer. Be specific: "do operators trust the alert system enough to act on it without a second confirmation?", not "how do operators feel about alerts".
+- **Inputs** — CLARA will search your programme's Confluence space for a prior-knowledge summary on the topic (optional). You can also paste in new material that is not in Confluence yet.
 
 ## Where the output lands
 
@@ -39,7 +37,7 @@ copyBlock: Use CLARA's `interview-guide-generator` for <programme name>.
 
 ## Tips
 
-- The "Listening for" annotation is the cheat code. It keeps the interviewer focused on signal instead of just collecting answers.
-- Resist the temptation to add more questions. A guide with 8 sharp questions beats a guide with 20 vague ones. The wrap-up "anything I should have asked" question covers what you missed.
-- Re-run this prompt for each interviewee role rather than building one giant guide that covers everyone. Different roles need different probes.
-- After running interviews, the transcripts feed into the [research synthesiser](/prompts/research-synthesiser).
+- The "Listening for" note on each question is the most useful part. It keeps the interviewer focused on what matters, instead of just collecting answers.
+- Resist the temptation to add more questions. A guide with 8 sharp questions beats one with 20 vague ones. The "anything I should have asked" question at the end covers what you missed.
+- Run this prompt again for each interviewee role, instead of building one giant guide for everyone. Different roles need different follow-up questions.
+- After the interviews, the transcripts feed into the [research synthesiser](/prompts/research-synthesiser).

@@ -1,45 +1,45 @@
 ---
 title: "Research"
-lede: "Understand users, operators, and needs. Define the right problem to solve before any solutioning happens."
+lede: "Understand your users, operators and their needs. Decide which problem to solve before you start designing solutions."
 artefactChecklist:
-  - label: "Problem framing is current"
-    description: "The problem statement reflects what the team now knows — and it's a problem, not a solution in disguise."
+  - label: "The problem statement is up to date"
+    description: "It reflects what the team now knows, and it describes a problem, not a solution in disguise."
   - label: "The research surfaced something new"
-    description: "Research that only confirms prior beliefs has produced no new information. Even a refinement should look different from the previous version."
-  - label: "Success criteria are measurable and capability-focused"
-    description: "What the capability or product has to be able to do — and to what threshold — for the next stretch of work to count as a win."
-  - label: "PRD or operational scenario is current"
-    description: "Digital teams: PRD. Engineering teams: operational scenario, grounded in operator reality."
+    description: "Research that only confirms what the team already believed has produced no new information. Even a refinement should look different from the previous version."
+  - label: "Success criteria are measurable and about what the product must be able to do"
+    description: "They state what the capability or product must be able to do, and to what level, for the next stretch of work to count as a win."
+  - label: "The PRD or operational scenario is up to date"
+    description: "Digital teams: the PRD (product requirements document). Engineering teams: the operational scenario, grounded in how operators really work."
 pitfalls:
   - label: "Confirming, not discovering."
-    description: "Research that only validates pre-existing beliefs has produced no new information. If your synthesis sounds like the brief, go back to the field."
-  - label: "Skipping the synthesis pass."
-    description: "Jumping from interviews to solutioning loses the layer where the actual problem gets defined — and where the four sections (themes / friction / problem / success criteria) get reconciled."
-  - label: "Synthesis-as-summary."
-    description: "Insights are not bullet points of what people said. They are the patterns underneath what people said."
+    description: "Research that only confirms existing beliefs finds nothing new. If your synthesis sounds like the original brief, go back to the field."
+  - label: "Skipping the synthesis step."
+    description: "Going straight from interviews to solutions skips the step where the real problem gets defined, and where the four parts (themes, friction, problem and success criteria) are made to agree with each other."
+  - label: "Summarising instead of synthesising."
+    description: "Insights are not a list of what people said. They are the patterns underneath what people said."
   - label: "Treating the AI output as final."
-    description: "The prompts produce first-draft artefacts. Manual editing and refinement after generation is the norm, not the fallback."
+    description: "The prompts produce first drafts. Editing and refining them afterwards is the normal way to work, not a fallback."
 stages:
   - name: "Discovery"
-    intro: "Build understanding of the current state. Surface what's already known, capture a baseline of the existing or legacy system, and design the qualitative field engagement."
+    intro: "Build an understanding of how things stand today. Find out what is already known, record a baseline for the existing or older system, and plan the fieldwork where you will talk to and observe people."
     artefacts:
       - name: "Surface prior knowledge"
-        description: "Pull what the team and the wider organisation already know about this problem space."
+        description: "Pull together what the team and the wider organisation already know about this problem."
         domain: "shared"
         promptSlugs:
           - prior-knowledge-summariser
       - name: "Baseline the current state"
-        description: "Run a DASH baseline survey with users of the existing, legacy, or competitor system. The numbers captured here become the comparator the new system's Measure results will be measured against — without them, future success criteria stay aspirational rather than verifiable."
+        description: "Run a DASH baseline survey with users of the existing, older or competing system. The numbers you collect become the figures that the new system's Measure results are compared against. Without them, future success criteria stay hopes, not things you can check."
         domain: "shared"
         toolSlugs:
           - dash
       - name: "Evaluate the existing product"
-        description: "Run a Nielsen heuristic usability evaluation of the existing, legacy, or competitor product — from screenshots, a live URL, or a deck — into a scored, evidence-anchored report. The severity-rated findings become candidate problems that feed the synthesis and the impact ranking."
+        description: "Check the existing, older or competing product against Nielsen's well-known usability rules, using screenshots, a live link or a deck. You get a scored report in which every finding points to evidence. The findings, each rated by severity, become candidate problems that feed the synthesis and the impact ranking."
         domain: "shared"
         promptSlugs:
           - heuristic-evaluator
       - name: "Generate the interview guide"
-        description: "Translate the outcome question into a field-ready interview guide — questions, listening signals, and probes."
+        description: "Turn the question about the outcome you want into an interview guide ready for the field, with questions, things to listen for, and follow-up probes."
         domain: "shared"
         promptSlugs:
           - interview-guide-generator
@@ -49,53 +49,53 @@ stages:
         toolSlugs:
           - insight
   - name: "Synthesis"
-    intro: "Turn transcripts and field observations into a single Research-synthesis page covering themes, friction, problem statement, and success criteria — produced in one pass so all four are internally consistent."
+    intro: "Turn the transcripts and field observations into a single research synthesis page covering themes, friction, the problem statement and success criteria. All four are produced in one pass so they agree with each other."
     artefacts:
       - name: "Synthesise the research"
-        description: "One pass over the transcripts and observation notes produces themes, friction points, the problem statement, and success criteria as a single page."
+        description: "One pass over the transcripts and observation notes produces the themes, friction points, problem statement and success criteria on a single page."
         domain: "shared"
         promptSlugs:
           - research-synthesiser
   - name: "Artefact production"
-    intro: "Compose the synthesis into the durable artefacts that pass into Design. Each domain has its own chain — start with the foundational artefact and let the downstream ones follow. The digital and engineering chains run independently. Within digital, the PRD only needs the persona, so it can run alongside the journey-map → service-blueprint branch. Within engineering, the capability spec and mission thread both branch off the operational scenario and can run in parallel."
+    intro: "Turn the synthesis into the lasting documents that pass into Design. Digital and engineering teams each have their own chain: start with the foundational document and let the others follow. The two chains run independently. In the digital chain, the PRD needs only the persona, so it can run alongside the branch that runs from the journey map to the service blueprint. In the engineering chain, the capability specification and the mission thread map both build on the operational scenario, so they can run in parallel."
     artefacts:
       - name: "Draft a persona"
-        description: "Composite user archetype grounded in the research synthesis."
+        description: "A composite user archetype (one typical user profile built up from the research evidence), grounded in the research synthesis."
         domain: "digital"
         promptSlugs:
           - persona-generator
       - name: "Map the user journey"
-        description: "Current-state experience, friction points, moments of truth."
+        description: "Today's experience step by step, with the friction points and the key moments that decide whether the experience succeeds."
         domain: "digital"
         promptSlugs:
           - journey-map-drafter
       - name: "Map the service blueprint"
-        description: "Front-stage and back-stage of the user experience."
+        description: "What the user sees (front stage) and what the organisation does behind the scenes (back stage) at each step of the experience."
         domain: "digital"
         promptSlugs:
           - service-blueprint-drafter
       - name: "Rank the problems by impact"
-        description: "Consolidate the synthesis's friction into a single ranked Problem-impact analysis — reach, severity, evidence, and leverage — so the PRD builds for the highest-impact problem first."
+        description: "Combine the friction found in the synthesis into one ranked problem-impact analysis. It scores each problem on how many people it affects, how serious it is, how strong the evidence is, and how much fixing it would unlock, so the PRD is built for the highest-impact problem first."
         domain: "shared"
         promptSlugs:
           - problem-impact-ranker
       - name: "Draft the PRD"
-        description: "Product Requirements Document — the artefact that passes into Design. Builds for the top-ranked problem from the Problem-impact analysis."
+        description: "The product requirements document: what the product must do, and the document that passes into Design. It is built for the top-ranked problem from the problem-impact analysis."
         domain: "digital"
         promptSlugs:
           - prd-generator
       - name: "Draft the operational scenario"
-        description: "Narrative of how a capability would be used in context."
+        description: "A story of how a capability would be used in real operations."
         domain: "engineering"
         promptSlugs:
           - operational-scenario-generator
       - name: "Specify the capability"
-        description: "Measurable requirements derived from operational need."
+        description: "Measurable requirements that follow from the operational need."
         domain: "engineering"
         promptSlugs:
           - capability-spec-generator
       - name: "Map the mission thread"
-        description: "End-to-end view of the operational task the capability supports."
+        description: "An end-to-end view of the operational task that the capability supports."
         domain: "engineering"
         promptSlugs:
           - mission-thread-mapper
@@ -103,10 +103,20 @@ stages:
 
 ## What this phase is for
 
-Research establishes *who* the work is for, *what* they're trying to achieve, and *what would count as a win*. It's the **outer loop** of the flywheel — done thoroughly at the start of a programme or a track, and re-engaged when measurement findings suggest the framing itself has shifted. Once a track moves into Design, the inner loop takes over: Design ↔ Measure iterates at a higher cadence, with Research re-engaged only when something foundational shifts.
+Research establishes *who* the work is for, *what* they are trying to achieve, and *what would count as a win*.
 
-For digital teams this typically spans pre-AOR through planning intervals; for engineering teams, concept development through capability requirements refinement.
+Throughout this page, an **artefact** means a document or working model that the team produces, such as a persona or a prototype.
+
+Research is the **outer loop** of the flywheel. The team does it thoroughly at the start of a programme or workstream, and returns to it when measurement findings suggest the problem itself has changed. Once work moves into Design, the inner loop takes over. Design and Measure repeat quickly, and the team goes back to Research only when something fundamental shifts.
+
+For digital teams, this phase typically runs from before the AOR through the planning intervals. For engineering teams, it runs from concept development through to refining the capability requirements.
 
 ## How to run a Research prompt
 
-Every Research prompt on this portal is a one-line invocation you paste into a CLARA-enabled LLM. CLARA confirms which artefact you want, asks for the few inputs she can't infer, reads the relevant pages, drafts the artefact, and files it back into the programme's Knowledge Base under the agreed path.
+Every Research prompt on this site is a one-line instruction that you paste into an AI assistant with CLARA enabled. CLARA then:
+
+1. Confirms which artefact you want.
+2. Asks for the few inputs it cannot work out for itself.
+3. Reads the relevant pages.
+4. Drafts the artefact.
+5. Files it in the programme's Knowledge Base, under the agreed path.

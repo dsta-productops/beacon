@@ -1,26 +1,26 @@
 ---
 title: "I'm joining a project midway"
-scenario: "You've been brought onto a project that's already running. There's prior research, an existing PRD or operational scenario, possibly a prototype in flight. The goal isn't to redo the team's work — it's to get up to speed without restarting the loop."
+scenario: "You have been brought onto a project that is already running. There is earlier research, an existing PRD or operational scenario, and possibly a prototype in progress. The goal is not to redo the team's work. It is to get up to speed without restarting the loop."
 order: 2
 visibility: "public"
 steps:
-  - label: "Locate the project's prior research"
-    description: "Pull the latest research synthesis for the programme. If it's stale or missing, that's a finding worth surfacing."
+  - label: "Find the project's earlier research"
+    description: "Pull the latest research synthesis for the programme. If it is out of date or missing, that is worth raising."
     prompt: "prior-knowledge-summariser"
     tool: "clara"
   - label: "Read the current PRD or operational scenario"
-    description: "Whichever artefact the team passes through to Design. This is the spec the prototype is built against — read it as it stands today, not as you'd write it."
-  - label: "Find the most recent test plan and its results"
-    description: "What did the team last try to validate, and what did the evidence say? Check DASH for survey responses, observations, and OKR status."
+    description: "Whichever document the team passes into Design. This is what the prototype is being built against. Read it as it stands today, not as you would write it."
+  - label: "Find the latest test plan and its results"
+    description: "What did the team last try to check, and what did the evidence say? Look in DASH for survey responses, observations and OKR status (OKRs are goals with measurable targets)."
     tool: "dash"
-  - label: "Sit with the team — surface what isn't written down"
-    description: "Half of what a team has learned lives in the heads of the people doing the work. Book a 30-minute walk-through with the lead and the most-recent contributor before forming opinions."
-  - label: "Identify which inner-loop iteration the team is in"
-    description: "Are they prototyping, validating with users, or stuck somewhere between? The answer determines where you can contribute fastest without disrupting flow."
-  - label: "Propose a contribution point"
-    description: "Don't drop into the team's flow uninvited. Name the slice you'd take on; let the team confirm it's the right one. The fastest way to add value mid-project is to take work the team has already prioritised but not yet started."
+  - label: "Sit with the team and find out what is not written down"
+    description: "Half of what a team has learned lives in the heads of the people doing the work. Book a 30-minute walk-through with the lead and the most recent contributor before you form opinions."
+  - label: "Work out where the team is in its loop"
+    description: "Are they prototyping, testing with users, or stuck somewhere in between? (This is the fast Design and Measure loop.) The answer tells you where you can help fastest without disrupting their flow."
+  - label: "Propose where you can help"
+    description: "Do not drop into the team's work uninvited. Name the piece you would take on, and let the team confirm it is the right one. The fastest way to add value mid-project is to take on work the team has already prioritised but not yet started."
 ---
 
-Joining mid-flight is harder than starting fresh, but the reflex to "redo the research properly" is almost always wrong. Prior work is the team's accumulated context — discarding it costs the team weeks and signals you don't trust their judgment.
+Joining a project that is already moving is harder than starting fresh. The urge to "redo the research properly" is almost always wrong. The earlier work is the team's built-up knowledge of the project. Throwing it away costs the team weeks and signals that you do not trust their judgement.
 
-The work below is about reading the artefacts the team has already produced, understanding which loop iteration they're in, and finding a contribution slice that helps rather than disrupts. Resist forming strong opinions until you've done all six steps.
+The work below is about reading what the team has already produced, understanding where they are in their loop, and finding a piece of work that helps instead of disrupts. Hold off on forming strong opinions until you have done all six steps.

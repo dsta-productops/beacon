@@ -3,10 +3,8 @@ title: Operational-scenario generator
 phase: research
 domain: engineering
 tool: clara
-task: draft an operational scenario from operator research and capability brief
-expectedOutput: >-
-  A full operational scenario covering operator, mission context, environment,
-  sequence, decisions, success/failure modes, and capability impact.
+task: "Draft an operational scenario from operator research and a capability brief."
+expectedOutput: "A full operational scenario covering the operator, mission context, environment, sequence of events, decisions, success and failure modes, and the impact on the capability."
 inputsFrom:
   - research-synthesiser
 confluenceContext:
@@ -42,10 +40,10 @@ copyBlock: Use CLARA's `operational-scenario-generator` for <programme name>.
 
 ## What CLARA will ask you for
 
-- **Programme name** — your programme's name (e.g. SKYPROTECT).
-- **Track** — the slice of the programme this artefact belongs to (workstream, capability area, feature line, etc.), or `Programme-wide` if it spans tracks.
-- **Scenario title** — short (e.g. "Tank crew night transit through contested terrain", "Fighter aircraft low-altitude intercept", "Frigate surface-contact classification at dusk").
-- **Inputs** — CLARA will search the programme's Confluence space for operator research — interviews, field/exercise observations, workshop outputs; capability brief or statement of operational need; doctrinal or procedural references the operators work from (optional); themes (optional); friction points (optional). You can also paste fresh material if it's not in Confluence yet.
+- **Programme name** — your programme's name (for example SKYPROTECT).
+- **Track** — the part of the programme this document belongs to (for example a workstream, capability area or feature line), or `Programme-wide` if it spans several. The [CLARA page](/tools/clara) explains tracks.
+- **Scenario title** — short (for example "Tank crew night transit through contested terrain", "Fighter aircraft low-altitude intercept" or "Frigate surface-contact classification at dusk").
+- **Inputs** — CLARA will search your programme's Confluence space for operator research (interviews, field and exercise observations, and workshop outputs), a capability brief or statement of operational need, and optionally the doctrine or procedures the operators work from, themes and friction points. You can also paste in new material that is not in Confluence yet.
 
 ## Where the output lands
 
@@ -53,7 +51,7 @@ copyBlock: Use CLARA's `operational-scenario-generator` for <programme name>.
 
 ## Tips
 
-- Validate the draft with at least one operator before using it in capability discussions. Their reaction is the real test.
-- Pay particular attention to the failure modes — that's where the design opportunity usually hides.
-- Pair the output with a visual: use [Nanobanana](/tools/nanobanana), [Luma](/tools/luma-ai), or [Forma](/tools/autodesk-forma) to make the scenario tangible.
-- The output feeds the [capability-spec generator](/prompts/capability-spec-generator) and [mission-thread mapper](/prompts/mission-thread-mapper).
+- Check the draft with at least one operator before you use it in capability discussions. Their reaction is the real test.
+- Pay particular attention to the failure modes. That is where design opportunities usually hide.
+- Pair the output with a visual: use [Nanobanana](/tools/nanobanana), [Luma](/tools/luma-ai) or [Forma](/tools/autodesk-forma) to make the scenario tangible.
+- The output feeds the [capability-spec generator](/prompts/capability-spec-generator) and the [mission-thread mapper](/prompts/mission-thread-mapper).

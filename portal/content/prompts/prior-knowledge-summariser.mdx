@@ -3,10 +3,8 @@ title: Prior-knowledge summariser
 phase: research
 domain: shared
 tool: clara
-task: summarise prior knowledge from past programmes on a specific topic
-expectedOutput: >-
-  A structured summary of past programme learnings with patterns,
-  contradictions, adjacent work, and source citations.
+task: "Summarise what past programmes learned about a specific topic."
+expectedOutput: "A structured summary of what past programmes learned, with patterns, contradictions, related work and source citations."
 inputsFrom: []
 confluenceContext:
   inputs:
@@ -25,10 +23,10 @@ copyBlock: Use CLARA's `prior-knowledge-summariser` for <programme name>.
 
 ## What CLARA will ask you for
 
-- **Programme name** — your programme's name (e.g. SKYPROTECT).
-- **Track** — the slice of the programme this artefact belongs to (workstream, capability area, feature line, etc.), or `Programme-wide` if it spans tracks.
-- **Topic** — what topic or domain you're researching. Be specific: "scheduling operator interviews around shift patterns", not "user research".
-- **Inputs** — CLARA will search the programme's Confluence space for past programme writeups touching the topic. You can also paste fresh material if it's not in Confluence yet.
+- **Programme name** — your programme's name (for example SKYPROTECT).
+- **Track** — the part of the programme this document belongs to (for example a workstream, capability area or feature line), or `Programme-wide` if it spans several. The [CLARA page](/tools/clara) explains tracks.
+- **Topic** — the topic or area you are researching. Be specific: "scheduling operator interviews around shift patterns", not "user research".
+- **Inputs** — CLARA will search your programme's Confluence space for write-ups from past programmes that touch on the topic. You can also paste in new material that is not in Confluence yet.
 
 ## Where the output lands
 
@@ -36,7 +34,7 @@ copyBlock: Use CLARA's `prior-knowledge-summariser` for <programme name>.
 
 ## Tips
 
-- Be specific with the topic. Broader queries return mush.
+- Be specific with the topic. Broad questions return vague results.
 - If the response is shallow, follow up with: "Go deeper on the recurring patterns — what specifically were the failure modes?"
-- Treat citations as the deliverable. If a finding has no citation, treat it as a hypothesis, not a fact.
-- Confirm CLARA's source list before she generates the summary. Wrong pages picked up here cascade into every downstream artefact — catch it upfront.
+- Treat the citations as the deliverable. If a finding has no citation, treat it as a hypothesis (an unproven idea to be checked), not as a fact.
+- Confirm CLARA's list of sources before it writes the summary. Wrong pages picked up here carry through into every later document, so catch it early.

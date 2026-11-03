@@ -3,12 +3,8 @@ title: Mission-thread mapper
 phase: research
 domain: engineering
 tool: clara
-task: >-
-  map an end-to-end mission thread for the operational task a capability
-  supports
-expectedOutput: >-
-  Markdown mission thread: actors, systems, data flow, decision points,
-  dependencies, and failure modes across the full task.
+task: "Map a mission thread: the end-to-end operational task that a capability supports."
+expectedOutput: "A Markdown mission thread covering the actors, systems, data flow, decision points, dependencies and failure modes across the whole task."
 inputsFrom:
   - operational-scenario-generator
 confluenceContext:
@@ -31,11 +27,11 @@ copyBlock: Use CLARA's `mission-thread-mapper` for <programme name>.
 
 ## What CLARA will ask you for
 
-- **Programme name** — your programme's name (e.g. SKYPROTECT).
-- **Track** — the slice of the programme this artefact belongs to (workstream, capability area, feature line, etc.), or `Programme-wide` if it spans tracks.
-- **Operational scenario** — page reference under `Knowledge Base/{{track}}/Operational scenarios/*`.
-- **Mission task** — be specific: "detect, identify, and engage an inbound air contact from a frigate", or "neutralise a hostile armoured vehicle in urban terrain" — not "air defence" or "ground operations".
-- **Inputs** — CLARA will search the programme's Confluence space for operational scenario for this capability; system context — systems, platforms, comms involved. You can also paste fresh material if it's not in Confluence yet.
+- **Programme name** — your programme's name (for example SKYPROTECT).
+- **Track** — the part of the programme this document belongs to (for example a workstream, capability area or feature line), or `Programme-wide` if it spans several. The [CLARA page](/tools/clara) explains tracks.
+- **Operational scenario** — the page under `Knowledge Base/{{track}}/Operational scenarios/*`.
+- **Mission task** — be specific: "detect, identify, and engage an inbound air contact from a frigate", or "neutralise a hostile armoured vehicle in urban terrain", not "air defence" or "ground operations".
+- **Inputs** — CLARA will search your programme's Confluence space for the operational scenario for this capability, and the system context (the systems, platforms and communications involved). You can also paste in new material that is not in Confluence yet.
 
 ## Where the output lands
 
@@ -43,6 +39,6 @@ copyBlock: Use CLARA's `mission-thread-mapper` for <programme name>.
 
 ## Tips
 
-- When you review CLARA's thread, aim for 5 to 12 steps end-to-end. Too coarse misses decision points; too fine documents screens. Push back if she lands outside that range.
-- Look at the "failure mode + recovery" column first — the steps with the most expensive recovery paths are usually where capability investment pays off.
-- Pair CLARA's output with a [Napkin AI](/tools/napkin-ai) diagram so the data flow is visible at a glance.
+- When you review CLARA's thread, aim for 5 to 12 steps from start to finish. Too coarse misses decision points. Too fine documents screens. Push back if it lands outside that range.
+- Look at the "failure mode + recovery" column first. The steps with the most expensive recovery paths are usually where investing in the capability pays off.
+- Pair CLARA's output with a diagram from [Napkin AI](/tools/napkin-ai), so the data flow is visible at a glance.

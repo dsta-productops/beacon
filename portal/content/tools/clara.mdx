@@ -36,44 +36,44 @@ prompts:
 
 ## What it does
 
-An AI-enabled product intelligence tool that produces research artefacts across the Research, Design, and Measure phases of the ProductOps pipeline. CLARA reads your programme's knowledge base, drafts structured artefacts, and files them back — so each team starts richer than the last.
+CLARA is an AI tool that drafts research and product documents for your programme. It works across the Research, Design and Measure phases of the Pipeline. CLARA reads your programme's knowledge base (the shared place where your team keeps its documents), drafts structured documents such as personas, journeys, PRDs, capability storyboards and test plans, and files them back. Each team therefore starts richer than the last.
 
-CLARA connects to more than one knowledge-base backend: **Confluence** (via a direct connector, no manual setup) and **Plane** (via an MCP server). She owns the research artefacts that live in the Knowledge Base across Research, Design, and Measure (personas, journeys, PRDs, capability storyboards, test plans, and the rest). Prototype scaffolding still goes through Claude Code, not CLARA.
+CLARA connects to more than one kind of knowledge base, including **Confluence** (through a direct connector, with no manual setup) and **Plane** (through an MCP server, a connector that lets AI tools work with Plane). CLARA owns the documents that live in the Knowledge Base across the Research, Design and Measure phases. It does not scaffold prototypes (set up their starting code), which still go through Claude Code.
 
 ## How CLARA behaves
 
-She is **disciplined about evidence** — every finding she surfaces cites the source Confluence page that supports it. If the corpus is silent on something, she says so plainly rather than extrapolating.
+CLARA is **disciplined about evidence**. Every finding it gives cites the Confluence page that supports it. If your documents say nothing on a topic, CLARA says so plainly instead of extrapolating (guessing beyond what the documents say).
 
-She is **cautious about fabrication** — when inputs are thin, she flags what's missing before drafting rather than producing something that looks complete but rests on guesses.
+CLARA is **cautious about making things up**. When inputs are thin, it tells you what is missing before drafting, instead of producing something that looks complete but rests on guesses.
 
-She is **strict about filing** — she verifies every level of the target hierarchy exists before creating a page. If she can't create the full path, she stops and reports rather than silently filing somewhere else.
+CLARA is **strict about filing**. It checks that every folder level of the target path exists before it creates a page. If it cannot create the full path, it stops and tells you, instead of quietly filing somewhere else.
 
-She is **track-aware** — she always knows whether she's working at programme-wide or track-level scope, and her downstream prompts cascade automatically (reading track-level material first, falling back to programme-wide when no track-level version exists).
+CLARA is **aware of your scope**. It knows whether it is working at programme-wide or track level (a track is explained below). Its later prompts follow automatically: they read track-level material first, and use programme-wide material when no track-level version exists.
 
 <!-- PROMPTS SLOT -->
 
 ## Where outputs land
 
-CLARA files every artefact under a top-level `Knowledge Base` page in the programme's knowledge base:
+A **track** is your programme's own way of slicing the work, such as a workstream, capability area, feature line or sub-system, whichever applies. Documents that span several tracks are filed under `Programme-wide`.
+
+CLARA files every document under a top-level `Knowledge Base` page in the programme's knowledge base:
 
 ```
 Knowledge Base /
-  Programme-wide /          cross-track artefacts
+  Programme-wide /          documents that span tracks
     Personas (Programme-wide) /
     PRDs (Programme-wide) /
     ...
-  <your track> /            track-specific artefacts
+  <your track> /            documents for one track
     Personas (<your track>) /
     Journeys (<your track>) /
     PRDs (<your track>) /
     ...
 ```
 
-*Track* is your programme's own organising slice — workstream, capability area, feature line, sub-system — whichever applies. Artefacts that span tracks file under `Programme-wide`.
+## Setting up the Knowledge Base
 
-## Provisioning the Knowledge Base
+CLARA creates any missing folders the first time you use it, so teams can start drafting without any setup. Two optional commands are recommended if you want a clean structure from the start:
 
-CLARA creates any missing parts of the hierarchy automatically on first use, so teams can start drafting without setup. Two optional invocations are recommended when you want clean structure upfront:
-
-- **New programme** — `use clara's setup-kb for [programme]`. CLARA walks through programme type and current track list, previews the full hierarchy, and creates it in one pass. Safe to re-run.
-- **New track on an existing programme** — `use clara's add-track [track] to [programme]`. Bolts one track's folders onto an already-provisioned KB without re-walking the full setup.
+- **New programme:** `use clara's setup-kb for [programme]`. CLARA asks about the programme type and its current tracks, shows you the full folder structure, and creates it in one go. It is safe to run again.
+- **New track on an existing programme:** `use clara's add-track [track] to [programme]`. CLARA adds one track's folders to a programme that is already set up, without going through the full setup again.

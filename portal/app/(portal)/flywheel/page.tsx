@@ -14,21 +14,21 @@ const phases = [
     icon: Compass,
     title: "Research",
     blurb:
-      "Understand users, operators, and needs. Define the right problem and what success looks like before solutioning.",
+      "Understand your users, operators and their needs. Decide which problem to solve, and what success looks like, before you start designing solutions.",
   },
   {
     href: "/flywheel/design",
     icon: PenTool,
     title: "Design",
     blurb:
-      "Translate validated needs into testable artefacts — interactive prototypes, virtual prototypes, capability storyboards.",
+      "Turn the needs you have confirmed into things you can test, such as interactive prototypes, virtual prototypes and storyboards of what a capability will do.",
   },
   {
     href: "/flywheel/measure",
     icon: FlaskConical,
     title: "Measure",
     blurb:
-      "Run the artefact against real users or operators, capture the feedback in DASH, feed the next Design iteration.",
+      "Try what you built with real users or operators, record their feedback in DASH, and use it to improve the next round of Design.",
   },
 ];
 
@@ -43,7 +43,7 @@ export default function FlywheelPage() {
         <PageHeader
           eyebrow="Foundation"
           title="The product flywheel"
-          lede="Three phases — Research, Design, Measure. Research is the outer loop, done thoroughly at the start; Design ↔ Measure is the inner loop, iterating at high cadence. Pick a phase to dive in."
+          lede="Product work runs as a cycle of three phases: Research, Design and Measure. You do Research thoroughly at the start. Then you repeat Design and Measure quickly. Pick a phase to explore."
         />
 
         <div className="grid gap-4 sm:grid-cols-3">
@@ -71,10 +71,10 @@ export default function FlywheelPage() {
         <Stack gap="4" className="pt-8">
           <Stack gap="2">
             <Heading as="h2" size="2xl">
-              Grounded in the 4Ds
+              Where the flywheel comes from
             </Heading>
             <Text variant="muted">
-              The flywheel adapts the 4Ds of design innovation — Discover, Define, Develop, Deliver — into a tighter loop suited to defence programmes. Discover and Define collapse into Research (problem space). Develop becomes the Design ↔ Measure inner loop (solution space). Deliver becomes the close-out at the end of each interval, where decisions are made and the next loop is seeded.
+              The flywheel adapts the four stages of design innovation (Discover, Define, Develop and Deliver) into a tighter loop for defence programmes. Discover and Define together become Research, which is about understanding the problem. Develop becomes the repeating Design and Measure loop, which is about building and testing a solution. Deliver becomes the close-out at the end of each cycle, where the team makes its decisions and prepares the next loop.
             </Text>
           </Stack>
 
@@ -91,7 +91,7 @@ export default function FlywheelPage() {
                   {name}
                 </Text>
                 <Text size="xs" variant="muted" className="mt-2 uppercase tracking-wide">
-                  Maps to
+                  Becomes
                 </Text>
                 <Text size="sm" className="mt-1">
                   {mapsTo}
@@ -107,10 +107,10 @@ export default function FlywheelPage() {
         <Stack gap="4" className="pt-8">
           <Stack gap="2">
             <Heading as="h2" size="2xl">
-              Cadence cheatsheet
+              What a typical cycle looks like
             </Heading>
             <Text variant="muted">
-              How the flywheel maps onto a typical 4-month block of eight 2-week sprints — a planning interval for digital programmes, or design innovation for engineering programmes. The spine is the same — Research up front, rapid loops in the middle, close-out at the end — only the content of each block changes. 4 months is typical; the actual length varies by programme, and the proportions matter more than the absolute numbers.
+              Here is how the flywheel fits into a typical 4-month block of work, split into eight 2-week sprints. Digital programmes call this block a planning interval. Engineering programmes call it design innovation. The shape is the same for both: Research at the start, fast loops in the middle and a close-out at the end. Only the content of each part differs. Four months is typical. The real length varies by programme, and the proportions matter more than the exact numbers.
             </Text>
           </Stack>
 
@@ -191,7 +191,7 @@ function DualTrackDiagram() {
         ))}
       </div>
       <Text size="xs" variant="muted" className="mt-3">
-        <span className="text-accent">↘</span> handover at sprint 8 close-out · <span className="text-accent">↑</span> upstream technical assessment in parallel with the current ProductOps design loop
+        <span className="text-accent">↘</span> handover at the sprint 8 close-out · <span className="text-accent">↑</span> early technical checks by engineers, run alongside the design side's current loop
       </Text>
     </div>
   );
@@ -203,28 +203,28 @@ const fourDs = [
     name: "Discover",
     mapsTo: "Research",
     blurb:
-      "Field and exercise observations, interviews, environmental scans. Surface the real problem rather than the assumed one.",
+      "Observe users in the field and in exercises, interview them, and study the surrounding environment. Find the real problem, not the one you assumed.",
   },
   {
     d: "D2",
     name: "Define",
     mapsTo: "Research",
     blurb:
-      "Frame the problem, scope, and success criteria. Set the hypotheses the rest of the loop will test.",
+      "State the problem, its scope and what success looks like. Set the hypotheses (the testable assumptions) that the rest of the loop will test.",
   },
   {
     d: "D3",
     name: "Develop",
     mapsTo: "Design ↔ Measure",
     blurb:
-      "Prototype, put it in front of operators, learn, adjust. The high-cadence inner loop of the flywheel.",
+      "Build a prototype, put it in front of operators, learn from them and adjust. This is the fast, repeating inner loop of the flywheel.",
   },
   {
     d: "D4",
     name: "Deliver",
     mapsTo: "Close-out",
     blurb:
-      "Ship, hand over, or decide to stop. Capture what was learned and seed the next loop.",
+      "Ship the work, hand it over, or decide to stop. Write down what you learned and use it to start the next loop.",
   },
 ];
 
@@ -336,36 +336,37 @@ const cadences: Record<"digital" | "engineering", Cadence> = {
         when: "Sprints 1–2",
         what: "Research",
         detail:
-          "Field and exercise observations, problem framing, opportunity mapping. Hypotheses and access already lined up from the previous PI's close-out.",
+          "Observe users in the field and in exercises, frame the problem and map the opportunities. The hypotheses to test, and access to users, are already lined up from the close-out of the previous PI.",
       },
       {
         when: "Sprints 3–7",
         what: "Rapid prototyping + user feedback",
         detail:
-          "Tight Design ↔ Measure loops each sprint — prototype, put it in front of operators, learn, adjust. The bulk of the flywheel spin happens here.",
+          "Each sprint is one tight Design and Measure loop: build a prototype, put it in front of operators, learn from them and adjust. Most of the flywheel's turning happens here.",
       },
       {
         when: "Sprint 8",
         what: "Close-out + prep for next PI",
         detail:
-          "Ship / kill / pivot decisions, retro and write-up, seed hypotheses for the next PI, line up Research access.",
+          "Decide whether to ship, stop or change direction. Review what went well and badly, and write it up. Set the hypotheses to test in the next PI and line up access to users for its Research.",
       },
     ],
     footnote:
-      "For a team just starting out with no prior PI, sprint 1 absorbs some kick-off work (hypotheses, access).",
+      "A team starting out with no earlier PI uses part of sprint 1 for kick-off work, such as setting the hypotheses to test and arranging access to users.",
     aside: {
-      summary: "How this aligns with the DevSecOps PI",
+      summary: "How this lines up with the engineering side's PI",
       paragraphs: [
-        "Because ProductOps produces working reference code in every Design ↔ Measure iteration, DevSecOps does not have to wait for the PI close-out to engage. They run upstream technical assessment — feasibility, integration, security, tech debt — in parallel with the current ProductOps design loop. Risk is reduced continuously, not only at handover.",
-        "The two PIs run as a dual-track model where ProductOps is always one PI ahead of DevSecOps. ProductOps designs and validates capability X in PI N while DevSecOps builds the previously-validated capability W and assesses X in the background. At sprint 8 close-out, validated X hands over to DevSecOps PI N+1, where the assessment work has already de-risked the build.",
+        "In this diagram, N is the current PI, N-1 is the one before it, and W, X, Y and Z are capabilities being designed or built, one after another.",
+        "Every Design and Measure loop produces working code that engineers can start from. So the engineering side (DevSecOps) does not have to wait for the close-out to get involved. While the design side (ProductOps) is still designing, engineers check early whether the capability is feasible, fits with other systems, is secure, and avoids building up technical shortcuts that cost more later. Risk is reduced all the time, not only at the handover.",
+        "The two PIs run side by side as a dual-track model, with the design side always one PI ahead. In PI N, the design side designs and validates capability X. At the same time, engineers build capability W, which the design side validated in PI N-1, and check X in the background. At the sprint 8 close-out, the validated X passes to engineers in PI N+1, where the early checks have already reduced the risk of building it.",
       ],
       bullets: [
-        "PI N (ProductOps): research, prototype, validate capability X — emit reference code each iteration.",
-        "PI N (DevSecOps): build capability W (validated in PI N-1) and run upstream technical assessment on X.",
-        "Sprint 8 close-out: validated X with draft requirements hands over to DevSecOps PI N+1.",
+        "PI N, design side: research, prototype and validate capability X, and produce working code in each loop.",
+        "PI N, engineering side: build capability W (validated in PI N-1) and run early checks on X.",
+        "Sprint 8 close-out: the validated X, with draft requirements, passes to the engineering side for PI N+1.",
       ],
       implication:
-        "Note: what ProductOps hands to DevSecOps is reference code that bootstraps development, not static designs. Working prototypes from the Design ↔ Measure loop become the starting point for the build PI, alongside validated requirements.",
+        "Note: what the design side hands over is working code to start building from, not static designs. The working prototypes from the Design and Measure loop become the starting point for the build PI, alongside the validated requirements.",
     },
   },
   engineering: {
@@ -377,22 +378,22 @@ const cadences: Record<"digital" | "engineering", Cadence> = {
         when: "Sprints 1–2",
         what: "Research",
         detail:
-          "Concept of use, operator workflows, scenarios, current pain points. Engage units and exercises early.",
+          "Work out the concept of use, which is how the system will be used. Study operator workflows, scenarios and current pain points. Involve units and exercises early.",
       },
       {
         when: "Sprints 3–7",
         what: "Rapid conceptualisation + operator feedback",
         detail:
-          "Concept sketches, mock-ups, tabletop walkthroughs with operators. Refine the concept of use each sprint.",
+          "Draw concept sketches and mock-ups, and walk through them with operators. Refine the concept of use each sprint.",
       },
       {
         when: "Sprint 8",
         what: "Concept document + draft requirements",
         detail:
-          "Consolidate the concept of use, draft requirements, hand off to the acquisition / build track.",
+          "Bring the concept of use together in one document, draft the requirements, and hand over to the acquisition and build track.",
       },
     ],
     footnote:
-      "Engineering programmes continue into an acquisition / build phase after design innovation. That phase is procurement- and process-heavy and not flywheel-shaped, so it is out of scope for this cheatsheet.",
+      "After design innovation, engineering programmes move into an acquisition and build phase. That phase is mostly procurement and process, and does not follow the flywheel, so it is not covered here.",
   },
 };

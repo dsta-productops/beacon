@@ -18,24 +18,26 @@ prompts: []
 
 ## What it does
 
-DSTA's AI-ingestible design system. Provides components, tokens, and templates that LLMs can read and generate from directly. Two product zones — C3 (command-and-control, tactical) and Enterprise (back-office, professional) — share the same component primitives but apply different design tokens.
+PRIZM is DSTA's design system, built so that AI tools can read it. It provides ready-made components (the building blocks of a screen), design tokens (named colours, spacing and styles) and templates. An AI can generate code from these directly.
 
-The point of building PRIZM as AI-ingestible is that any team using Claude Code (or a similar tool) can generate UI that is automatically PRIZM-conformant — no separate handoff, no manual styling, no design-system drift.
+PRIZM has two product zones: C3 (command and control, for tactical work) and Enterprise (back-office, professional work). They share the same components but apply different design tokens.
+
+PRIZM is built to be AI-readable so that any team using Claude Code, or a similar tool, can generate screens that automatically follow PRIZM. There is no separate handover, no manual styling, and no drift away from the design system.
 
 ## When to use it
 
-- Mandatory for any digital UI work — internal tool, customer portal, marketing surface
-- Earliest possible in Design — set up the design system before prototyping, not after
-- For both prototyping (PRIZM components are copy-paste, fast to iterate) and production
+- Mandatory for any digital UI work: internal tools, customer portals and marketing pages
+- As early as possible in Design: set up the design system before you prototype, not after
+- For both prototyping (the components are copy-and-paste, so they are quick to iterate on) and production
 
 ## How to access
 
-Source: [github.com/prizm-design/prizm](https://github.com/prizm-design/prizm). Distribution is copy-paste — components live in the PRIZM repo and are copied into consuming projects. No npm package.
+The source is at [github.com/prizm-design/prizm](https://github.com/prizm-design/prizm). PRIZM is distributed by copy and paste. The components live in the PRIZM repository (its code store on GitHub), and you copy them into your own project. There is no npm package (the usual installable download for code libraries).
 
-Read `PRIZM.md` and `llms.txt` at the root of that repo before using PRIZM with an AI tool — they brief the LLM on conventions, semantic tokens, and what NOT to do.
+Read `PRIZM.md` and `llms.txt` at the root of that repository before using PRIZM with an AI tool. They brief the AI on the conventions, the design tokens, and what not to do.
 
 ## Output expectations
 
-- Generated code uses semantic Tailwind tokens (`bg-bg`, `text-fg`, `border-border`, `bg-accent`), never raw colour utilities
-- Components are composed from PRIZM primitives where possible
-- No external URL references (PRIZM is air-gap safe)
+- Generated code uses PRIZM's named style tokens, which are Tailwind classes named for their purpose (such as `bg-bg`, `text-fg`, `border-border` and `bg-accent`). It never uses raw colour classes
+- Screens are built from PRIZM's basic components wherever possible
+- No links to outside web addresses. PRIZM is air-gap safe, meaning it works on isolated networks

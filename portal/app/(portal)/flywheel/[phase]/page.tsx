@@ -254,7 +254,7 @@ export default async function PhasePage({
                       Before you leave this phase
                     </Heading>
                     <Text size="sm" variant="muted" className="mt-1">
-                      The exit gate. Confirm each item is true before moving
+                      The exit gate, a last check. Confirm each item is true before moving
                       on.
                     </Text>
                   </div>

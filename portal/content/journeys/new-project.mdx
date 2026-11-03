@@ -1,37 +1,37 @@
 ---
 title: "I'm starting a new project"
-scenario: "A project lead in their first week. There's a brief, but no PRD yet, no research done yet, and no clear sense of who the users actually are."
+scenario: "You are a project lead in your first week. There is a brief, but no PRD yet, no research done, and no clear idea of who the users really are."
 order: 1
 visibility: "public"
 steps:
-  - label: "Provision the Knowledge Base (recommended)"
-    description: "One-time setup of the programme's Confluence KB structure. Optional — CLARA also creates missing parts on first use — but recommended on day 1 so the hierarchy is clean before artefacts start landing. Invocation: `use clara's setup-kb for [programme]`."
+  - label: "Set up the Knowledge Base (recommended)"
+    description: "A one-time setup of your programme's folder structure in Confluence, the shared place where the team keeps its documents. It is optional, because CLARA also creates missing folders the first time you use it, but it is worth doing on day 1 so the structure is clean before documents start arriving. Command: `use clara's setup-kb for [programme]`."
     tool: "clara"
-  - label: "Locate prior knowledge"
-    description: "Find what's already been learned about this problem space across past programmes. Don't restart from zero."
+  - label: "Find out what is already known"
+    description: "Find what past programmes have already learned about this problem. Do not start from zero."
     prompt: "prior-knowledge-summariser"
     tool: "clara"
   - label: "Baseline the current state"
-    description: "Run a DASH baseline survey with users of the existing, legacy, or competitor system. These numbers become the comparator the new system's Measure results will be measured against."
+    description: "Run a DASH baseline survey with users of the existing, older or competing system. These numbers become the figures that the new system's Measure results are compared against."
     tool: "dash"
   - label: "Generate the interview guide"
-    description: "Translate what you need to learn into a field-ready interview guide — questions, listening signals, and probes."
+    description: "Turn what you need to learn into an interview guide ready for the field, with questions, things to listen for, and follow-up probes."
     prompt: "interview-guide-generator"
     tool: "clara"
-  - label: "Run the field engagement"
-    description: "5 to 7 user or operator conversations. Identify the right people; book the time; brief the team on what to listen for."
+  - label: "Run the fieldwork"
+    description: "Hold 5 to 7 conversations with users or operators. Work out who the right people are, book the time, and brief the team on what to listen for."
   - label: "Synthesise the research"
-    description: "One pass over the transcripts produces themes, friction points, the problem statement, and success criteria as a single Research-synthesis page."
+    description: "One pass over the transcripts pulls the findings together. It produces the themes, friction points, problem statement and success criteria on a single research synthesis page."
     prompt: "research-synthesiser"
     tool: "clara"
   - label: "Draft the PRD or operational scenario"
-    description: "Digital teams: PRD. Engineering teams: operational scenario plus capability spec."
+    description: "Digital teams: draft the PRD (product requirements document), which says what the product must do. Engineering teams: draft the operational scenario (a story of how the capability would be used) and the capability specification (its measurable requirements)."
     prompt: "prd-generator"
     tool: "prd-authoring"
   - label: "Move into Design"
-    description: "With validated framing, named users, and a draft PRD or scenario in hand, the team is ready to start prototyping."
+    description: "With a validated problem framing, named users and a draft PRD or scenario in hand, the team is ready to start prototyping."
 ---
 
-You're in your first week leading a new project. There's a brief from management, maybe a few decks, possibly some informal conversations. What you don't have yet: a defined product, validated users, or a documented decision about *what* to build.
+You are in your first week of leading a new project. There is a brief from management, maybe a few slide decks and some informal conversations. What you do not have yet is a defined product, confirmed users, or a recorded decision about *what* to build.
 
-The temptation will be to start solutioning. Resist it for two or three days. The work below is the cheapest part of the whole project — and the part with the highest leverage on everything that follows.
+The temptation will be to jump straight to designing solutions. Resist it for two or three days. The work below is the cheapest part of the whole project, and it has the biggest effect on everything that follows.

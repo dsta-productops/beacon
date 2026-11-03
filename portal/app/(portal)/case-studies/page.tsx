@@ -14,7 +14,7 @@ export default function CaseStudiesPage() {
         <PageHeader
           eyebrow="Knowledge"
           title="Case studies"
-          lede="Programmes' first-hand accounts of running the flywheel — what worked, what didn't, what the team would do differently."
+          lede="First-hand accounts from programmes that ran the flywheel: what worked, what did not, and what the team would do differently."
         />
         <PlaceholderNote>
           Case studies are deferred to a later deep-dive. The route scaffold

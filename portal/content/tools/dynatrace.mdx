@@ -13,23 +13,23 @@ prompts: []
 
 ## What it does
 
-Product instrumentation platform augmented with LLM-powered insight extraction. Captures usage data from live digital products, then lets any team member derive actionable insights through natural-language queries — without specialist data analysis skills.
+Dynatrace is a platform that records how people use live digital products, with an AI layer that helps pull out insights. Any team member can ask questions in plain language and get useful answers, without specialist data-analysis skills.
 
-The LLM layer is what makes Dynatrace usable by product owners and designers directly. Asking "where are users dropping off in the onboarding flow?" in natural language is faster than constructing a query, and surfaces what matters even when the team didn't know which question to ask.
+The AI layer is what lets product owners and designers use Dynatrace directly. Asking "where are users dropping off in the onboarding flow?" in plain language is faster than writing a query. It also brings up what matters when the team did not know which question to ask.
 
 ## When to use it
 
-- Measure phase for digital teams — live-product measurement
-- Throughout a digital product's lifetime — continuous outcome tracking
-- Decision support — when a team needs evidence for an iterate / harden / sunset call
+- Measure phase for digital teams: measuring live products
+- Throughout a digital product's life: tracking outcomes continuously
+- Supporting decisions: when a team needs evidence to decide whether to iterate, harden or sunset a product (keep improving it, make it more robust, or retire it)
 
 ## How to access
 
-Available through the MCC tooling stack today; planned for ANZ C and ANZ S. Configured per programme; LLM query layer accessible from the standard Dynatrace UI.
+Available through the MCC tooling stack today, and planned for ANZ C and ANZ S. It is set up for each programme, and the AI query layer is available from the standard Dynatrace screen.
 
 ## Output expectations
 
-- Quantitative signal on live usage — sessions, paths, drop-offs, error rates — only as good as the instrumentation in place
-- LLM-generated query answers are starting points, not final analyses; verify against the underlying data before acting
-- Pair instrumentation data with [DASH](/tools/dash) survey signal — quantitative behaviour plus qualitative feedback is stronger than either alone
-- Compare against the PRD's success criteria, not against raw counts in isolation
+- It gives numbers on live use, such as sessions, paths, drop-offs and error rates, but they are only as good as the usage recording set up in the product
+- AI-generated answers are starting points, not final analyses. Check them against the underlying data before acting
+- Pair the usage data with [DASH](/tools/dash) survey results. What people do, plus what they say, is stronger than either alone
+- Compare against the PRD's success criteria, not against raw counts on their own

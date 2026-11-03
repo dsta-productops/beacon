@@ -1,65 +1,102 @@
 ---
 title: "Same quality bar, regardless of author"
 eyebrow: "Foundation"
-lede: "The ProductOps Quality Model exists so that functional code meets the same quality bar non-functional-requirement (NFR) code is expected to meet — regardless of who authored it or which pipeline it came from."
+lede: "The Quality Model makes sure that functional code meets the same quality bar that NFR code (the code for security, reliability and integration) is expected to meet, whoever or whatever wrote it and whichever pipeline it came from."
 visibility: "public"
 ---
 
-## Two pipelines, one bar
+## In short
 
-Within this Pipeline, the ProductOps and DevSecOps streams divide the work: ProductOps produces the code that implements functional requirements; DevSecOps produces the code that implements non-functional requirements — hardening, integration, reliability. This division follows the [tripartite product structure](/product-roles) — Design owns functional code, Engineering owns NFR code. Both streams are increasingly authored through Claude Code.
+Two groups write code in the Pipeline, and both increasingly use Claude Code:
 
-The rest of this page uses **functional code** and **NFR code** as shorthand for what each stream produces:
+- **The design side (ProductOps)** decides what to build and how it should work. It writes **functional code**: reference code built from product requirements documents (PRDs), capability storyboards and virtual prototypes. It is usually driven by user experience (UX) work, and sometimes by a developer working on their own. Design owns it.
+- **The engineering side (DevSecOps)** builds, secures and ships the software. It writes **NFR code**, the code for the non-functional requirements: hardening (making the product secure and robust), integration and reliability. It is usually driven by developers. Engineering owns it.
 
-- **Functional code** — reference implementations scaffolded from PRDs, capability storyboards, virtual prototypes. Usually driven by UX; sometimes a Dev self-serving.
-- **NFR code** — implementation of non-functional requirements, hardening, integration. Usually driven by Dev.
+The Quality Model makes sure both kinds of code meet the same bar. Every proposed change goes through the same automated checks in the engineering side's (DevSecOps) pipeline. Three more layers catch what automated checks cannot.
 
-**Both are subjected to the same automated scan suite at PR time.** Functional code and NFR code go through the DevSecOps pipeline's Quality Checks & Linters, SCA, SAST, Container Scanning, and DAST — applied identically regardless of stream or author. The Quality Model is the layered assurance approach that wraps that scan with three further layers — extending parity beyond what a scanner can codify, and making the handoff between the two streams a smooth collaboration rather than a throw-over-the-wall: functional code arrives on shared foundations (design system, typed contracts, agreed patterns) that Dev can layer NFR work onto in parallel, not sequentially.
+It also makes the handover smoother. Functional code is built on shared foundations: the design system, agreed patterns, and typed contracts (shared definitions of how the two kinds of code connect). Engineers can then add NFR work alongside the design side's work, not after it.
+
+This split follows the [tripartite product structure](/product-roles): design owns functional code, and engineering owns NFR code.
 
 ## The four layers
 
-Each layer intervenes at a different point in the lifecycle. A concern that slips past one layer is still likely to be caught by another before it reaches production.
+Each layer works at a different point in the lifecycle. If a problem gets past one layer, another is likely to catch it before the product goes live.
 
-| Layer | When | Intent | Mechanism | Catches |
-|---|---|---|---|---|
-| **L1 — Prevention** | Pre-build | Start every generation from a shared baseline: consistent style, aligned architecture patterns, baseline security and accessibility hygiene. Reduces how often the later layers need to fire. | `CLAUDE.md` NFR rules; PRIZM paved-road components; typed contract boundaries between functional and NFR surfaces | Violations that never get a chance to occur — the cheapest layer |
-| **L2 — Outcome Validation** | Design → continuous | Validate that the product concept will deliver its intended outcome before and as it is built. Catch misalignment before implementation effort is sunk into the wrong thing. | Test plan generation, usability testing, product scorecard, OKR validation → DASH for outcome measurement and early-warning | Functional and product-outcome risk, before implementation effort is sunk into the wrong thing |
-| **L3 — Automated Scan** | At PR | Mechanically verify that generated code meets codifiable quality and security bars, applied identically regardless of author. | Software quality checks and linters + application security testing suite (SCA, SAST, container scanning, DAST) → Vulnerability Management | Known, codifiable NFR classes — code quality, dependency and code-level vulnerabilities, container misconfigurations, runtime-exposed flaws |
-| **L4 — Integration Verification** | Post-merge | Confirm that once NFR implementation is layered on top of functional code, the combined artifact still meets the L3 bar. Catches interaction effects from the merge, not re-doing NFR work L1 should already have shaped. | L3 scan suite re-run against the integrated build rather than isolated components | Interaction effects invisible at the component level |
+### Layer 1: Prevention
 
-**Ownership.** L1 and L4 span both pipelines directly. **L2 sits within ProductOps.** **L3 sits within DevSecOps.**
+**When:** before the code is written.
 
-## Where L1 does the heavy lifting
+Every piece of code starts from the same baseline: consistent style, aligned architecture patterns, and baseline security and accessibility hygiene. Fewer problems get created, so the later layers have less to catch. This is the cheapest layer, because a problem that never occurs costs nothing to fix.
 
-Parity is engineered at L1, not enforced at L3. L3 is the safety net; L1 is what keeps most code from ever needing it.
+It works through three things, described further down this page: a rules file for Claude Code, ready-made PRIZM components, and typed contracts.
 
-Three L1 mechanisms carry most of the load:
+### Layer 2: Outcome validation
 
-- **`CLAUDE.md` NFR rules** — a per-project file that loads into Claude Code's context on every session. Names the exact patterns to use (shared API wrapper, existing state store, `ErrorBoundary`, PRIZM form components) rather than describing them in the abstract. The starter is below.
-- **PRIZM paved-road components** — [PRIZM](/tools/prizm) primitives already conform to DSTA's accessibility, theming, and visual bars. Using them means those bars are met by construction. Whenever PRIZM ships a component for the job — layout (`Frame`, `Stack`), forms (`Input`, `Select`, `Checkbox`, `Textarea`), interactive surfaces (`Button`, `Tabs`, `Sheet`, `Command`), content (`Card`, `Heading`, `Text`) — reach for it before writing a bespoke one or dropping to raw HTML.
-- **Typed contract boundaries** — shared type definitions at the seam between functional and NFR surfaces, so Dev can layer NFR work on top of a UX-authored scaffold without redefining prop shapes or guessing at intent. Straightforward integration is the goal; typed contracts are how L1 delivers it.
+**When:** during design, and continuously after.
+
+Checks that the product will deliver the result it is meant to, before effort is spent building the wrong thing. It uses test plans, usability testing, the product scorecard, and checks against goals with measurable targets (OKRs). [DASH](/tools/dash) measures the result and gives early warning when something is off.
+
+The design side owns this layer.
+
+### Layer 3: Automated scan
+
+**When:** when a change is proposed. This step is called a pull request: the point where new code is put forward for adding to the product.
+
+A set of automated tools checks everything a machine can check. It applies the same checks to all code, whoever wrote it:
+
+- **Quality checks and linters** flag code that breaks style rules or quality standards.
+- **SCA** (software composition analysis) finds known security weaknesses in third-party libraries the code relies on.
+- **SAST** (static application security testing) reads the source code and looks for security flaws.
+- **Container scanning** checks the packaged application for risky settings.
+- **DAST** (dynamic application security testing) tests the running application the way an attacker would.
+
+What the tools find goes into Vulnerability Management, the engineering side's process for tracking and fixing security issues. The engineering side owns this layer.
+
+### Layer 4: Integration verification
+
+**When:** after the changes are merged, meaning combined into the main codebase.
+
+Once the engineering side's work is added on top of the design side's, the combined result goes through the Layer 3 scan again. Each part may pass on its own and still cause problems when joined. This layer catches those problems. It does not redo the engineering work, because Layer 1 should already have shaped it.
+
+### Who owns what
+
+Both sides take part in Layers 1 and 4. The design side owns Layer 2. The engineering side owns Layer 3.
+
+## Where Layer 1 does the heavy lifting
+
+Most of the quality is built in at Layer 1. Layer 3 is the safety net, and Layer 1 keeps most code from ever needing it.
+
+Three things carry most of the load:
+
+- **A rules file for Claude Code.** Each project has a file called `CLAUDE.md`, which Claude Code reads at the start of every session. It names the exact approaches to use, such as the shared API wrapper (the project's shared code for talking to the backend), the existing state store (where the app keeps its data), `ErrorBoundary` (the component that catches errors) and PRIZM form components, so Claude does not have to guess.
+- **PRIZM components.** [PRIZM](/tools/prizm) is DSTA's design system. Its ready-made components already meet DSTA's standards for accessibility, theming and appearance, so code that uses them meets those standards automatically. If PRIZM has a component for the job, use it before writing your own or dropping to raw HTML:
+  - Layout: `Frame`, `Stack`
+  - Forms: `Input`, `Select`, `Checkbox`, `Textarea`
+  - Interactive: `Button`, `Tabs`, `Sheet`, `Command`
+  - Content: `Card`, `Heading`, `Text`
+- **Typed contracts.** Shared type definitions at the boundary between functional and NFR code: written-down definitions of exactly what data and settings pass between the two. Engineers can add NFR work on top of a design-built prototype without redefining the prop shapes (the settings each screen component accepts) or guessing what was intended.
 
 ## Why four layers, not one
 
-A single uniform scan catches syntactic and pattern-level issues but not architectural drift, integration-time failures, or repeat offences that a static rule set never learns from. The four layers exist because those failure modes intervene at different points in the lifecycle:
+A single scan catches problems in syntax and code patterns. It does not catch drift in architecture, failures that only appear when parts are joined, or repeat offences that a fixed set of rules never learns from. The four layers exist because these problems arise at different points in the lifecycle:
 
-- L1 shapes the code before it exists — cheapest to fix, before violations occur.
-- L2 checks that the thing being built is worth building.
-- L3 catches known issues that can be checked by a rule — hardcoded secrets, vulnerable dependencies, injection patterns, accessibility failures — at PR time.
-- L4 catches the interaction effects that only appear once functional and NFR code are integrated.
+- **Layer 1** shapes the code before it exists.
+- **Layer 2** checks that the thing is worth building.
+- **Layer 3** catches known problems that a rule can detect, such as hardcoded secrets (passwords or keys written into the code), vulnerable dependencies (libraries with known flaws), injection patterns (inputs crafted to run unintended commands) and accessibility failures.
+- **Layer 4** catches problems that only appear once the two kinds of code are joined.
 
-Any one layer is necessary but not sufficient. Together, they let functional code ship into the same DevSecOps pipeline as NFR code, with the same confidence.
+Each layer is necessary, but none is sufficient on its own. Together, they let the design side's code go through the same engineering pipeline as everyone else's, with the same confidence.
 
 ## Starter `CLAUDE.md`
 
-Below is a ready-to-use starting file. Drop it into a project as-is, or edit it as a template.
+Below is a ready-to-use starter file. Drop it into a project as it is, or edit it as a template.
 
-> **Before use:** the rules reference the project's actual patterns (shared API wrapper, error handling pattern, state management approach). These are placeholders in the starter template and must be verified — and the file endorsed — by the project's tech lead before it is enabled. A rule that names the wrong convention actively misleads Claude Code and recreates the integration risk this file exists to prevent.
+> **Before use:** the rules refer to a project's real approaches, such as its shared code for talking to the backend, its error handling, and how it keeps track of data on screen. In the starter these are placeholders. The project's tech lead must check them and approve the file before it is turned on. A rule that names the wrong approach misleads Claude Code, and brings back the integration risk this file is meant to prevent.
 
-Rules use MUST / SHOULD phrasing rather than a separate severity field, since directive language measurably improves how consistently Claude Code follows a rule. Enforcement-layer mapping lives in the four-layer table above, not repeated per rule — every line in `CLAUDE.md` loads into context on every session, so keep it lean.
+Rules use MUST and SHOULD wording (firm instructions) because directive language measurably improves how consistently Claude Code follows a rule. The file does not say which layer enforces each rule, because the four layers above already cover that. Claude Code reads every line of this file at the start of every session, so keep it short.
 
 ## Where to go next
 
-- Curious how the flywheel produces functional code? See [the flywheel](/flywheel).
-- Looking at how measurement findings feed L2? See [the Measure phase](/flywheel/measure).
-- Working with the AI-native prompt library? [Browse prompts](/prompts).
+- To see how the flywheel produces functional code, read [the flywheel](/flywheel).
+- To see how measurement findings feed Layer 2, read [the Measure phase](/flywheel/measure).
+- To work with the AI-native prompt library, [browse prompts](/prompts).

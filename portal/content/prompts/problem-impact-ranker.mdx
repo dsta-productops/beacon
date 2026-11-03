@@ -3,18 +3,8 @@ title: Problem-impact ranker
 phase: research
 domain: shared
 tool: clara
-task: >-
-  consolidate the captured problems for a programme into a single ranked
-  Problem-impact analysis — each problem rated High/Medium/Low on severity,
-  reach and frequency, ranked by the combined score and grouped into tiers, so
-  the team knows which problem to build for first
-expectedOutput: >-
-  A single markdown page: a scoring rubric, a ranked at-a-glance table (each
-  problem rated H/M/L on severity, reach and frequency, scored out of 9, with
-  its evidence strength and cluster alongside), tiered problem entries (a
-  problem paragraph, What / Where & when / Who / Why tables, evidence and
-  status), and a 'reading the ranking' analysis. Clarifying questions where the
-  evidence is thin.
+task: "Combine the problems captured for a programme into one ranked problem-impact analysis. Each problem is rated High, Medium or Low on severity, reach and frequency, then ranked by its combined score and grouped into tiers, so the team knows which problem to build for first."
+expectedOutput: "A single Markdown page with: a scoring guide; a ranked table in which each problem is rated H, M or L on severity, reach and frequency, scored out of 9, with the strength of its evidence and its cluster alongside; an entry for each problem, grouped by tier (a paragraph describing the problem, tables for What, Where and when, Who and Why, plus evidence and status); and a \"reading the ranking\" analysis. CLARA asks clarifying questions where the evidence is thin."
 inputsFrom:
   - research-synthesiser
   - persona-generator
@@ -62,11 +52,11 @@ copyBlock: Use CLARA's `problem-impact-ranker` for <programme name>.
 
 ## What CLARA will ask you for
 
-- **Programme name** — your programme's name (e.g. SKYPROTECT).
-- **Track** — the slice of the programme this artefact belongs to (workstream, capability area, feature line, etc.), or `Programme-wide` if it spans tracks.
-- **Problem set scope** — which body of problems you're ranking (e.g. "all problems across the end-to-end journey", or one track's friction). One line.
-- **Source of the problems** — where the captured problems come from (the Research synthesis friction table, a workshop board, a pasted list). Named in the output so the ranking is traceable.
-- **Inputs** — CLARA will search the programme's Confluence space for friction points, themes and problem statement from the research synthesis; persona(s) for the affected roles; prior-knowledge summaries (optional); raw field notes / captured problem sources; journeys and service blueprints (optional). You can also paste fresh material if it's not in Confluence yet.
+- **Programme name** — your programme's name (for example SKYPROTECT).
+- **Track** — the part of the programme this document belongs to (for example a workstream, capability area or feature line), or `Programme-wide` if it spans several. The [CLARA page](/tools/clara) explains tracks.
+- **Problem set scope** — which group of problems you are ranking (for example "all problems across the end-to-end journey", or one track's friction). One line.
+- **Source of the problems** — where the captured problems come from (the friction table in the research synthesis, a workshop board or a pasted list). It is named in the output so the ranking can be traced.
+- **Inputs** — CLARA will search your programme's Confluence space for friction points, themes and the problem statement from the research synthesis, personas for the affected roles, optionally prior-knowledge summaries, the raw field notes or other sources of captured problems, and optionally journeys and service blueprints. You can also paste in new material that is not in Confluence yet.
 
 ## Where the output lands
 
@@ -74,8 +64,8 @@ copyBlock: Use CLARA's `problem-impact-ranker` for <programme name>.
 
 ## Tips
 
-- The ranking is an **action queue, not a complaint list**. Its value is the sort order and the tiers — an unranked pile of problems tells the team nothing about where to start.
-- **Severity, Reach and Frequency are each High, Medium or Low** (3, 2, 1), and the score is their sum out of 9. H-H-H ranks first. Ties are broken by Severity, then Reach, then Frequency.
-- **Evidence and clusters are shown, not scored.** A persuasive problem backed only by 💬 discussion keeps its rank but is flagged `[provisional]` — the gap is exactly what tells research what to go prove next. A cluster of problems sharing one root cause should usually be scoped as a single product, not N point fixes — that judgement is the whole point of the "Clusters" note.
-- **A missing rating is a `?`, not an L.** It sorts as Medium and is flagged, so unmeasured problems aren't quietly pushed down.
-- This page is the hand-off between synthesis and build: the Research synthesis says *what is wrong*, this artefact says *which wrong thing to fix first*, and the [PRD generator](/prompts/prd-generator) builds for the top-ranked (or user-chosen) problem. Keep the problem statements clean enough that the PRD can lift one straight out.
+- The ranking is a **queue of actions, not a list of complaints**. Its value is the sort order and the tiers. An unranked pile of problems does not tell the team where to start.
+- **Severity, reach and frequency are each rated High, Medium or Low** (worth 3, 2 or 1 point), and the score is their sum out of 9. A problem rated High on all three ranks first. Ties are broken by severity, then reach, then frequency.
+- **Evidence and clusters are shown, not scored.** A persuasive problem backed only by 💬 discussion keeps its rank but is flagged `[provisional]`. That gap tells research what to go and prove next. A cluster of problems with one root cause should usually be tackled as a single product, not as many separate fixes. That judgement is the whole point of the "Clusters" note.
+- **A missing rating is shown as `?`, not as Low.** It sorts as Medium and is flagged, so problems nobody has measured are not quietly pushed down.
+- This page is the handover between synthesis and build. The research synthesis says *what is wrong*, this document says *which wrong thing to fix first*, and the [PRD generator](/prompts/prd-generator) builds for the top-ranked problem (or the one you choose). Keep the problem statements clean enough that the PRD can lift one straight out.

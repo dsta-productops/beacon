@@ -1,46 +1,50 @@
 ---
 title: "What ProductOps is, and how it works"
 eyebrow: "Foundation"
-lede: "Every team building software or capability for DSTA already moves through three layers of operations — what to build, how to build it, and how to run intelligent systems. ProductOps governs the first."
+lede: "DSTA teams already work in three layers: deciding what to build, building it, and running intelligent systems. ProductOps governs the first: how teams decide what to build, design it, and check that it works for the people who use it."
 visibility: "public"
 ---
 
-## Three layers of operations, working in concert
+## In short
 
-DSTA's delivery ecosystem has three operations disciplines that govern different layers of the work:
+Every team building software or capabilities for DSTA does three kinds of work:
 
-- **ProductOps** governs *what* gets built, *how* product decisions are made, and *whether* what is delivered achieves the intended outcomes.
-- **DevSecOps** governs *how* software is built, secured, and shipped.
-- **MLOps** governs *how* models are trained, evaluated, and deployed.
+1. **Deciding what to build, and whether it works for users.** This is **ProductOps**.
+2. **Building, securing and shipping the software.** This is **DevSecOps**.
+3. **Training, evaluating and deploying AI models.** This is **MLOps**.
 
-ProductOps is the **upstream layer**. It decides what the other two operate on. Without it, DevSecOps becomes very good at shipping the wrong thing efficiently, and MLOps becomes very good at deploying models that don't change anyone's day.
+## Why ProductOps comes first
 
-## Parallel, not sequential
+The other two kinds of work build on what ProductOps decides. Without it, DevSecOps gets very good at delivering the wrong thing quickly, and MLOps gets very good at deploying models that change nothing for anyone.
 
-Traditionally, ProductOps locks down finished static designs and hands them off to DevSecOps to build against. This Pipeline is designed to operate the opposite way.
+## Working side by side, not one after another
 
-Each iteration of the product flywheel produces **reference artefacts** — code, scenarios, visualisations — that DevSecOps can act on concurrently. The hand-off isn't a milestone; it's a continuous flow. This shortens the loop between design intent and production behaviour, and catches integration risk early instead of at the end.
+Traditionally, the design side finishes and locks down its designs, then hands them to the engineering side to build. The Pipeline works the other way round.
 
-## Outer loop, inner loop
+Each pass through the flywheel produces **reference artefacts**: code, scenarios or visualisations that engineers can start from. (An artefact is a document or working model that the team produces.) The flywheel is BEACON's three-phase cycle of research, design and measurement, and it is explained on [its own page](/flywheel). Engineers can act on these reference artefacts while design is still going on.
 
-The flywheel has three phases — Research, Design, Measure — but they run at different cadences:
+So the hand-off is not a single moment. Work passes between the two sides all the time. This shortens the gap between what the team intends and how the product behaves, and it catches problems with fitting the parts together early, not at the end.
 
-- **Research is the outer loop.** Done thoroughly at the start of a programme or a track. Foundational — it sets what the team is trying to achieve. Re-engaged when the team learns something that calls the framing itself into question, not on every turn through Design and Measure.
-- **Design ↔ Measure is the inner loop.** High-frequency. Build something testable, run it past users or operators, capture the signal, iterate. This is where most of the iteration mileage in a programme is spent.
+## Two loops at different speeds
 
-Measure findings normally feed the next Design pass. Occasionally they exceed the threshold for "the problem framing has shifted" — that's when the team re-engages Research. The flywheel still closes; the radii are just honest about how often each phase actually turns.
+The flywheel has three phases: Research, Design and Measure. They do not all turn at the same speed.
+
+- **Research is the slow, outer loop.** The team does it thoroughly at the start of a programme or workstream. It sets what the team is trying to achieve. The team goes back to it only when it learns something that puts the original framing of the problem in doubt, not on every pass through Design and Measure.
+- **Design and Measure make up the fast, inner loop.** The team builds something testable, tries it with users or operators, notes what it learns, and improves it. This is where most of the iterations happen.
+
+What the team learns in Measure normally feeds the next Design pass. Occasionally the findings are strong enough to show that the problem framing itself has shifted. That is when the team goes back to Research, so the flywheel still closes. It just turns at different speeds in different places.
 
 ## Four design principles
 
-The Pipeline is built on four principles. Every tool, prompt, and template in the portal traces back to at least one of these.
+Every tool, prompt and template in BEACON follows at least one of these principles.
 
-1. **AI-native by design.** Every iteration leverages AI to reduce manual effort and surface insights that previously required specialist time. BEACON itself is AI-native — see the AI-ready prompts on every page.
-2. **Dual-domain from the outset.** The Pipeline serves both digital programme teams and engineering programme teams. Shared infrastructure first; domain-specific tools only where the work genuinely diverges.
-3. **Accessible without specialist skills.** Natural-language interfaces. A developer or a programme manager should be able to use the tools without becoming a product professional first.
-4. **Build where it creates unique value; buy where industry has solved it.** Bespoke for DSTA-specific context; COTS where the problem is general.
+1. **AI-native by design.** Every pass uses AI to cut manual effort and to bring out insights that used to need specialist time. BEACON works this way too, and every page offers prompts you can paste into an AI tool.
+2. **Built for both domains from the start (dual-domain).** The Pipeline serves both digital programme teams and engineering programme teams. The two share infrastructure first, with domain-specific tools only where their work really differs.
+3. **No specialist skills needed.** You give instructions in plain language. A developer or a programme manager should be able to use the tools without first becoming a product professional.
+4. **Build where it creates unique value; buy where industry has solved it.** DSTA builds its own tools for its own unique context. Where an off-the-shelf product (COTS) already solves a general problem, it uses that.
 
 ## Where to go next
 
-- Curious how the work flows? See [the product flywheel](/flywheel).
-- Looking for a specific tool? Browse the [tool catalogue](/tools).
-- Starting something new? Try a [guided journey](/journeys).
+- To see how the work flows, read [the product flywheel](/flywheel).
+- To find a specific tool, browse the [tool catalogue](/tools).
+- To start something new, try a [guided journey](/journeys).

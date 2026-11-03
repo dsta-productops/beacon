@@ -3,18 +3,8 @@ title: Heuristic evaluator
 phase: research
 domain: shared
 tool: clara
-task: >-
-  conduct a Nielsen heuristic usability evaluation of an existing product from
-  screenshots, a live URL, or a PDF/deck — producing a scored, evidence-anchored
-  report with per-heuristic compliance, severity-rated findings, and a
-  prioritised remediation roadmap
-expectedOutput: >-
-  A markdown evaluation report: a scored cover (index /100 + band), executive
-  summary with the top findings to fix first, methodology, a per-heuristic
-  scorecard (current vs achievable), scenario walkthroughs listing every finding
-  in flow order (ID · heuristic · severity · origin · recommendation ·
-  screenshot reference), a complete findings register, and a P0/P1/P2
-  remediation roadmap.
+task: "Check an existing product against Nielsen's well-known usability rules (heuristics), using screenshots, a live link or a PDF or deck. You get a scored report in which every finding points to evidence, with severity ratings, how well the product meets each rule, and a prioritised list of fixes."
+expectedOutput: "A Markdown evaluation report with: a scored cover (an index out of 100, and a band); an executive summary with the top findings to fix first; the method used; a scorecard for each heuristic (current score against the score achievable); walkthroughs of each scenario that list every finding in the order the user meets it (ID, heuristic, severity, origin, recommendation and screenshot reference); a complete register of findings; and a fix roadmap ranked P0, P1 and P2."
 inputsFrom:
   - prior-knowledge-summariser
 confluenceContext:
@@ -53,12 +43,12 @@ copyBlock: Use CLARA's `heuristic-evaluator` for <programme name>.
 
 ## What CLARA will ask you for
 
-- **Programme name** — your programme's name (e.g. SKYPROTECT).
-- **Track** — the slice of the programme this artefact belongs to (workstream, capability area, feature line, etc.), or `Programme-wide` if it spans tracks.
-- **Product name** — the product and the slice under evaluation (e.g. "Oracle HCM — Absence & Onboarding").
-- **Evaluation mode** — competitor / existing-system-to-improve / decommissioning / standalone. Sets origin attribution and whether Appendix B applies.
-- **Task scenarios** — the one or two end-to-end tasks to walk. If not given, CLARA proposes them from the screens and confirms.
-- **Inputs** — CLARA will search the programme's Confluence space for the product material to evaluate (user-supplied); the task scenarios to walk; evaluation mode; prior-knowledge summary on the product or domain (optional). You can also paste fresh material if it's not in Confluence yet.
+- **Programme name** — your programme's name (for example SKYPROTECT).
+- **Track** — the part of the programme this document belongs to (for example a workstream, capability area or feature line), or `Programme-wide` if it spans several. The [CLARA page](/tools/clara) explains tracks.
+- **Product name** — the product and the part of it under evaluation (for example "Oracle HCM — Absence & Onboarding").
+- **Evaluation mode** — one of: a competitor's product, an existing system you want to improve, a system being retired, or a standalone evaluation. It decides how findings are attributed to their origin, and whether Appendix B of the report applies.
+- **Task scenarios** — the one or two end-to-end tasks to walk through. If you do not give them, CLARA proposes them from the screens and asks you to confirm.
+- **Inputs** — CLARA will search your programme's Confluence space for the product material to evaluate (which you supply), the task scenarios to walk through, the evaluation mode, and optionally a prior-knowledge summary on the product or area. You can also paste in new material that is not in Confluence yet.
 
 ## Where the output lands
 
@@ -66,17 +56,17 @@ copyBlock: Use CLARA's `heuristic-evaluator` for <programme name>.
 
 ## Tips
 
-- CLARA works from whatever fidelity you supply. A live URL lets it exercise more states than static screenshots; a PDF/deck is fine but freezes the product in one rendered state — the Scope & limitations section records that honestly.
-- Treat the score as a comparative instrument, not an absolute grade: it is most useful for tracking the same product across iterations, or ranking a set of competitors evaluated the same way.
-- The findings are a lower bound. For a decision that carries weight, run a second evaluator and merge — Nielsen's own research is why the single-evaluator caveat is in the report.
-- In existing-system mode, the CFG-vs-PRD split and the achievable-via-fix index are the most persuasive parts of the report: they tell the team how much they can fix themselves, now.
+- CLARA works with whatever level of detail you give it. A live link lets it try more states of the product than static screenshots. A PDF or deck is fine, but it freezes the product in one state. The Scope & limitations section of the report records this honestly.
+- Treat the score as a way to compare, not as an absolute grade. It is most useful for tracking the same product across versions, or ranking several competitors that were evaluated in the same way.
+- The findings are a minimum: a single evaluator will miss some problems. For a decision that matters, have a second evaluator repeat the exercise and merge the results. Nielsen's own research is the reason the report carries this caveat.
+- In existing-system mode, the CFG-versus-PRD split and the achievable-via-fix index are the most persuasive parts of the report. They show the team how much it can fix by itself, now.
 
-## Before you circulate — self-review checklist
+## Before you circulate: self-review checklist
 
-- **Every finding cites a specific screen and element.** No principle-in-the-abstract findings; no finding that can't be located on a screen.
-- **Severity is justified.** Each rating reflects frequency × impact × persistence, not just how annoying the issue felt. The catastrophes really are catastrophes.
-- **The score is reproducible.** Per-heuristic deductions, the weights (summing to 1.0) and their rationale are stated, so a reader can follow the index from findings to headline number. The band matches the number.
-- **Achievable-via-fix index is present** (existing-system/decommissioning modes) and the CFG/PRD attribution behind it is consistent with Appendix B.
-- **Strengths are recorded.** "What works well" names genuine, screen-cited strengths in each scenario.
-- **Scope & limitations is honest** — the static-capture and single-evaluator caveats are stated; the score is framed as an upper bound and the findings as a lower bound.
-- **Walkthrough is complete.** Every finding in the register appears in full in a walkthrough, in flow order, with a stable ID; the appendix adds nothing new.
+- **Every finding names a specific screen and element.** No findings that state a principle in the abstract, and none that cannot be located on a screen.
+- **Severity is justified.** Each rating reflects how often the problem occurs, how much it matters and how long it lasts, not just how annoying it felt. The worst ratings are for real catastrophes.
+- **The score can be reproduced.** The deduction for each heuristic, the weights (which add up to 1.0) and the reasons for them are stated, so a reader can follow the score from the findings to the headline number. The band matches the number.
+- **The achievable-via-fix index is present** (in existing-system and retirement modes), and the CFG/PRD attribution behind it matches Appendix B.
+- **Strengths are recorded.** "What works well" names real strengths in each scenario, each citing a screen.
+- **Scope and limitations are honest.** The caveats about static captures and a single evaluator are stated. The score is framed as an upper bound (the real score may be lower) and the findings as a lower bound (there may be more problems).
+- **The walkthrough is complete.** Every finding in the register appears in full in a walkthrough, in the order the user meets it, with a stable ID. The appendix adds nothing new.

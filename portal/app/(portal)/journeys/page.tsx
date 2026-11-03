@@ -43,7 +43,7 @@ export default async function JourneysPage() {
         <PageHeader
           eyebrow="Guided journeys"
           title="Scenario walkthroughs"
-          lede="Step-by-step flows that compose tools and prompts end-to-end — for new projects, user research, hand-offs to DevSecOps, and onboarding."
+          lede="Step-by-step guides that put the tools and prompts together from start to finish. They cover new projects, user research, hand-offs to the engineering team (DevSecOps), and onboarding."
         />
 
         <Stack gap="4">

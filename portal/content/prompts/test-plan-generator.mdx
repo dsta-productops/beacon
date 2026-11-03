@@ -3,12 +3,8 @@ title: Test-plan generator
 phase: test
 domain: shared
 tool: clara
-task: >-
-  draft a complete test plan with scenarios, participants, measurement, and
-  analysis
-expectedOutput: >-
-  Markdown test plan with objective, scenarios as a numbered section,
-  participants, session structure, measurement, analysis, and validity risks.
+task: "Draft a complete test plan with scenarios, participants, measures and analysis."
+expectedOutput: "A Markdown test plan with an objective, numbered scenarios, participants, session structure, measures, analysis and risks to validity (things that could make the results misleading)."
 inputsFrom:
   - prd-generator
   - operational-scenario-generator
@@ -44,13 +40,13 @@ copyBlock: Use CLARA's `test-plan-generator` for <programme name>.
 
 ## What CLARA will ask you for
 
-- **Programme name** — your programme's name (e.g. SKYPROTECT).
-- **Track** — the slice of the programme this artefact belongs to (workstream, capability area, feature line, etc.), or `Programme-wide` if it spans tracks.
-- **Test type** — what kind of test this is. Examples: usability test on interactive prototype, moderated walk-through of a clickable prototype with operators, instrumented A/B on a deployed feature, capability rehearsal in scripted exercise.
-- **Test name** — short (e.g. "Console-v1-usability-test", "Tank-crew-alerting-rehearsal").
-- **Test focus (optional)** — describe what this round of testing should cover. Leave blank to test against all the artefact's success criteria. Otherwise narrow the scope: a specific user story (e.g. "submit-incident-report"), one or two success criteria, the features shipping in this PI, or the storyboard beats being rehearsed.
-- **Constraints (optional)** — time budget, recruiting limits, environment, classification, secrecy.
-- **Inputs** — CLARA will search the programme's Confluence space for relevant artefacts; success criteria; field notes for scenario seeding (optional). You can also paste fresh material if it's not in Confluence yet.
+- **Programme name** — your programme's name (for example SKYPROTECT).
+- **Track** — the part of the programme this document belongs to (for example a workstream, capability area or feature line), or `Programme-wide` if it spans several. The [CLARA page](/tools/clara) explains tracks.
+- **Test type** — what kind of test this is. Examples: a usability test on an interactive prototype, a moderated walk-through of a clickable prototype with operators, an instrumented A/B test on a deployed feature, or a capability rehearsal in a scripted exercise.
+- **Test name** — short (for example "Console-v1-usability-test" or "Tank-crew-alerting-rehearsal").
+- **Test focus (optional)** — what this round of testing should cover. Leave it blank to test against all the success criteria of what is being tested. Otherwise narrow the scope to a specific user story (for example "submit-incident-report"), one or two success criteria, the features shipping in this planning interval (PI), or the storyboard beats being rehearsed.
+- **Constraints (optional)** — time budget, limits on recruiting, environment, classification, secrecy.
+- **Inputs** — CLARA will search your programme's Confluence space for the relevant documents and success criteria, and optionally field notes to draw scenarios from. You can also paste in new material that is not in Confluence yet.
 
 ## Where the output lands
 
@@ -58,5 +54,5 @@ copyBlock: Use CLARA's `test-plan-generator` for <programme name>.
 
 ## Tips
 
-- The Objective sentence is the test of the test plan. CLARA proposes it before drafting the rest and waits for your confirmation — if she can't compress it to one line, treat that as a signal to narrow the test focus and rerun.
-- When you review CLARA's scenarios, each should map to a success criterion. If a scenario can't fail, it isn't a test — ask CLARA to rework it.
+- The Objective sentence is the test of the test plan. CLARA proposes it before drafting the rest and waits for your confirmation. If it cannot be compressed into one line, that is a sign to narrow the test focus and run it again.
+- When you review CLARA's scenarios, each should map to a success criterion. If a scenario cannot fail, it is not a test. Ask CLARA to rework it.

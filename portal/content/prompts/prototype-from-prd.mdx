@@ -3,20 +3,20 @@ title: "Prototype-from-PRD scaffolder"
 phase: "design"
 domain: "digital"
 tool: "claude-code"
-task: "Scaffold a working reference implementation from a PRD"
-expectedOutput: "Scaffolded, PRIZM-conformant reference code that implements the user stories in the PRD. Runs as an interactive prototype users can walk through."
+task: "Scaffold (set up the starting code for) a working reference implementation from a PRD (product requirements document)"
+expectedOutput: "Starter code that follows the PRIZM design system and implements the user stories in the PRD. It runs as an interactive prototype that users can click through."
 inputsFrom:
   - prd-generator
-outputDestination: "A working scaffold in your repo. The running scaffold is the prototype teams put in front of users; the source is the reference code DevSecOps picks up — push to a branch so their technical assessment runs in parallel with the next Design iteration."
+outputDestination: "A working starter project in your repository. The running version is the prototype you put in front of users. The source code is the reference code that the engineering side (DevSecOps) picks up. Push it to a branch, so their technical checks run alongside the next Design round."
 inputs:
   - token: "PRD"
-    description: "The PRD you're building from, in any of these forms:"
+    description: "The PRD you are building from, in any of these forms:"
     examples:
-      - "Output of [PRD generator](/prompts/prd-generator), reviewed and refined by hand"
-      - "A PRD authored by hand, pasted as markdown"
+      - "Output of the [PRD generator](/prompts/prd-generator), reviewed and edited by hand"
+      - "A PRD you wrote by hand, pasted as Markdown (a plain-text format)"
       - "A PRD exported from another system"
   - token: "DESIGN_INTENT"
-    description: "Any visual or interaction direction you want to anchor on. Plain text."
+    description: "Any visual or interaction direction you want to follow, as plain text."
     optional: true
     examples:
       - "calm and information-dense"
@@ -51,11 +51,11 @@ promptBody: |
 visibility: "public"
 ---
 
-Use this prompt with [Claude Code](/tools/claude-code) to scaffold working reference code from a finalised PRD — the same running scaffold serves as the interactive prototype for the next Measure pass.
+Use this prompt with [Claude Code](/tools/claude-code) to build working starter code from a finished PRD. The same running version serves as the interactive prototype for the next Measure round.
 
 ## Tips
 
-- The "before writing any code, confirm" step is what prevents Claude Code from generating 500 lines of irrelevant scaffolding. Don't skip it.
-- The output is reference code, not production code. Treat it as the starting point for the team's iteration, and let DevSecOps act on it in parallel.
-- If Claude Code starts inventing PRIZM components that don't exist, stop and tell it to check `lib/components-registry.ts` in the PRIZM repo before generating.
-- The scaffolded prototype is the thing the next Measure phase puts in front of users — pair it with the [test-plan generator](/prompts/test-plan-generator), which reads the PRD to draft the plan, then close the loop with usability sessions and DASH surveys.
+- The step where Claude Code confirms with you before writing any code is what stops it generating 500 lines of code you do not need. Do not skip it.
+- The output is reference code, not production code. Treat it as the starting point for the team's iterations, and let the engineering side (DevSecOps) act on it in parallel.
+- If Claude Code starts inventing PRIZM components that do not exist, stop it and tell it to check `lib/components-registry.ts` in the PRIZM repository (its code store on GitHub) before generating.
+- The prototype is what the next Measure phase puts in front of users. Pair it with the [test-plan generator](/prompts/test-plan-generator), which reads the PRD to draft the plan. Then close the loop with usability sessions and DASH surveys.

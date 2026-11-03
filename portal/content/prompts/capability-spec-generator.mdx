@@ -3,10 +3,8 @@ title: Capability-spec generator
 phase: research
 domain: engineering
 tool: clara
-task: derive measurable capability requirements from an operational scenario
-expectedOutput: >-
-  Markdown capability spec with functional requirements, performance thresholds,
-  environmental constraints, and traceability back to the scenario.
+task: "Turn an operational scenario into measurable capability requirements."
+expectedOutput: "A Markdown capability specification with functional requirements (what the capability must do), performance thresholds, environmental constraints, and links back to the scenario that each requirement comes from."
 inputsFrom:
   - operational-scenario-generator
 confluenceContext:
@@ -34,11 +32,11 @@ copyBlock: Use CLARA's `capability-spec-generator` for <programme name>.
 
 ## What CLARA will ask you for
 
-- **Programme name** — your programme's name (e.g. SKYPROTECT).
-- **Track** — the slice of the programme this artefact belongs to (workstream, capability area, feature line, etc.), or `Programme-wide` if it spans tracks.
-- **Operational scenario** — page reference under `Knowledge Base/{{track}}/Operational scenarios/*` to base the spec on.
-- **Capability name** — short (e.g. "Tank-crew alerting aid", "Fighter aircraft sensor-fusion module", "Frigate surface-contact classifier").
-- **Inputs** — CLARA will search the programme's Confluence space for operational scenario for this capability; capability brief or statement of operational need; known constraints (optional) — regulatory, integration, schedule, platform. You can also paste fresh material if it's not in Confluence yet.
+- **Programme name** — your programme's name (for example SKYPROTECT).
+- **Track** — the part of the programme this document belongs to (for example a workstream, capability area or feature line), or `Programme-wide` if it spans several. The [CLARA page](/tools/clara) explains tracks.
+- **Operational scenario** — the page under `Knowledge Base/{{track}}/Operational scenarios/*` to base the specification on.
+- **Capability name** — short (for example "Tank-crew alerting aid", "Fighter aircraft sensor-fusion module" or "Frigate surface-contact classifier").
+- **Inputs** — CLARA will search your programme's Confluence space for the operational scenario for this capability, a capability brief or statement of operational need, and optionally known constraints (regulatory, integration, schedule or platform). You can also paste in new material that is not in Confluence yet.
 
 ## Where the output lands
 
@@ -46,6 +44,6 @@ copyBlock: Use CLARA's `capability-spec-generator` for <programme name>.
 
 ## Tips
 
-- When you review CLARA's spec, every requirement should trace back to a specific scenario beat. Challenge any that can't — that's where drift creeps in.
-- Performance thresholds are where CLARA's draft will be vaguest unless your operational scenario contains hard numbers. Push for measurable thresholds ("within 5 seconds, 95th percentile") rather than "fast enough".
-- Pair CLARA's output with a [Napkin AI](/tools/napkin-ai) system diagram so the requirements have a structural picture to anchor against.
+- When you review CLARA's specification, every requirement should trace back to a specific beat in the scenario. Challenge any that cannot. That is where drift creeps in.
+- Performance thresholds are where the draft will be vaguest, unless your operational scenario contains hard numbers. Push for measurable thresholds (such as "within 5 seconds, in 95% of cases") instead of "fast enough".
+- Pair CLARA's output with a system diagram from [Napkin AI](/tools/napkin-ai), so the requirements have a structural picture to anchor to.

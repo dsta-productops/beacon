@@ -1,23 +1,23 @@
 ---
-title: "I need to hand off to DevSecOps"
-scenario: "The interactive prototype has been through enough Measure iterations to be validated. The developers in DevSecOps need to pick it up for production. The point of the Pipeline is that this isn't a 'throw it over the wall' moment — their technical assessment runs in parallel with the next Design pass."
+title: "I need to hand over to the engineering team (DevSecOps)"
+scenario: "The interactive prototype has been through enough Measure rounds to be confirmed as working. The developers on the engineering side (DevSecOps) now need to pick it up for production. The point of the Pipeline is that this is not a \"throw it over the wall\" moment. Their technical checks run alongside the next Design round."
 order: 3
 visibility: "public"
 steps:
-  - label: "Confirm the prototype lives in a repo DevSecOps can read"
-    description: "Parallel assessment depends on visibility. If developers can't see the code, they can't start. Check repo access; if the target environment is air-gapped, mirror the prototype to the right place."
-  - label: "Pass the PRD across as the spec contract"
-    description: "The PRD is what the prototype was built against. Developers need it to scope build, security, integration, and non-functional work — not to re-derive intent from the code."
+  - label: "Confirm the prototype is in a repository the engineers can read"
+    description: "Working side by side depends on visibility. If developers cannot see the code, they cannot start. Check access to the repository (the place where the code is kept). If the target environment is air-gapped (isolated from the internet), copy the prototype to the right place."
+  - label: "Pass the PRD across as the agreed specification"
+    description: "The PRD is what the prototype was built against. Developers need it to plan the build, security, integration and other non-functional work (such as reliability), so they do not have to work out the intent from the code."
   - label: "Carry forward the success criteria"
-    description: "These are the targets developers will measure against post-deployment. Capability-focused and measurable — not 'looks polished' or 'feels right'."
-  - label: "Surface the integration concerns developers will hit"
-    description: "Authentication, data sources, deployment environment, scaling profile, classification, secrecy. Wherever the prototype mocked something, name what was mocked. Wherever the prototype made an environmental assumption, name it."
-  - label: "Set a parallel-assessment cadence"
-    description: "The developers' technical assessment runs while the product team iterates on the next Design pass. Agree a weekly sync at minimum — surface blockers from both sides before they become integration shocks."
-  - label: "Name what stays open"
-    description: "List the user flows, content gaps, fidelity choices, and operational edge cases the prototype didn't settle. Developers need to know what's a design decision vs an implementation detail."
+    description: "These are the targets developers will measure against after deployment. They are capability-focused and measurable (about what the product must be able to do), not \"looks polished\" or \"feels right\"."
+  - label: "Raise the integration issues developers will meet"
+    description: "Authentication (sign-in), data sources, the deployment environment, how much load it must handle, classification and secrecy. Wherever the prototype faked something, say what was faked. Wherever it made an assumption about the environment, say what it assumed."
+  - label: "Agree how often you will check in"
+    description: "The developers' technical checks run while the product team improves the next Design round. Agree a weekly meeting at minimum, so blockers from both sides come up before they turn into integration surprises."
+  - label: "Say what is still open"
+    description: "List the user flows, content gaps, level-of-detail choices and unusual operational cases that the prototype did not settle. Developers need to know which are design decisions and which are implementation details."
 ---
 
-The Design phase emits PRIZM-conformant code that DevSecOps developers can pick up. The risk isn't quality of the code — it's the assumption that hand-off is a one-time event. It isn't. The developers' assessment runs in parallel with continued Design iteration; both sides keep moving.
+The Design phase produces code, built with the PRIZM design system, that DevSecOps developers can pick up. The risk is not the quality of the code. It is the assumption that handover happens once. It does not. The developers' checks run alongside continued Design work, and both sides keep moving.
 
-This journey is about setting that parallelism up correctly, not about packaging a finished artefact. If the team is treating hand-off as a milestone where Design stops and DevSecOps starts, the pipeline's parallelism advantage is being thrown away.
+This journey is about setting that up correctly, not about packaging a finished product. If the team treats handover as a milestone where Design stops and DevSecOps starts, it throws away the advantage of working side by side that the Pipeline is built for.

@@ -117,7 +117,7 @@ export default async function ToolsPage() {
         <PageHeader
           eyebrow="Operations"
           title="Tool catalogue"
-          lede="Every tool in the pipeline — what it does, when to reach for it, how to access it, and ready-to-paste prompts for the AI-enabled ones."
+          lede="Every tool in the Pipeline: what it does, when to use it, how to get it, and ready-to-paste prompts for the AI-enabled ones."
         />
 
         {activePhases.map((phase, i) => {

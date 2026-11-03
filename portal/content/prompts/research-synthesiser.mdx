@@ -3,14 +3,8 @@ title: Research synthesiser
 phase: research
 domain: shared
 tool: clara
-task: >-
-  turn interview transcripts and field observations into a single Research
-  synthesis page covering themes, friction, problem statement, and success
-  criteria
-expectedOutput: >-
-  A single markdown page with four sections — Themes, Friction points, Problem
-  statement, Success criteria — internally consistent because they're produced
-  in one pass.
+task: "Turn interview transcripts and field observations into a single research synthesis page covering themes, friction, the problem statement and success criteria."
+expectedOutput: "A single Markdown page with four sections (Themes, Friction points, Problem statement and Success criteria), which agree with each other because they are produced in one pass."
 inputsFrom:
   - interview-guide-generator
   - prior-knowledge-summariser
@@ -43,10 +37,10 @@ copyBlock: Use CLARA's `research-synthesiser` for <programme name>.
 
 ## What CLARA will ask you for
 
-- **Programme name** — your programme's name (e.g. SKYPROTECT).
-- **Track** — the slice of the programme this artefact belongs to (workstream, capability area, feature line, etc.), or `Programme-wide` if it spans tracks.
-- **Outcome question** — what the research was trying to answer (one line — taken from the interview guide if one exists).
-- **Inputs** — CLARA will search the programme's Confluence space for interview transcripts, field/exercise observation notes, operator session notes; prior-knowledge summary on the topic (optional); interview guide used in the field (optional). You can also paste fresh material if it's not in Confluence yet.
+- **Programme name** — your programme's name (for example SKYPROTECT).
+- **Track** — the part of the programme this document belongs to (for example a workstream, capability area or feature line), or `Programme-wide` if it spans several. The [CLARA page](/tools/clara) explains tracks.
+- **Outcome question** — what the research was trying to answer (one line, taken from the interview guide if there is one).
+- **Inputs** — CLARA will search your programme's Confluence space for interview transcripts, field and exercise observation notes and operator session notes, and optionally a prior-knowledge summary on the topic and the interview guide used in the field. You can also paste in new material that is not in Confluence yet.
 
 ## Where the output lands
 
@@ -54,8 +48,8 @@ copyBlock: Use CLARA's `research-synthesiser` for <programme name>.
 
 ## Tips
 
-- Themes are clusters, not summaries. If a "theme" is just one person's statement restated, it's not a theme — it's a quote.
-- The friction table earns its weight when it's sorted. A friction table without rank ordering is a list of complaints; with rank ordering, it's an action queue.
-- The problem statement is what separates synthesis from notes. Resist the urge to leave it open-ended — pick the framing the evidence best supports, and name the alternatives explicitly.
-- Success criteria written without measurability ("users should feel more confident") aren't success criteria — they're aspirations. Push for "X% of operators complete task Y in Z seconds without secondary confirmation" or similar.
-- This page is the single upstream for the rest of the Research phase. Downstream prompts (persona, journey, PRD, etc.) read sections of this page directly — that's why all four sections live together.
+- Themes are clusters, not summaries. If a "theme" is just one person's statement repeated, it is a quote, not a theme.
+- The friction table is most useful when it is sorted. Unranked, it is a list of complaints. Ranked, it is a queue of actions.
+- The problem statement is what separates a synthesis from notes. Resist leaving it open-ended: pick the framing the evidence best supports, and name the alternatives.
+- Success criteria without a measure ("users should feel more confident") are not success criteria but hopes. Push for something like "X% of operators complete task Y in Z seconds without a second confirmation".
+- This page is the single starting point for the rest of the Research phase. Later prompts (persona, journey, PRD and so on) read sections of this page directly, which is why all four sections live together.
