@@ -94,7 +94,7 @@ Claude Code lists the Confluence spaces you connected it to.
 ## 3. Create a DASH account
 ::step{id="dash-account" phase="Setup" tool="DASH"}
 
-**DASH** runs short surveys that measure how easy a system is to use. You use it in step 9 to measure how things are today, and in step 17 to compare your prototype against that.
+**DASH** runs short surveys that measure how easy a system is to use. You use it in step 10 to measure how things are today, and in step 18 to compare your prototype against that.
 
 1. Go to [diux-dash.com](https://diux-dash.com) and sign up.
 2. Sign up with a **personal email address**, such as a Gmail address, not your work email.
@@ -160,7 +160,7 @@ CLARA introduces itself and says what it can do, such as drafting personas, jour
 
 **PRIZM** is DSTA's design system: a library of ready-made screens, components and colours.
 
-Claude Code reads its instructions, so the prototype you build in step 15 follows DSTA standards without extra styling work.
+Claude Code reads its instructions, so the prototype you build in step 16 follows DSTA standards without extra styling work.
 
 Choose a method below. If you are not sure, choose **File**.
 
@@ -340,14 +340,77 @@ CLARA cites a source for every finding, and marks anything uncertain as thin, op
 :::
 
 
-## 8. Evaluate existing product
+## 8. Draft the one-pager
+::step{id="one-pager-draft" phase="Research" tool="CLARA"}
+
+A **product strategy one-pager** sets out the problem your product is attempting to solve, where it is heading, how you will measure success, what it costs against the value it delivers, the risks and the roadmap.
+
+It is the core document a product manager uses to explain the product to stakeholders, so write it for someone who knows nothing about the problem.
+
+Start it now, before the research, so that the people who approve and fund the work can see what you are setting out to do. You do not have a PRD yet, so this is a first draft from what you already have. CLARA marks everything it cannot support with **[TBD]**, and you will fill those in as your research and prototype confirm or overturn your assumptions. You will update this same page in step 19.
+
+1. :own[Paste this prompt into CLARA. Replace PROGRAMME with your programme's name.]:demo[Paste this prompt into CLARA:]
+   ```prompt
+   Use CLARA's `product-strategy-one-pager` for PROGRAMME.
+   ```
+2. Answer its questions about your programme name, track (or Programme-wide) and product name. :own[Choose a working name for your product. Keep it the same when you update the one-pager in step 19, because CLARA uses the name to find the page.]
+   :::demo
+   Answer with:
+
+   ```prompt
+   Programme name: SKYPROTECT
+   Track: Programme-wide
+   Product name: Operator console
+   New or existing product: new product
+   ```
+   :::
+3. Tell it that there is no PRD yet, and where your sources are. :own[Give it **URL links** to Confluence pages, one link per page, or tell it to search your space and pick from what it finds. Include the stakeholder ask or brief, and your prior-knowledge summary.] :demo[Paste this prompt:]
+   :::own
+   ```
+   There is no PRD yet. Proceed without one.
+   https://<your-confluence-site>/wiki/spaces/<space-key>/pages/<page-id>
+   ```
+   :::
+   :::demo
+   ```prompt
+   There is no PRD yet. Proceed without one. Search the SKYPROTECT space and use ONLY the SKYPROTECT kickoff brief and the prior-knowledge summary.
+   ```
+   :::
+4. Read the draft. CLARA marks anything it could not find with **[TBD]**, then asks you about those gaps in one message, such as the business owner, the team, quarterly costs and roadmap dates.
+5. Answer what you can, and CLARA fills your answers into the draft. You do not need every answer now. Anything you skip stays as [TBD], and you can fill it in on the Confluence page later.
+   :::demo
+   The demo has no real owners or costs. Answer with these sample details, and leave the rest as [TBD]:
+
+   ```prompt
+   Business owner: Head of Operations, SKYPROTECT
+   Team members: 1 product manager, 1 designer, 2 engineers
+   Product lifecycle stage: Discovery
+   Scale: console operators at Site Alpha and Site Bravo, and commanders in the central ops room
+   ```
+   :::
+6. CLARA shows you the draft and the page it will go under. Say yes to file it.
+
+::::when{project="own"}
+:::check
+In Confluence, open the **One-pagers** folder. It holds the first draft of your one-pager, with a header, change log, problem, vision, strategy, risks, roadmap and open issues. The success metrics, the cost and value table and the roadmap dates are mostly [TBD] for now, and each [TBD] is listed under Open issues.
+:::
+::::
+
+::::when{project="demo"}
+:::check
+In Confluence, open the **One-pagers** folder. It holds the first draft of the Operator console one-pager, drawn from the kickoff brief. The problem, vision, strategy and risks are filled in. The success metrics, the cost and value table and the roadmap dates are mostly [TBD] for now, and each [TBD] is listed under Open issues.
+:::
+::::
+
+
+## 9. Evaluate existing product
 ::step{id="heuristic-evaluation" phase="Research" tool="CLARA"}
 
 A **heuristic evaluation** checks a product against well-known usability rules, like Nielsen's 10 heuristics.
 
 For each problem CLARA finds, it gives a severity rating and the screen it appears on.
 
-These problems feed your research synthesis in step 11 and your problem ranking in step 13.
+These problems feed your research synthesis in step 12 and your problem ranking in step 14.
 
 
 1. Collect the material to evaluate: numbered screenshots of the flows, a link CLARA can open, or a PDF or deck of the screens.
@@ -388,7 +451,7 @@ In Confluence, open the **Heuristic-evaluations** folder. It holds your new repo
 ::::
 
 
-## 9. Prepare for the interviews
+## 10. Prepare for the interviews
 ::step{id="baseline" phase="Research" tool="DASH + CLARA + INSIGHT"}
 
 Before you talk to anyone, set up three things: a baseline survey in DASH, which gives you numbers, an interview guide from CLARA, which helps you find out why, and INSIGHT, which supports you during the interviews.
@@ -413,7 +476,7 @@ It also tracks **OKRs**, which are goals with numbers attached.
 ::screenshot{src="/confluence-walkthrough-step-7-2.png" caption="The Baseline Testing session, showing the share link and QR code" hint="the Baseline Testing session in DASH, showing the share link and QR code"}
 
 :::details{title="Can I skip the baseline survey?"}
-Not if you want to show that your design is better. The comparison in step 17 needs a baseline to compare against. More in the [FAQ](/faq#skip-baseline).
+Not if you want to show that your design is better. The comparison in step 18 needs a baseline to compare against. More in the [FAQ](/faq#skip-baseline).
 :::
 
 
@@ -457,7 +520,7 @@ In Confluence, open the **Interview-guides** folder to find :own[your new interv
 
 ### Install INSIGHT
 
-INSIGHT gives you live prompts and a transcript during your interviews in step 10. It is only available on Mac for now. If you use Windows, skip this section.
+INSIGHT gives you live prompts and a transcript during your interviews in step 11. It is only available on Mac for now. If you use Windows, skip this section.
 
 1. Download the INSIGHT app [here](https://drive.google.com/file/d/1RwBK2d0W2AlxtCk1VHl77378iNDGMGNk/view?usp=sharing).
 2. Open the `.dmg` file and drag **INSIGHT** into the **Applications** folder.
@@ -473,7 +536,7 @@ INSIGHT opens without a warning that the app is damaged or from an unidentified 
 :::
 
 
-## 10. Interview your users
+## 11. Interview your users
 ::step{id="interviews" phase="Research" tool="INSIGHT"}
 
 After the preparation for the interview is done, you are now ready to interview your users.
@@ -485,13 +548,13 @@ In the demo project, the SKYPROTECT interviews have already been held. But if yo
 ### During the interview
 
 ::::own
-1. Run 5 to 7 conversations. Use the interview guide from step 9 to ask your questions, and take notes as you go.
-2. Ask each user to complete the survey, using the QR code or link from step 9. Responses appear in DASH as they answer.
+1. Run 5 to 7 conversations. Use the interview guide from step 10 to ask your questions, and take notes as you go.
+2. Ask each user to complete the survey, using the QR code or link from step 10. Responses appear in DASH as they answer.
 3. Run INSIGHT during each conversation for live prompts and a transcript, as described below.
 ::::
 
 ::::demo
-1. On a real project, you would use the interview guide from step 9 to ask your questions, and take notes as you go.
+1. On a real project, you would use the interview guide from step 10 to ask your questions, and take notes as you go.
 2. To simulate a survey response from a user, answer the survey yourself as a Site Alpha operator would, using what you read in the kickoff brief. If you can, ask a colleague to answer it too, so you have more than one response.
 ::::
 
@@ -546,7 +609,7 @@ In Confluence, the **Field-notes** folder holds one page of raw notes for each c
 ::::
 
 
-## 11. Make sense of the notes
+## 12. Make sense of the notes
 ::step{id="synthesise" phase="Research" tool="CLARA"}
 
 Research synthesiser turns interview transcripts and field observations into a single research synthesis page covering themes, friction, problem statement, and success criteria.
@@ -581,7 +644,7 @@ In Confluence, open the **Research-synthesis** page. It has themes, a friction t
 ::::
 
 
-## 12. Map the user experience
+## 13. Map the user experience
 ::step{id="personas-journeys" phase="Research" tool="CLARA"}
 
 Turn the research into three documents, one at a time.
@@ -669,7 +732,7 @@ In Confluence, open the **Service-blueprints** folder to find :own[your service 
 :::screenshot{src="/confluence-walkthrough-demo-service-blueprint.png" caption="A service blueprint document" hint="the filed service blueprint page, with the phase overview table visible"}
 ::::
 
-## 13. Rank the problems
+## 14. Rank the problems
 ::step{id="problem-ranking" phase="Research" tool="CLARA"}
 
 Your research now lists many problems, and you cannot fix them all at once.
@@ -690,7 +753,7 @@ CLARA also shows how well each problem is proven (its evidence) and whether it s
    ```prompt
    Use CLARA's `problem-impact-ranker` for PROGRAMME.
    ```
-2. Tell it which problems to rank, such as all problems across the journey, or one track's. Name where they come from, such as the friction table in your research synthesis from step 11, so the ranking can be traced.
+2. Tell it which problems to rank, such as all problems across the journey, or one track's. Name where they come from, such as the friction table in your research synthesis from step 12, so the ranking can be traced.
    :::demo
    Answer with:
 
@@ -713,7 +776,7 @@ In Confluence, open the **Problem-impact-analysis** page. It has a ranked table 
 ::::
 
 
-## 14. Write the PRD
+## 15. Write the PRD
 ::step{id="prd" phase="Research" tool="CLARA"}
 
 A **PRD** (product requirements document) is one page everyone agrees on: the problem, who it is for, what the product must do and how you will know it worked.
@@ -724,7 +787,7 @@ It is the most important output of Research.
    ```prompt
    Use CLARA's `prd-generator` for PROGRAMME.
    ```
-2. :own[Choose the problem to build for. CLARA suggests the top-ranked problem from step 13.]:demo[Answer with:]
+2. :own[Choose the problem to build for. CLARA suggests the top-ranked problem from step 14.]:demo[Answer with:]
    :::demo
    ```prompt
    Programme name: SKYPROTECT
@@ -757,7 +820,7 @@ Start a new PRD when:
 - the next prototype is a separate component or workstream
 
 
-## 15. Build a prototype
+## 16. Build a prototype
 ::step{id="prototype" phase="Design" tool="Claude Code + PRIZM"}
 
 A prototype is a working draft people can click through.
@@ -857,7 +920,7 @@ A running prototype of your chosen flow, built from PRIZM components and semanti
 :::
 
 
-## 16. Plan the test
+## 17. Plan the test
 ::step{id="test-plan" phase="Measure" tool="CLARA + DASH"}
 
 Now that you have a working prototype, it is time to put it to the test.
@@ -892,7 +955,7 @@ In Confluence, open the **Test-plans** folder. It holds your new test plan, with
 ::::
 
 :::details{title="What is the difference between a test plan and an interview guide?"}
-The interview guide (step 9) helps you discover the problem: open-ended questions about how users work today. The test plan checks whether you have solved it: scenarios for users to attempt on your prototype, measured against the success criteria from your research. More in the [FAQ](/faq#test-plan-vs-interview-guide).
+The interview guide (step 10) helps you discover the problem: open-ended questions about how users work today. The test plan checks whether you have solved it: scenarios for users to attempt on your prototype, measured against the success criteria from your research. More in the [FAQ](/faq#test-plan-vs-interview-guide).
 :::
 
 ### Creating prototype test session
@@ -905,10 +968,10 @@ A DASH Prototype Test session, ready to share with your participants.
 :::
 
 
-## 17. Measure and compare
+## 18. Measure and compare
 ::step{id="measure" phase="Measure" tool="DASH + INSIGHT + CLARA"}
 
-Test the prototype, then compare the results with your baseline from step 9.
+Test the prototype, then compare the results with your baseline from step 10.
 
 The comparison is your evidence that the new design is better, or your guide to what to fix next.
 
@@ -916,8 +979,8 @@ The comparison is your evidence that the new design is better, or your guide to 
 
 ::::own
 1. Run the test sessions as set out in your test plan. Ask each participant to use the prototype through the scenarios, and ask the questions from the test plan.
-2. Ask each participant to complete the survey, using the QR code or link from step 16. Responses appear in DASH as they answer.
-3. You can also run INSIGHT during each session for live prompts and a transcript, as in step 10.
+2. Ask each participant to complete the survey, using the QR code or link from step 17. Responses appear in DASH as they answer.
+3. You can also run INSIGHT during each session for live prompts and a transcript, as in step 11.
 ::::
 
 ::::demo
@@ -935,12 +998,12 @@ The comparison is your evidence that the new design is better, or your guide to 
 
 ::screenshot{src="/confluence-walkthrough-step-17-2.png" caption="The DASH AI panel, ready for your question" hint="the DASH AI panel open"}
 
-3. If you took notes or used INSIGHT during the sessions, file each session's notes in Confluence using the **Field Notes** template, as in **After the interview** in step 10, in the same **Field-notes** folder.
+3. If you took notes or used INSIGHT during the sessions, file each session's notes in Confluence using the **Field Notes** template, as in **After the interview** in step 11, in the same **Field-notes** folder.
 4. If you filed field notes, synthesise the prototype testing results. Paste this prompt into CLARA. When it asks for sources, name the new test-session notes in **Field-notes**, so it does not mix them up with your interview notes:
    ```prompt
    Use CLARA's `research-synthesiser` for PROGRAMME.
    ```
-5. File the results in Confluence, so the report card in step 19 can cite them. CLARA has no results page of its own yet, so ask it to add a page under your test plan. Extract the test sessions and/or comparison from DASH, attach it, and paste:
+5. File the results in Confluence, so the report card in step 20 can cite them. CLARA has no results page of its own yet, so ask it to add a page under your test plan. Extract the test sessions and/or comparison from DASH, attach it, and paste:
    ```prompt
    File the attached DASH results in Confluence as a new child page of the PROGRAMME test plan. Call it "Results". Show me the page and where it will go before you create it. Copy the figures exactly, name the DASH session each one came from, and do not add figures that are not in the attachment.
    ```
@@ -953,14 +1016,12 @@ A DASH Prototype Test session with your participants' responses, a comparison vi
 :::
 
 
-## 18. Write the one-pager
+## 19. Update the one-pager
 ::step{id="one-pager" phase="Measure" tool="CLARA"}
 
-A **product strategy one-pager** sets out the problem your product is attempting to solve, where it is heading, how you will measure success, what it costs against the value it delivers, the risks and the roadmap.
+You drafted your **product strategy one-pager** in step 8, before you had a PRD. Now you have the PRD, your research and your test results, so update the same page with what you have learned. Do not create a new one.
 
-It is the core document a product manager uses to explain the product to stakeholders, so write it for someone who knows nothing about the problem.
-
-CLARA fills in most of it from your PRD and the rest of your Knowledge Base. Some details would not be found in the Knowledge Base, such as who owns the product and what it costs. CLARA will ask you for these in a systematic manner.
+CLARA reads your PRD and the rest of your Knowledge Base, then revises the existing page. It keeps everything you have already filled in or edited, and fills the remaining gaps. Some details would not be found in the Knowledge Base, such as who owns the product and what it costs. CLARA will ask you for these in a systematic manner.
 
 1. :own[Paste this prompt into CLARA. Replace PROGRAMME with your programme's name.]:demo[Paste this prompt into CLARA:]
    ```prompt
@@ -977,24 +1038,29 @@ CLARA fills in most of it from your PRD and the rest of your Knowledge Base. Som
    New or existing product: new product
    ```
    :::
-2. Read the draft. CLARA marks anything it could not find with **[TBD]**, then asks you about those gaps in one message, such as the business owner, the team, quarterly costs and roadmap dates.
-3. Answer what you can, and CLARA fills your answers into the draft. You do not need every answer now. Anything you skip stays as [TBD], and you can fill it in on the Confluence page later.
+2. :own[Use the same product name as in step 8.] CLARA finds the existing one-pager and tells you it will revise it. Choose to update it in place. The page history keeps the earlier draft.
+3. Read the changes. CLARA fills in the success metrics, strategy, risks and roadmap from your PRD, and keeps anything you added by hand. It then lists the **[TBD]** items that are still open, such as quarterly costs and roadmap dates.
+4. Answer what you can, and CLARA fills your answers into the page. You do not need every answer now. Anything you skip stays as [TBD], and you can fill it in on the Confluence page later.
    :::demo
-   The demo has no real owners or costs. Answer with these sample details, and leave the rest as [TBD]:
+   The demo has no real costs. Leave the cost and value table as [TBD], and answer with this sample detail:
 
    ```prompt
-   Business owner: Head of Operations, SKYPROTECT
-   Team members: 1 product manager, 1 designer, 2 engineers
-   Product lifecycle stage: Discovery
-   Scale: console operators at Site Alpha and Site Bravo, and commanders in the central ops room
    Unit of impact: drone alerts confirmed and escalated
    ```
    :::
-4. CLARA shows you the draft and the page it will go under. Say yes to file it.
+5. CLARA shows you the changes and the page it will update. Say yes to file it.
 
+::::when{project="own"}
 :::check
-In Confluence, open the **One-pagers** folder. It holds the one-pager for :own[your product]:demo[the Operator console], with a header, change log, problem, vision, success metrics, a cost and value table, strategy, risks, roadmap and open issues. Anything still marked [TBD] is listed under Open issues, ready for you to fill in on the page.
+In Confluence, open the **One-pagers** folder. Your one-pager has a new row in the **Change log**, and the success metrics, strategy, risks and roadmap now draw on your PRD. Fewer items are left under Open issues.
 :::
+::::
+
+::::when{project="demo"}
+:::check
+In Confluence, open the **One-pagers** folder. The Operator console one-pager has a new row in the **Change log**, and the success metrics, strategy, risks and roadmap now draw on the Operator-console-v1 PRD. Fewer items are left under Open issues, and the cost and value table is still [TBD].
+:::
+::::
 
 ::::demo
 :::screenshot{src="/confluence-walkthrough-demo-one-pager.png" caption="A one-pager document" hint="the filed one-pager page, with the header table and change log visible"}
@@ -1024,12 +1090,12 @@ The one-pager and the PRD both describe your product, but they do different jobs
 
 **How the two documents link up:** a PRD's problem and goals should trace back to the one-pager's status quo and North Star. Its success criteria should feed the one-pager's metrics and its "Delivered" log. Any open question that affects strategy or scope should be raised in the one-pager too.
 
-:::details{title="Why does this tutorial write the PRD before the one-pager?"}
-In this tutorial, CLARA builds the one-pager from your PRD, so most of it fills in for you. On a real programme you often start the one-pager early, to get approval and funding, and refine it as the PRD and research mature. More in the [FAQ](/faq#prd-before-one-pager).
+:::details{title="Why does this tutorial draft the one-pager before the PRD?"}
+On a real programme, you start the one-pager early, to get approval and funding, and refine it as your research and prototype confirm or overturn your assumptions. In this tutorial, you draft it in step 8 from what you already know, then update it here with your PRD and test results. More in the [FAQ](/faq#prd-before-one-pager).
 :::
 
 
-## 19. Publish a report card
+## 20. Publish a report card
 ::step{id="report-card" phase="Measure" tool="PULSE"}
 
 A **report card** is a one-page public summary of a product: the problem it solves, what it has achieved, how healthy it is and what changed lately.
