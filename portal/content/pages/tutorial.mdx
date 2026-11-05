@@ -77,7 +77,7 @@ You use one folder for the whole tutorial, so that CLARA, PRIZM and your prototy
    - **Scope:** choose **User**, so the connection works in every folder you open.
 3. Click **Add server**.
 4. Select `atlassian` in the list and choose to authenticate.
-5. Your browser opens. Sign in to Atlassian and approve access to your Confluence site. Once done, you should see the /mcp list showing the Atlassian connection as connected.
+5. Your browser opens. Sign in to Atlassian and approve access to your Confluence site. When you are done, the /mcp list shows the Atlassian connection as connected.
 
 ::screenshot{src="/confluence-walkthrough-step-2-2.png" caption="The /mcp list showing the Atlassian connection as connected" hint="the Claude panel with the /mcp connection list open and the atlassian entry showing as connected, highlighted"}
 
@@ -125,7 +125,7 @@ You install CLARA once, and it is then available whenever you open your project 
 
 1. Download :file[SKILL.md]{href="/confluence/SKILL.md"}. You can also download it from the [clara-confluence repository on GitHub](https://github.com/dsta-productops/clara-confluence/blob/main/dist/SKILL.md), at `clara-confluence/dist/SKILL.md`.
 2. The panel on the left of VS Code, called **Explorer**, shows what is inside this folder. Drag the downloaded file into the **Explorer** panel on the left.
-3. In the Claude panel, paste this prompt below. It moves `SKILL.md` into the folders `.claude/skills/clara-confluence`, so that Claude Code can find CLARA.
+3. In the Claude panel, paste this prompt below. It moves `SKILL.md` into the folder `.claude/skills/clara-confluence`, so that Claude Code can find CLARA.
    ```prompt
    Move SKILL.md into a new folder called .claude/skills/clara-confluence in this project. Keep the file name as SKILL.md.
    ```
@@ -229,7 +229,7 @@ Your **Knowledge Base** is the set of Confluence pages where CLARA files everyth
 ::::when{project="own"}
 CLARA builds the folders for you and shows you the plan before it creates anything.
 
-1. In Confluence, create an empty space for your programme. Give a name for this space, and you may choose to customize its space key.
+1. In Confluence, create an empty space. Name it after your programme. You can also change its space key.
 
 ::screenshot{src="/confluence-walkthrough-step-5-1.png" caption="The Create a space form, with your programme's name and key" hint="the Confluence Create a space form with a programme name and space key filled in and the key field highlighted"}
 
@@ -256,7 +256,7 @@ Its team starts from the documents of an earlier programme, **FLEETWATCH**, a co
 ::screenshot{src="/confluence-walkthrough-step-5-2.png" caption="The 'Create a space' form, with the name SKYPROTECT and the key SKYPR" hint="the Confluence Create a space form with the name SKYPROTECT and the space key SKYPR filled in and the key field highlighted"}
 
 2. In the Claude panel, type `setup-kb` to set up your Knowledge Base skeleton.
-3. CLARA will ask you fill in the programme name, programme type and track. Paste this prompt:
+3. CLARA will ask you to fill in the programme name, programme type and track. Paste this prompt:
    ```prompt
    Programme name: SKYPROTECT
    Programme type: digital
@@ -557,7 +557,7 @@ CLARA reads them all in one pass and separates what is new from what you already
    ```prompt
    Use CLARA's `research-synthesiser` for PROGRAMME.
    ```
-2. Give it your learning goals, the gaps you found in step 7 and the findings from step 8.
+2. Give it your learning goals.
    :::demo
    Answer with:
 
@@ -594,9 +594,8 @@ A **persona** is a profile of a typical user, with their goals, frustrations and
    ```prompt
    Use CLARA's `persona-generator` for PROGRAMME.
    ```
+2. :own[Answer its questions.]:demo[Answer with:]
    :::demo
-   Answer with:
-
    ```prompt
    Programme name: SKYPROTECT
    Track: Programme-wide
@@ -622,9 +621,8 @@ A **user journey** shows the steps a person goes through, and where you could im
    ```prompt
    Use CLARA's `journey-map-drafter` for PROGRAMME.
    ```
+2. :own[Answer its questions.]:demo[Answer with:]
    :::demo
-   Answer with:
-
    ```prompt
    Programme name: SKYPROTECT
    Track: Programme-wide
@@ -651,9 +649,8 @@ A **service blueprint** is the journey plus what your team and systems do behind
    ```prompt
    Use CLARA's `service-blueprint-drafter` for PROGRAMME.
    ```
+2. :own[Answer its questions.]:demo[Answer with:]
    :::demo
-   Answer with:
-
    ```prompt
    Programme name: SKYPROTECT
    Track: Programme-wide
@@ -938,8 +935,8 @@ The comparison is your evidence that the new design is better, or your guide to 
 
 ::screenshot{src="/confluence-walkthrough-step-17-2.png" caption="The DASH AI panel, ready for your question" hint="the DASH AI panel open"}
 
-3. If you took notes or used INSIGHT during the sessions, file each session's notes in Confluence using the **Field Notes** template, as in **After the interview** in step 10.
-4. If you filed field notes, synthesise the prototype testing results. Paste this prompt into CLARA, and tell it to use the field notes from the test sessions:
+3. If you took notes or used INSIGHT during the sessions, file each session's notes in Confluence using the **Field Notes** template, as in **After the interview** in step 10, in the same **Field-notes** folder.
+4. If you filed field notes, synthesise the prototype testing results. Paste this prompt into CLARA. When it asks for sources, name the new test-session notes in **Field-notes**, so it does not mix them up with your interview notes:
    ```prompt
    Use CLARA's `research-synthesiser` for PROGRAMME.
    ```
@@ -1063,7 +1060,7 @@ You check it in PULSE and publish it.
 ::::::demo
 2. Choose how you want to get the report card document.
 
-   If you are not sure, choose **Download the file**, because it is easier to setup.
+   If you are not sure, choose **Download the file**, because it is easier to set up.
 
 :::::tabs
 ::::tab{value="file" label="Download the file"}
