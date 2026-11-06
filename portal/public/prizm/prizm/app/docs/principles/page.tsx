@@ -107,6 +107,95 @@ const CORE_PRINCIPLES: Principle[] = [
   },
 ];
 
+const INTERACTION_PRINCIPLES: Principle[] = [
+  {
+    title: "Goal before screen",
+    citation: "Cooper, Reimann, Cronin, Noessel (2014)",
+    says: "Start from who the user is and what they are trying to achieve, then choose screens and components. A screen that supports no stated goal should not exist.",
+    why: "People use software to reach an outcome, not to operate features. Designs organised around features or data produce screens that are correct but do not help anyone finish what they came to do. Naming one primary persona and one primary scenario stops a design drifting towards a vague average user.",
+    how: (
+      <>
+        Before composing, state the primary persona, their end goal, and the primary scenario,
+        taken from the brief or PRD. If any is missing, ask — do not invent them. Each screen in
+        the output should be traceable to a step in that scenario.
+      </>
+    ),
+  },
+  {
+    title: "Posture sets density",
+    citation: "Cooper et al. (2014)",
+    says: "Decide whether a screen is used for long periods (sovereign), briefly (transient), or in the background (daemonic), and set density and chrome to match.",
+    why: "A tool people live in for hours can be dense and rich, because they will learn it. A screen visited for seconds must be obvious at a glance and get out of the way. Treating them the same gives either cluttered quick screens or sparse expert ones.",
+    how: (
+      <>
+        C3 consoles and the{" "}
+        <Link href="/c3/templates/app-shell" className="text-accent hover:underline">
+          App Shell
+        </Link>{" "}
+        are sovereign. Enterprise confirmations, pickers and quick edits are transient: use{" "}
+        {L("/components/dialog","Dialog")} or {L("/components/popover","Popover")} and keep them
+        small. Name the posture of each screen before picking its zone density.
+      </>
+    ),
+  },
+  {
+    title: "Cut excise",
+    citation: "Cooper et al. (2014)",
+    says: "Remove effort that serves the tool rather than the goal. Do not ask for what the system can infer, remember, or default.",
+    why: "Every extra field, step, or mode is work the user does for the software. Sensible defaults, remembered choices, and inference save that work without removing control.",
+    how: (
+      <>
+        Pre-fill {L("/components/field","Field")} values where the answer is known. Prefer{" "}
+        {L("/components/combobox","Combobox")} typeahead over long scrolling lists, and offer{" "}
+        {L("/components/command","Command")} for frequent actions. Do not add a confirmation,
+        wizard step, or settings screen unless the goal needs it.
+      </>
+    ),
+  },
+  {
+    title: "Speak the user's model",
+    citation: "Cooper et al. (2014); Norman (1988)",
+    says: "Name and group things the way the user thinks about the task, not the way the data or code is organised.",
+    why: "Users carry a mental model of their work. Interfaces that expose the implementation model (tables, IDs, internal states) force people to translate. Matching the user's model makes a design feel obvious.",
+    how: (
+      <>
+        Button labels name the outcome (“Send report”, not “Submit”).{" "}
+        {L("/components/table","Table")} columns, {L("/components/menu","Menu")} items and{" "}
+        {L("/components/navigation-menu","Navigation")} labels use the user's vocabulary from
+        the brief, never field names from the data model.
+      </>
+    ),
+  },
+  {
+    title: "Complete every state",
+    citation: "Cooper et al. (2014); Nielsen (1994)",
+    says: "Every list, region, and action has a designed empty, loading, and error state, not just the happy path.",
+    why: "Users meet empty, loading, and failed states constantly, and they are where trust is won or lost. A prototype that only shows the populated case hides the screens people see first.",
+    how: (
+      <>
+        Empty regions use {L("/components/empty-state","Empty State")} with a next action. Loading
+        uses {L("/components/skeleton","Skeleton")}, {L("/components/spinner","Spinner")} or{" "}
+        {L("/components/progress","Progress")}. Failures use {L("/components/alert","Alert")} or
+        field-level errors, say what happened and how to recover, and never blame the user.
+      </>
+    ),
+  },
+  {
+    title: "Primary path first",
+    citation: "Cooper et al. (2014)",
+    says: "Design the main scenario end to end before any secondary path. One clear primary action per context.",
+    why: "Designing for every case at once dilutes the common one. Completing the primary path first makes edge cases additions to a sound design, not compromises inside it.",
+    how: (
+      <>
+        Use one {L("/components/button","Button")} <code className="rounded bg-bg-muted px-1.5 py-0.5 font-mono text-xs">solid</code>{" "}
+        per context, with <code className="rounded bg-bg-muted px-1.5 py-0.5 font-mono text-xs">outline</code> or{" "}
+        <code className="rounded bg-bg-muted px-1.5 py-0.5 font-mono text-xs">ghost</code> for the rest. Build
+        and confirm the primary flow before adding secondary screens.
+      </>
+    ),
+  },
+];
+
 const C3_PRINCIPLES: Principle[] = [
   {
     title: "Operator dark mode",
@@ -322,6 +411,23 @@ export default function PrinciplesPage() {
       </div>
 
       {/* ============================================================
+          Interaction principles
+          ============================================================ */}
+      <h2 className="mt-16 text-2xl font-semibold tracking-tight">
+        Interaction — decide before you compose
+      </h2>
+      <p className="mt-3 text-fg-muted">
+        Principles about what a screen is for and how it behaves, applied before any component is
+        chosen. They apply in both products, and they are the first thing an AI assistant should
+        settle when building a prototype.
+      </p>
+      <div className="mt-8 space-y-4">
+        {INTERACTION_PRINCIPLES.map((p) => (
+          <PrincipleCard key={p.title} principle={p} accent="neutral" />
+        ))}
+      </div>
+
+      {/* ============================================================
           C3 principles
           ============================================================ */}
       <h2 className="mt-16 text-2xl font-semibold tracking-tight">C3 — for command and control</h2>
@@ -363,6 +469,10 @@ export default function PrinciplesPage() {
         <li>
           Cooper, A., Reimann, R., &amp; Cronin, D. (2007).{" "}
           <em>About Face 3: The Essentials of Interaction Design.</em>
+        </li>
+        <li>
+          Cooper, A., Reimann, R., Cronin, D., &amp; Noessel, C. (2014).{" "}
+          <em>About Face: The Essentials of Interaction Design</em> (4th ed.).
         </li>
         <li>
           Driskell, J. E., &amp; Salas, E. (1996). <em>Stress and Human Performance.</em>

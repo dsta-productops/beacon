@@ -27,6 +27,19 @@ This is the rule most AI sessions drift on. Not tokens, not accessibility — th
 
 This rule covers templates and pack organisms too — check `/c3/templates`, the "Templates" section below, and the "Extension packs" section before scaffolding a new layout or a new domain organism. The JavaFX library has the same discipline: reach for `Prizm*` controls in `javafx/src/main/java/design/prizm/fx/controls/` before restyling stock JavaFX.
 
+## Design before you compose
+
+Reuse tells you *how* to build. These rules tell you *what to decide first*. They come from the interaction-design principles at `/docs/principles` (group "Interaction") and apply to both zones. Settle them before choosing components, and state your answers in a few lines at the start of your reply.
+
+1. **Goal before screen.** Name the primary persona, their end goal, and the primary scenario, from the brief or PRD. If any is missing, ask; do not invent them. Every screen you produce should trace to a step in that scenario.
+2. **Posture sets density.** For each screen, say whether it is sovereign (used for long periods), transient (brief), or daemonic (background). Set density and chrome to match, within the zone's tokens.
+3. **Cut excise.** Do not ask for what the system can infer, remember, or default. Do not add confirmations, wizard steps, or settings screens the goal does not need.
+4. **Speak the user's model.** Labels and groupings use the user's vocabulary from the brief, not data-model names. Button labels name the outcome.
+5. **Complete every state.** Every list, region, and action gets empty, loading, and error states, using `EmptyState`, `Skeleton` / `Spinner` / `Progress`, and `Alert` / `FieldError`.
+6. **Primary path first.** Build the main scenario end to end before secondary ones. One `solid` Button per context.
+
+These sit alongside the zone principles (staged commit and operator dark in C3; progressive disclosure, form ergonomics, and undo-over-confirm in Enterprise). When a rule here needs a component PRIZM does not ship, follow "Reuse before you build": say what is missing and stop, do not fabricate it.
+
 ## How PRIZM is distributed
 
 PRIZM uses a **copy-paste model**. Components live in this repo and are designed to be copied into consuming projects, not installed as an npm package. This gives consuming teams full ownership of their component code.

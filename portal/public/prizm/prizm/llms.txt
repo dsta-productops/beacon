@@ -17,7 +17,7 @@ If you're working in a consumer project, look for a project rules file (`CLAUDE.
 ## Foundations — visual reference + design rationale
 
 - [Foundations overview](/docs/foundations): index of every foundation reference page.
-- [Design principles](/docs/principles): the human factors and HCI research behind PRIZM's patterns. Core + C3 + Enterprise principle sets. Templates and components anchor on these.
+- [Design principles](/docs/principles): the human factors and HCI research behind PRIZM's patterns. Core + Interaction + C3 + Enterprise principle sets. Templates and components anchor on these. **Read the Interaction group first** (goal before screen, posture, excise, user's model, complete states, primary path); the same six rules are summarised in PRIZM.md under "Design before you compose".
 - [Colours](/docs/colors): semantic tokens across all four theme variants, plus baseline scales.
 - [Typography](/docs/typography): font families, type scale, weights.
 - [Surface & motion](/docs/surface-and-motion): radii, shadows, and a note on motion (components use Tailwind's default duration / easing utilities; PRIZM doesn't define its own).
