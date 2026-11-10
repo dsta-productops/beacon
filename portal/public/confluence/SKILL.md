@@ -2216,7 +2216,7 @@ Step 3 — Draft.
 
 A good test plan:
 - States the objective in one sentence — what question this test is supposed to answer.
-- Derives 3–6 scenarios that, together, exercise the success criteria. Each scenario has setup, steps, expected result, and evidence to capture.
+- Derives 3–6 scenarios that, together, exercise the success criteria. Each scenario has a persona block (who the participant is, what is happening, what they are responsible for), setup, steps, expected result, and evidence to capture.
 - Names the participants: how many, what type, recruiting source, exclusion criteria.
 - Structures the session: pre-task, scenarios, post-task, total duration.
 - Names what gets measured: behavioural observations, metrics, post-session questions, planned DASH survey type (prototype survey or system survey).
@@ -2236,6 +2236,9 @@ Output as markdown:
 ### Scenarios
 
 #### Scenario 1: [name]
+- **Who you are:** [the role or persona the participant assumes for this scenario, e.g. "Wei Jian, the Mentor of project X"]
+- **What is happening:** [the situation or trigger that leads to the task, written as a short in-story moment, e.g. "You have just received an email saying the shortlisted profiles are ready for review"]
+- **What you are responsible for:** [enough context about the participant's part in the wider process for them to understand what they are trying to achieve, without naming the steps]
 - **Setup:** [pre-conditions, system state, participant context]
 - **Steps:** [numbered actions the participant takes]
 - **Expected:** [what success looks like]
@@ -2277,6 +2280,8 @@ Rules:
 - Every scenario must map to at least one success criterion **within the test focus**. Criteria outside the focus are out of scope for this round — note them under "Success criteria tested" as "deferred to a later round" rather than inventing scenarios for them.
 - If a scenario is seeded from a field note, reference the field-note ID (e.g. `S03`, `Field Alpha 2`) so readers can trace it back.
 - Don't invent participant counts or recruiting sources. If the user hasn't named one, ask or leave a flagged placeholder.
+- Every scenario carries the three persona-block fields (**Who you are**, **What is happening**, **What you are responsible for**). Draw the role from an existing Persona page where one exists and name it in the scenario. Don't invent a persona name or a role the programme doesn't have: if none is available, leave a flagged placeholder. Write the three fields in the second person, as something that can be read aloud to the participant, and keep them separate from **Setup**, which is for the moderator (system state, fixtures, pre-conditions).
+- If a scenario is a moderator-led question-and-answer exercise (for example reading a screen and explaining it) rather than a role-played task, keep the persona block short, but do not omit it.
 
 Step 4 — File the output.
 
