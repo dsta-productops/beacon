@@ -30,7 +30,7 @@ See `.env.local.example` for the full list. The only thing you need to set for t
 |---|---|---|
 | `LLM_BASE_URL` | `https://api.groq.com/openai/v1` | OpenAI-compatible endpoint |
 | `LLM_API_KEY` | (none) | API key — required |
-| `LLM_MODEL` | `llama-3.3-70b-versatile` | Model ID |
+| `LLM_MODEL` | `openai/gpt-oss-20b` | Model ID |
 
 ### Swapping LLM providers
 
@@ -40,7 +40,7 @@ The AI helper speaks OpenAI-compatible, so swapping providers is config-only.
 ```
 LLM_BASE_URL=https://api.groq.com/openai/v1
 LLM_API_KEY=gsk_...
-LLM_MODEL=llama-3.3-70b-versatile
+LLM_MODEL=openai/gpt-oss-20b
 ```
 
 **Airgap phase (on-prem LLM):**

@@ -10,14 +10,14 @@ import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
  * Set in .env.local:
  *   LLM_BASE_URL=https://api.groq.com/openai/v1
  *   LLM_API_KEY=gsk_...
- *   LLM_MODEL=llama-3.3-70b-versatile
+ *   LLM_MODEL=openai/gpt-oss-20b
  *
  * Defaults target Groq. To swap providers, change LLM_BASE_URL and LLM_MODEL.
  */
 
 const baseURL = process.env.LLM_BASE_URL || "https://api.groq.com/openai/v1";
 const apiKey = process.env.LLM_API_KEY || "";
-const modelId = process.env.LLM_MODEL || "llama-3.3-70b-versatile";
+const modelId = process.env.LLM_MODEL || "openai/gpt-oss-20b";
 
 export const llmProvider = createOpenAICompatible({
   name: "productops-copilot-llm",
