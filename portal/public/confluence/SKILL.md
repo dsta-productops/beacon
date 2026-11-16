@@ -2219,7 +2219,7 @@ A good test plan:
 - Derives 3–6 scenarios that, together, exercise the success criteria. Each scenario has a persona block (who the participant is, what is happening, what they are responsible for), setup, steps, expected result, and evidence to capture.
 - Names the participants: how many, what type, recruiting source, exclusion criteria.
 - Structures the session: pre-task (including the think-aloud instruction and how participants signal they are done), scenarios, post-task, total duration.
-- Names what gets measured: behavioural observations, metrics, per-scenario ratings, post-session questions, planned DASH survey type (prototype survey or system survey).
+- Names what gets measured: behavioural observations, metrics, post-session questions, planned DASH survey type (prototype survey or system survey).
 - Names how findings will translate into design adjustments.
 - Lists what could invalidate the test (and the mitigations).
 
@@ -2266,7 +2266,6 @@ Output as markdown:
 ### Measurement
 - **Behavioural observations:** [task completion, hesitation, errors, recovery, where they look for help]
 - **Metrics:** [if instrumented — what to log]
-- **Per-scenario ratings:** [the rating scale used (e.g. 1–5 or 1–7), the same for every scenario, and how ratings will be compared across scenarios]
 - **DASH survey:** [prototype survey (post-iteration) OR system survey (post-deployment) — name which and why]
 - **Open questions:** [what to ask in the debrief]
 
@@ -2283,9 +2282,7 @@ Rules:
 - If a scenario is seeded from a field note, reference the field-note ID (e.g. `S03`, `Field Alpha 2`) so readers can trace it back.
 - Don't invent participant counts or recruiting sources. If the user hasn't named one, ask or leave a flagged placeholder.
 - Every scenario carries the three persona-block fields (**Who you are**, **What is happening**, **What you are responsible for**). Draw the role from an existing Persona page where one exists and name it in the scenario. Don't invent a persona name or a role the programme doesn't have: if none is available, leave a flagged placeholder. Write the three fields in the second person, as something that can be read aloud to the participant, and keep them separate from **Setup**, which is for the moderator (system state, fixtures, pre-conditions).
-- If a scenario is a moderator-led question-and-answer exercise (for example reading a screen and explaining it) rather than a role-played task, keep the persona block short, but do not omit it.
-- Always include the think-aloud instruction and the stop cue in the pre-task briefing, so every scenario has a clear end point and timings are comparable. Moderators should not end a task for the participant unless a time limit is reached, and any such cut-off is recorded.
-- Every scenario ends with the ease rating. Include the usefulness-of-content rating only when the test involves an interface (a prototype or a deployed feature); omit it for capability rehearsals and other non-interface tests. Use one scale for all scenarios, and do not invent the scale: if the user hasn't named one, ask or leave a flagged placeholder.
+- Always include the think-aloud instruction and the stop cue in the pre-task briefing.
 
 Step 4 — File the output.
 
