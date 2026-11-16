@@ -11,6 +11,7 @@ import { ArrowUp, Plus, Sparkles, Square, X } from "lucide-react";
 import {
   type FormEvent,
   type KeyboardEvent,
+  type PointerEvent as ReactPointerEvent,
   useCallback,
   useEffect,
   useRef,
@@ -18,6 +19,8 @@ import {
 } from "react";
 
 const transport = new DefaultChatTransport({ api: "/api/ai" });
+
+const MIN_WIDTH = 400;
 
 const SUGGESTIONS = [
   "Which tool should I use for user interviews?",
@@ -36,6 +39,10 @@ export function AskBeacon({ className }: { className?: string }) {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  // Custom width from dragging the side edges (null = default 700px).
+  const [width, setWidth] = useState<number | null>(null);
+  const [resizing, setResizing] = useState(false);
+  const popupRef = useRef<HTMLDivElement>(null);
 
   const { messages, sendMessage, setMessages, status, error, stop } = useChat({
     transport,
@@ -75,6 +82,7 @@ export function AskBeacon({ className }: { className?: string }) {
   // Focus the input each time the drawer opens
   useEffect(() => {
     if (!open) return;
+    setWidth(null);
     const t = setTimeout(() => inputRef.current?.focus(), 150);
     return () => clearTimeout(t);
   }, [open]);
@@ -99,6 +107,35 @@ export function AskBeacon({ className }: { className?: string }) {
       send(input);
     }
   };
+
+  // Drag a side edge to resize. The modal is centred, so each pixel dragged
+  // changes the width by two: the edge stays under the cursor.
+  const startResize =
+    (side: "left" | "right") => (e: ReactPointerEvent<HTMLDivElement>) => {
+      const el = popupRef.current;
+      if (!el) return;
+      e.preventDefault();
+      const target = e.currentTarget;
+      target.setPointerCapture(e.pointerId);
+      const startX = e.clientX;
+      const startWidth = el.offsetWidth;
+      const dir = side === "right" ? 1 : -1;
+      setResizing(true);
+      const onMove = (ev: PointerEvent) => {
+        const max = window.innerWidth - 32;
+        const next = startWidth + 2 * dir * (ev.clientX - startX);
+        setWidth(Math.round(Math.min(max, Math.max(MIN_WIDTH, next))));
+      };
+      const onUp = () => {
+        setResizing(false);
+        target.removeEventListener("pointermove", onMove);
+        target.removeEventListener("pointerup", onUp);
+        target.removeEventListener("pointercancel", onUp);
+      };
+      target.addEventListener("pointermove", onMove);
+      target.addEventListener("pointerup", onUp);
+      target.addEventListener("pointercancel", onUp);
+    };
 
   const canSend = input.trim().length > 0 && !isPending;
 
@@ -125,15 +162,29 @@ export function AskBeacon({ className }: { className?: string }) {
             )}
           />
           <BaseDialog.Popup
+            ref={popupRef}
             aria-describedby={undefined}
+            style={width ? { width, maxWidth: "none" } : undefined}
             className={cn(
-              "fixed left-1/2 top-[10%] z-50 flex h-[min(640px,80vh)] w-[calc(100%-2rem)] max-w-xl -translate-x-1/2 flex-col",
+              "fixed left-1/2 top-1/2 z-50 flex h-[min(960px,calc(100vh-2rem))] w-[calc(100%-2rem)] max-w-[700px] -translate-x-1/2 -translate-y-1/2 flex-col",
               "overflow-hidden rounded-xl border border-border bg-surface-elevated shadow-lg",
               "data-[starting-style]:opacity-0 data-[starting-style]:scale-95",
               "data-[ending-style]:opacity-0 data-[ending-style]:scale-95",
-              "transition-all duration-200",
+              resizing ? "transition-none" : "transition-all duration-200",
             )}
           >
+            {(["left", "right"] as const).map((side) => (
+              <div
+                key={side}
+                onPointerDown={startResize(side)}
+                aria-hidden
+                className={cn(
+                  "absolute inset-y-0 z-10 hidden w-1.5 cursor-col-resize touch-none sm:block",
+                  "hover:bg-accent/30 active:bg-accent/40",
+                  side === "left" ? "left-0" : "right-0",
+                )}
+              />
+            ))}
             <div className="flex items-center justify-between gap-2 border-b border-border px-4 py-3">
               <div className="flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-accent" aria-hidden />
@@ -269,6 +320,20 @@ function scrollParent(el: HTMLElement | null): HTMLElement | null {
   return null;
 }
 
+function Dots() {
+  return (
+    <span className="flex items-center gap-1" aria-hidden>
+      {[0, 150, 300].map((delay) => (
+        <span
+          key={delay}
+          className="h-1.5 w-1.5 rounded-full bg-fg-subtle motion-safe:animate-bounce motion-reduce:animate-pulse"
+          style={{ animationDelay: `${delay}ms` }}
+        />
+      ))}
+    </span>
+  );
+}
+
 function ChatBody({ messages, status, error }: ChatBodyProps) {
   const endRef = useRef<HTMLDivElement>(null);
   const last = messages[messages.length - 1];
@@ -315,6 +380,12 @@ function ChatBody({ messages, status, error }: ChatBodyProps) {
             <Avatar />
             <div className="min-w-0 flex-1 text-sm text-fg">
               <Markdown>{text}</Markdown>
+              {status === "streaming" && m === last && (
+                <div role="status" className="mt-2 flex h-4 items-center gap-1">
+                  <span className="sr-only">BEACON is still writing…</span>
+                  <Dots />
+                </div>
+              )}
             </div>
           </div>
         );
@@ -323,14 +394,8 @@ function ChatBody({ messages, status, error }: ChatBodyProps) {
         <div role="status" className="flex gap-2.5">
           <Avatar />
           <span className="sr-only">BEACON is thinking…</span>
-          <div className="flex h-6 items-center gap-1" aria-hidden>
-            {[0, 150, 300].map((delay) => (
-              <span
-                key={delay}
-                className="h-1.5 w-1.5 rounded-full bg-fg-subtle motion-safe:animate-bounce motion-reduce:animate-pulse"
-                style={{ animationDelay: `${delay}ms` }}
-              />
-            ))}
+          <div className="flex h-6 items-center gap-1">
+            <Dots />
           </div>
         </div>
       )}

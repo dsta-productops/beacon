@@ -7,7 +7,9 @@ export const maxDuration = 60;
 
 const MAX_MESSAGES = 20;
 const MAX_CHARS_PER_MESSAGE = 2000;
-const MAX_OUTPUT_TOKENS = 600;
+// Reasoning tokens count against this budget too, so keep headroom: at 600,
+// longer answers were cut off mid-sentence (finishReason "length").
+const MAX_OUTPUT_TOKENS = 1500;
 // Only the most recent turns go to the model: keeps requests inside
 // free-tier tokens-per-minute limits.
 const HISTORY_MESSAGES = 6;
@@ -84,7 +86,13 @@ export async function POST(req: Request) {
   if (messages.length > MAX_MESSAGES) {
     return json({ error: "Conversation too long. Start a new one." }, 400);
   }
-  if (messages.some((m) => messageLength(m) > MAX_CHARS_PER_MESSAGE)) {
+  // Only cap user input: assistant replies in the history can legitimately
+  // exceed this (up to MAX_OUTPUT_TOKENS) and would otherwise break follow-ups.
+  if (
+    messages.some(
+      (m) => m.role === "user" && messageLength(m) > MAX_CHARS_PER_MESSAGE,
+    )
+  ) {
     return json({ error: "Message too long." }, 400);
   }
 
