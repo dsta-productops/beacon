@@ -2182,6 +2182,7 @@ The artefact brief may ask for additional tokens (a topic, a persona name, a jou
 **Programme type** is not elicited at run time. Once `{{programme}}` is confirmed, CLARA reads the `Programme type` field from the `Knowledge Base` page body to determine whether the programme is digital or engineering. This was set once during `setup-kb` and does not need to be asked again. If the field is missing or unreadable, CLARA asks the user to confirm the programme type before proceeding.
 
 - **Test type** — what kind of test this is. Examples: usability test on interactive prototype, moderated walk-through of a clickable prototype with operators, instrumented A/B on a deployed feature, capability rehearsal in scripted exercise.
+- **Test mode** — how the sessions are run: **moderated** (a facilitator is present, in person or remote), **unmoderated** (the participant works alone and their output is recorded or submitted), or **hybrid** (some scenarios each way; the user says which). Always ask. Don't infer it silently. If the test type already states it (e.g. "moderated walk-through"), confirm it instead of asking afresh. If the constraints mention sensitive, private or secret material and the mode is unmoderated or hybrid, ask whether unsupervised recording or submission is acceptable.
 - **Test name** — short (e.g. "Console-v1-usability-test", "Tank-crew-alerting-rehearsal"). Becomes `{{test-name}}`.
 - **Test focus (optional)** — describe what this round of testing should cover. Leave blank to test against all the artefact's success criteria. Otherwise narrow the scope: a specific user story (e.g. "submit-incident-report"), one or two success criteria, the features shipping in this PI, or the storyboard beats being rehearsed.
 - **Constraints (optional)** — time budget, recruiting limits, environment, classification, secrecy.
@@ -2207,7 +2208,8 @@ The fallback is **visible**, not silent. Tell the user which version you used an
 - Identify the artefact being tested. For digital: a PRD page. For engineering: an operational-scenario + capability-spec pair. Confirm the path(s) with the user before reading in detail.
 - Read the Success-criteria section of the relevant Research-synthesis page (track-level, fall back to programme-wide).
 - Optionally scan field notes for material that scenarios can be seeded from — anonymised alert content, ambiguity that operators experienced, recurring edge cases. Reference the field-note IDs in the scenarios you write.
-- Show the user what you found and confirm test type, test focus, and constraints before drafting. If the user didn't name a focus, restate the success criteria you found and confirm "all of these" is the intent.
+- Show the user what you found and confirm test type, test mode, test focus, and constraints before drafting. If the user didn't name a focus, restate the success criteria you found and confirm "all of these" is the intent.
+- **Facilitator-dependency check (unmoderated and hybrid only).** Before drafting, go through the scenarios you expect to write and list any that depend on something a facilitator does or controls, such as setting up or resetting state, triggering an event, giving access, driving the system, or clarifying the task. For each one, ask the user to choose: make the prototype or environment do it automatically, run that scenario moderated (hybrid), or drop it from this round. Record the outcome in each scenario's **Mode** line. Don't draft an unmoderated scenario that still needs a facilitator.
 - In copy-paste mode: ask the user for the artefact, success criteria, test type, test focus, and constraints in turn.
 
 Step 3 — Draft.
@@ -2222,10 +2224,16 @@ A good test plan:
 - Names what gets measured: behavioural observations, metrics, post-session questions, planned DASH survey type (prototype survey or system survey).
 - Names how findings will translate into design adjustments.
 - Lists what could invalidate the test (and the mitigations).
+- States the test mode (moderated, unmoderated or hybrid) and marks each scenario's mode.
+- Ends with a participant worksheet the team can copy out and hand over as it is. The worksheet is derived from the plan's scenarios and carries nothing the participant should not see. For an unmoderated or hybrid test it also works on its own, because no facilitator is there to explain it.
+
+The output is **one document with two parts**: Part A is the plan for the team, and Part B is the worksheet for the participant. Both are drafted and filed together, on one page.
 
 Output as markdown:
 
-## Test plan: [name]
+## Part A — Test plan: [name]
+
+*For the team. Do not hand this part to participants: it contains expected answers and risks.*
 
 ### Objective
 [One sentence — what question this test answers]
@@ -2239,8 +2247,10 @@ Output as markdown:
 - **Who you are:** [the role or persona the participant assumes for this scenario, e.g. "Wei Jian, the Mentor of project X"]
 - **What is happening:** [the situation or trigger that leads to the task, written as a short in-story moment, e.g. "You have just received an email saying the shortlisted profiles are ready for review"]
 - **What you are responsible for:** [enough context about the participant's part in the wider process for them to understand what they are trying to achieve, without naming the steps]
-- **Setup:** [pre-conditions, system state, participant context]
+- **Mode:** [Moderated | Unmoderated]
+- **Setup:** [pre-conditions, system state, participant context. For an unmoderated scenario, what the environment must provide without a facilitator]
 - **Steps:** [numbered actions the participant takes]
+- **Answer capture:** [unmoderated scenarios only: where the participant records their answer for each step, e.g. a typed response, a choice from a list, or a spoken answer on the recording]
 - **Expected:** [what success looks like]
 - **Evidence to capture:** [observations, metrics, artefacts]
 - **Ratings after the scenario:** [ease: "Overall, how difficult or easy did you find this task?"; usefulness (interface tests only): "How useful was the content (e.g. copy, icons, labels, tooltips) in helping you complete the task?"]
@@ -2258,13 +2268,14 @@ Output as markdown:
 - **Exclusions:** [who NOT to include and why]
 
 ### Session structure
-- **Pre-task (5–10 min):** [briefing, think-aloud instruction (ask participants to say what they are looking for, what confuses them and why they act), stop cue (e.g. "I'm done" or "I'd stop here" to end each task), consent, warmup]
+- **Test mode:** [Moderated | Unmoderated | Hybrid, and which scenarios are which if hybrid. Say if hybrid needs separate sessions]
+- **Pre-task (5–10 min):** [briefing, think-aloud instruction (ask participants to say what they are looking for, what confuses them and why they act), stop cue (e.g. "I'm done" or "I'd stop here" to end each task; for unmoderated, a Done step the participant selects so the end of each task is timestamped), consent, warmup. For unmoderated the briefing and consent are written on the worksheet, not given live]
 - **Scenarios:** [refs, in order, with time budget per scenario]
-- **Post-task (10 min):** [debrief questions, planned DASH survey]
-- **Total duration:** [N minutes]
+- **Post-task (10 min):** [debrief questions, planned DASH survey. For unmoderated, the debrief is written, with an optional follow-up interview]
+- **Total duration:** [N minutes. For unmoderated, give a time limit per scenario as well, and leave out any facilitator buffer]
 
 ### Measurement
-- **Behavioural observations:** [task completion, hesitation, errors, recovery, where they look for help]
+- **Behavioural observations:** [task completion, hesitation, errors, recovery, where they look for help. For unmoderated, taken from the recording and the captured answers, since nobody observes live or can probe]
 - **Metrics:** [if instrumented — what to log]
 - **DASH survey:** [prototype survey (post-iteration) OR system survey (post-deployment) — name which and why]
 - **Open questions:** [what to ask in the debrief]
@@ -2277,12 +2288,116 @@ Output as markdown:
 - **[risk]:** [mitigation]
 - **[risk]:** [mitigation]
 
+[Include the risks that follow from the mode. Moderated: the moderator leading the participant or explaining too much. Unmoderated: tasks misread with no one to clarify, technical failure with no one to help, low effort or rushed answers, an uncontrolled environment, and recording or submitting material that should not be shared.]
+
+## Part B — Participant worksheet: [name]
+
+*Copy from the next heading to the end of this part to hand out. Everything below is for the participant. Do not add moderator notes here.*
+
+[If the test has more than one participant role with different scenarios, repeat Part B once per role, titled "Part B — Participant worksheet: [name] ([role])", with only the scenarios that role runs.]
+
+### Welcome
+
+Thank you for taking part in this test. This worksheet contains the scenarios and tasks you will be asked to complete.
+
+As you work through each task, please say your thoughts aloud. For example, describe what you are looking for, what feels confusing, and why you are doing what you are doing. When you feel you have finished a task, say "I'm done" or "I'd stop here" before moving on to the next one. [Unmoderated scenarios: replace this with the Done step the participant selects, and say that nobody will be available to answer questions during the task.]
+
+We are testing the design, not you, so there are no right or wrong answers. Please share your open and honest opinions.
+
+### Before you start
+
+[Unmoderated or hybrid tests only; leave this section out for a fully moderated test. Write it so a participant working alone can follow it.]
+
+- **What you need:** [device, browser, quiet space, time to allow, e.g. "about 25 minutes"]
+- **How to open the prototype:** [link or access steps]
+- **Recording:** [how to start and stop screen and audio recording, what is recorded, and the consent statement the participant agrees to]
+- **If you get stuck:** [what to do, e.g. move on after N minutes and say so in the answer box; who to contact for technical problems]
+- **What not to share:** [any material the participant must not show or say, drawn from the constraints]
+
+### How this worksheet is organised
+
+Each scenario describes one step of the process and has one or more tasks for you to complete. Each scenario sets up three things before the tasks begin: who you are, what is happening, and what you are responsible for. After each scenario you will answer two short questions.
+
+### Scenario 1: [name]
+
+**Who you are:** [copied from Part A]
+
+**What is happening:** [copied from Part A]
+
+**What you are responsible for:** [copied from Part A]
+
+**Tasks:**
+
+| Task | What to do |
+| --- | --- |
+| Task 1 | [task, as a goal in the second person] |
+| Task 2 | [task] |
+
+[Unmoderated scenarios only: add a third column, **Your answer**, left empty for the participant to fill in, in the form given by the scenario's Answer capture. End the scenario with the Done step.]
+
+**Ratings:**
+
+1. Overall, how difficult or easy did you find this task?
+
+| Very difficult | | | | Very easy |
+| --- | --- | --- | --- | --- |
+| 1 | 2 | 3 | 4 | 5 |
+
+2. How useful was the content (for example copy, icons, labels, tooltips) in helping you complete the task? [interface tests only]
+
+| Not at all useful | | | | Very useful |
+| --- | --- | --- | --- | --- |
+| 1 | 2 | 3 | 4 | 5 |
+
+[The tables above show a 1–5 scale. Draw each scale table from the scale the user confirmed: one numbered cell per point, with the end labels in the first and last cells of the header row.]
+
+[Unmoderated scenarios only: add a final free-text question, "Was anything confusing or missing? Tell us in your own words.", because nobody is there to ask.]
+
+### Scenario 2: [name]
+[same structure, one block per scenario in Part A, in the same order]
+
+### Closing questions
+
+Thank you for your feedback. Before you go, please answer these questions.
+
+1. The prototyped product meets my needs.
+
+| Strongly disagree | | | | Strongly agree |
+| --- | --- | --- | --- | --- |
+| 1 | 2 | 3 | 4 | 5 |
+
+2. The prototyped product is easy to use. [same scale table as item 1]
+3. How satisfied are you with the prototyped product's look and feel? [scale table with the end labels Strongly dissatisfied and Strongly satisfied]
+4. Rate your experience with the prototyped product or features. [scale table with the end labels Strongly dissatisfied and Strongly satisfied]
+
+*Replace these four with the team's DASH prototype survey items if the user supplies them. For a deployed system, reword "prototyped product" to name the system.*
+
+[Unmoderated or hybrid tests only: end Part B with a **How to submit** section: how to stop the recording, where to send the recording and answers, and what happens next.]
+
+### Before you hand this over (remove this heading before sharing)
+
+- [ ] Every `[TBD]` and `[scale]` in Part B is resolved.
+- [ ] The rating and survey scale is stated once and matches Part A (for example 1 to 5, with the end labels named).
+- [ ] Every scenario in Part A has a matching scenario in Part B, in the same order.
+- [ ] No fixture values, expected answers, system state labels or PRD references appear in Part B.
+- [ ] Unmoderated or hybrid: every unmoderated scenario runs with no facilitator action, has an answer field, and has a Done step; the "Before you start" and "How to submit" sections are complete.
+- [ ] Open items still flagged in Part A: [list them].
+
 Rules:
 - Every scenario must map to at least one success criterion **within the test focus**. Criteria outside the focus are out of scope for this round — note them under "Success criteria tested" as "deferred to a later round" rather than inventing scenarios for them.
 - If a scenario is seeded from a field note, reference the field-note ID (e.g. `S03`, `Field Alpha 2`) so readers can trace it back.
 - Don't invent participant counts or recruiting sources. If the user hasn't named one, ask or leave a flagged placeholder.
 - Every scenario carries the three persona-block fields (**Who you are**, **What is happening**, **What you are responsible for**). Draw the role from an existing Persona page where one exists and name it in the scenario. Don't invent a persona name or a role the programme doesn't have: if none is available, leave a flagged placeholder. Write the three fields in the second person, as something that can be read aloud to the participant, and keep them separate from **Setup**, which is for the moderator (system state, fixtures, pre-conditions).
 - Always include the think-aloud instruction and the stop cue in the pre-task briefing.
+- **Part B is derived, not rewritten.** The persona fields, the tasks and the rating questions in Part B are copied from the scenarios in Part A, in the same order, so the two cannot drift apart. Draft the scenario in Part A first, and write its persona fields and steps so they can be copied unchanged. Part B never contains **Setup**, **Expected**, **Evidence to capture**, **Maps to**, fixture values, system status labels, PRD or field-note references, or `[TBD]` flags other than the unresolved scale placeholders the checklist asks the user to fill.
+- **Task wording.** Write each Part B task as a goal in the second person ("Review the shortlisted profiles and decide who you would interview"), not as a screen instruction ("Click the Candidates tab") and not as a leading question that names the answer or the interface state. Keep the in-story trigger concrete, as something that has just happened to the participant.
+- **Scale.** Don't invent the response scale silently. Propose one (for example 1 to 5, from very difficult to very easy, and from not at all useful to very useful), show it to the user with the objective checkpoint, and state it once in Part A and in Part B.
+- **Copy-paste format.** In Part B, put the task list and every rating scale in plain Markdown tables, as in the template. Use no merged cells, colours, HTML, nested lists or emoji in them, so the tables paste into Word, Google Docs or slides unchanged. Don't try to produce tick boxes or fillable fields, and don't set page breaks or headers and footers: the user adds those when they export.
+- **Roles.** If the test has more than one participant role, write one Part B per role, with only the scenarios that role runs.
+- **Mode.** Every scenario has a **Mode** line, and it must agree with the test mode the user confirmed. A moderated scenario may rely on the facilitator. An unmoderated scenario must not: if one needs a facilitator to set up, trigger, reset, drive or explain, it fails the facilitator-dependency check and is automated, made moderated, or dropped. Draft Part B's tasks so that an unmoderated participant can complete them unaided, with closed, unambiguous wording and a place to put each answer. Don't rely on a facilitator to probe or clarify.
+- **Hybrid.** In a hybrid test, Part B marks which scenarios the participant does alone and which with the facilitator. If the two cannot run in one sitting, say so in Part A and give each its own pre-task.
+- **Don't invent mode-dependent numbers.** Don't set a participant count, session length or per-scenario time limit for an unmoderated test unless the user gives one. Leave a flagged placeholder, as for any other participant detail.
+- **Pre-flight checklist.** Always end Part B with the "Before you hand this over" checklist, filled in with the open items that remain, so the user can see what stands between the draft and a worksheet that is ready to give out.
 
 Step 4 — File the output.
 
@@ -2304,6 +2419,6 @@ When you have Confluence MCP tools available and are about to create or update a
 
 You do **not** apply Confluence labels. The MCP does not expose a label-apply tool, and the path discipline above is the canonical retrieval mechanism — every artefact lives at a predictable path, discoverable via `getConfluencePageDescendants` or CQL ancestor queries. Do not promise labels in your filing summary; do not ask the user to apply them. The path is the contract.
 
-- Create a new page at `Knowledge Base/{{track}}/Test-plans/{{test-name}}`. Link to the artefact being tested (PRD or operational-scenario + capability-spec) and the Research-synthesis page the success criteria come from.
+- Create a new page at `Knowledge Base/{{track}}/Test-plans/{{test-name}}`, holding both Part A and Part B. Link to the artefact being tested (PRD or operational-scenario + capability-spec) and the Research-synthesis page the success criteria come from.
 - In copy-paste mode: return the markdown and the user will file it manually.
 ```
